@@ -36,6 +36,15 @@ class ToolInteractionManager:
             trace.emit("attempt_started", {"attempt_number": attempt})
 
             selected_tools = self.selector.select(analyzed_task, attempt)
+            selection_metadata = {}
+            if hasattr(self.selector, "get_last_selection_metadata"):
+                selection_metadata = self.selector.get_last_selection_metadata()
+                analyzed_task["tool_selection"] = selection_metadata
+                print("\n[4.1] Memory-aware tool selection")
+                print(f"    strategy: {selection_metadata.get('selection_strategy')}")
+                print(f"    reason: {selection_metadata.get('selection_reason')}")
+                print(f"    reference_trace_id: {selection_metadata.get('reference_trace_id')}")
+                print(f"    selected_tools: {selection_metadata.get('selected_tools')}")
             trace.emit("tools_selected", selected_tools)
 
             plan = self.planner.create_plan(selected_tools, analyzed_task)

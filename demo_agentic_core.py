@@ -1,27 +1,46 @@
 import json
-from ai.agentic.tutoring.personalized_tutoring_workflow import PersonalizedTutoringWorkflow
+
+from ai.agentic.core.agentic_core_service import AgenticCoreService
 
 
 def main():
     print("=" * 80)
-    print("OpenTutorAI-Agentic Core Demo")
+    print("OpenTutorAI-Agentic Core Terminal Runner")
     print("Centralized T2-Based Adaptive Tool Interaction Manager")
     print("=" * 80)
 
-    workflow = PersonalizedTutoringWorkflow()
+    service = AgenticCoreService()
 
-    result = workflow.run(
-        "Explain convolution with a simple example."
+    result = service.handle_request(
+        {
+            "request_type": "personalized_tutoring",
+            "learner_id": "demo_user",
+            "query": "Explain convolution with a simple example.",
+            "metadata": {
+                "source": "terminal_runner",
+                "force_first_failure": True,
+            },
+        }
     )
 
-    print("\n[7] Final answer generated")
-    print(result["final_answer"])
+    print("\n" + "=" * 80)
+    print("TERMINAL RUNNER SUMMARY")
+    print("=" * 80)
 
-    print("\n[8] Scratchpad state")
-    print(json.dumps(result["scratchpad"], indent=2, ensure_ascii=False))
+    print("\nFinal Answer:")
+    print(result["answer"])
 
-    print("\n[9] Tool interaction trace saved")
-    print(result["trace_path"])
+    print("\nExecution Metadata:")
+    print(f"Status: {result['status']}")
+    print(f"Confidence: {result['confidence']}")
+    print(f"Trace ID: {result['trace_id']}")
+    print(f"Trace Path: {result['trace_path']}")
+    print(f"Attempts: {result['attempts']}")
+    print(f"Selected Tools: {result['selected_tools']}")
+    print(f"Recovery Used: {result['recovery_used']}")
+
+    print("\nOutput Package:")
+    print(json.dumps(result["output_package"], indent=2))
 
     print("\nDemo completed successfully.")
 

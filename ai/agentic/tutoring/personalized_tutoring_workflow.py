@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
+from ai.agentic.llm.llm_adapter import MockLLMAdapter
 from ai.agentic.tutoring.scratchpad import StepBasedScratchpad
 from ai.agentic.tutoring.tool_request_agent import ToolRequestAgent
 from ai.agentic.tool_interaction.manager import ToolInteractionManager
@@ -15,18 +16,18 @@ class PersonalizedTutoringWorkflow:
     student question -> solving plan -> ToolRequestAgent -> centralized
     ToolInteractionManager -> output package -> scratchpad -> final answer.
 
-    The workflow still prints execution steps for terminal testing, but it also
-    returns a clean dictionary so it can later be used by:
-    - AgenticCoreService
-    - evaluation scripts
-    - API endpoint
-    - UI integration
+    Phase 5C:
+    The final answer is generated through a deterministic MockLLMAdapter using:
+    - Dynamic Personal Memory
+    - Static Knowledge Grounding
+    - validated OutputPackage
     """
 
     def __init__(self):
         self.scratchpad = StepBasedScratchpad()
         self.tool_request_agent = ToolRequestAgent()
         self.tool_manager = ToolInteractionManager()
+        self.llm_adapter = MockLLMAdapter()
 
     def run(
         self,
@@ -92,9 +93,13 @@ class PersonalizedTutoringWorkflow:
                 )
                 print("\n[6] Scratchpad updated with validated package")
 
-        final_answer = self._compose_answer(student_question, final_package)
+        final_answer = self._compose_answer(
+            question=student_question,
+            package=final_package,
+            learner_id=learner_id,
+        )
 
-        print("\n[7] Final answer generated")
+        print("\n[7] Final answer generated with MockLLMAdapter")
         print(final_answer)
 
         print("\n[8] Scratchpad state")
@@ -110,7 +115,7 @@ class PersonalizedTutoringWorkflow:
         return {
             # Main result
             "answer": final_answer,
-            "final_answer": final_answer,  # kept for compatibility with your old demo
+            "final_answer": final_answer,
 
             # Request information
             "learner_id": learner_id,
@@ -135,29 +140,30 @@ class PersonalizedTutoringWorkflow:
             "metadata": {
                 "workflow": "personalized_problem_tutoring",
                 "source": "terminal_backend_prototype",
+                "final_answer_generator": "MockLLMAdapter",
                 **metadata,
             },
         }
 
-    def _compose_answer(self, question, package):
+    def _compose_answer(self, question: str, package: Any, learner_id: str) -> str:
         if not package:
-            return "No tool package was generated."
+            return "No validated tool package was generated, so the tutor cannot produce a grounded answer."
 
-        return (
-            "Final personalized answer draft:\n"
-            f"For the question: '{question}', the system retrieved grounded support about convolution. "
-            "A convolution kernel slides over local regions of an input matrix. "
-            "At each position, the system multiplies the kernel values with the corresponding input patch, "
-            "then sums the products to produce one output value. "
-            "The validated package also includes visual support for kernel movement."
+        return self.llm_adapter.generate_personalized_tutoring_answer(
+            student_question=question,
+            learner_id=learner_id,
+            output_package=package,
+            scratchpad=self.scratchpad.to_dict(),
         )
 
     def _extract_trace_metadata(self, trace_path) -> Dict[str, Any]:
         """
-        Reads the saved trace JSON and extracts simple metadata useful for
-        evaluation: number of attempts, selected tools, and whether recovery was used.
+        Extract metadata for the current run only.
 
-        The function is intentionally defensive because trace structure may evolve.
+        Important:
+        The trace may contain previous successful/failed traces inside
+        collected_context.trace_memory. Those previous traces must not be counted
+        as attempts for the current execution.
         """
         metadata = {
             "attempts": 1,
@@ -182,30 +188,39 @@ class PersonalizedTutoringWorkflow:
         selected_tools = set()
         recovery_used = False
 
-        def walk(obj):
+        def walk(obj, inside_previous_trace_memory=False):
             nonlocal recovery_used
 
             if isinstance(obj, dict):
                 for key, value in obj.items():
-                    if key == "attempt_number" and isinstance(value, int):
-                        attempt_numbers.append(value)
+                    # Skip previous trace summaries stored in context memory.
+                    if key in {
+                        "similar_successful_traces",
+                        "failed_traces",
+                        "trace_memory",
+                    }:
+                        continue
 
-                    if key in {"selected_tools", "tools", "tool_names"} and isinstance(value, list):
-                        for tool in value:
-                            if isinstance(tool, str):
-                                selected_tools.add(tool)
+                    if not inside_previous_trace_memory:
+                        if key in {"attempt", "attempt_number", "current_attempt"} and isinstance(value, int):
+                            attempt_numbers.append(value)
 
-                    if key in {"tool_name", "selected_tool"} and isinstance(value, str):
-                        selected_tools.add(value)
+                        if key in {"selected_tools", "tools", "tool_names"} and isinstance(value, list):
+                            for tool in value:
+                                if isinstance(tool, str):
+                                    selected_tools.add(tool)
 
-                    if isinstance(value, str) and "recovery" in value.lower():
-                        recovery_used = True
+                        if key in {"tool_name", "selected_tool"} and isinstance(value, str):
+                            selected_tools.add(value)
 
-                    walk(value)
+                        if isinstance(value, str) and "recovery" in value.lower():
+                            recovery_used = True
+
+                    walk(value, inside_previous_trace_memory=inside_previous_trace_memory)
 
             elif isinstance(obj, list):
                 for item in obj:
-                    walk(item)
+                    walk(item, inside_previous_trace_memory=inside_previous_trace_memory)
 
         walk(trace_data)
 

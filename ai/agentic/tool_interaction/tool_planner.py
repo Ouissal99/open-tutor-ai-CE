@@ -43,5 +43,6 @@ class ToolPlanner:
                 "topic": topic,
                 "current_step": current_step,
                 "tool_selection": analyzed_task.get("tool_selection", {}),
+                "collected_context": analyzed_task.get("collected_context", {}),
             },
         )

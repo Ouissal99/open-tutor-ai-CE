@@ -1,4 +1,5 @@
 from ai.agentic.tool_interaction.task_context_analyzer import TaskContextAnalyzer
+from ai.agentic.tool_interaction.context_collector import ContextCollector
 from ai.agentic.tool_interaction.tool_selector import ToolSelector
 from ai.agentic.tool_interaction.tool_planner import ToolPlanner
 from ai.agentic.tool_interaction.tool_executor import ToolExecutor
@@ -15,6 +16,7 @@ class ToolInteractionManager:
 
     def __init__(self):
         self.analyzer = TaskContextAnalyzer()
+        self.context_collector = ContextCollector()
         self.selector = ToolSelector()
         self.planner = ToolPlanner()
         self.executor = ToolExecutor()
@@ -27,6 +29,22 @@ class ToolInteractionManager:
         trace.emit("tool_request_received", request)
 
         analyzed_task = self.analyzer.analyze(request)
+
+        analyzed_task = self.context_collector.enrich_task(
+            request=request,
+            analyzed_task=analyzed_task,
+        )
+
+        collected_context = analyzed_task.get("collected_context", {})
+        context_summary = collected_context.get("summary", {})
+
+        print("\n[4.0] ContextCollector enriched task context")
+        print(f"    learner_id: {collected_context.get('learner_id')}")
+        print(f"    learner_level: {context_summary.get('learner_level')}")
+        print(f"    is_weak_topic: {context_summary.get('is_weak_topic')}")
+        print(f"    retrieved_knowledge_chunks: {context_summary.get('retrieved_knowledge_chunks')}")
+        print(f"    similar_successful_traces: {context_summary.get('similar_successful_trace_count')}")
+        print(f"    failed_traces: {context_summary.get('failed_trace_count')}")
         trace.emit("task_context_analyzed", analyzed_task)
 
         last_results = []

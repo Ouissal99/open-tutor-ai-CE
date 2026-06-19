@@ -1,3 +1,5 @@
+from typing import Any, Dict, Optional
+
 from ai.agentic.core.schemas import ToolRequest, new_id
 
 
@@ -10,8 +12,23 @@ class ToolRequestAgent:
     It only creates a structured ToolRequest.
     """
 
-    def create_request(self, student_question: str, step_goal: str) -> ToolRequest:
+    def create_request(
+        self,
+        student_question: str,
+        step_goal: str,
+        learner_id: str = "demo_user",
+        context: Optional[Dict[str, Any]] = None,
+    ) -> ToolRequest:
         task_type = self._infer_task_type(student_question, step_goal)
+
+        metadata = {
+            "source_component": "ToolRequestAgent",
+            "learner_id": learner_id,
+            "current_step": step_goal,
+        }
+
+        if context:
+            metadata.update(context)
 
         return ToolRequest(
             request_id=new_id("REQ"),
@@ -20,10 +37,7 @@ class ToolRequestAgent:
             task_type=task_type,
             expected_output="visual explanation with grounded evidence",
             workflow_source="personalized_problem_tutoring",
-            metadata={
-                "source_component": "ToolRequestAgent",
-                "current_step": step_goal,
-            },
+            metadata=metadata,
         )
 
     def _infer_task_type(self, student_question: str, step_goal: str) -> str:

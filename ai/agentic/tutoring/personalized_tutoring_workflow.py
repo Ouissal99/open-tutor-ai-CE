@@ -66,6 +66,10 @@ class PersonalizedTutoringWorkflow:
                 request = self.tool_request_agent.create_request(
                     student_question=student_question,
                     step_goal=step["step_goal"],
+                    learner_id=learner_id,
+                    context={
+                        "workflow_source": "personalized_problem_tutoring",
+                    },
                 )
                 final_request = request
 

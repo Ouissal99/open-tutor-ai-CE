@@ -1,0 +1,30 @@
+[
+  {
+    "chunk_id": "SKG-CONV-001",
+    "topic": "convolution",
+    "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+    "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+    "tags": ["convolution", "kernel", "image processing", "matrix"]
+  },
+  {
+    "chunk_id": "SKG-CONV-002",
+    "topic": "convolution",
+    "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+    "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+    "tags": ["convolution", "kernel movement", "output value", "matrix"]
+  },
+  {
+    "chunk_id": "SKG-CONV-003",
+    "topic": "kernel movement",
+    "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+    "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+    "tags": ["visual explanation", "kernel", "3x3 matrix", "2x2 kernel"]
+  },
+  {
+    "chunk_id": "SKG-OVERFIT-001",
+    "topic": "overfitting",
+    "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+    "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+    "tags": ["machine learning", "overfitting", "generalization"]
+  }
+]

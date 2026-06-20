@@ -335,3 +335,13 @@ eziane_docs.worktrees/
 
 # Superpowers plans/specs (local dev tooling, not part of the project)
 docs/superpowers/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Local secrets
+.env
+
+# Runtime generated data
+var/agentic_traces/

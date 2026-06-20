@@ -17,7 +17,7 @@ class StaticKnowledgeGrounding:
     def __init__(
         self,
         kb_name: str = "default",
-        base_dir: str = "data/agentic_memory/skg/knowledge_bases",
+        base_dir: str = "var/agentic_memory/skg/knowledge_bases",
     ):
         self.kb_name = kb_name
         self.base_dir = Path(base_dir)

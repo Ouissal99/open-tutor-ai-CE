@@ -16,7 +16,7 @@ class DynamicPersonalMemory:
     - L3: synthesized learner profile, preferences, recent memory
     """
 
-    def __init__(self, base_dir: str = "data/agentic_memory/dpm"):
+    def __init__(self, base_dir: str = "var/agentic_memory/dpm"):
         self.base_dir = Path(base_dir)
 
     def load_profile(self, learner_id: str = "demo_user") -> Dict[str, Any]:

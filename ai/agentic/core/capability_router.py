@@ -1,7 +1,7 @@
 from typing import Any, Dict
 
 from ai.agentic.core.schemas import AgenticRequest
-from ai.agentic.tutoring.personalized_tutoring_workflow import PersonalizedTutoringWorkflow
+from learning.supports.agentic_tutoring.personalized_tutoring_workflow import PersonalizedTutoringWorkflow
 
 
 class CapabilityRouter:

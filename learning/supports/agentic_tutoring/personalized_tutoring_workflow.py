@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 from learning.supports.agentic_tutoring.tutoring_answer_writer import TutoringAnswerWriter
+from learning.supports.agentic_tutoring.investigation_agent import InvestigationAgent
 from learning.supports.agentic_tutoring.scratchpad import StepBasedScratchpad
 from learning.supports.agentic_tutoring.tool_request_agent import ToolRequestAgent
 from ai.agentic.tool_interaction.manager import ToolInteractionManager
@@ -28,6 +29,7 @@ class PersonalizedTutoringWorkflow:
         self.tool_request_agent = ToolRequestAgent()
         self.tool_manager = ToolInteractionManager()
         self.answer_writer = TutoringAnswerWriter()
+        self.investigation_agent = InvestigationAgent()
 
     def run(
         self,
@@ -40,7 +42,18 @@ class PersonalizedTutoringWorkflow:
         print("\n[1] Student question received")
         print(f"    {student_question}")
 
-        print("\n[2] Creating simplified solving plan")
+        print("\n[2] LLM InvestigationAgent decomposed the question")
+
+        investigation_result = self.investigation_agent.investigate(
+            student_question=student_question,
+            learner_id=learner_id,
+        )
+
+        print(f"    topic: {investigation_result.get('topic')}")
+        print(f"    task_type: {investigation_result.get('task_type')}")
+        print(f"    required_context: {investigation_result.get('required_context')}")
+        print(f"    meta_questions: {investigation_result.get('meta_questions')}")
+        print(f"    initial_tutoring_plan: {investigation_result.get('initial_tutoring_plan')}")
         solving_plan = [
             {
                 "step_goal": "Explain the concept using course-grounded evidence",
@@ -70,6 +83,7 @@ class PersonalizedTutoringWorkflow:
                     learner_id=learner_id,
                     context={
                         "workflow_source": "personalized_problem_tutoring",
+                "investigation_result": investigation_result,
                     },
                 )
                 final_request = request

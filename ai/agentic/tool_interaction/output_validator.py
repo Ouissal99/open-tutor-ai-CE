@@ -5,9 +5,11 @@ class OutputValidator:
     """
     Validates tool outputs.
 
-    For this demo, the important rule is:
-    the final output must be grounded by the RAG tool.
-    Visualizer output alone is not enough.
+    Rules:
+    - all selected tools should execute successfully
+    - output must be grounded by RAGTool
+    - visual explanations must include VisualMatrixTool
+    - convolution visual explanations should include MatrixComputationTool
     """
 
     def validate(self, request, tool_results, attempt_number: int):
@@ -18,13 +20,12 @@ class OutputValidator:
                 status="invalid",
                 confidence_score=0.2,
                 failure_reason="tool_execution_failed",
-                recommended_action="re_execute"
+                recommended_action="re_execute",
             )
 
-        # Require grounding from the RAG tool specifically.
         rag_results = [
             result for result in tool_results
-            if result.tool_name == "mock_rag_tool"
+            if result.tool_name in {"RAGTool", "mock_rag_tool"}
         ]
 
         rag_has_evidence = any(result.evidence for result in rag_results)
@@ -35,14 +36,13 @@ class OutputValidator:
                 status="invalid",
                 confidence_score=0.42,
                 failure_reason="weak_grounding",
-                recommended_action="re_query_or_re_execute"
+                recommended_action="re_query_or_re_execute",
             )
 
-        # Check that the expected visual support exists when requested.
         if request.task_type == "visual_explanation":
             visual_results = [
                 result for result in tool_results
-                if result.tool_name == "mock_visualizer_tool"
+                if result.tool_name in {"VisualMatrixTool", "mock_visualizer_tool"}
             ]
 
             if not visual_results:
@@ -50,12 +50,27 @@ class OutputValidator:
                     status="invalid",
                     confidence_score=0.5,
                     failure_reason="missing_visual_support",
-                    recommended_action="re_select_or_re_execute"
+                    recommended_action="re_select_or_re_execute",
                 )
+
+            question = getattr(request, "student_question", "").lower()
+            if "convolution" in question:
+                matrix_results = [
+                    result for result in tool_results
+                    if result.tool_name == "MatrixComputationTool"
+                ]
+
+                if not matrix_results:
+                    return ValidationReport(
+                        status="invalid",
+                        confidence_score=0.55,
+                        failure_reason="missing_matrix_computation_support",
+                        recommended_action="re_select_or_re_execute",
+                    )
 
         return ValidationReport(
             status="valid",
-            confidence_score=0.88,
+            confidence_score=0.9,
             failure_reason=None,
-            recommended_action="accept"
+            recommended_action="accept",
         )

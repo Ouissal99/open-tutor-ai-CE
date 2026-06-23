@@ -9,6 +9,7 @@ from learning.supports.agentic_tutoring.scratchpad import StepBasedScratchpad
 from learning.supports.agentic_tutoring.tool_request_agent import ToolRequestAgent
 from ai.agentic.tool_interaction.manager import ToolInteractionManager
 from ai.agentic.memory.dynamic_personal_memory import DynamicPersonalMemory
+from ai.agentic.memory.memory_update_agent import MemoryUpdateAgent
 
 
 class PersonalizedTutoringWorkflow:
@@ -33,6 +34,7 @@ class PersonalizedTutoringWorkflow:
         self.answer_writer = TutoringAnswerWriter()
         self.investigation_agent = InvestigationAgent()
         self.dpm = DynamicPersonalMemory()
+        self.memory_update_agent = MemoryUpdateAgent(dpm=self.dpm)
 
     def run(
         self,
@@ -70,6 +72,7 @@ class PersonalizedTutoringWorkflow:
         final_package = None
         trace_path = None
         final_request = None
+        final_memory_update_summary = {}
 
         for step in solving_plan:
             round_item = self.scratchpad.add_round(
@@ -121,7 +124,7 @@ class PersonalizedTutoringWorkflow:
                 )
                 print("\n[7] Scratchpad updated with validated package")
 
-                self._append_dpm_trace_summary(
+                memory_update_summary = self.memory_update_agent.update_after_interaction(
                     learner_id=learner_id,
                     student_question=student_question,
                     investigation_result=investigation_result,
@@ -129,7 +132,11 @@ class PersonalizedTutoringWorkflow:
                     package=package,
                     trace_path=trace_path,
                 )
-                print("    DPM L1 trace summary updated")
+                print("\n[17] DPM MemoryUpdateAgent updated learner memory")
+                print(f"    diagnosed_gap: {memory_update_summary.get('diagnosed_gap')}")
+                print(f"    recommended_future_strategy: {memory_update_summary.get('recommended_future_strategy')}")
+                print(f"    updated_layers: L1, L2, L3")
+                final_memory_update_summary = memory_update_summary
 
         final_answer = self._compose_answer(
             question=student_question,
@@ -179,6 +186,7 @@ class PersonalizedTutoringWorkflow:
                 "workflow": "personalized_problem_tutoring",
                 "source": "terminal_backend_prototype",
                 "final_answer_generator": "TutoringAnswerWriter",
+                "memory_update_summary": final_memory_update_summary,
                 **metadata,
             },
         }

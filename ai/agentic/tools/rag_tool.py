@@ -98,12 +98,15 @@ class RAGTool(BaseTool):
             metadata={
                 "attempt": attempt,
                 "source_component": self.name,
-                "grounding_source": "OpenTutorAI Agentic SKG Retriever",
-                "retrieval_mode": "jsonl_keyword",
+                "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+                "retrieval_mode": chunks[0].get("retrieval_mode", "jsonl_hybrid_lexical") if chunks else "jsonl_hybrid_lexical",
                 "query": query,
                 "retrieved_knowledge_chunks": len(chunks),
                 "scores": [chunk.get("score") for chunk in chunks],
                 "chunk_ids": [chunk.get("chunk_id") for chunk in chunks],
+                "matched_terms": [chunk.get("matched_terms") for chunk in chunks],
+                "score_breakdown": [chunk.get("score_breakdown") for chunk in chunks],
+                "expanded_terms": chunks[0].get("expanded_terms", []) if chunks else [],
                 "registry_tool": True,
             },
         )

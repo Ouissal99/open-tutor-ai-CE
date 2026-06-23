@@ -23,7 +23,7 @@ class TraceSearchTool(BaseTool):
         attempt: int = 1,
     ) -> ToolResult:
         summary = collected_context.get("summary", {})
-        trace_context = collected_context.get("traces", {}) or collected_context.get("trace_toolkit", {})
+        trace_context = collected_context.get("trace_memory", {}) or collected_context.get("traces", {}) or collected_context.get("trace_toolkit", {})
 
         similar_count = summary.get("similar_successful_trace_count", 0)
         failed_count = summary.get("failed_trace_count", 0)

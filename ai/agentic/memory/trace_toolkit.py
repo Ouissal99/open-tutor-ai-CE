@@ -1,4 +1,5 @@
-from typing import Any, Dict, List, Optional
+import re
+from typing import Any, Dict, List, Optional, Set
 
 from ai.agentic.memory.trace_store import TraceStore
 
@@ -7,10 +8,8 @@ class TraceToolkit:
     """
     Query layer over saved tool interaction traces.
 
-    TraceStore = low-level file loading.
+    TraceStore = low-level file loading and summarization.
     TraceToolkit = higher-level search and reuse.
-
-    This component will later be used by the Memory-Aware Tool Selector.
     """
 
     def __init__(self, trace_store: Optional[TraceStore] = None):
@@ -25,10 +24,7 @@ class TraceToolkit:
         task_type: Optional[str] = None,
         limit: int = 5,
     ) -> List[Dict[str, Any]]:
-        """
-        Return traces that ended successfully.
-        Invalid traces must not be returned here.
-        """
+        """Return traces that ended successfully."""
         results = []
 
         for trace in self.trace_store.list_traces():
@@ -50,9 +46,7 @@ class TraceToolkit:
         task_type: Optional[str] = None,
         limit: int = 5,
     ) -> List[Dict[str, Any]]:
-        """
-        Return traces that ended as failed, invalid, rejected, or requiring retry.
-        """
+        """Return traces that ended as failed, invalid, rejected, or requiring retry."""
         results = []
 
         for trace in self.trace_store.list_traces():
@@ -77,13 +71,14 @@ class TraceToolkit:
         only_successful: bool = False,
     ) -> List[Dict[str, Any]]:
         """
-        Simple similarity search for the prototype.
+        Lightweight similarity search over real saved traces.
 
-        For now, similarity is keyword-based:
-        - same task_type
-        - shared words between query and trace content
-
-        If only_successful=True, invalid traces are excluded.
+        The score is based on meaningful fields only:
+        - student question
+        - step goal
+        - task type
+        - selected tools
+        - content preview
         """
         query_words = self._normalize_words(query)
         scored_results = []
@@ -97,20 +92,53 @@ class TraceToolkit:
             if only_successful and not self._is_successful(trace, summary):
                 continue
 
-            trace_text = str(trace).lower()
-            trace_words = self._normalize_words(trace_text)
-
+            trace_words = self._summary_words(summary)
             overlap = query_words.intersection(trace_words)
-            score = len(overlap)
+
+            score = float(len(overlap))
+            score_breakdown = {
+                "word_overlap": len(overlap),
+                "task_type_boost": 0.0,
+                "tool_quality_boost": 0.0,
+                "confidence_boost": 0.0,
+            }
 
             if task_type and summary["task_type"] == task_type:
-                score += 2
+                score += 3.0
+                score_breakdown["task_type_boost"] = 3.0
+
+            selected_tools = set(summary.get("selected_tools", []))
+            if {"RAGTool", "TraceSearchTool"} <= selected_tools:
+                score += 1.0
+                score_breakdown["tool_quality_boost"] += 1.0
+
+            if "MatrixComputationTool" in selected_tools:
+                score += 0.75
+                score_breakdown["tool_quality_boost"] += 0.75
+
+            if "VisualMatrixTool" in selected_tools:
+                score += 0.75
+                score_breakdown["tool_quality_boost"] += 0.75
+
+            confidence = summary.get("confidence_score")
+            if isinstance(confidence, (int, float)):
+                score += min(float(confidence), 1.0)
+                score_breakdown["confidence_boost"] = min(float(confidence), 1.0)
 
             if score > 0:
-                summary["similarity_score"] = score
+                summary["similarity_score"] = round(score, 4)
+                summary["matched_terms"] = sorted(overlap)
+                summary["score_breakdown"] = score_breakdown
+                summary["memory_source"] = "real_trace_files"
                 scored_results.append(summary)
 
-        scored_results.sort(key=lambda item: item["similarity_score"], reverse=True)
+        scored_results.sort(
+            key=lambda item: (
+                item.get("similarity_score", 0),
+                item.get("created_at") or "",
+            ),
+            reverse=True,
+        )
         return scored_results[:limit]
 
     def get_trace_summary(self, trace_id_or_path: str) -> Optional[Dict[str, Any]]:
@@ -122,13 +150,10 @@ class TraceToolkit:
         return self.trace_store.summarize_trace(trace)
 
     def _is_successful(self, trace: Dict[str, Any], summary: Dict[str, Any]) -> bool:
-        """
-        Strict success detection.
+        failure_reason = summary.get("failure_reason")
+        if failure_reason is not None and str(failure_reason).strip().lower() not in {"", "none", "null"}:
+            return False
 
-        Important:
-        Do not use substring matching like "valid" in status,
-        because "invalid" contains "valid".
-        """
         status = str(summary.get("status", "")).lower().strip()
 
         successful_statuses = {
@@ -160,6 +185,12 @@ class TraceToolkit:
         if '"status": "invalid"' in text or "'status': 'invalid'" in text:
             return False
 
+        if '"recommended_action": "retry"' in text or "'recommended_action': 'retry'" in text:
+            return False
+
+        if '"recommended_action": "reject"' in text or "'recommended_action': 'reject'" in text:
+            return False
+
         if '"recommended_action": "accept"' in text or "'recommended_action': 'accept'" in text:
             return True
 
@@ -169,13 +200,10 @@ class TraceToolkit:
         return False
 
     def _is_failed(self, trace: Dict[str, Any], summary: Dict[str, Any]) -> bool:
-        """
-        Strict failure detection.
+        failure_reason = summary.get("failure_reason")
+        if failure_reason is not None and str(failure_reason).strip().lower() not in {"", "none", "null"}:
+            return True
 
-        Important:
-        A successful trace may contain "failure_reason": null.
-        So we must not classify a trace as failed just because the key exists.
-        """
         status = str(summary.get("status", "")).lower().strip()
 
         failed_statuses = {
@@ -196,11 +224,11 @@ class TraceToolkit:
             "ok",
         }
 
-        if status in successful_statuses:
-            return False
-
         if status in failed_statuses:
             return True
+
+        if status in successful_statuses:
+            return False
 
         text = str(trace).lower()
 
@@ -209,7 +237,6 @@ class TraceToolkit:
             "'status': 'invalid'",
             '"status": "failed"',
             "'status': 'failed'",
-            "weak_grounding",
             '"recommended_action": "retry"',
             "'recommended_action': 'retry'",
             '"recommended_action": "reject"',
@@ -218,27 +245,54 @@ class TraceToolkit:
 
         return any(marker in text for marker in failure_markers)
 
-    def _normalize_words(self, text: str) -> set:
-        cleaned = (
-            text.lower()
-            .replace(".", " ")
-            .replace(",", " ")
-            .replace(":", " ")
-            .replace(";", " ")
-            .replace("(", " ")
-            .replace(")", " ")
-            .replace("[", " ")
-            .replace("]", " ")
-            .replace("{", " ")
-            .replace("}", " ")
-            .replace('"', " ")
-            .replace("'", " ")
-        )
+    def _summary_words(self, summary: Dict[str, Any]) -> Set[str]:
+        parts = [
+            summary.get("student_question", ""),
+            summary.get("step_goal", ""),
+            summary.get("task_type", ""),
+            summary.get("content_preview", ""),
+            " ".join(summary.get("selected_tools", [])),
+        ]
 
-        words = set()
+        return self._normalize_words(" ".join(str(part) for part in parts if part))
 
-        for word in cleaned.split():
-            if len(word) >= 4:
-                words.add(word)
+    def _normalize_words(self, text: str) -> Set[str]:
+        tokens = re.findall(r"[a-zA-Z0-9_]+", (text or "").lower())
 
-        return words
+        stopwords = {
+            "the",
+            "a",
+            "an",
+            "and",
+            "or",
+            "of",
+            "to",
+            "in",
+            "with",
+            "for",
+            "is",
+            "are",
+            "be",
+            "this",
+            "that",
+            "it",
+            "as",
+            "by",
+            "on",
+            "how",
+            "what",
+            "why",
+            "use",
+            "using",
+            "explain",
+            "simple",
+            "example",
+            "student",
+            "learner",
+        }
+
+        return {
+            token
+            for token in tokens
+            if token not in stopwords and len(token) >= 4
+        }

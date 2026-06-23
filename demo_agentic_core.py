@@ -1,3 +1,4 @@
+from ai.llm.errors import LLMProviderUnavailableError
 import json
 
 from ai.agentic.core.agentic_core_service import AgenticCoreService
@@ -44,6 +45,16 @@ def main():
 
     print("\nDemo completed successfully.")
 
-
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except LLMProviderUnavailableError:
+        print()
+        print("=" * 80)
+        print("LLM PROVIDER UNAVAILABLE")
+        print("=" * 80)
+        print("The configured Groq/OpenAI-compatible LLM provider could not be reached.")
+        print("Please check your internet connection, API key, provider status, or try again later.")
+        print("No ungrounded or hard-coded tutoring answer was generated.")
+        print("=" * 80)
+        raise SystemExit(0)

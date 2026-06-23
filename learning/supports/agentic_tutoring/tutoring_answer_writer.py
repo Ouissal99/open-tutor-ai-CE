@@ -11,6 +11,7 @@ from ai.agentic.memory.static_knowledge_grounding import StaticKnowledgeGroundin
 from ai.llm.schemas import LLMRequest, Message
 from ai.llm.service import LLMService
 from ai.llm.transports.openai_compatible import OpenAICompatibleTransport
+from learning.supports.agentic_tutoring.grounded_answer_guard import GroundedAnswerGuard
 
 
 class TutoringAnswerWriter:
@@ -36,6 +37,7 @@ class TutoringAnswerWriter:
         self.dpm = dpm or DynamicPersonalMemory()
         self.skg = skg or StaticKnowledgeGrounding()
         self.model = model or os.getenv("AGENTIC_LLM_MODEL") or "llama-3.1-8b-instant"
+        self.grounding_guard = GroundedAnswerGuard()
 
     def generate(
         self,
@@ -148,6 +150,9 @@ Rules:
 6. Include a short "Evidence used" section.
 7. Include a short "References" section using only provided references.
 8. Keep the answer clear, pedagogical, and suitable for a tutoring platform.
+9. For numerical, matrix, code, or formula results, use only calculations already present in the validated OutputPackage.
+10. Do not invent extra patch formulas, matrix values, or code outputs.
+11. If the tool output gives a verified matrix/result, state it exactly and do not recalculate it differently.
 """.strip()
 
         user_prompt = (
@@ -162,12 +167,20 @@ Rules:
                     Message(role="system", content=system_prompt),
                     Message(role="user", content=user_prompt),
                 ],
-                temperature=0.2,
+                temperature=0.0,
                 max_tokens=900,
             )
         )
 
-        return response.completion.strip()
+        answer = response.completion.strip()
+
+        return self.grounding_guard.validate_or_fallback(
+            answer=answer,
+            student_question=student_question,
+            topic=topic,
+            package_dict=package_dict,
+            dpm_context=dpm_context,
+        )
 
     def _infer_topic(self, text: str) -> str:
         lower = text.lower()

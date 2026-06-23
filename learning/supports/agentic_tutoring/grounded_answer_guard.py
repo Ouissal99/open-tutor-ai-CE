@@ -171,9 +171,12 @@ class GroundedAnswerGuard:
         marker = "MatrixComputationTool computed"
         if marker not in content:
             return content[:1200].strip()
+
         start = content.find(marker)
         end = len(content)
+
         for next_marker in (
+            "\n\n## ",
             " Course evidence retrieved",
             " Trace guidance retrieved",
             " Generated visual explanation",
@@ -181,6 +184,7 @@ class GroundedAnswerGuard:
             index = content.find(next_marker, start + 1)
             if index != -1:
                 end = min(end, index)
+
         return content[start:end].strip()
 
     def _format_list(self, items: List[Any], max_items: int = 5) -> str:

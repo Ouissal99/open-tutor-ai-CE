@@ -1,4 +1,5 @@
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -7,6 +8,7 @@ from learning.supports.agentic_tutoring.investigation_agent import Investigation
 from learning.supports.agentic_tutoring.scratchpad import StepBasedScratchpad
 from learning.supports.agentic_tutoring.tool_request_agent import ToolRequestAgent
 from ai.agentic.tool_interaction.manager import ToolInteractionManager
+from ai.agentic.memory.dynamic_personal_memory import DynamicPersonalMemory
 
 
 class PersonalizedTutoringWorkflow:
@@ -30,6 +32,7 @@ class PersonalizedTutoringWorkflow:
         self.tool_manager = ToolInteractionManager()
         self.answer_writer = TutoringAnswerWriter()
         self.investigation_agent = InvestigationAgent()
+        self.dpm = DynamicPersonalMemory()
 
     def run(
         self,
@@ -83,7 +86,7 @@ class PersonalizedTutoringWorkflow:
                     learner_id=learner_id,
                     context={
                         "workflow_source": "personalized_problem_tutoring",
-                "investigation_result": investigation_result,
+                        "investigation_result": investigation_result,
                     },
                 )
                 final_request = request
@@ -106,6 +109,16 @@ class PersonalizedTutoringWorkflow:
                     package=package,
                 )
                 print("\n[6] Scratchpad updated with validated package")
+
+                self._append_dpm_trace_summary(
+                    learner_id=learner_id,
+                    student_question=student_question,
+                    investigation_result=investigation_result,
+                    request=request,
+                    package=package,
+                    trace_path=trace_path,
+                )
+                print("    DPM L1 trace summary updated")
 
         final_answer = self._compose_answer(
             question=student_question,
@@ -158,6 +171,44 @@ class PersonalizedTutoringWorkflow:
                 **metadata,
             },
         }
+
+    def _append_dpm_trace_summary(
+        self,
+        learner_id: str,
+        student_question: str,
+        investigation_result: Dict[str, Any],
+        request: Any,
+        package: Any,
+        trace_path: Any,
+    ) -> None:
+        package_dict = package.to_dict() if hasattr(package, "to_dict") else {}
+        package_metadata = package_dict.get("metadata", {}) or {}
+        validation_report = package_dict.get("validation_report", {}) or {}
+
+        trace_summary = {
+            "trace_type": "tool_interaction_summary",
+            "stored_from": "PersonalizedTutoringWorkflow",
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "learner_id": learner_id,
+            "student_question": student_question,
+            "topic": investigation_result.get("topic"),
+            "task_type": getattr(request, "task_type", None),
+            "step_goal": getattr(request, "step_goal", None),
+            "expected_output": getattr(request, "expected_output", None),
+            "request_id": getattr(request, "request_id", None),
+            "trace_id": package_dict.get("trace_id"),
+            "trace_path": str(trace_path) if trace_path else None,
+            "status": package_dict.get("status"),
+            "confidence_score": validation_report.get("confidence_score"),
+            "failure_reason": validation_report.get("failure_reason"),
+            "selected_tools": package_metadata.get("tool_names", []),
+            "content_format": package_metadata.get("content_format"),
+        }
+
+        self.dpm.append_l1_trace_summary(
+            learner_id=learner_id,
+            trace_summary=trace_summary,
+        )
 
     def _compose_answer(self, question: str, package: Any, learner_id: str) -> str:
         if not package:

@@ -1,7 +1,7 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from learning.supports.agentic_tutoring.tutoring_answer_writer import TutoringAnswerWriter
 from learning.supports.agentic_tutoring.investigation_agent import InvestigationAgent
@@ -57,16 +57,15 @@ class PersonalizedTutoringWorkflow:
         print(f"    required_context: {investigation_result.get('required_context')}")
         print(f"    meta_questions: {investigation_result.get('meta_questions')}")
         print(f"    initial_tutoring_plan: {investigation_result.get('initial_tutoring_plan')}")
-        solving_plan = [
-            {
-                "step_goal": "Explain the concept using course-grounded evidence",
-                "needs_tool": False,
-            },
-            {
-                "step_goal": "Generate visual support for kernel movement",
-                "needs_tool": True,
-            },
-        ]
+        solving_plan = self._build_solving_plan_from_investigation(investigation_result)
+
+        print("\n[3] Scratchpad solving plan created from LLM InvestigationAgent")
+        for step in solving_plan:
+            print(
+                f"    step {step.get('step_id')}: {step.get('step_goal')} "
+                f"| needs_tool={step.get('needs_tool')} "
+                f"| tools={step.get('suggested_tools')}"
+            )
 
         final_package = None
         trace_path = None
@@ -78,15 +77,27 @@ class PersonalizedTutoringWorkflow:
                 analysis="The tutor prepares the current solving step.",
             )
 
-            if step["needs_tool"]:
-                print("\n[3] Tool Request Agent creates a structured ToolRequest")
+            if not step.get("needs_tool", False):
+                round_item.status = "completed_without_tool"
+                round_item.tool_request_summary = "No tool request required for this investigation step."
+                continue
+
+            if step.get("needs_tool", False):
+                print("\n[4] Tool Request Agent creates a structured ToolRequest")
                 request = self.tool_request_agent.create_request(
                     student_question=student_question,
                     step_goal=step["step_goal"],
                     learner_id=learner_id,
+                    task_type=step.get("task_type"),
+                    expected_output=step.get("expected_output"),
+                    suggested_tools=step.get("suggested_tools", []),
+                    step_id=step.get("step_id"),
+                    reason=step.get("reason"),
                     context={
                         "workflow_source": "personalized_problem_tutoring",
                         "investigation_result": investigation_result,
+                        "current_plan_step": step,
+                        "full_investigation_plan": solving_plan,
                     },
                 )
                 final_request = request
@@ -94,11 +105,11 @@ class PersonalizedTutoringWorkflow:
                 print(f"    request_id: {request.request_id}")
                 print(f"    task_type: {request.task_type}")
 
-                print("\n[4] Central Tool Interaction Manager runs")
+                print("\n[5] Central Tool Interaction Manager runs")
                 package, trace_path = self.tool_manager.run(request)
                 final_package = package
 
-                print("\n[5] OutputPackage received from central manager")
+                print("\n[6] OutputPackage received from central manager")
                 print(f"    status: {package.status}")
                 print(f"    confidence: {package.validation_report.confidence_score}")
                 print(f"    trace_id: {package.trace_id}")
@@ -108,7 +119,7 @@ class PersonalizedTutoringWorkflow:
                     request_summary=f"{request.task_type} / {request.expected_output}",
                     package=package,
                 )
-                print("\n[6] Scratchpad updated with validated package")
+                print("\n[7] Scratchpad updated with validated package")
 
                 self._append_dpm_trace_summary(
                     learner_id=learner_id,
@@ -126,14 +137,14 @@ class PersonalizedTutoringWorkflow:
             learner_id=learner_id,
         )
 
-        print("\n[7] Real LLM TutoringAnswerWriter generated personalized answer")
+        print("\n[8] Real LLM TutoringAnswerWriter generated personalized answer")
         print(final_answer)
 
-        print("\n[8] Scratchpad state")
+        print("\n[9] Scratchpad state")
         print(json.dumps(self.scratchpad.to_dict(), indent=2))
 
         if trace_path:
-            print("\n[9] Tool interaction trace saved")
+            print("\n[10] Tool interaction trace saved")
             print(trace_path)
 
         package_dict = final_package.to_dict() if final_package else {}
@@ -171,6 +182,142 @@ class PersonalizedTutoringWorkflow:
                 **metadata,
             },
         }
+
+    def _build_solving_plan_from_investigation(
+        self,
+        investigation_result: Dict[str, Any],
+    ) -> List[Dict[str, Any]]:
+        raw_plan = investigation_result.get("initial_tutoring_plan") or []
+
+        if not isinstance(raw_plan, list):
+            raw_plan = []
+
+        normalized_plan = []
+
+        for index, raw_step in enumerate(raw_plan, start=1):
+            if not isinstance(raw_step, dict):
+                continue
+
+            step_goal = str(raw_step.get("step_goal") or f"Tutoring step {index}").strip()
+            suggested_tools = raw_step.get("suggested_tools") or []
+
+            if isinstance(suggested_tools, str):
+                suggested_tools = [suggested_tools]
+
+            if not isinstance(suggested_tools, list):
+                suggested_tools = []
+
+            suggested_tools = [
+                str(tool)
+                for tool in suggested_tools
+                if isinstance(tool, str) and tool.strip()
+            ]
+
+            needs_tool = bool(raw_step.get("needs_tool", False)) or bool(suggested_tools)
+            task_type = self._infer_step_task_type(
+                step_goal=step_goal,
+                suggested_tools=suggested_tools,
+                fallback_task_type=investigation_result.get("task_type", "general_tutoring"),
+            )
+
+            normalized_plan.append(
+                {
+                    "step_id": raw_step.get("step_id", index),
+                    "step_goal": step_goal,
+                    "needs_tool": needs_tool,
+                    "suggested_tools": suggested_tools,
+                    "task_type": task_type,
+                    "expected_output": self._infer_expected_output_for_step(
+                        task_type=task_type,
+                        suggested_tools=suggested_tools,
+                    ),
+                    "reason": raw_step.get("reason", "Generated by InvestigationAgent."),
+                }
+            )
+
+        if not normalized_plan:
+            normalized_plan = self._fallback_solving_plan(investigation_result)
+
+        if not any(step.get("needs_tool") for step in normalized_plan):
+            normalized_plan.extend(self._fallback_solving_plan(investigation_result))
+
+        return normalized_plan
+
+    def _infer_step_task_type(
+        self,
+        step_goal: str,
+        suggested_tools: List[str],
+        fallback_task_type: str,
+    ) -> str:
+        text = f"{step_goal} {' '.join(suggested_tools)}".lower()
+        tool_set = set(suggested_tools)
+
+        if "CodeSandboxTool" in tool_set:
+            return "code_help"
+
+        if "CalculatorTool" in tool_set:
+            return "calculation_or_verification"
+
+        if "VisualMatrixTool" in tool_set or any(
+            word in text for word in ["visual", "matrix", "kernel", "image", "diagram"]
+        ):
+            return "visual_explanation"
+
+        if "RAGTool" in tool_set or any(
+            word in text for word in ["define", "explain", "evidence", "course", "grounded"]
+        ):
+            return "conceptual_explanation"
+
+        return fallback_task_type or "general_tutoring"
+
+    def _infer_expected_output_for_step(
+        self,
+        task_type: str,
+        suggested_tools: List[str],
+    ) -> str:
+        if task_type == "visual_explanation":
+            return "visual explanation with grounded evidence"
+
+        if task_type == "conceptual_explanation":
+            return "course-grounded tutoring explanation"
+
+        if task_type == "calculation_or_verification":
+            return "verified calculation with evidence"
+
+        if task_type == "code_help":
+            return "grounded code help with execution evidence"
+
+        if suggested_tools:
+            return "grounded tool-supported tutoring output"
+
+        return "tutoring explanation"
+
+    def _fallback_solving_plan(
+        self,
+        investigation_result: Dict[str, Any],
+    ) -> List[Dict[str, Any]]:
+        topic = investigation_result.get("topic", "the topic")
+
+        return [
+            {
+                "step_id": 1,
+                "step_goal": f"Retrieve course-grounded evidence about {topic}",
+                "needs_tool": True,
+                "suggested_tools": ["RAGTool", "TraceSearchTool"],
+                "task_type": "conceptual_explanation",
+                "expected_output": "course-grounded tutoring explanation",
+                "reason": "Fallback plan when InvestigationAgent output is incomplete.",
+            },
+            {
+                "step_id": 2,
+                "step_goal": f"Generate visual support for {topic}",
+                "needs_tool": True,
+                "suggested_tools": ["VisualMatrixTool", "TraceSearchTool"],
+                "task_type": "visual_explanation",
+                "expected_output": "visual explanation with grounded evidence",
+                "reason": "Fallback plan when InvestigationAgent output is incomplete.",
+            },
+        ]
 
     def _append_dpm_trace_summary(
         self,

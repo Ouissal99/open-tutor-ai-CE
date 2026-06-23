@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from ai.agentic.core.schemas import ToolRequest, new_id
 
@@ -18,13 +18,22 @@ class ToolRequestAgent:
         step_goal: str,
         learner_id: str = "demo_user",
         context: Optional[Dict[str, Any]] = None,
+        task_type: Optional[str] = None,
+        expected_output: Optional[str] = None,
+        suggested_tools: Optional[List[str]] = None,
+        step_id: Optional[int] = None,
+        reason: Optional[str] = None,
     ) -> ToolRequest:
-        task_type = self._infer_task_type(student_question, step_goal)
+        resolved_task_type = task_type or self._infer_task_type(student_question, step_goal)
+        resolved_expected_output = expected_output or self._infer_expected_output(resolved_task_type)
 
         metadata = {
             "source_component": "ToolRequestAgent",
             "learner_id": learner_id,
             "current_step": step_goal,
+            "plan_step_id": step_id,
+            "step_reason": reason,
+            "suggested_tools": suggested_tools or [],
         }
 
         if context:
@@ -34,8 +43,8 @@ class ToolRequestAgent:
             request_id=new_id("REQ"),
             student_question=student_question,
             step_goal=step_goal,
-            task_type=task_type,
-            expected_output="visual explanation with grounded evidence",
+            task_type=resolved_task_type,
+            expected_output=resolved_expected_output,
             workflow_source="personalized_problem_tutoring",
             metadata=metadata,
         )
@@ -49,4 +58,16 @@ class ToolRequestAgent:
         if "calculate" in text or "compute" in text or "solve" in text:
             return "calculation_or_verification"
 
-        return "concept_explanation"
+        return "conceptual_explanation"
+
+    def _infer_expected_output(self, task_type: str) -> str:
+        if task_type == "visual_explanation":
+            return "visual explanation with grounded evidence"
+
+        if task_type == "calculation_or_verification":
+            return "verified calculation with evidence"
+
+        if task_type in {"code_help", "programming", "code_execution"}:
+            return "grounded code help with execution evidence"
+
+        return "grounded tutoring explanation"

@@ -88,6 +88,13 @@ class OpenAICompatibleTransport(LLMTransport):
             path="chat/completions",
             body=body,
             timeout=60.0,
+            extra_headers={
+                "User-Agent": os.getenv(
+                    "LLM_USER_AGENT",
+                    "OpenTutorAI-Agentic-Demo/0.1 local-research-client",
+                ),
+                "Accept": "application/json",
+            },
         )
 
         choices: List[Dict[str, Any]] = data.get("choices", [])

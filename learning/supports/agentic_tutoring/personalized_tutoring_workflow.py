@@ -10,6 +10,8 @@ from learning.supports.agentic_tutoring.tool_request_agent import ToolRequestAge
 from ai.agentic.tool_interaction.manager import ToolInteractionManager
 from ai.agentic.memory.dynamic_personal_memory import DynamicPersonalMemory
 from ai.agentic.memory.memory_update_agent import MemoryUpdateAgent
+from ai.agentic.tool_interaction.trace_event_bus import TraceEventBus
+from ai.llm.errors import LLMProviderUnavailableError
 
 
 class PersonalizedTutoringWorkflow:
@@ -140,11 +142,53 @@ class PersonalizedTutoringWorkflow:
                 print(f"    updated_layers: L1, L2, L3")
                 final_memory_update_summary = memory_update_summary
 
-        final_answer = self._compose_answer(
-            question=student_question,
-            package=final_package,
-            learner_id=learner_id,
-        )
+                TraceEventBus.update_trace_file(
+                    trace_path=trace_path,
+                    updates={
+                        "memory_update_status": "updated",
+                        "memory_update_summary": memory_update_summary,
+                    },
+                )
+
+        try:
+            final_answer = self._compose_answer(
+                question=student_question,
+                package=final_package,
+                learner_id=learner_id,
+            )
+
+            TraceEventBus.update_trace_file(
+                trace_path=trace_path,
+                updates={
+                    "final_answer_status": "generated",
+                    "final_answer": final_answer,
+                    "provider_failure": None,
+                    "llm_calls_metadata": {
+                        "final_answer_generator": {
+                            "status": "generated",
+                            "component": "TutoringAnswerWriter",
+                        }
+                    },
+                },
+            )
+
+        except LLMProviderUnavailableError as exc:
+            TraceEventBus.update_trace_file(
+                trace_path=trace_path,
+                updates={
+                    "final_answer_status": "provider_unavailable",
+                    "final_answer": None,
+                    "provider_failure": str(exc),
+                    "llm_calls_metadata": {
+                        "final_answer_generator": {
+                            "status": "provider_unavailable",
+                            "component": "TutoringAnswerWriter",
+                            "error": str(exc),
+                        }
+                    },
+                },
+            )
+            raise
 
         print("\n[8] Real LLM TutoringAnswerWriter generated personalized answer")
         print(final_answer)

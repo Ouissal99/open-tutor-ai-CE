@@ -83,6 +83,7 @@ class TutoringAnswerWriter:
 
         package_dict = self._to_dict(output_package)
         scratchpad_dict = self._to_dict(scratchpad or [])
+        scratchpad_summary = self._compact_scratchpad_summary(scratchpad_dict)
 
         task_type = (package_dict.get("metadata", {}) or {}).get(
             "task_type",
@@ -113,23 +114,23 @@ class TutoringAnswerWriter:
                 "known_topics": dpm_context.get("known_topics"),
                 "weak_topics": dpm_context.get("weak_topics"),
                 "is_weak_topic": dpm_context.get("is_weak_topic"),
-                "recent_memory": dpm_context.get("recent_memory"),
-                "tutoring_memory": dpm_context.get("tutoring_memory"),
+                "recent_memory": self._truncate(dpm_context.get("recent_memory"), 500),
+                "tutoring_memory": self._truncate(dpm_context.get("tutoring_memory"), 500),
             },
             "static_knowledge_grounding": {
                 "kb_name": skg_context.get("kb_name"),
-                "retrieved_snippets": skg_context.get("snippets", []),
-                "sources": skg_context.get("sources", []),
+                "retrieved_snippets": self._truncate_list(skg_context.get("snippets", []), max_items=3, max_chars=700),
+                "sources": skg_context.get("sources", [])[:3],
             },
             "validated_output_package": {
                 "status": package_dict.get("status"),
-                "content": package_dict.get("content"),
-                "evidence": package_dict.get("evidence", []),
-                "references": package_dict.get("references", []),
+                "content": self._truncate(package_dict.get("content"), 2500),
+                "evidence": self._truncate_list(package_dict.get("evidence", []), max_items=4, max_chars=700),
+                "references": package_dict.get("references", [])[:4],
                 "validation_report": package_dict.get("validation_report", {}),
                 "trace_id": package_dict.get("trace_id"),
             },
-            "scratchpad": scratchpad_dict,
+            "scratchpad_summary": scratchpad_summary,
         }
 
         system_prompt = """
@@ -181,6 +182,64 @@ Rules:
             package_dict=package_dict,
             dpm_context=dpm_context,
         )
+
+    def _truncate(self, value: Any, max_chars: int) -> Any:
+        if value is None:
+            return None
+
+        text = str(value)
+
+        if len(text) <= max_chars:
+            return text
+
+        return text[:max_chars].rstrip() + "... [truncated]"
+
+    def _truncate_list(
+        self,
+        values: Any,
+        max_items: int = 4,
+        max_chars: int = 700,
+    ) -> List[Any]:
+        if not isinstance(values, list):
+            return []
+
+        compact = []
+
+        for item in values[:max_items]:
+            compact.append(self._truncate(item, max_chars))
+
+        return compact
+
+    def _compact_scratchpad_summary(self, scratchpad: Any) -> List[Dict[str, Any]]:
+        if not isinstance(scratchpad, list):
+            return []
+
+        summary = []
+
+        for item in scratchpad:
+            if not isinstance(item, dict):
+                continue
+
+            package = item.get("output_package") or item.get("package") or {}
+            package = package if isinstance(package, dict) else {}
+
+            validation = package.get("validation_report", {}) or {}
+            metadata = package.get("metadata", {}) or {}
+
+            summary.append(
+                {
+                    "step_id": item.get("step_id"),
+                    "step_goal": item.get("step_goal") or item.get("goal"),
+                    "status": item.get("status") or package.get("status"),
+                    "task_type": metadata.get("task_type"),
+                    "tool_names": metadata.get("tool_names", []),
+                    "confidence_score": validation.get("confidence_score"),
+                    "failure_reason": validation.get("failure_reason"),
+                    "trace_id": package.get("trace_id"),
+                }
+            )
+
+        return summary
 
     def _infer_topic(self, text: str) -> str:
         lower = text.lower()

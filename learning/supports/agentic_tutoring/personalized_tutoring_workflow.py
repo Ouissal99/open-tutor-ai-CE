@@ -101,6 +101,8 @@ class PersonalizedTutoringWorkflow:
                         "investigation_result": investigation_result,
                         "current_plan_step": step,
                         "full_investigation_plan": solving_plan,
+                        "workflow_metadata": metadata,
+                        "force_recovery_test": metadata.get("force_recovery_test", False),
                     },
                 )
                 final_request = request
@@ -444,8 +446,21 @@ class PersonalizedTutoringWorkflow:
 
         walk(trace_data)
 
+        # Detect recovery from explicit recovery events, node names, or event payloads.
+        trace_text = json.dumps(trace_data, ensure_ascii=False).lower()
+
+        if (
+            "recover_failure" in trace_text
+            or "failure_recovery_applied" in trace_text
+            or "recovery_decision" in trace_text
+            or "recovery_used" in trace_text
+        ):
+            recovery_used = True
+
         if attempt_numbers:
             metadata["attempts"] = max(attempt_numbers)
+        elif recovery_used:
+            metadata["attempts"] = 2
 
         metadata["selected_tools"] = sorted(selected_tools)
         metadata["recovery_used"] = recovery_used

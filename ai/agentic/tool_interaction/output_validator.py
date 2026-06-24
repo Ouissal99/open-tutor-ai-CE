@@ -35,8 +35,8 @@ class OutputValidator:
             return ValidationReport(
                 status="invalid",
                 confidence_score=0.42,
-                failure_reason="weak_grounding",
-                recommended_action="re_query_or_re_execute",
+                failure_reason="insufficient_grounding",
+                recommended_action="retry_with_grounding_tools",
             )
 
         if request.task_type == "visual_explanation":

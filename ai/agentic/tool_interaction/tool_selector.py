@@ -7,8 +7,8 @@ class ToolSelector:
     """
     Memory-aware tool selector.
 
-    It can reuse previous successful traces, but normalizes old mock tool names
-    into real ToolRegistry names.
+    It can reuse previous successful traces, normalize old mock tool names,
+    and respect FailureRecovery-required tools.
     """
 
     TOOL_NAME_ALIASES = {
@@ -27,6 +27,45 @@ class ToolSelector:
     def select_tools(self, analyzed_task: Dict[str, Any], attempt: int = 1) -> List[str]:
         task_type = analyzed_task.get("task_type", "unknown_task")
         query = self._build_query_text(analyzed_task)
+
+        if attempt == 1 and analyzed_task.get("force_recovery_test"):
+            selected_tools = ["TraceSearchTool"]
+
+            self.last_selection_metadata = {
+                "selection_strategy": "controlled_failure_test",
+                "selection_reason": "force_recovery_test_attempt_1_omits_grounding_tools",
+                "reference_trace_id": None,
+                "reference_trace_path": None,
+                "similarity_score": 0,
+                "failed_trace_count_considered": 0,
+                "selected_tools": selected_tools,
+                "attempt": attempt,
+            }
+
+            return selected_tools
+
+        recovery_required_tools = analyzed_task.get("recovery_required_tools") or []
+        if attempt > 1 and recovery_required_tools:
+            selected_tools = self._normalize_selected_tools(
+                selected_tools=recovery_required_tools,
+                task_type=task_type,
+                failed_traces=[],
+                analyzed_task=analyzed_task,
+            )
+
+            self.last_selection_metadata = {
+                "selection_strategy": "failure_recovery_policy",
+                "selection_reason": "using_tools_required_by_failure_recovery",
+                "reference_trace_id": None,
+                "reference_trace_path": None,
+                "similarity_score": 0,
+                "failed_trace_count_considered": 0,
+                "selected_tools": selected_tools,
+                "attempt": attempt,
+                "recovery_required_tools": recovery_required_tools,
+            }
+
+            return selected_tools
 
         similar_successful_traces = self.trace_toolkit.find_similar_traces(
             query=query,

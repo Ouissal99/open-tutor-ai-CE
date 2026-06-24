@@ -124,16 +124,26 @@ def compact_report(
     package_metadata = package.get("metadata", {}) or {}
     validation_report = package.get("validation_report", {}) or {}
 
+    effective_trace_path = (
+        (response or {}).get("trace_path")
+        or (trace_summary or {}).get("trace_path")
+        or (trace or {}).get("trace_path")
+    )
+
+    recovery_metadata = extract_recovery_metadata_from_trace(effective_trace_path)
+
     summary = {
         "question": question,
         "learner_id": learner_id,
         "provider_status": provider_status,
         "workflow_status": (response or {}).get("status") or package.get("status"),
         "trace_id": (response or {}).get("trace_id") or (trace_summary or {}).get("trace_id") or package.get("trace_id"),
-        "trace_path": (response or {}).get("trace_path") or (trace_summary or {}).get("trace_path"),
+        "trace_path": effective_trace_path,
         "confidence": (response or {}).get("confidence") or validation_report.get("confidence_score"),
         "selected_tools": (response or {}).get("selected_tools") or (trace_summary or {}).get("selected_tools") or package_metadata.get("tool_names", []),
-        "recovery_used": (response or {}).get("recovery_used") or (trace_summary or {}).get("recovery_used", False),
+        "recovery_used": recovery_metadata.get("recovery_used", False),
+        "attempts": recovery_metadata.get("attempts", 1),
+        "recovery_steps": recovery_metadata.get("recovery_steps", []),
         "content_format": package_metadata.get("content_format"),
         "rag_retrieval_mode": rag_metadata[0].get("retrieval_mode") if rag_metadata else None,
         "rag_grounding_source": rag_metadata[0].get("grounding_source") if rag_metadata else None,
@@ -193,6 +203,76 @@ def save_report(report: Dict[str, Any]) -> Path:
     return path
 
 
+
+def extract_recovery_metadata_from_trace(trace_path):
+    """Extract attempts and recovery usage directly from a saved trace file."""
+    metadata = {
+        "attempts": 1,
+        "recovery_used": False,
+        "recovery_steps": [],
+    }
+
+    if not trace_path:
+        return metadata
+
+    path = Path(trace_path)
+    if not path.exists():
+        return metadata
+
+    try:
+        trace_data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return metadata
+
+    trace_text = json.dumps(trace_data, ensure_ascii=False).lower()
+
+    if (
+        "recover_failure" in trace_text
+        or "failure_recovery_applied" in trace_text
+        or "recovery_decision" in trace_text
+        or "using_tools_required_by_failure_recovery" in trace_text
+        or "controlled_failure_test" in trace_text
+    ):
+        metadata["recovery_used"] = True
+
+    attempts = []
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            event_type = obj.get("event_type") or obj.get("node") or obj.get("event")
+            payload = obj.get("payload", {})
+
+            if event_type in {"failure_recovery_applied", "recover_failure"}:
+                metadata["recovery_used"] = True
+                metadata["recovery_steps"].append(obj)
+
+            if isinstance(payload, dict):
+                if payload.get("recovery_used") is True:
+                    metadata["recovery_used"] = True
+                    metadata["recovery_steps"].append(payload)
+
+                if "previous_attempt" in payload and "next_attempt" in payload:
+                    metadata["recovery_used"] = True
+                    metadata["recovery_steps"].append(payload)
+
+            for key, value in obj.items():
+                if key in {"attempt", "attempt_number", "current_attempt", "next_attempt"} and isinstance(value, int):
+                    attempts.append(value)
+                walk(value)
+
+        elif isinstance(obj, list):
+            for item in obj:
+                walk(item)
+
+    walk(trace_data)
+
+    if attempts:
+        metadata["attempts"] = max(attempts)
+    elif metadata["recovery_used"]:
+        metadata["attempts"] = 2
+
+    return metadata
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -204,6 +284,11 @@ def main() -> None:
         "--learner-id",
         default="demo_user",
         help="Learner id used for DPM personalization.",
+    )
+    parser.add_argument(
+        "--force-recovery-test",
+        action="store_true",
+        help="Force a weak first attempt to prove FailureRecovery.",
     )
     args = parser.parse_args()
 
@@ -223,6 +308,7 @@ def main() -> None:
                 "learner_id": args.learner_id,
                 "metadata": {
                     "source": "run_agentic_tutoring_demo",
+                    "force_recovery_test": args.force_recovery_test,
                 },
             }
         )

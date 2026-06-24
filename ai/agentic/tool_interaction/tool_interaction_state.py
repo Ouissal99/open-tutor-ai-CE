@@ -29,6 +29,7 @@ class ToolInteractionState(TypedDict, total=False):
     last_report: Any
 
     recovery_decision: Dict[str, Any]
+    recovery_steps: List[Dict[str, Any]]
     recovery_used: bool
 
     package: Any

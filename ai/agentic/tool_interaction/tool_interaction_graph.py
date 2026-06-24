@@ -71,6 +71,7 @@ class ToolInteractionGraph:
             "last_results": [],
             "last_report": None,
             "recovery_used": False,
+            "recovery_steps": [],
             "node_history": [],
             "trace_events": [],
             "final_status": "running",
@@ -126,6 +127,12 @@ class ToolInteractionGraph:
         trace_bus = state["trace_bus"]
 
         analyzed_task = self.analyzer.analyze(request)
+
+        request_metadata = getattr(request, "metadata", {}) or {}
+        analyzed_task["request_metadata"] = request_metadata
+
+        if request_metadata.get("force_recovery_test"):
+            analyzed_task["force_recovery_test"] = True
 
         state["analyzed_task"] = analyzed_task
         trace_bus.emit("task_analyzed", analyzed_task)
@@ -279,6 +286,12 @@ class ToolInteractionGraph:
 
         trace_bus.emit("output_validated", report)
 
+        print("\n[12] OutputValidator checked grounding and learner fit")
+        print(f"    attempt: {attempt}")
+        print(f"    status: {report.status}")
+        print(f"    reason: {report.failure_reason}")
+        print(f"    recommended_action: {report.recommended_action}")
+
         if report.status == "valid":
             state["route_decision"] = "success"
             state["final_status"] = "validated"
@@ -310,8 +323,42 @@ class ToolInteractionGraph:
         self._mark_node(state, "recover_failure")
 
         previous_attempt = state["attempt"]
+        recovery_decision = state.get("recovery_decision", {}) or {}
+
+        request = state["request"]
+        analyzed_task = state.get("analyzed_task", {})
+
+        required_tools = list(recovery_decision.get("required_tools", []))
+
+        if getattr(request, "task_type", None) == "visual_explanation":
+            for tool in ["RAGTool", "TraceSearchTool", "MatrixComputationTool", "VisualMatrixTool"]:
+                if tool not in required_tools:
+                    required_tools.append(tool)
+
+        analyzed_task["recovery_required_tools"] = required_tools
+        analyzed_task["recovery_reason"] = recovery_decision.get("reason")
+        state["analyzed_task"] = analyzed_task
+
         state["attempt"] = previous_attempt + 1
         state["recovery_used"] = True
+
+        recovery_step = {
+            "previous_attempt": previous_attempt,
+            "next_attempt": state["attempt"],
+            "recovery_decision": recovery_decision,
+            "required_tools": required_tools,
+            "recovery_used": True,
+        }
+        state.setdefault("recovery_steps", []).append(recovery_step)
+
+        trace_bus = state["trace_bus"]
+        trace_bus.emit("failure_recovery_applied", recovery_step)
+
+        print("\n[13] FailureRecovery triggered")
+        print(f"    previous_attempt: {previous_attempt}")
+        print(f"    next_attempt: {state['attempt']}")
+        print(f"    recovery_action: {recovery_decision.get('action')}")
+        print(f"    required_tools: {required_tools}")
 
         self._add_trace_event(
             state,
@@ -321,6 +368,8 @@ class ToolInteractionGraph:
                 "previous_attempt": previous_attempt,
                 "next_attempt": state["attempt"],
                 "recovery_decision": state.get("recovery_decision", {}),
+                "required_tools": state.get("analyzed_task", {}).get("recovery_required_tools", []),
+                "recovery_used": True,
             },
         )
 

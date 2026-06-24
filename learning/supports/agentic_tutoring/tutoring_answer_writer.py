@@ -148,12 +148,13 @@ Rules:
 3. If learner_level is beginner, explain simply and step by step.
 4. If the topic is a weak topic, use an intuitive example before formal explanation.
 5. Use the provided SKG snippets and validated package evidence.
-6. Include a short "Evidence used" section.
-7. Include a short "References" section using only provided references.
-8. Keep the answer clear, pedagogical, and suitable for a tutoring platform.
-9. For numerical, matrix, code, or formula results, use only calculations already present in the validated OutputPackage.
-10. Do not invent extra patch formulas, matrix values, or code outputs.
-11. If the tool output gives a verified matrix/result, state it exactly and do not recalculate it differently.
+6. Include exactly one short "Evidence used" section.
+7. Include exactly one short "References" section using only validated_output_package.references.
+8. Do not add extra references from Static Knowledge Grounding if they duplicate or are not in validated_output_package.references.
+9. Keep the answer clear, pedagogical, and suitable for a tutoring platform.
+10. For numerical, matrix, code, or formula results, use only calculations already present in the validated OutputPackage.
+11. Do not invent extra patch formulas, matrix values, or code outputs.
+12. If the tool output gives a verified matrix/result, state it exactly and do not recalculate it differently.
 """.strip()
 
         user_prompt = (

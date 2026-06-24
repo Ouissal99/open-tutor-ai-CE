@@ -194,7 +194,22 @@ class PersonalizedTutoringWorkflow:
         print(final_answer)
 
         print("\n[9] Scratchpad state")
-        print(json.dumps(self.scratchpad.to_dict(), indent=2))
+        scratchpad_items = self.scratchpad.to_dict()
+        print(f"    rounds: {len(scratchpad_items)}")
+
+        for item in scratchpad_items:
+            package = item.get("output_package", {}) if isinstance(item, dict) else {}
+            metadata = package.get("metadata", {}) if isinstance(package, dict) else {}
+            validation = package.get("validation_report", {}) if isinstance(package, dict) else {}
+
+            print(
+                "    - "
+                f"round={item.get('round_id')} | "
+                f"step={item.get('step_goal')} | "
+                f"status={item.get('status')} | "
+                f"tools={metadata.get('tool_names', [])} | "
+                f"confidence={validation.get('confidence_score')}"
+            )
 
         if trace_path:
             print("\n[10] Tool interaction trace saved")

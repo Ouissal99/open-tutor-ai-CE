@@ -1,0 +1,25 @@
+LLM-AS-A-JUDGE 3-RUN AVERAGE — 30 TESTS
+============================================================
+Judge runs: 3
+Judged tests per run: 30
+Total judge decisions: 90
+
+correctness: 3.50/5
+source_faithfulness: 3.90/5
+grounding_quality: 4.43/5
+personalization: 3.30/5
+applicability: 4.37/5
+vividness: 4.30/5
+logical_depth: 3.80/5
+clarity: 3.97/5
+overall_score: 3.76/5
+
+Lowest average overall scores:
+T08: overall=2.00/5 | Calculate the output size with input 7x7, kernel 3x3, stride 2, padding 1.
+T27: overall=2.00/5 | Explain padding and stride, but force the first attempt without grounding.
+T15: overall=2.60/5 | Show how a filter detects vertical edges in an image matrix.
+T18: overall=2.60/5 | Give Python code for applying a 2x2 kernel on a 3x3 matrix.
+T06: overall=2.80/5 | Compute the result of a 2x2 kernel applied to a 3x3 matrix.
+T30: overall=3.00/5 | Explain, compute, and visualize convolution, but force the first attempt without grounding.
+T28: overall=3.60/5 | Explain visually how a kernel moves, but force the first attempt without grounding.
+T29: overall=3.60/5 | Explain convolution output size, but force the first attempt without grounding.

@@ -1,6 +1,8 @@
 """CodeSandboxTool: restricted Python execution for educational code examples.
 
-This is a prototype sandbox. It blocks dangerous imports and runs with timeout.
+This is a prototype sandbox. It blocks dangerous imports/tokens and runs with
+timeout. It is not a production-grade secure sandbox.
+
 For production, replace this with Docker/firejail/microVM isolation.
 """
 
@@ -40,6 +42,19 @@ BLOCKED_TOKENS = [
 ]
 
 
+def _safe_import(name, globals=None, locals=None, fromlist=(), level=0):
+    """Allow only small educational imports."""
+    if name == "math":
+        import math
+        return math
+
+    if name == "numpy" or name.startswith("numpy."):
+        import numpy
+        return numpy
+
+    raise ImportError(f"Import '{name}' is not allowed in CodeSandboxTool.")
+
+
 def _run_code(code: str, output_queue: multiprocessing.Queue) -> None:
     old_stdout = sys.stdout
     old_stderr = sys.stderr
@@ -47,37 +62,44 @@ def _run_code(code: str, output_queue: multiprocessing.Queue) -> None:
     stdout = StringIO()
     stderr = StringIO()
 
+    safe_builtins = {
+        "__import__": _safe_import,
+        "abs": abs,
+        "all": all,
+        "any": any,
+        "bool": bool,
+        "dict": dict,
+        "enumerate": enumerate,
+        "Exception": Exception,
+        "float": float,
+        "int": int,
+        "len": len,
+        "list": list,
+        "max": max,
+        "min": min,
+        "pow": pow,
+        "print": print,
+        "range": range,
+        "round": round,
+        "set": set,
+        "sorted": sorted,
+        "str": str,
+        "sum": sum,
+        "tuple": tuple,
+        "TypeError": TypeError,
+        "ValueError": ValueError,
+        "zip": zip,
+    }
+
     safe_globals = {
-        "__builtins__": {
-            "abs": abs,
-            "all": all,
-            "any": any,
-            "bool": bool,
-            "dict": dict,
-            "enumerate": enumerate,
-            "float": float,
-            "int": int,
-            "len": len,
-            "list": list,
-            "max": max,
-            "min": min,
-            "pow": pow,
-            "print": print,
-            "range": range,
-            "round": round,
-            "set": set,
-            "sorted": sorted,
-            "str": str,
-            "sum": sum,
-            "tuple": tuple,
-            "zip": zip,
-        }
+        "__builtins__": safe_builtins,
     }
 
     try:
         sys.stdout = stdout
         sys.stderr = stderr
-        exec(code, safe_globals, {})
+        exec(code, safe_globals, safe_globals)
+
         output_queue.put(
             {
                 "success": True,
@@ -119,7 +141,7 @@ class CodeSandboxTool(BaseTool):
         code = (
             step.get("code")
             or analyzed_task.get("code")
-            or request.metadata.get("code")
+            or (getattr(request, "metadata", {}) or {}).get("code")
             or ""
         )
 
@@ -136,6 +158,7 @@ class CodeSandboxTool(BaseTool):
                     "source_component": self.name,
                     "failure_reason": "missing_code",
                     "registry_tool": True,
+                    "requires_code": True,
                 },
             )
 
@@ -147,7 +170,14 @@ class CodeSandboxTool(BaseTool):
                 tool_name=self.name,
                 status="failed",
                 success=False,
-                output=f"Code execution blocked for safety. Blocked token(s): {blocked}",
+                output=(
+                    "Code execution blocked for safety.\n\n"
+                    "Candidate code:\n"
+                    "```python\n"
+                    f"{code}\n"
+                    "```\n\n"
+                    f"Blocked token(s): {blocked}"
+                ),
                 evidence=["The sandbox blocked potentially unsafe code."],
                 references=["CodeSandboxTool safety policy"],
                 metadata={
@@ -155,6 +185,9 @@ class CodeSandboxTool(BaseTool):
                     "source_component": self.name,
                     "failure_reason": "blocked_code",
                     "blocked_tokens": blocked,
+                    "code": code,
+                    "code_source": step.get("code_source"),
+                    "code_draft": step.get("code_draft"),
                     "registry_tool": True,
                 },
             )
@@ -171,13 +204,22 @@ class CodeSandboxTool(BaseTool):
                 tool_name=self.name,
                 status="failed",
                 success=False,
-                output="Code execution timed out.",
+                output=(
+                    "Code execution timed out.\n\n"
+                    "Candidate code:\n"
+                    "```python\n"
+                    f"{code}\n"
+                    "```"
+                ),
                 evidence=["The sandbox stopped execution after timeout."],
                 references=["CodeSandboxTool timeout policy"],
                 metadata={
                     "attempt": attempt,
                     "source_component": self.name,
                     "failure_reason": "timeout",
+                    "code": code,
+                    "code_source": step.get("code_source"),
+                    "code_draft": step.get("code_draft"),
                     "registry_tool": True,
                 },
             )
@@ -195,7 +237,11 @@ class CodeSandboxTool(BaseTool):
         success = bool(result.get("success"))
 
         output = (
-            "Code execution completed.\n"
+            "Candidate Python code executed by CodeSandboxTool:\n"
+            "```python\n"
+            f"{code}\n"
+            "```\n\n"
+            "Execution result:\n"
             f"STDOUT:\n{result.get('stdout', '')}\n"
             f"STDERR:\n{result.get('stderr', '')}\n"
         )
@@ -208,7 +254,10 @@ class CodeSandboxTool(BaseTool):
             status="success" if success else "failed",
             success=success,
             output=output,
-            evidence=["CodeSandboxTool executed the provided Python snippet."],
+            evidence=[
+                "CodeSandboxTool executed the LLM-generated Python snippet.",
+                "Execution success status was returned to the OutputValidator.",
+            ],
             references=["CodeSandboxTool local restricted Python sandbox"],
             metadata={
                 "attempt": attempt,
@@ -216,6 +265,10 @@ class CodeSandboxTool(BaseTool):
                 "stdout": result.get("stdout"),
                 "stderr": result.get("stderr"),
                 "error": result.get("error"),
+                "code": code,
+                "code_source": step.get("code_source"),
+                "code_draft": step.get("code_draft"),
                 "registry_tool": True,
+                "sandbox_type": "restricted_python_multiprocessing_timeout",
             },
         )

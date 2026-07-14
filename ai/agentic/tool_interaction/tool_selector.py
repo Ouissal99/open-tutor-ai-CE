@@ -161,10 +161,11 @@ class ToolSelector:
                 "VisualMatrixTool",
             ]
 
-        if task_type in {"code_help", "programming", "code_execution"}:
+        if task_type in {"code_help", "programming", "code_execution", "debugging"}:
             return [
                 "RAGTool",
                 "TraceSearchTool",
+                "MatrixComputationTool",
                 "CodeSandboxTool",
             ]
 

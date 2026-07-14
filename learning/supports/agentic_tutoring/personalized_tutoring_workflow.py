@@ -61,7 +61,10 @@ class PersonalizedTutoringWorkflow:
         print(f"    required_context: {investigation_result.get('required_context')}")
         print(f"    meta_questions: {investigation_result.get('meta_questions')}")
         print(f"    initial_tutoring_plan: {investigation_result.get('initial_tutoring_plan')}")
-        solving_plan = self._build_solving_plan_from_investigation(investigation_result)
+        solving_plan = self._build_solving_plan_from_investigation(
+            investigation_result,
+            student_question=student_question,
+        )
 
         print("\n[3] Scratchpad solving plan created from LLM InvestigationAgent")
         for step in solving_plan:
@@ -75,6 +78,7 @@ class PersonalizedTutoringWorkflow:
         trace_path = None
         final_request = None
         final_memory_update_summary = {}
+        all_tool_packages = []
 
         for step in solving_plan:
             round_item = self.scratchpad.add_round(
@@ -115,6 +119,14 @@ class PersonalizedTutoringWorkflow:
                 print("\n[5] Central Tool Interaction Manager runs")
                 package, trace_path = self.tool_manager.run(request)
                 final_package = package
+                all_tool_packages.append(
+                    {
+                        "step": step,
+                        "request": request,
+                        "package": package,
+                        "trace_path": trace_path,
+                    }
+                )
 
                 print("\n[6] OutputPackage received from central manager")
                 print(f"    status: {package.status}")
@@ -150,6 +162,21 @@ class PersonalizedTutoringWorkflow:
                     },
                 )
 
+        # Prefer the package that best matches the original question.
+        # For code questions, keep the CodeSandboxTool package as the main
+        # validated package, even if later visual/tool steps also ran.
+        final_selection = self._select_final_package(
+            student_question=student_question,
+            all_tool_packages=all_tool_packages,
+            fallback_package=final_package,
+            fallback_trace_path=trace_path,
+            fallback_request=final_request,
+        )
+
+        final_package = final_selection.get("package")
+        trace_path = final_selection.get("trace_path")
+        final_request = final_selection.get("request") or final_request
+
         try:
             final_answer = self._compose_answer(
                 question=student_question,
@@ -173,24 +200,33 @@ class PersonalizedTutoringWorkflow:
             )
 
         except LLMProviderUnavailableError as exc:
-            TraceEventBus.update_trace_file(
-                trace_path=trace_path,
-                updates={
-                    "final_answer_status": "provider_unavailable",
-                    "final_answer": None,
-                    "provider_failure": str(exc),
-                    "llm_calls_metadata": {
-                        "final_answer_generator": {
-                            "status": "provider_unavailable",
-                            "component": "TutoringAnswerWriter",
-                            "error": str(exc),
-                        }
-                    },
-                },
+            final_answer = self._compose_fallback_answer_from_package(
+                question=student_question,
+                package=final_package,
             )
-            raise
 
-        print("\n[8] Real LLM TutoringAnswerWriter generated personalized answer")
+            if trace_path:
+                TraceEventBus.update_trace_file(
+                    trace_path=trace_path,
+                    updates={
+                        "final_answer_status": "fallback_from_validated_output_package",
+                        "final_answer": final_answer,
+                        "provider_failure": str(exc),
+                        "llm_calls_metadata": {
+                            "final_answer_generator": {
+                                "status": "provider_unavailable",
+                                "component": "TutoringAnswerWriter",
+                                "error": str(exc),
+                            },
+                            "fallback_answer_generator": {
+                                "status": "generated",
+                                "component": "ValidatedOutputPackageRenderer",
+                            },
+                        },
+                    },
+                )
+
+        print("\n[8] Final tutor answer generated")
         print(final_answer)
 
         print("\n[9] Scratchpad state")
@@ -252,9 +288,86 @@ class PersonalizedTutoringWorkflow:
             },
         }
 
+    def _select_final_package(
+        self,
+        student_question: str,
+        all_tool_packages: List[Dict[str, Any]],
+        fallback_package: Any,
+        fallback_trace_path: Any,
+        fallback_request: Any,
+    ) -> Dict[str, Any]:
+        question_text = (student_question or "").lower()
+        code_terms = ["code", "python", "numpy", "implement", "debug", "script", "program"]
+
+        def package_tool_names(item: Dict[str, Any]) -> List[str]:
+            package = item.get("package")
+            if not package:
+                return []
+
+            package_dict = package.to_dict() if hasattr(package, "to_dict") else {}
+            metadata = package_dict.get("metadata", {}) or {}
+            return metadata.get("tool_names", []) or []
+
+        if any(term in question_text for term in code_terms):
+            for item in reversed(all_tool_packages):
+                if "CodeSandboxTool" in package_tool_names(item):
+                    return item
+
+        for item in reversed(all_tool_packages):
+            package = item.get("package")
+            package_dict = package.to_dict() if hasattr(package, "to_dict") else {}
+            if package_dict.get("status") == "validated":
+                return item
+
+        return {
+            "package": fallback_package,
+            "trace_path": fallback_trace_path,
+            "request": fallback_request,
+        }
+
+    def _compose_fallback_answer_from_package(
+        self,
+        question: str,
+        package: Any,
+    ) -> str:
+        """
+        Safe fallback renderer used only when the final LLM answer writer is unavailable.
+        It does not invent new code, formulas, or results. It only formats the
+        already validated OutputPackage.
+        """
+        if not package:
+            return (
+                "I could not generate a final personalized answer because no validated "
+                "tool package was available."
+            )
+
+        package_dict = package.to_dict() if hasattr(package, "to_dict") else {}
+        content = package_dict.get("content") or ""
+        metadata = package_dict.get("metadata", {}) or {}
+        validation = package_dict.get("validation_report", {}) or {}
+
+        tool_names = metadata.get("tool_names", []) or []
+        confidence = validation.get("confidence_score")
+
+        lines = [
+            "## Grounded answer from validated tool output",
+            "",
+            f"Question: {question}",
+            "",
+            f"Validated tools used: {', '.join(tool_names) if tool_names else 'not recorded'}",
+            f"Validation confidence: {confidence}",
+            "",
+            "### Validated output",
+            "",
+            content,
+        ]
+
+        return "\n".join(lines)
+
     def _build_solving_plan_from_investigation(
         self,
         investigation_result: Dict[str, Any],
+        student_question: str = "",
     ) -> List[Dict[str, Any]]:
         raw_plan = investigation_result.get("initial_tutoring_plan") or []
 
@@ -282,12 +395,31 @@ class PersonalizedTutoringWorkflow:
                 if isinstance(tool, str) and tool.strip()
             ]
 
-            needs_tool = bool(raw_step.get("needs_tool", False)) or bool(suggested_tools)
             task_type = self._infer_step_task_type(
                 step_goal=step_goal,
                 suggested_tools=suggested_tools,
                 fallback_task_type=investigation_result.get("task_type", "general_tutoring"),
             )
+
+            suggested_tools = self._normalize_tools_for_step(
+                step_goal=step_goal,
+                task_type=task_type,
+                suggested_tools=suggested_tools,
+            )
+
+            needs_tool = (
+                bool(raw_step.get("needs_tool", False))
+                or bool(suggested_tools)
+                or self._step_requires_tool(step_goal=step_goal, task_type=task_type)
+            )
+
+            if task_type in {"code_help", "code_execution", "programming", "debugging"}:
+                expected_output = "executed code example with sandbox stdout and grounded evidence"
+            else:
+                expected_output = self._infer_expected_output_for_step(
+                    task_type=task_type,
+                    suggested_tools=suggested_tools,
+                )
 
             normalized_plan.append(
                 {
@@ -296,10 +428,7 @@ class PersonalizedTutoringWorkflow:
                     "needs_tool": needs_tool,
                     "suggested_tools": suggested_tools,
                     "task_type": task_type,
-                    "expected_output": self._infer_expected_output_for_step(
-                        task_type=task_type,
-                        suggested_tools=suggested_tools,
-                    ),
+                    "expected_output": expected_output,
                     "reason": raw_step.get("reason", "Generated by InvestigationAgent."),
                 }
             )
@@ -310,7 +439,117 @@ class PersonalizedTutoringWorkflow:
         if not any(step.get("needs_tool") for step in normalized_plan):
             normalized_plan.extend(self._fallback_solving_plan(investigation_result))
 
+
+        question_text = " ".join(
+            [
+                str(student_question or ""),
+                str(investigation_result.get("student_question") or ""),
+                str(investigation_result.get("question") or ""),
+                str(investigation_result.get("query") or ""),
+                str(investigation_result.get("learner_question") or ""),
+            ]
+        ).lower()
+
+        code_request_terms = [
+            "code",
+            "python",
+            "numpy",
+            "script",
+            "program",
+            "implement",
+            "implementation",
+            "debug",
+            "function",
+        ]
+
+        code_task_types = {"code_help", "code_execution", "programming", "debugging"}
+
+        def has_code_execution_step(step: Dict[str, Any]) -> bool:
+            tools = step.get("suggested_tools") or []
+            return (
+                step.get("task_type") in code_task_types
+                or "CodeSandboxTool" in tools
+            )
+
+        if (
+            any(term in question_text for term in code_request_terms)
+            and not any(has_code_execution_step(step) for step in normalized_plan)
+        ):
+            next_step_id = len(normalized_plan) + 1
+            normalized_plan.append(
+                {
+                    "step_id": next_step_id,
+                    "step_goal": "Provide an executable Python/NumPy code example for the learner request",
+                    "needs_tool": True,
+                    "suggested_tools": [
+                        "RAGTool",
+                        "TraceSearchTool",
+                        "MatrixComputationTool",
+                        "CodeSandboxTool",
+                    ],
+                    "task_type": "code_help",
+                    "expected_output": "executed code example with sandbox stdout and grounded evidence",
+                    "reason": "Added by scratchpad normalization because the original learner question requested code, Python, or NumPy but the investigation plan did not include a code execution step.",
+                }
+            )
+
         return normalized_plan
+
+    def _step_requires_tool(self, step_goal: str, task_type: str) -> bool:
+        text = (step_goal or "").lower()
+
+        code_terms = [
+            "code",
+            "python",
+            "numpy",
+            "implement",
+            "implementation",
+            "script",
+            "program",
+            "debug",
+            "function",
+        ]
+
+        if task_type in {"code_help", "code_execution", "programming", "debugging"}:
+            return True
+
+        return any(term in text for term in code_terms)
+
+    def _normalize_tools_for_step(
+        self,
+        step_goal: str,
+        task_type: str,
+        suggested_tools: List[str],
+    ) -> List[str]:
+        tools = list(suggested_tools or [])
+        text = (step_goal or "").lower()
+
+        def add(tool_name: str) -> None:
+            if tool_name not in tools:
+                tools.append(tool_name)
+
+        if task_type in {"code_help", "code_execution", "programming", "debugging"}:
+            add("RAGTool")
+            add("TraceSearchTool")
+            add("MatrixComputationTool")
+            add("CodeSandboxTool")
+
+        elif task_type == "visual_explanation":
+            add("RAGTool")
+            add("TraceSearchTool")
+            add("MatrixComputationTool")
+            add("VisualMatrixTool")
+
+        elif task_type == "calculation_or_verification":
+            add("RAGTool")
+            add("TraceSearchTool")
+            add("MatrixComputationTool")
+
+        elif any(term in text for term in ["evidence", "grounded", "retrieve", "course"]):
+            add("RAGTool")
+            add("TraceSearchTool")
+
+        return tools
 
     def _infer_step_task_type(
         self,
@@ -321,7 +560,20 @@ class PersonalizedTutoringWorkflow:
         text = f"{step_goal} {' '.join(suggested_tools)}".lower()
         tool_set = set(suggested_tools)
 
-        if "CodeSandboxTool" in tool_set:
+        if "CodeSandboxTool" in tool_set or any(
+            word in text
+            for word in [
+                "code",
+                "python",
+                "numpy",
+                "implement",
+                "implementation",
+                "script",
+                "program",
+                "debug",
+                "function",
+            ]
+        ):
             return "code_help"
 
         if "CalculatorTool" in tool_set:

@@ -152,9 +152,11 @@ Rules:
 7. Include exactly one short "References" section using only validated_output_package.references.
 8. Do not add extra references from Static Knowledge Grounding if they duplicate or are not in validated_output_package.references.
 9. Keep the answer clear, pedagogical, and suitable for a tutoring platform.
-10. For numerical, matrix, code, or formula results, use only calculations already present in the validated OutputPackage.
-11. Do not invent extra patch formulas, matrix values, or code outputs.
-12. If the tool output gives a verified matrix/result, state it exactly and do not recalculate it differently.
+10. For numerical, matrix, code, or formula results, use only results already present in the validated OutputPackage.
+11. Do not invent extra formulas, matrix values, code blocks, code outputs, or execution results.
+12. If the student asks for code, include code only when the validated OutputPackage contains CodeSandboxTool output or executed code.
+13. If no CodeSandboxTool output is present, say that executable code was not validated in the current tool step instead of inventing code.
+14. If the tool output gives a verified matrix/result/stdout, state it exactly and do not recalculate it differently.
 """.strip()
 
         user_prompt = (

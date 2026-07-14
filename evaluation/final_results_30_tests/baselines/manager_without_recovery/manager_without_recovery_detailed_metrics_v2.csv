@@ -1,0 +1,31 @@
+test_id,category,recovery_test,process_ok,validated,invalid_or_failed,recovery_disabled,recovery_used,attempts,trace_saved,report_saved,final_answer_generated,question
+T01,conceptual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Explain convolution in simple terms.
+T02,conceptual,No,Yes,No,Yes,Yes,No,1,Yes,Yes,No,What is a convolution kernel in image processing?
+T03,conceptual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Explain the difference between a filter and a feature map.
+T04,conceptual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Why is convolution useful in CNNs?
+T05,conceptual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Explain padding and stride in convolution.
+T06,calculation,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Compute the result of a 2x2 kernel applied to a 3x3 matrix.
+T07,calculation,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,"Calculate the output size of a convolution with input 5x5, kernel 3x3, stride 1, padding 0."
+T08,calculation,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,"Calculate the output size with input 7x7, kernel 3x3, stride 2, padding 1."
+T09,calculation,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Apply a simple edge detection kernel to a small matrix.
+T10,calculation,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Compute one convolution step using a 3x3 input and a 2x2 kernel.
+T11,visual,No,Yes,No,Yes,Yes,No,1,Yes,Yes,No,Show visually how a convolution kernel moves over a matrix.
+T12,visual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Illustrate stride 2 in a convolution operation.
+T13,visual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Show the difference between padding and no padding visually.
+T14,visual,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Visualize one convolution operation on a 3x3 matrix.
+T15,visual,No,Yes,No,Yes,Yes,No,1,Yes,Yes,No,Show how a filter detects vertical edges in an image matrix.
+T16,code,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Give a simple Python example of 2D convolution.
+T17,code,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Write Python code to compute convolution output size.
+T18,code,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Give Python code for applying a 2x2 kernel on a 3x3 matrix.
+T19,code,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Give a small NumPy example explaining convolution.
+T20,code,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Debug this simple convolution explanation: the kernel is added to the matrix instead of multiplied.
+T21,personalized,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Explain convolution to a beginner who confuses filters and matrices.
+T22,personalized,No,Yes,No,Yes,Yes,No,1,Yes,Yes,No,Explain stride to a learner who already understands kernels.
+T23,personalized,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Explain padding to a learner who struggles with output size.
+T24,personalized,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Explain convolution using a simple analogy for a beginner.
+T25,personalized,No,Yes,Yes,No,Yes,No,1,Yes,Yes,Yes,Review my previous mistake about convolution output size and explain it again.
+T26,recovery,Yes,Yes,No,Yes,Yes,No,1,Yes,Yes,No,"Explain convolution, but force the first attempt without RAG grounding."
+T27,recovery,Yes,Yes,No,Yes,Yes,No,1,Yes,Yes,No,"Explain padding and stride, but force the first attempt without grounding."
+T28,recovery,Yes,Yes,No,Yes,Yes,No,1,No,Yes,No,"Explain visually how a kernel moves, but force the first attempt without grounding."
+T29,recovery,Yes,Yes,No,Yes,Yes,No,1,No,Yes,No,"Explain convolution output size, but force the first attempt without grounding."
+T30,recovery,Yes,Yes,No,Yes,Yes,No,1,Yes,Yes,No,"Explain, compute, and visualize convolution, but force the first attempt without grounding."

@@ -1,0 +1,31 @@
+test_id,category,question,correctness,source_faithfulness,grounding_quality,personalization,applicability,vividness,logical_depth,clarity,overall_score
+T01,conceptual,Explain convolution in simple terms.,4.0,5.0,5.0,4.0,5.0,5.0,4.0,5.0,4.5
+T02,conceptual,What is a convolution kernel in image processing?,4.0,5.0,5.0,3.0,5.0,4.0,4.0,4.0,4.0
+T03,conceptual,Explain the difference between a filter and a feature map.,4.0,4.0,5.0,3.0,5.0,4.0,4.0,4.0,4.0
+T04,conceptual,Why is convolution useful in CNNs?,4.0,5.0,5.0,3.0,5.0,5.0,4.0,5.0,4.133
+T05,conceptual,Explain padding and stride in convolution.,4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T06,calculation,Compute the result of a 2x2 kernel applied to a 3x3 matrix.,4.667,5.0,5.0,4.333,5.0,4.667,4.667,4.667,4.667
+T07,calculation,"Calculate the output size of a convolution with input 5x5, kernel 3x3, stride 1, padding 0.",4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T08,calculation,"Calculate the output size with input 7x7, kernel 3x3, stride 2, padding 1.",4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T09,calculation,Apply a simple edge detection kernel to a small matrix.,4.0,4.0,5.0,3.0,5.0,4.0,4.0,4.0,4.0
+T10,calculation,Compute one convolution step using a 3x3 input and a 2x2 kernel.,4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T11,visual,Show visually how a convolution kernel moves over a matrix.,4.0,4.0,5.0,4.0,5.0,4.0,4.0,4.0,4.0
+T12,visual,Illustrate stride 2 in a convolution operation.,4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T13,visual,Show the difference between padding and no padding visually.,4.0,4.0,4.0,4.0,5.0,5.0,4.0,4.0,4.0
+T14,visual,Visualize one convolution operation on a 3x3 matrix.,4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T15,visual,Show how a filter detects vertical edges in an image matrix.,4.0,4.0,4.0,4.0,5.0,4.0,4.0,4.0,4.0
+T16,code,Give a simple Python example of 2D convolution.,4.0,5.0,5.0,3.0,5.0,4.0,4.0,4.0,4.0
+T17,code,Write Python code to compute convolution output size.,5.0,5.0,5.0,5.0,5.0,4.0,5.0,5.0,5.0
+T18,code,Give Python code for applying a 2x2 kernel on a 3x3 matrix.,5.0,5.0,5.0,5.0,5.0,5.0,5.0,5.0,5.0
+T19,code,Give a small NumPy example explaining convolution.,4.0,5.0,5.0,5.0,5.0,4.0,4.0,4.0,4.0
+T20,code,Debug this simple convolution explanation: the kernel is added to the matrix instead of multiplied.,4.0,5.0,5.0,3.0,5.0,4.0,4.0,4.0,4.0
+T21,personalized,Explain convolution to a beginner who confuses filters and matrices.,4.0,4.0,4.0,5.0,5.0,4.0,4.0,4.0,4.0
+T22,personalized,Explain stride to a learner who already understands kernels.,4.0,4.0,5.0,5.0,5.0,5.0,4.0,4.0,4.4
+T23,personalized,Explain padding to a learner who struggles with output size.,4.0,4.0,4.0,5.0,5.0,4.0,4.0,4.0,4.0
+T24,personalized,Explain convolution using a simple analogy for a beginner.,4.0,5.0,5.0,5.0,5.0,5.0,4.0,4.0,4.4
+T25,personalized,Review my previous mistake about convolution output size and explain it again.,4.0,4.0,5.0,5.0,5.0,4.0,4.0,4.0,4.0
+T26,recovery,"Explain convolution, but force the first attempt without RAG grounding.",4.0,4.0,3.0,4.0,5.0,4.0,4.0,4.0,4.0
+T27,recovery,"Explain padding and stride, but force the first attempt without grounding.",4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0,4.0
+T28,recovery,"Explain visually how a kernel moves, but force the first attempt without grounding.",2.0,2.0,1.0,3.0,2.0,4.0,1.0,3.0,2.0
+T29,recovery,"Explain convolution output size, but force the first attempt without grounding.",2.0,3.0,4.0,4.0,4.0,4.0,3.0,4.0,3.0
+T30,recovery,"Explain, compute, and visualize convolution, but force the first attempt without grounding.",2.0,4.0,4.0,4.0,4.0,4.0,3.0,4.0,3.0

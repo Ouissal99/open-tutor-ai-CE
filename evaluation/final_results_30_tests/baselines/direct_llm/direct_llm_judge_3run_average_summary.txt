@@ -1,0 +1,25 @@
+DIRECT LLM BASELINE — 3-RUN LLM-AS-A-JUDGE AVERAGE
+======================================================================
+Judge runs: 3
+Judged tests per run: 30
+Total judge decisions: 90
+
+correctness: 3.69/5
+source_faithfulness: 4.03/5
+grounding_quality: 3.83/5
+personalization: 3.91/5
+applicability: 4.23/5
+vividness: 4.53/5
+logical_depth: 4.27/5
+clarity: 4.46/5
+overall_score: 4.04/5
+
+Lowest average overall scores:
+T27: overall=2.00/5 | Explain padding and stride, but force the first attempt without grounding.
+T06: overall=2.40/5 | Compute the result of a 2x2 kernel applied to a 3x3 matrix.
+T29: overall=2.40/5 | Explain convolution output size, but force the first attempt without grounding.
+T30: overall=2.50/5 | Explain, compute, and visualize convolution, but force the first attempt without grounding.
+T07: overall=2.60/5 | Calculate the output size of a convolution with input 5x5, kernel 3x3, stride 1, padding 0.
+T28: overall=2.60/5 | Explain visually how a kernel moves, but force the first attempt without grounding.
+T13: overall=3.00/5 | Show the difference between padding and no padding visually.
+T02: overall=3.80/5 | What is a convolution kernel in image processing?

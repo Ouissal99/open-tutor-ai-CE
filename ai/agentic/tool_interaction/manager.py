@@ -6,6 +6,8 @@ The external API remains the same:
     package, trace_path = ToolInteractionManager().run(request)
 """
 
+import os
+
 from ai.agentic.tool_interaction.tool_interaction_graph import ToolInteractionGraph
 
 
@@ -13,7 +15,11 @@ class ToolInteractionManager:
     """Centralized T2-Based Adaptive Tool Interaction Manager."""
 
     def __init__(self):
-        self.graph = ToolInteractionGraph(max_attempts=3)
+        # Normal condition: max_attempts=3 with FailureRecovery enabled.
+        # Baseline condition: NO_RECOVERY_BASELINE=1 forces max_attempts=1,
+        # which prevents retry/recovery after an invalid first attempt.
+        max_attempts = 1 if os.getenv("NO_RECOVERY_BASELINE") == "1" else 3
+        self.graph = ToolInteractionGraph(max_attempts=max_attempts)
 
     def run(self, request):
         print("\n[4.0] LangGraph ToolInteractionGraph started")

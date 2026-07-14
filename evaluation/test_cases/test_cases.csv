@@ -1,0 +1,31 @@
+test_id,category,question,expected_tools,recovery_test
+T01,conceptual,"Explain convolution in simple terms.","RAGTool;TraceSearchTool;VisualMatrixTool;MatrixComputationTool",No
+T02,conceptual,"What is a convolution kernel in image processing?","RAGTool;TraceSearchTool",No
+T03,conceptual,"Explain the difference between a filter and a feature map.","RAGTool;TraceSearchTool",No
+T04,conceptual,"Why is convolution useful in CNNs?","RAGTool;TraceSearchTool",No
+T05,conceptual,"Explain padding and stride in convolution.","RAGTool;TraceSearchTool;VisualMatrixTool",No
+T06,calculation,"Compute the result of a 2x2 kernel applied to a 3x3 matrix.","MatrixComputationTool;RAGTool;TraceSearchTool;VisualMatrixTool",No
+T07,calculation,"Calculate the output size of a convolution with input 5x5, kernel 3x3, stride 1, padding 0.","MatrixComputationTool;RAGTool;TraceSearchTool",No
+T08,calculation,"Calculate the output size with input 7x7, kernel 3x3, stride 2, padding 1.","MatrixComputationTool;RAGTool;TraceSearchTool",No
+T09,calculation,"Apply a simple edge detection kernel to a small matrix.","MatrixComputationTool;RAGTool;TraceSearchTool;VisualMatrixTool",No
+T10,calculation,"Compute one convolution step using a 3x3 input and a 2x2 kernel.","MatrixComputationTool;RAGTool;TraceSearchTool;VisualMatrixTool",No
+T11,visual,"Show visually how a convolution kernel moves over a matrix.","VisualMatrixTool;RAGTool;TraceSearchTool;MatrixComputationTool",No
+T12,visual,"Illustrate stride 2 in a convolution operation.","VisualMatrixTool;RAGTool;TraceSearchTool",No
+T13,visual,"Show the difference between padding and no padding visually.","VisualMatrixTool;RAGTool;TraceSearchTool",No
+T14,visual,"Visualize one convolution operation on a 3x3 matrix.","VisualMatrixTool;MatrixComputationTool;RAGTool;TraceSearchTool",No
+T15,visual,"Show how a filter detects vertical edges in an image matrix.","VisualMatrixTool;MatrixComputationTool;RAGTool;TraceSearchTool",No
+T16,code,"Give a simple Python example of 2D convolution.","RAGTool;TraceSearchTool",No
+T17,code,"Write Python code to compute convolution output size.","RAGTool;TraceSearchTool;MatrixComputationTool",No
+T18,code,"Give Python code for applying a 2x2 kernel on a 3x3 matrix.","RAGTool;TraceSearchTool;MatrixComputationTool",No
+T19,code,"Give a small NumPy example explaining convolution.","RAGTool;TraceSearchTool;MatrixComputationTool",No
+T20,code,"Debug this simple convolution explanation: the kernel is added to the matrix instead of multiplied.","RAGTool;TraceSearchTool;MatrixComputationTool",No
+T21,personalized,"Explain convolution to a beginner who confuses filters and matrices.","RAGTool;TraceSearchTool;VisualMatrixTool;MatrixComputationTool",No
+T22,personalized,"Explain stride to a learner who already understands kernels.","RAGTool;TraceSearchTool;VisualMatrixTool",No
+T23,personalized,"Explain padding to a learner who struggles with output size.","RAGTool;TraceSearchTool;MatrixComputationTool;VisualMatrixTool",No
+T24,personalized,"Explain convolution using a simple analogy for a beginner.","RAGTool;TraceSearchTool;VisualMatrixTool",No
+T25,personalized,"Review my previous mistake about convolution output size and explain it again.","RAGTool;TraceSearchTool;MatrixComputationTool",No
+T26,recovery,"Explain convolution, but force the first attempt without RAG grounding.","RAGTool;TraceSearchTool;VisualMatrixTool;MatrixComputationTool",Yes
+T27,recovery,"Explain padding and stride, but force the first attempt without grounding.","RAGTool;TraceSearchTool;VisualMatrixTool",Yes
+T28,recovery,"Explain visually how a kernel moves, but force the first attempt without grounding.","RAGTool;TraceSearchTool;VisualMatrixTool;MatrixComputationTool",Yes
+T29,recovery,"Explain convolution output size, but force the first attempt without grounding.","RAGTool;TraceSearchTool;MatrixComputationTool",Yes
+T30,recovery,"Explain, compute, and visualize convolution, but force the first attempt without grounding.","RAGTool;TraceSearchTool;MatrixComputationTool;VisualMatrixTool",Yes

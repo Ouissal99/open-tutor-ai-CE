@@ -1,0 +1,14 @@
+PROMISED CHAPTER 5 AUDIT METRICS — CORRECTED
+============================================================
+Number of active tests: 30
+
+Tool Execution Success Rate: 100.00%
+Trace Completeness Rate: 100.00%
+
+All recovery-used cases: 16
+Recovery Success Rate over recovery-used cases: 100.00%
+
+Controlled forced-recovery tests: 5
+Invalid Output Detection Rate over controlled recovery tests: 100.00%
+Controlled Recovery Success Rate: 100.00%
+Missing Tool Correction Rate over controlled recovery tests: 100.00%

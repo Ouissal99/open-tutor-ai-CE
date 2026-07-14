@@ -1,0 +1,10 @@
+{
+  "index_type": "jsonl_keyword",
+  "index_dir": "var/agentic_memory/skg_index",
+  "documents_dir": "var/agentic_memory/skg_index/documents",
+  "chunks_path": "var/agentic_memory/skg_index/chunks.jsonl",
+  "document_count": 1,
+  "chunk_count": 1,
+  "chunk_size": 180,
+  "chunk_overlap": 40
+}

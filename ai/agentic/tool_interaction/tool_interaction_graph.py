@@ -335,6 +335,68 @@ class ToolInteractionGraph:
                 if tool not in required_tools:
                     required_tools.append(tool)
 
+        task_type = analyzed_task.get("task_type") or getattr(request, "task_type", None)
+
+        step_text = " ".join(
+            str(getattr(request, attr, "") or "")
+            for attr in ["current_step", "expected_output"]
+        ).lower()
+
+        global_text = " ".join(
+            str(getattr(request, attr, "") or "")
+            for attr in ["student_question", "user_query", "query"]
+        ).lower()
+
+        code_keywords = ["code", "python", "numpy", "debug", "implement", "function", "script", "snippet"]
+        retrieval_keywords = [
+            "retrieve",
+            "retrieval",
+            "course-grounded evidence",
+            "grounded evidence",
+            "grounding",
+            "rag",
+            "search evidence",
+            "collect evidence",
+            "course evidence",
+        ]
+
+        retrieval_only_step = (
+            any(keyword in step_text for keyword in retrieval_keywords)
+            and not any(keyword in step_text for keyword in code_keywords)
+        )
+
+        is_code_task = (
+            not retrieval_only_step
+            and (
+                task_type in {"code_execution", "code_help", "programming", "debugging"}
+                or any(keyword in step_text for keyword in code_keywords)
+                or (not step_text.strip() and any(keyword in global_text for keyword in code_keywords))
+            )
+        )
+
+        if is_code_task:
+            for tool in ["RAGTool", "TraceSearchTool", "MatrixComputationTool", "CodeSandboxTool"]:
+                if tool not in required_tools:
+                    required_tools.append(tool)
+
+            previous_code_errors = []
+            for result in state.get("last_results", []):
+                if getattr(result, "tool_name", None) == "CodeSandboxTool":
+                    metadata = getattr(result, "metadata", {}) or {}
+                    previous_code_errors.append(
+                        {
+                            "status": getattr(result, "status", None),
+                            "success": getattr(result, "success", None),
+                            "output": getattr(result, "output", None),
+                            "stdout": metadata.get("stdout"),
+                            "stderr": metadata.get("stderr"),
+                            "error": metadata.get("error"),
+                            "code": metadata.get("code"),
+                        }
+                    )
+
+            analyzed_task["previous_code_execution_errors"] = previous_code_errors
+
         analyzed_task["recovery_required_tools"] = required_tools
         analyzed_task["recovery_reason"] = recovery_decision.get("reason")
         state["analyzed_task"] = analyzed_task

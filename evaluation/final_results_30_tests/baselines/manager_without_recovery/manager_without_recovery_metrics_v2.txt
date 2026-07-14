@@ -1,0 +1,25 @@
+MANAGER WITHOUT RECOVERY BASELINE — CLEAN METRICS V2
+======================================================================
+Total tests: 30
+
+Process Completion Rate: 100.00% (30/30)
+Validation Success Rate: 70.00% (21/30)
+Invalid or Failed Output Rate: 30.00% (9/30)
+Recovery Used Rate: 0.00% (0/30)
+Average Attempts: 1.00
+Trace Save Rate: 93.33% (28/30)
+Report Save Rate: 100.00% (30/30)
+Final Answer Generation Rate: 70.00% (21/30)
+
+Controlled recovery cases:
+Controlled recovery tests: 5
+Validated despite recovery disabled: 0/5
+Invalid/failed because recovery disabled: 5/5
+Controlled Recovery Success Rate: 0.00% (0/5)
+
+Per forced-recovery case:
+T26: validated=No, invalid_or_failed=Yes, recovery_used=No, attempts=1, final_answer=No
+T27: validated=No, invalid_or_failed=Yes, recovery_used=No, attempts=1, final_answer=No
+T28: validated=No, invalid_or_failed=Yes, recovery_used=No, attempts=1, final_answer=No
+T29: validated=No, invalid_or_failed=Yes, recovery_used=No, attempts=1, final_answer=No
+T30: validated=No, invalid_or_failed=Yes, recovery_used=No, attempts=1, final_answer=No

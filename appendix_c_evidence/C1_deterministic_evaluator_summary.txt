@@ -1,0 +1,47 @@
+CURRENT PARTIAL METRICS
+============================================================
+Executed active tests: 30
+Workflow Completion Rate: 100.00%
+Output Validation Success Rate: 100.00%
+Tool Selection Precision: 81.56%
+Tool Selection Recall: 100.00%
+Tool Selection F1-score: 88.67%
+Trace Save Rate: 100.00%
+Memory Update Success Rate: 100.00%
+Final Answer Generation Rate: 100.00%
+Recovery Used Rate: 53.33%
+Average Number of Attempts: 1.53
+pass@3: 100.00%
+
+PER-TEST TOOL SELECTION
+============================================================
+T01: status=validated, validation=valid, precision=0.67, recall=1.00, f1=0.80
+T26: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T06: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T02: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T03: status=validated, validation=valid, precision=0.75, recall=1.00, f1=0.86
+T04: status=validated, validation=valid, precision=0.75, recall=1.00, f1=0.86
+T05: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T07: status=validated, validation=valid, precision=0.75, recall=1.00, f1=0.86
+T08: status=validated, validation=valid, precision=0.75, recall=1.00, f1=0.86
+T09: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T10: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T11: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T12: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T13: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T14: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T15: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T16: status=validated, validation=valid, precision=0.80, recall=1.00, f1=0.89
+T17: status=validated, validation=valid, precision=0.80, recall=1.00, f1=0.89
+T18: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T19: status=validated, validation=valid, precision=1.00, recall=1.00, f1=1.00
+T20: status=validated, validation=valid, precision=0.80, recall=1.00, f1=0.89
+T21: status=validated, validation=valid, precision=0.80, recall=1.00, f1=0.89
+T22: status=validated, validation=valid, precision=0.60, recall=1.00, f1=0.75
+T23: status=validated, validation=valid, precision=0.67, recall=1.00, f1=0.80
+T24: status=validated, validation=valid, precision=0.50, recall=1.00, f1=0.67
+T25: status=validated, validation=valid, precision=0.50, recall=1.00, f1=0.67
+T27: status=validated, validation=valid, precision=0.50, recall=1.00, f1=0.67
+T28: status=validated, validation=valid, precision=0.67, recall=1.00, f1=0.80
+T29: status=validated, validation=valid, precision=0.50, recall=1.00, f1=0.67
+T30: status=validated, validation=valid, precision=0.67, recall=1.00, f1=0.80

@@ -1,0 +1,27 @@
+# Convolution in Image Processing
+
+Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value.
+
+In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations.
+
+A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix:
+
+1 2 3
+4 5 6
+7 8 9
+
+and the kernel:
+
+1 0
+0 1
+
+the top-left output value is computed as:
+
+(1×1) + (2×0) + (4×0) + (5×1) = 6
+
+The full valid output matrix is:
+
+6 8
+12 14
+
+This example helps learners see how a local input patch is transformed into an output value.

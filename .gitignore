@@ -345,3 +345,98 @@ __pycache__/
 
 # Runtime generated data
 var/agentic_traces/
+
+# ── THESIS REPOSITORY CLEANUP ─────────────────────────────
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials*.json
+
+# Python generated files
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local Python environments
+.venv/
+venv/
+env/
+
+# Frontend generated files
+node_modules/
+ui/node_modules/
+ui/.svelte-kit/
+ui/build/
+ui/dist/
+
+# Runtime outputs
+var/agentic_traces/
+var/agentic_demo_runs/
+
+# Local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Temporary implementation material
+backups_before_*/
+*.backup*
+*.broken*
+*_inspection.txt
+implementation_audit.txt
+project_structure.txt
+technology_files.txt
+interface_targets.txt
+app_before_simplification.py
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~
+*.swp
+# ── THESIS RELEASE DATA RULES ──────────────────────────────
+
+# The original repository ignores var/ globally.
+# Re-include only the static SKG seed required by the demo.
+!var/
+var/*
+!var/agentic_memory/
+var/agentic_memory/*
+!var/agentic_memory/skg_index/
+!var/agentic_memory/skg_index/**
+
+# Runtime and learner-specific data must remain private
+var/agentic_traces/
+var/agentic_demo_runs/
+var/agentic_memory/dpm/
+var/agentic_memory/learners/
+var/agentic_memory/traces/
+
+# Large generated evaluation evidence
+evaluation/**/traces/
+evaluation/**/traces_backup*/
+evaluation/full_manager_locked_copy/
+evaluation/**/*_trace.json
+evaluation/**/*_no_recovery_trace.json
+
+# Generated evaluation runs and intermediate outputs
+evaluation/runs/
+evaluation/judge_repeats/
+evaluation/screenshots/
+evaluation/**/logs/
+evaluation/**/runs/
+evaluation/**/judge_repeats/
+evaluation/**/*_raw_*.jsonl
+evaluation/metrics/*.csv
+evaluation/metrics/*.txt

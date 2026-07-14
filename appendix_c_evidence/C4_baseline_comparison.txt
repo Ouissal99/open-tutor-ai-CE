@@ -1,0 +1,69 @@
+FINAL BASELINE COMPARISON
+================================================================================
+
+Direct LLM Tutor
+----------------
+workflow_or_process_completion: 100.00%
+tool_execution_success: N/A
+tool_selection_precision: N/A
+tool_selection_recall: N/A
+tool_selection_f1: N/A
+validation_success: N/A
+controlled_recovery_success: N/A
+trace_save_rate: 0.00%
+memory_update_success: 0.00%
+final_answer_generation: 100.00%
+llm_judge_3run_overall: 4.04/5
+interpretation: Fluent direct answers, but no external tools, validation, recovery, trace lifecycle, or memory update.
+
+Basic Tool Use Without Central Manager
+--------------------------------------
+workflow_or_process_completion: 100.00%
+tool_execution_success: 100.00%
+tool_selection_precision: 89.17%
+tool_selection_recall: 67.78%
+tool_selection_f1: 75.08%
+validation_success: 0.00% / not used
+controlled_recovery_success: 0.00% / not used
+trace_save_rate: 0.00% / not used
+memory_update_success: 0.00% / not used
+final_answer_generation: 100.00%
+llm_judge_3run_overall: 4.00/5
+interpretation: Tools execute successfully, but static selection misses expected tools and there is no validation, recovery, trace lifecycle, or memory update.
+
+Manager Without Recovery
+------------------------
+workflow_or_process_completion: 100.00%
+tool_execution_success: N/A
+tool_selection_precision: N/A
+tool_selection_recall: N/A
+tool_selection_f1: N/A
+validation_success: 70.00%
+controlled_recovery_success: 0.00%
+trace_save_rate: 93.33%
+memory_update_success: N/A
+final_answer_generation: 70.00%
+llm_judge_3run_overall: N/A for invalid/failed cases
+interpretation: Validation exists, but forced recovery cases fail when retry/recovery is disabled.
+
+Full Tool Interaction Manager
+-----------------------------
+workflow_or_process_completion: 100.00%
+tool_execution_success: 100.00%
+tool_selection_precision: 81.56%
+tool_selection_recall: 100.00%
+tool_selection_f1: 88.67%
+validation_success: 100.00%
+controlled_recovery_success: 100.00%
+trace_save_rate: 100.00%
+memory_update_success: 100.00%
+final_answer_generation: 100.00%
+llm_judge_3run_overall: 3.76/5
+interpretation: Complete lifecycle: centralized selection, planning, execution, validation, recovery, trace saving, memory update, and final answer generation.
+
+Main conclusion:
+- Direct LLM and Basic Tool Use can produce fluent answers, and their judge scores may be high.
+- However, they do not provide the full controlled tool-interaction lifecycle promised by the proposed approach.
+- Basic Tool Use has lower recall than the Full Manager, showing that simple static tool selection misses expected tools.
+- Manager Without Recovery confirms that validation alone is insufficient: controlled recovery cases fail when recovery is disabled.
+- The Full Tool Interaction Manager is strongest on reliability, recoverability, traceability, memory update, and lifecycle control.

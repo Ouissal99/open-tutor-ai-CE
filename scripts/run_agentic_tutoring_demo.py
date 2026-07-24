@@ -124,6 +124,17 @@ def compact_report(
     package_metadata = package.get("metadata", {}) or {}
     validation_report = package.get("validation_report", {}) or {}
 
+
+    selected_tools_from_event = []
+    if isinstance(selection_payload, dict):
+        selected_tools_from_event = (
+            selection_payload.get("selected_tools")
+            or selection_payload.get("tools")
+            or []
+        )
+    elif isinstance(selection_payload, list):
+        selected_tools_from_event = selection_payload
+
     effective_trace_path = (
         (response or {}).get("trace_path")
         or (trace_summary or {}).get("trace_path")
@@ -140,7 +151,7 @@ def compact_report(
         "trace_id": (response or {}).get("trace_id") or (trace_summary or {}).get("trace_id") or package.get("trace_id"),
         "trace_path": effective_trace_path,
         "confidence": (response or {}).get("confidence") or validation_report.get("confidence_score"),
-        "selected_tools": (response or {}).get("selected_tools") or (trace_summary or {}).get("selected_tools") or package_metadata.get("tool_names", []),
+        "selected_tools": (trace_summary or {}).get("selected_tools") or selected_tools_from_event or package_metadata.get("tool_names", []) or (response or {}).get("selected_tools") or [],
         "recovery_used": recovery_metadata.get("recovery_used", False),
         "attempts": recovery_metadata.get("attempts", 1),
         "recovery_steps": recovery_metadata.get("recovery_steps", []),

@@ -6,9 +6,9 @@ class OutputValidator:
     Validates tool outputs.
 
     Important:
-    Validation must be step-aware. A global student question may ask for code,
-    but an individual scratchpad step may only retrieve grounding evidence.
-    CodeSandboxTool is required only when the current step itself is code-related.
+    Validation is step-aware and topic-aware.
+    A tool can execute successfully but still be pedagogically invalid if it answers
+    the wrong mathematical concept.
     """
 
     CODE_KEYWORDS = {
@@ -42,8 +42,29 @@ class OutputValidator:
         "illustrate",
         "visualize",
         "matrix",
-        "kernel movement",
-        "sliding",
+        "step-by-step",
+    }
+
+    MATRIX_MULTIPLICATION_KEYWORDS = {
+        "matrix multiplication",
+        "matrix_multiplication",
+        "multiply matrices",
+        "multiplication of matrices",
+        "row by column",
+        "row-by-column",
+        "dot product",
+    }
+
+    CONVOLUTION_KEYWORDS = {
+        "convolution",
+        "kernel",
+        "cross-correlation",
+        "sliding window",
+        "slide the kernel",
+        "kernel sliding",
+        "local patch",
+        "cnn-style",
+        "cnn",
     }
 
     def validate(self, request, tool_results, attempt_number: int):
@@ -55,6 +76,14 @@ class OutputValidator:
                 confidence_score=0.2,
                 failure_reason="tool_execution_failed",
                 recommended_action="re_execute",
+            )
+
+        if self._uses_convolution_for_plain_matrix_multiplication(request, tool_results):
+            return ValidationReport(
+                status="invalid",
+                confidence_score=0.35,
+                failure_reason="topic_mismatch_convolution_used_for_matrix_multiplication",
+                recommended_action="retry_with_topic_consistent_tools",
             )
 
         rag_results = [
@@ -130,10 +159,43 @@ class OutputValidator:
             recommended_action="accept",
         )
 
+    def _uses_convolution_for_plain_matrix_multiplication(self, request, tool_results) -> bool:
+        request_text = " ".join(
+            [
+                self._global_text(request),
+                self._current_step_text(request),
+            ]
+        ).lower()
+
+        asks_matrix_multiplication = any(
+            keyword in request_text
+            for keyword in self.MATRIX_MULTIPLICATION_KEYWORDS
+        )
+
+        explicitly_asks_convolution = any(
+            keyword in request_text
+            for keyword in self.CONVOLUTION_KEYWORDS
+        )
+
+        if not asks_matrix_multiplication or explicitly_asks_convolution:
+            return False
+
+        output_text_parts = []
+
+        for result in tool_results:
+            output_text_parts.append(str(getattr(result, "output", "") or ""))
+            output_text_parts.append(str(getattr(result, "content", "") or ""))
+            output_text_parts.append(" ".join(str(item) for item in getattr(result, "evidence", []) or []))
+            output_text_parts.append(" ".join(str(item) for item in getattr(result, "references", []) or []))
+
+        output_text = " ".join(output_text_parts).lower()
+
+        return any(keyword in output_text for keyword in self.CONVOLUTION_KEYWORDS)
+
     def _current_step_text(self, request) -> str:
         return " ".join(
             str(getattr(request, attr, "") or "")
-            for attr in ["current_step", "expected_output"]
+            for attr in ["current_step", "step_goal", "expected_output"]
         ).lower()
 
     def _global_text(self, request) -> str:
@@ -163,7 +225,6 @@ class OutputValidator:
         if any(keyword in step_text for keyword in self.CODE_KEYWORDS):
             return True
 
-        # Only use the global question when there is no concrete scratchpad step.
         if not step_text.strip() and any(keyword in global_text for keyword in self.CODE_KEYWORDS):
             return True
 

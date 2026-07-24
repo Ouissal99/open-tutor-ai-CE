@@ -95,9 +95,9 @@ class ToolInteractionGraph:
         workflow.set_entry_point("analyze_task")
 
         workflow.add_edge("analyze_task", "collect_context")
-        workflow.add_edge("collect_context", "select_tools")
-        workflow.add_edge("select_tools", "plan_tools")
-        workflow.add_edge("plan_tools", "execute_tools")
+        workflow.add_edge("collect_context", "plan_tools")
+        workflow.add_edge("plan_tools", "select_tools")
+        workflow.add_edge("select_tools", "execute_tools")
         workflow.add_edge("execute_tools", "validate_output")
 
         workflow.add_conditional_edges(
@@ -109,8 +109,7 @@ class ToolInteractionGraph:
                 "fallback": "build_fallback_package",
             },
         )
-
-        workflow.add_edge("recover_failure", "select_tools")
+        workflow.add_edge("recover_failure", "plan_tools")
         workflow.add_edge("build_success_package", END)
         workflow.add_edge("build_fallback_package", END)
 
@@ -186,25 +185,33 @@ class ToolInteractionGraph:
         self._mark_node(state, "select_tools")
 
         analyzed_task = state["analyzed_task"]
+        plan = state.get("plan")
         attempt = state["attempt"]
         trace_bus = state["trace_bus"]
 
-        selected_tools = self.selector.select(analyzed_task, attempt)
+        selected_tools = self.selector.select(
+            analyzed_task=analyzed_task,
+            attempt=attempt,
+            plan=plan,
+        )
 
         selection_metadata: Dict[str, Any] = {}
         if hasattr(self.selector, "get_last_selection_metadata"):
             selection_metadata = self.selector.get_last_selection_metadata()
             analyzed_task["tool_selection"] = selection_metadata
 
-            print("\n[4.1] LangGraph memory-aware tool selection")
+            print("\n[4.1] LangGraph plan-guided tool selection")
             print(f"    strategy: {selection_metadata.get('selection_strategy')}")
             print(f"    reason: {selection_metadata.get('selection_reason')}")
             print(f"    reference_trace_id: {selection_metadata.get('reference_trace_id')}")
             print(f"    selected_tools: {selection_metadata.get('selected_tools')}")
 
+        plan = self._bind_selected_tools_to_plan(plan, selected_tools)
+
         state["selected_tools"] = selected_tools
         state["selection_metadata"] = selection_metadata
         state["analyzed_task"] = analyzed_task
+        state["plan"] = plan
 
         trace_bus.emit("tools_selected", selected_tools)
 
@@ -224,11 +231,14 @@ class ToolInteractionGraph:
     def _plan_tools_node(self, state: ToolInteractionState) -> ToolInteractionState:
         self._mark_node(state, "plan_tools")
 
-        selected_tools = state["selected_tools"]
         analyzed_task = state["analyzed_task"]
+        collected_context = state.get("collected_context", {})
         trace_bus = state["trace_bus"]
 
-        plan = self.planner.create_plan(selected_tools, analyzed_task)
+        plan = self.planner.create_plan(
+            analyzed_task=analyzed_task,
+            collected_context=collected_context,
+        )
 
         state["plan"] = plan
         trace_bus.emit("tool_plan_created", plan)
@@ -239,10 +249,76 @@ class ToolInteractionGraph:
             {
                 "status": "completed",
                 "attempt": state["attempt"],
+                "plan_id": getattr(plan, "plan_id", None),
+                "plan_steps": getattr(plan, "steps", []),
             },
         )
 
         return state
+    
+    def _bind_selected_tools_to_plan(self, plan: Any, selected_tools: list[str]) -> Any:
+        """
+        Bind concrete selected tools to the capability-first plan.
+
+        The planner creates required capabilities.
+        The selector chooses concrete tools.
+        This method attaches selected tool names to plan steps so the executor
+        can run the plan without changing the executor contract.
+        """
+        if plan is None:
+            return plan
+
+        capability_to_tool = {
+            "grounding": "RAGTool",
+            "trace_reuse": "TraceSearchTool",
+            "matrix_computation": "MatrixComputationTool",
+            "visualization": "VisualMatrixTool",
+            "calculation": "CalculatorTool",
+            "code_execution": "CodeSandboxTool",
+            "general_tool_support": "RAGTool",
+        }
+
+        tool_to_capability = {
+            tool_name: capability
+            for capability, tool_name in capability_to_tool.items()
+        }
+
+        plan.selected_tools = selected_tools
+
+        steps = getattr(plan, "steps", []) or []
+        assigned_tools = set()
+
+        for step in steps:
+            if not isinstance(step, dict):
+                continue
+
+            capability = step.get("required_capability")
+            tool_name = capability_to_tool.get(capability)
+
+            if tool_name in selected_tools:
+                step["tool_name"] = tool_name
+                step["purpose"] = step.get("goal", f"Use {tool_name}")
+                assigned_tools.add(tool_name)
+
+        for tool_name in selected_tools:
+            if tool_name in assigned_tools:
+                continue
+
+            capability = tool_to_capability.get(tool_name, "general_tool_support")
+
+            steps.append(
+                {
+                    "step_id": len(steps) + 1,
+                    "tool_name": tool_name,
+                    "purpose": f"Use {tool_name}",
+                    "required_capability": capability,
+                    "goal": f"Execute selected tool: {tool_name}",
+                    "reason": "Tool selected by Adaptive Tool Selector.",
+                }
+            )
+
+        plan.steps = steps
+        return plan
 
     def _execute_tools_node(self, state: ToolInteractionState) -> ToolInteractionState:
         self._mark_node(state, "execute_tools")

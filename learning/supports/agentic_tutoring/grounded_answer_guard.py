@@ -60,6 +60,66 @@ class GroundedAnswerGuard:
         if "center patch" in answer_lower:
             return "unsupported_center_patch"
 
+        unsupported_dimension_claims = (
+            "same dimensions as the input",
+            "same dimensions as input",
+            "same size as the input",
+            "same size as input",
+            "output matrix will have the same dimensions",
+            "output will have the same dimensions",
+            "output retains the input dimensions",
+            "output preserves the input dimensions",
+        )
+
+        for claim in unsupported_dimension_claims:
+            if (
+                claim in answer_lower
+                and self._normalize_formula_text(claim)
+                not in trusted_text
+            ):
+                return (
+                    "unsupported_convolution_dimension_claim"
+                )
+
+        trusted_digits = re.sub(
+            r"\D",
+            "",
+            trusted_text,
+        )
+
+        for raw_line in answer.splitlines():
+            candidate_line = raw_line.strip().strip(
+                "-*`| "
+            )
+
+            # Matrix rows and numeric arrays must already exist in the
+            # validated package. This catches invented rows such as
+            # "14 18 24" while allowing verified rows.
+            if re.fullmatch(
+                r"[\[\]\d,.;\s+\-]+",
+                candidate_line,
+            ):
+                numeric_tokens = re.findall(
+                    r"-?\d+(?:\.\d+)?",
+                    candidate_line,
+                )
+
+                if len(numeric_tokens) >= 2:
+                    numeric_signature = re.sub(
+                        r"\D",
+                        "",
+                        "".join(numeric_tokens),
+                    )
+
+                    if (
+                        numeric_signature
+                        and numeric_signature
+                        not in trusted_digits
+                    ):
+                        return (
+                            "unsupported_numeric_matrix_row"
+                        )
+
         for raw_line in answer.splitlines():
             line = raw_line.strip().strip("-*` ")
 
@@ -133,12 +193,8 @@ class GroundedAnswerGuard:
             "```text\n"
             f"{matrix_section}\n"
             "```\n\n"
-            "The important point is that the tutor must trust the validated tool output. "
-            "For this example, the verified full valid output matrix is:\n\n"
-            "```text\n"
-            "6 8\n"
-            "12 14\n"
-            "```\n\n"
+            "The important point is that the tutor must use the verified "
+            "values shown above exactly as returned by the validated tools.\n\n"
             "**Evidence used**\n\n"
             f"{evidence_lines}\n\n"
             "**References**\n\n"

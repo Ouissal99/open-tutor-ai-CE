@@ -1,0 +1,503 @@
+"""TaskContextAnalyzer for the centralized Tool Interaction Manager.
+
+This component interprets the incoming tutoring/tool request before context
+retrieval and tool selection.
+
+It understands:
+- workflow source
+- task type
+- topic / goal
+- expected output
+- code / visual / calculation intent
+
+Context retrieval is handled by ContextCollector, which completes the
+architecture-level "Task & Context Analysis" stage by retrieving:
+- SKG grounding
+- DPM learner profile
+- previous tool traces
+"""
+
+from __future__ import annotations
+
+import asyncio
+import json
+import os
+import re
+import threading
+from typing import Any, Dict, Optional
+
+from ai.llm.schemas import LLMRequest, Message
+from ai.llm.service import LLMService
+from ai.llm.transports.openai_compatible import OpenAICompatibleTransport
+
+
+class TaskContextAnalyzer:
+    """
+    Request-understanding stage of the Tool Interaction Manager.
+
+    The main path uses the configured LLM provider to produce structured task
+    analysis. A deterministic fallback is kept only for provider failure, so the
+    prototype remains runnable during local evaluation.
+    """
+
+    VALID_TASK_TYPES = {
+        "conceptual_explanation",
+        "visual_explanation",
+        "calculation_or_verification",
+        "code_execution",
+        "code_help",
+        "programming",
+        "debugging",
+        "personalized_support",
+        "unknown_task",
+    }
+
+    def __init__(
+        self,
+        llm_service: Optional[LLMService] = None,
+        model: Optional[str] = None,
+    ):
+        self.llm_service = llm_service or LLMService(OpenAICompatibleTransport())
+        self.model = model or os.getenv("AGENTIC_LLM_MODEL") or "llama-3.1-8b-instant"
+
+    def analyze(self, request: Any) -> Dict[str, Any]:
+        base_payload = self._base_payload(request)
+
+        try:
+            llm_analysis = self._run_async(self._analyze_with_llm(base_payload))
+            analysis = self._normalize_analysis(base_payload, llm_analysis)
+            analysis["analysis_strategy"] = "llm_structured_task_analysis"
+            return analysis
+
+        except Exception as exc:
+            fallback = self._fallback_analysis(base_payload)
+            fallback["analysis_strategy"] = "deterministic_fallback_after_llm_failure"
+            fallback["analysis_error"] = str(exc)
+            return fallback
+
+    async def _analyze_with_llm(self, base_payload: Dict[str, Any]) -> Dict[str, Any]:
+        system_prompt = """
+You are the Task & Context Analyzer inside a centralized Tool Interaction Manager.
+
+Your job is to understand the incoming tutoring request before context retrieval
+and tool selection.
+
+Return ONLY valid JSON. No markdown. No explanation.
+
+The JSON must contain:
+{
+  "task_type": "...",
+  "topic": "...",
+  "goal": "...",
+  "expected_output": "...",
+  "workflow_source": "...",
+  "learner_level": "...",
+  "needs_visual_support": true/false,
+  "needs_calculation": true/false,
+  "needs_code_execution": true/false,
+  "needs_debugging": true/false,
+  "needs_grounding": true/false,
+  "code_generation_required": true/false,
+  "reasoning_summary": "...",
+  "tool_request_goal": "...",
+  "code_generation_instruction": "..."
+}
+
+Rules:
+1. If the request asks for Python, NumPy, code, implementation, debugging, or executable example, set task_type to "code_execution".
+2. If the request asks to compute or verify a numerical/matrix result, set task_type to "calculation_or_verification".
+3. If the request asks to show, visualize, illustrate, or explain visually, set task_type to "visual_explanation".
+4. If it asks for an explanation only, use "conceptual_explanation".
+5. For code tasks, code_generation_instruction should tell a later LLM code-drafting step what kind of small safe Python snippet should be generated.
+6. Do not retrieve memory or knowledge here. Only analyze the request.
+""".strip()
+
+        user_prompt = json.dumps(base_payload, ensure_ascii=False, indent=2)
+
+        response = await self.llm_service.complete(
+            LLMRequest(
+                model=self.model,
+                messages=[
+                    Message(role="system", content=system_prompt),
+                    Message(role="user", content=user_prompt),
+                ],
+                temperature=0.0,
+                max_tokens=700,
+            )
+        )
+
+        return self._parse_json(response.completion)
+
+    def _base_payload(self, request: Any) -> Dict[str, Any]:
+        metadata = getattr(request, "metadata", {}) or {}
+        context = getattr(request, "context", {}) or {}
+
+        user_query = (
+            getattr(request, "student_question", None)
+            or getattr(request, "user_query", None)
+            or getattr(request, "query", None)
+            or ""
+        )
+
+        return {
+            "request_id": getattr(request, "request_id", None),
+            "workflow_source": getattr(request, "workflow_source", None),
+            "incoming_task_type": getattr(request, "task_type", "unknown_task"),
+            "user_query": user_query,
+            "student_question": user_query,
+            "current_step": getattr(request, "current_step", ""),
+            "expected_output": getattr(request, "expected_output", ""),
+            "context": context,
+            "metadata": metadata,
+            "learner_level": context.get("learner_level", "beginner"),
+            "force_recovery_test": bool(metadata.get("force_recovery_test")),
+        }
+
+    def _normalize_analysis(
+        self,
+        base_payload: Dict[str, Any],
+        llm_analysis: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        global_text = str(base_payload.get("user_query", "") or "").lower()
+        step_text = " ".join(
+            str(base_payload.get(key, "") or "")
+            for key in ["current_step", "expected_output"]
+        ).lower()
+
+        full_text = " ".join([global_text, step_text]).lower()
+
+        no_code_phrases = (
+            "without code",
+            "no code",
+            "avoid code",
+            "do not use code",
+            "don't use code",
+            "code is confusing",
+            "code confusing",
+        )
+        no_code_requested = any(
+            phrase in global_text
+            for phrase in no_code_phrases
+        )
+
+        task_type = str(llm_analysis.get("task_type") or base_payload.get("incoming_task_type") or "unknown_task")
+
+        if task_type not in self.VALID_TASK_TYPES:
+            task_type = self._infer_task_type(full_text, base_payload.get("incoming_task_type", "unknown_task"))
+
+        topic = str(llm_analysis.get("topic") or self._infer_topic(full_text))
+        goal = str(llm_analysis.get("goal") or base_payload.get("user_query") or "")
+
+        retrieval_only_step = self._is_retrieval_only_step(step_text)
+
+        incoming_task_type = str(base_payload.get("incoming_task_type") or "")
+        incoming_is_code = (
+            incoming_task_type
+            in {"code_execution", "code_help", "programming", "debugging"}
+            and not no_code_requested
+        )
+
+        step_has_code_intent = (
+            self._has_code_intent(step_text)
+            and not no_code_requested
+        )
+        global_has_code_intent = (
+            self._has_code_intent(global_text)
+            and not no_code_requested
+        )
+
+        # Important:
+        # A global student question may ask for code, but an individual scratchpad
+        # step may only ask for retrieval/grounding. In that case, do not force
+        # CodeSandboxTool into the retrieval step.
+        needs_code_execution = (
+            not no_code_requested
+            and not retrieval_only_step
+            and (
+                step_has_code_intent
+                or incoming_is_code
+                or (
+                    bool(llm_analysis.get("needs_code_execution"))
+                    and not self._is_retrieval_only_step(step_text)
+                )
+                or (
+                    global_has_code_intent
+                    and not step_text.strip()
+                )
+            )
+        )
+
+        needs_debugging = (
+            not retrieval_only_step
+            and (bool(llm_analysis.get("needs_debugging")) or self._has_debug_intent(step_text + " " + global_text))
+        )
+
+        needs_calculation = (
+            not retrieval_only_step
+            and (bool(llm_analysis.get("needs_calculation")) or self._has_calculation_intent(step_text))
+        )
+
+        needs_visual_support = (
+            not retrieval_only_step
+            and (bool(llm_analysis.get("needs_visual_support")) or self._has_visual_intent(step_text))
+        )
+
+        if no_code_requested and task_type in {
+            "code_execution",
+            "code_help",
+            "programming",
+            "debugging",
+        }:
+            task_type = "conceptual_explanation"
+            needs_code_execution = False
+
+        if retrieval_only_step:
+            task_type = "conceptual_explanation"
+            needs_code_execution = False
+            needs_debugging = False
+            needs_calculation = False
+            needs_visual_support = False
+        elif needs_code_execution:
+            task_type = "code_execution"
+        elif needs_calculation:
+            task_type = "calculation_or_verification"
+        elif needs_visual_support:
+            task_type = "visual_explanation"
+
+        return {
+            "request_id": base_payload.get("request_id"),
+            "workflow_source": base_payload.get("workflow_source"),
+            "original_task_type": base_payload.get("incoming_task_type"),
+            "task_type": task_type,
+            "topic": topic,
+            "goal": goal,
+            "current_step": base_payload.get("current_step"),
+            "student_question": base_payload.get("student_question"),
+            "user_query": base_payload.get("user_query"),
+            "expected_output": llm_analysis.get("expected_output") or base_payload.get("expected_output"),
+            "learner_level": llm_analysis.get("learner_level") or base_payload.get("learner_level"),
+            "needs_visual_support": needs_visual_support,
+            "needs_calculation": needs_calculation,
+            "needs_code_execution": needs_code_execution,
+            "needs_debugging": needs_debugging,
+            "needs_grounding": bool(llm_analysis.get("needs_grounding", True)),
+            "code_generation_required": bool(llm_analysis.get("code_generation_required")) or needs_code_execution,
+            "tool_request_goal": llm_analysis.get("tool_request_goal") or goal,
+            "code_generation_instruction": (
+                llm_analysis.get("code_generation_instruction")
+                or self._default_code_instruction(full_text)
+            ),
+            "reasoning_summary": llm_analysis.get("reasoning_summary", ""),
+        }
+
+    def _fallback_analysis(self, base_payload: Dict[str, Any]) -> Dict[str, Any]:
+        global_text = str(base_payload.get("user_query", "") or "").lower()
+        step_text = " ".join(
+            str(base_payload.get(key, "") or "")
+            for key in ["current_step", "expected_output"]
+        ).lower()
+
+        full_text = " ".join([global_text, step_text]).lower()
+        retrieval_only_step = self._is_retrieval_only_step(step_text)
+
+        incoming_task_type = str(base_payload.get("incoming_task_type") or "")
+        incoming_is_code = incoming_task_type in {"code_execution", "code_help", "programming", "debugging"}
+
+        needs_code_execution = (
+            not retrieval_only_step
+            and (
+                self._has_code_intent(step_text)
+                or incoming_is_code
+                or (self._has_code_intent(global_text) and not step_text.strip())
+            )
+        )
+        needs_debugging = not retrieval_only_step and self._has_debug_intent(step_text + " " + global_text)
+        needs_calculation = not retrieval_only_step and self._has_calculation_intent(step_text)
+        needs_visual_support = not retrieval_only_step and self._has_visual_intent(step_text)
+
+        if retrieval_only_step:
+            task_type = "conceptual_explanation"
+        else:
+            task_type = self._infer_task_type(full_text, base_payload.get("incoming_task_type", "unknown_task"))
+
+        return {
+            "request_id": base_payload.get("request_id"),
+            "workflow_source": base_payload.get("workflow_source"),
+            "original_task_type": base_payload.get("incoming_task_type"),
+            "task_type": task_type,
+            "topic": self._infer_topic(full_text),
+            "goal": base_payload.get("user_query", ""),
+            "current_step": base_payload.get("current_step"),
+            "student_question": base_payload.get("student_question"),
+            "user_query": base_payload.get("user_query"),
+            "expected_output": base_payload.get("expected_output"),
+            "learner_level": base_payload.get("learner_level"),
+            "needs_visual_support": needs_visual_support,
+            "needs_calculation": needs_calculation,
+            "needs_code_execution": needs_code_execution,
+            "needs_debugging": needs_debugging,
+            "needs_grounding": True,
+            "code_generation_required": needs_code_execution,
+            "tool_request_goal": base_payload.get("user_query", ""),
+            "code_generation_instruction": self._default_code_instruction(full_text),
+            "reasoning_summary": "Fallback task analysis generated from request text.",
+        }
+
+    def _infer_task_type(self, text: str, incoming_task_type: str) -> str:
+        if self._has_code_intent(text):
+            return "code_execution"
+        if self._has_calculation_intent(text):
+            return "calculation_or_verification"
+        if self._has_visual_intent(text):
+            return "visual_explanation"
+        if incoming_task_type:
+            return incoming_task_type
+        return "conceptual_explanation"
+
+    def _infer_topic(self, text: str) -> str:
+        if "convolution" in text or "kernel" in text or "cnn" in text:
+            return "convolution"
+        if "edge" in text:
+            return "edge_detection"
+        if "padding" in text:
+            return "padding"
+        if "stride" in text:
+            return "stride"
+        if "overfitting" in text:
+            return "overfitting"
+        if "gradient" in text:
+            return "gradient descent"
+        return "general topic"
+
+    def _is_retrieval_only_step(self, text: str) -> bool:
+        text = (text or "").lower()
+
+        retrieval_terms = [
+            "retrieve",
+            "retrieval",
+            "course-grounded evidence",
+            "grounded evidence",
+            "grounding",
+            "rag",
+            "search evidence",
+            "collect evidence",
+            "course evidence",
+        ]
+
+        code_terms = [
+            "code",
+            "python",
+            "numpy",
+            "implement",
+            "script",
+            "program",
+            "debug",
+        ]
+
+        has_retrieval = any(term in text for term in retrieval_terms)
+        has_code = any(term in text for term in code_terms)
+
+        return has_retrieval and not has_code
+
+    def _has_code_intent(self, text: str) -> bool:
+        return any(
+            word in text
+            for word in [
+                "code",
+                "python",
+                "numpy",
+                "debug",
+                "implement",
+                "function",
+                "script",
+                "program",
+                "snippet",
+            ]
+        )
+
+    def _has_debug_intent(self, text: str) -> bool:
+        return any(word in text for word in ["debug", "fix", "error", "wrong", "instead of"])
+
+    def _has_calculation_intent(self, text: str) -> bool:
+        return any(
+            phrase in text
+            for phrase in [
+                "calculate",
+                "compute",
+                "output size",
+                "result",
+                "apply",
+                "formula",
+                "matrix",
+            ]
+        )
+
+    def _has_visual_intent(self, text: str) -> bool:
+        return any(
+            phrase in text
+            for phrase in [
+                "visual",
+                "show",
+                "illustrate",
+                "visualize",
+                "draw",
+                "moves",
+                "movement",
+            ]
+        )
+
+    def _default_code_instruction(self, text: str) -> str:
+        if not self._has_code_intent(text):
+            return ""
+
+        return (
+            "Generate a minimal, safe, executable Python snippet that answers the "
+            "student request. The code must be deterministic, beginner-friendly, "
+            "avoid unsafe imports and file/network operations, and print its result."
+        )
+
+    def _parse_json(self, text: str) -> Dict[str, Any]:
+        text = (text or "").strip()
+
+        if text.startswith("```"):
+            text = re.sub(r"^```(?:json)?", "", text).strip()
+            text = re.sub(r"```$", "", text).strip()
+
+        start = text.find("{")
+        end = text.rfind("}")
+
+        if start != -1 and end != -1 and end > start:
+            text = text[start:end + 1]
+
+        data = json.loads(text)
+
+        if not isinstance(data, dict):
+            raise ValueError("LLM task analysis did not return a JSON object.")
+
+        return data
+
+    def _run_async(self, coroutine):
+        try:
+            running_loop = asyncio.get_running_loop()
+            if running_loop.is_running():
+                result_box = {}
+                error_box = {}
+
+                def runner():
+                    try:
+                        result_box["result"] = asyncio.run(coroutine)
+                    except Exception as exc:
+                        error_box["error"] = exc
+
+                thread = threading.Thread(target=runner)
+                thread.start()
+                thread.join()
+
+                if "error" in error_box:
+                    raise error_box["error"]
+
+                return result_box.get("result")
+        except RuntimeError:
+            pass
+
+        return asyncio.run(coroutine)

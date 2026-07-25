@@ -19,12 +19,13 @@ architecture-level "Task & Context Analysis" stage by retrieving:
 
 from __future__ import annotations
 
+import ast
 import asyncio
 import json
 import os
 import re
 import threading
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 
 from ai.llm.schemas import LLMRequest, Message
 from ai.llm.service import LLMService
@@ -164,30 +165,84 @@ Rules:
             for key in ["current_step", "expected_output"]
         ).lower()
 
-        full_text = " ".join([global_text, step_text]).lower()
+        full_text = " ".join(
+            [global_text, step_text]
+        ).lower()
+
+        explicit_visual_requested = (
+            self._explicit_visual_requested(
+                global_text
+            )
+        )
+
+        no_code_phrases = (
+            "without code",
+            "no code",
+            "avoid code",
+            "do not use code",
+            "don't use code",
+            "code is confusing",
+            "code confusing",
+        )
+        no_code_requested = any(
+            phrase in global_text
+            for phrase in no_code_phrases
+        )
 
         task_type = str(llm_analysis.get("task_type") or base_payload.get("incoming_task_type") or "unknown_task")
 
         if task_type not in self.VALID_TASK_TYPES:
             task_type = self._infer_task_type(full_text, base_payload.get("incoming_task_type", "unknown_task"))
 
-        topic = str(llm_analysis.get("topic") or self._infer_topic(full_text))
-        goal = str(llm_analysis.get("goal") or base_payload.get("user_query") or "")
+        topic = str(
+            llm_analysis.get("topic")
+            or self._infer_topic(full_text)
+        )
+        goal = str(
+            llm_analysis.get("goal")
+            or base_payload.get("user_query")
+            or ""
+        )
 
-        retrieval_only_step = self._is_retrieval_only_step(step_text)
+        retrieval_only_step = (
+            self._is_retrieval_only_step(
+                step_text
+            )
+        )
+
+        operation_analysis = (
+            self._resolve_step_operation(
+                global_text=global_text,
+                step_text=step_text,
+                retrieval_only_step=(
+                    retrieval_only_step
+                ),
+            )
+        )
 
         incoming_task_type = str(base_payload.get("incoming_task_type") or "")
-        incoming_is_code = incoming_task_type in {"code_execution", "code_help", "programming", "debugging"}
+        incoming_is_code = (
+            incoming_task_type
+            in {"code_execution", "code_help", "programming", "debugging"}
+            and not no_code_requested
+        )
 
-        step_has_code_intent = self._has_code_intent(step_text)
-        global_has_code_intent = self._has_code_intent(global_text)
+        step_has_code_intent = (
+            self._has_code_intent(step_text)
+            and not no_code_requested
+        )
+        global_has_code_intent = (
+            self._has_code_intent(global_text)
+            and not no_code_requested
+        )
 
         # Important:
         # A global student question may ask for code, but an individual scratchpad
         # step may only ask for retrieval/grounding. In that case, do not force
         # CodeSandboxTool into the retrieval step.
         needs_code_execution = (
-            not retrieval_only_step
+            not no_code_requested
+            and not retrieval_only_step
             and (
                 step_has_code_intent
                 or incoming_is_code
@@ -214,8 +269,17 @@ Rules:
 
         needs_visual_support = (
             not retrieval_only_step
-            and (bool(llm_analysis.get("needs_visual_support")) or self._has_visual_intent(step_text))
+            and explicit_visual_requested
         )
+
+        if no_code_requested and task_type in {
+            "code_execution",
+            "code_help",
+            "programming",
+            "debugging",
+        }:
+            task_type = "conceptual_explanation"
+            needs_code_execution = False
 
         if retrieval_only_step:
             task_type = "conceptual_explanation"
@@ -235,6 +299,12 @@ Rules:
             "workflow_source": base_payload.get("workflow_source"),
             "original_task_type": base_payload.get("incoming_task_type"),
             "task_type": task_type,
+            "operation_type": operation_analysis[
+                "operation_type"
+            ],
+            "operation_parameters": operation_analysis[
+                "operation_parameters"
+            ],
             "topic": topic,
             "goal": goal,
             "current_step": base_payload.get("current_step"),
@@ -243,6 +313,9 @@ Rules:
             "expected_output": llm_analysis.get("expected_output") or base_payload.get("expected_output"),
             "learner_level": llm_analysis.get("learner_level") or base_payload.get("learner_level"),
             "needs_visual_support": needs_visual_support,
+            "explicit_visual_requested": (
+                explicit_visual_requested
+            ),
             "needs_calculation": needs_calculation,
             "needs_code_execution": needs_code_execution,
             "needs_debugging": needs_debugging,
@@ -263,8 +336,29 @@ Rules:
             for key in ["current_step", "expected_output"]
         ).lower()
 
-        full_text = " ".join([global_text, step_text]).lower()
-        retrieval_only_step = self._is_retrieval_only_step(step_text)
+        full_text = " ".join(
+            [global_text, step_text]
+        ).lower()
+
+        explicit_visual_requested = (
+            self._explicit_visual_requested(
+                global_text
+            )
+        )
+
+        retrieval_only_step = (
+            self._is_retrieval_only_step(step_text)
+        )
+
+        operation_analysis = (
+            self._resolve_step_operation(
+                global_text=global_text,
+                step_text=step_text,
+                retrieval_only_step=(
+                    retrieval_only_step
+                ),
+            )
+        )
 
         incoming_task_type = str(base_payload.get("incoming_task_type") or "")
         incoming_is_code = incoming_task_type in {"code_execution", "code_help", "programming", "debugging"}
@@ -279,7 +373,10 @@ Rules:
         )
         needs_debugging = not retrieval_only_step and self._has_debug_intent(step_text + " " + global_text)
         needs_calculation = not retrieval_only_step and self._has_calculation_intent(step_text)
-        needs_visual_support = not retrieval_only_step and self._has_visual_intent(step_text)
+        needs_visual_support = (
+            not retrieval_only_step
+            and explicit_visual_requested
+        )
 
         if retrieval_only_step:
             task_type = "conceptual_explanation"
@@ -291,6 +388,12 @@ Rules:
             "workflow_source": base_payload.get("workflow_source"),
             "original_task_type": base_payload.get("incoming_task_type"),
             "task_type": task_type,
+            "operation_type": operation_analysis[
+                "operation_type"
+            ],
+            "operation_parameters": operation_analysis[
+                "operation_parameters"
+            ],
             "topic": self._infer_topic(full_text),
             "goal": base_payload.get("user_query", ""),
             "current_step": base_payload.get("current_step"),
@@ -299,6 +402,9 @@ Rules:
             "expected_output": base_payload.get("expected_output"),
             "learner_level": base_payload.get("learner_level"),
             "needs_visual_support": needs_visual_support,
+            "explicit_visual_requested": (
+                explicit_visual_requested
+            ),
             "needs_calculation": needs_calculation,
             "needs_code_execution": needs_code_execution,
             "needs_debugging": needs_debugging,
@@ -421,6 +527,724 @@ Rules:
             "student request. The code must be deterministic, beginner-friendly, "
             "avoid unsafe imports and file/network operations, and print its result."
         )
+
+    def _explicit_visual_requested(
+        self,
+        global_text: str,
+    ) -> bool:
+        text = str(global_text or "").lower()
+
+        return any(
+            phrase in text
+            for phrase in (
+                "visualize",
+                "visualise",
+                "show visually",
+                "visual explanation",
+                "draw a diagram",
+                "draw",
+                "diagram",
+                "illustrate",
+                "illustration",
+                "text-based visualization",
+                "text based visualization",
+            )
+        )
+
+    def _conceptual_operation_for_text(
+        self,
+        text: str,
+    ) -> Dict[str, Any]:
+        normalized = str(text or "").lower()
+
+        if any(
+            term in normalized
+            for term in (
+                "convolution",
+                "kernel",
+                "cross-correlation",
+                "padding",
+                "stride",
+            )
+        ):
+            operation_type = "convolution_concept"
+
+        elif any(
+            term in normalized
+            for term in (
+                "matrix",
+                "matrices",
+                "row-by-column",
+                "row by column",
+                "dot product",
+            )
+        ):
+            operation_type = "matrix_concept"
+
+        else:
+            operation_type = (
+                "conceptual_explanation"
+            )
+
+        return {
+            "operation_type": operation_type,
+            "operation_parameters": {
+                "matrices": [],
+                "shapes": [],
+                "stride": 1,
+                "padding": 0,
+            },
+        }
+
+    def _resolve_step_operation(
+        self,
+        global_text: str,
+        step_text: str,
+        retrieval_only_step: bool,
+    ) -> Dict[str, Any]:
+        """
+        Resolve the operation for one tutoring step.
+
+        The global question supplies the original operation and
+        parameters. The current step determines whether that operation
+        should be executed now or whether the step is only conceptual
+        or retrieval-oriented.
+        """
+        global_analysis = self._infer_operation(
+            global_text
+        )
+
+        if retrieval_only_step:
+            return self._conceptual_operation_for_text(
+                " ".join(
+                    [global_text, step_text]
+                )
+            )
+
+        if not str(step_text or "").strip():
+            return global_analysis
+
+        step_analysis = self._infer_operation(
+            step_text
+        )
+
+        global_operation = str(
+            global_analysis.get("operation_type")
+            or ""
+        )
+
+        step_lower = str(step_text or "").lower()
+
+        explicit_execution_cues = any(
+            phrase in step_lower
+            for phrase in (
+                "calculate",
+                "compute",
+                "apply",
+                "verify",
+                "solve",
+                "determine",
+                "perform",
+                "multiply",
+                "product",
+                "first entry",
+                "top-left",
+                "top left",
+                "dot product",
+                "how many",
+                "number of",
+                "result",
+            )
+        )
+
+        conceptual_cues = any(
+            phrase in step_lower
+            for phrase in (
+                "explain",
+                "understand",
+                "define",
+                "describe",
+                "discuss",
+                "introduce",
+                "concept",
+                "why",
+                "difference",
+                "compare",
+            )
+        )
+
+        # A dimension-compatibility question may be expressed through
+        # an explanatory step such as “explain the conditions”.
+        if (
+            global_operation
+            == "matrix_compatibility"
+            and any(
+                phrase in step_lower
+                for phrase in (
+                    "condition",
+                    "precondition",
+                    "dimension",
+                    "compatible",
+                    "can be multiplied",
+                    "determine",
+                    "verify",
+                    "check",
+                    "example",
+                )
+            )
+        ):
+            return global_analysis
+
+        if (
+            conceptual_cues
+            and not explicit_execution_cues
+        ):
+            return self._conceptual_operation_for_text(
+                " ".join(
+                    [global_text, step_text]
+                )
+            )
+
+        deterministic_operations = {
+            "scalar_arithmetic",
+            "convolution_output_size",
+            "matrix_compatibility",
+            "matrix_multiplication",
+            "matrix_entry",
+            "dot_product",
+            "valid_2d_convolution",
+            "convolution_window_count",
+            "kernel_fit",
+        }
+
+        if (
+            global_operation
+            in deterministic_operations
+            and (
+                explicit_execution_cues
+                or step_analysis.get(
+                    "operation_type"
+                )
+                == global_operation
+            )
+        ):
+            return global_analysis
+
+        return step_analysis
+
+    def _infer_operation(
+        self,
+        text: str,
+    ) -> Dict[str, Any]:
+        """
+        Extract the requested operation and its parameters.
+
+        This remains part of Task & Context Analyzer. It does not
+        choose or execute tools.
+        """
+        original_text = str(text or "")
+        normalized = (
+            original_text.lower()
+            .replace("×", "x")
+            .replace("–", "-")
+            .replace("−", "-")
+        )
+
+        matrices = self._extract_matrix_literals(
+            original_text
+        )
+
+        shapes = [
+            [int(rows), int(cols)]
+            for rows, cols in re.findall(
+                r"\b(\d+)\s*x\s*(\d+)\b",
+                normalized,
+            )
+        ]
+
+        parameters: Dict[str, Any] = {
+            "matrices": matrices,
+            "shapes": shapes,
+        }
+
+        input_shape = self._extract_labeled_shape(
+            normalized,
+            labels=(
+                "input",
+                "input matrix",
+                "matrix",
+            ),
+        )
+
+        kernel_shape = self._extract_labeled_shape(
+            normalized,
+            labels=(
+                "kernel",
+                "filter",
+                "window",
+            ),
+        )
+
+        if input_shape:
+            parameters["input_shape"] = input_shape
+
+        if kernel_shape:
+            parameters["kernel_shape"] = kernel_shape
+
+        stride_match = re.search(
+            r"\bstride\s*(?:=|of|is)?\s*(\d+)\b",
+            normalized,
+        )
+
+        padding_match = re.search(
+            r"\bpadding\s*(?:=|of|is)?\s*(\d+)\b",
+            normalized,
+        )
+
+        parameters["stride"] = (
+            int(stride_match.group(1))
+            if stride_match
+            else 1
+        )
+
+        parameters["padding"] = (
+            int(padding_match.group(1))
+            if padding_match
+            else 0
+        )
+
+        has_convolution = any(
+            term in normalized
+            for term in (
+                "convolution",
+                "kernel",
+                "cross-correlation",
+                "sliding window",
+            )
+        )
+
+        output_size_requested = any(
+            phrase in normalized
+            for phrase in (
+                "output size",
+                "output shape",
+                "output dimension",
+                "output dimensions",
+            )
+        )
+
+        window_count_requested = (
+            has_convolution
+            and any(
+                phrase in normalized
+                for phrase in (
+                    "how many valid",
+                    "number of valid",
+                    "convolution windows",
+                    "windows exist",
+                )
+            )
+        )
+
+        kernel_fit_requested = (
+            has_convolution
+            and any(
+                phrase in normalized
+                for phrase in (
+                    "can slide",
+                    "can the kernel",
+                    "kernel fit",
+                    "fits inside",
+                )
+            )
+        )
+
+        matrix_compatibility_requested = (
+            "matrix" in normalized
+            and any(
+                phrase in normalized
+                for phrase in (
+                    "can a",
+                    "can the",
+                    "can be multiplied",
+                    "whether",
+                    "multiplication possible",
+                    "dimensions matter",
+                )
+            )
+            and (
+                "multipl" in normalized
+                or "product" in normalized
+            )
+        )
+
+        matrix_entry_requested = any(
+            phrase in normalized
+            for phrase in (
+                "first entry",
+                "top-left entry",
+                "top left entry",
+                "first element",
+                "c[1,1]",
+            )
+        )
+
+        matrix_multiplication_requested = any(
+            phrase in normalized
+            for phrase in (
+                "multiply the matrices",
+                "multiply matrices",
+                "matrix multiplication",
+                "matrix product",
+                "product of the matrices",
+            )
+        )
+
+        dot_product_requested = any(
+            phrase in normalized
+            for phrase in (
+                "dot product",
+                "row-by-column",
+                "row by column",
+                "multiplying row",
+            )
+        )
+
+        explicit_convolution = (
+            has_convolution
+            and len(matrices) >= 2
+            and any(
+                phrase in normalized
+                for phrase in (
+                    "compute",
+                    "calculate",
+                    "valid convolution",
+                    "top-left convolution",
+                    "convolution step",
+                )
+            )
+        )
+
+        if has_convolution and output_size_requested:
+            operation_type = "convolution_output_size"
+
+        elif window_count_requested:
+            operation_type = "convolution_window_count"
+
+            if len(shapes) >= 2:
+                parameters["kernel_shape"] = shapes[0]
+                parameters["input_shape"] = shapes[1]
+
+        elif kernel_fit_requested:
+            operation_type = "kernel_fit"
+
+            if len(shapes) >= 2:
+                parameters["kernel_shape"] = shapes[0]
+                parameters["input_shape"] = shapes[1]
+
+        elif explicit_convolution:
+            operation_type = "valid_2d_convolution"
+
+            parameters["input_matrix"] = matrices[0]
+            parameters["kernel"] = matrices[1]
+
+        elif (
+            matrix_compatibility_requested
+            and len(matrices) < 2
+            and len(shapes) >= 2
+        ):
+            operation_type = "matrix_compatibility"
+
+            if len(shapes) >= 2:
+                parameters["left_shape"] = shapes[0]
+                parameters["right_shape"] = shapes[1]
+
+        elif matrix_entry_requested and len(matrices) >= 2:
+            operation_type = "matrix_entry"
+
+            parameters["matrix_a"] = matrices[0]
+            parameters["matrix_b"] = matrices[1]
+            parameters["entry"] = [0, 0]
+
+        elif (
+            (
+                matrix_multiplication_requested
+                or "multiplied by" in normalized
+                or "identity matrix" in normalized
+            )
+            and len(matrices) >= 2
+        ):
+            operation_type = "matrix_multiplication"
+
+            parameters["matrix_a"] = matrices[0]
+            parameters["matrix_b"] = matrices[1]
+
+        elif dot_product_requested:
+            operation_type = "dot_product"
+
+            vectors = self._extract_vector_literals(
+                original_text
+            )
+
+            if len(vectors) >= 2:
+                parameters["left_vector"] = vectors[0]
+                parameters["right_vector"] = vectors[1]
+
+        else:
+            scalar_expression = (
+                self._extract_scalar_expression(
+                    normalized
+                )
+            )
+
+            if scalar_expression:
+                operation_type = "scalar_arithmetic"
+                parameters["expression"] = (
+                    scalar_expression
+                )
+
+            elif has_convolution:
+                operation_type = "convolution_concept"
+
+            elif "matrix" in normalized:
+                operation_type = "matrix_concept"
+
+            else:
+                operation_type = "conceptual_explanation"
+
+        return {
+            "operation_type": operation_type,
+            "operation_parameters": parameters,
+        }
+
+    def _extract_labeled_shape(
+        self,
+        text: str,
+        labels,
+    ) -> Optional[List[int]]:
+        for label in labels:
+            pattern = (
+                rf"\b{re.escape(label)}\b"
+                r"(?:\s+(?:size|shape|dimensions?))?"
+                r"\s*(?:=|is|of|:)?\s*"
+                r"(\d+)\s*x\s*(\d+)"
+            )
+
+            match = re.search(pattern, text)
+
+            if match:
+                return [
+                    int(match.group(1)),
+                    int(match.group(2)),
+                ]
+
+        return None
+
+    def _extract_matrix_literals(
+        self,
+        text: str,
+    ) -> List[List[List[float]]]:
+        results = []
+        index = 0
+        source = str(text or "")
+
+        while index < len(source) - 1:
+            start = source.find("[[", index)
+
+            if start == -1:
+                break
+
+            depth = 0
+            end = None
+
+            for position in range(start, len(source)):
+                char = source[position]
+
+                if char == "[":
+                    depth += 1
+
+                elif char == "]":
+                    depth -= 1
+
+                    if depth == 0:
+                        end = position + 1
+                        break
+
+            if end is None:
+                break
+
+            literal = source[start:end]
+
+            try:
+                value = ast.literal_eval(literal)
+            except Exception:
+                index = start + 2
+                continue
+
+            if self._is_numeric_matrix(value):
+                results.append(value)
+
+            index = end
+
+        return results
+
+    def _extract_vector_literals(
+        self,
+        text: str,
+    ) -> List[List[float]]:
+        matrices = self._extract_matrix_literals(text)
+        masked = str(text or "")
+
+        for matrix in matrices:
+            masked = masked.replace(
+                str(matrix),
+                "",
+            )
+
+        vectors = []
+
+        for literal in re.findall(
+            r"(?<!\[)\[[^\[\]]+\](?!\])",
+            masked,
+        ):
+            try:
+                value = ast.literal_eval(literal)
+            except Exception:
+                continue
+
+            if (
+                isinstance(value, list)
+                and value
+                and all(
+                    isinstance(item, (int, float))
+                    for item in value
+                )
+            ):
+                vectors.append(value)
+
+        return vectors
+
+    def _is_numeric_matrix(
+        self,
+        value: Any,
+    ) -> bool:
+        if not isinstance(value, list) or not value:
+            return False
+
+        if not all(
+            isinstance(row, list) and row
+            for row in value
+        ):
+            return False
+
+        width = len(value[0])
+
+        if any(len(row) != width for row in value):
+            return False
+
+        return all(
+            isinstance(item, (int, float))
+            for row in value
+            for item in row
+        )
+
+    def _extract_scalar_expression(
+        self,
+        text: str,
+    ) -> Optional[str]:
+        normalized = str(text or "").lower()
+
+        matrix_context = any(
+            term in normalized
+            for term in (
+                "matrix",
+                "matrices",
+                "kernel",
+                "convolution",
+                "input shape",
+                "output shape",
+                "dimensions",
+            )
+        )
+
+        squared_match = re.search(
+            r"\b(-?\d+(?:\.\d+)?)\s+squared\s*"
+            r"(plus|\+|minus|-)\s*"
+            r"(-?\d+(?:\.\d+)?)\s+squared\b",
+            normalized,
+        )
+
+        if squared_match:
+            left, operator_word, right = (
+                squared_match.groups()
+            )
+
+            operator_symbol = (
+                "+"
+                if operator_word in {"plus", "+"}
+                else "-"
+            )
+
+            return (
+                f"{left} ** 2 "
+                f"{operator_symbol} "
+                f"{right} ** 2"
+            )
+
+        binary_match = re.search(
+            r"\b(-?\d+(?:\.\d+)?)\s*"
+            r"(times|multiplied\s+by|\*|plus|\+|"
+            r"minus|-|divided\s+by|/)\s*"
+            r"(-?\d+(?:\.\d+)?)\b",
+            normalized,
+        )
+
+        if binary_match:
+            left, raw_operator, right = (
+                binary_match.groups()
+            )
+
+            operator_map = {
+                "times": "*",
+                "multiplied by": "*",
+                "*": "*",
+                "plus": "+",
+                "+": "+",
+                "minus": "-",
+                "-": "-",
+                "divided by": "/",
+                "/": "/",
+            }
+
+            operator_key = re.sub(
+                r"\s+",
+                " ",
+                raw_operator.strip(),
+            )
+
+            return (
+                f"{left} "
+                f"{operator_map[operator_key]} "
+                f"{right}"
+            )
+
+        # The character x is allowed as scalar multiplication only
+        # when the surrounding request is not about matrix/kernel
+        # dimensions.
+        if not matrix_context:
+            x_match = re.search(
+                r"\b(-?\d+(?:\.\d+)?)\s*x\s*"
+                r"(-?\d+(?:\.\d+)?)\b",
+                normalized,
+            )
+
+            if x_match:
+                return (
+                    f"{x_match.group(1)} * "
+                    f"{x_match.group(2)}"
+                )
+
+        return None
 
     def _parse_json(self, text: str) -> Dict[str, Any]:
         text = (text or "").strip()

@@ -56,11 +56,13 @@ class ContextCollector:
             task_type=task_type,
             limit=3,
             only_successful=True,
+            learner_id=learner_id,
         )
 
         failed_traces = self.trace_toolkit.find_failed_traces(
             task_type=task_type,
             limit=3,
+            learner_id=learner_id,
         )
 
         return {

@@ -206,21 +206,7 @@ class ToolInteractionGraph:
             print(f"    reference_trace_id: {selection_metadata.get('reference_trace_id')}")
             print(f"    selected_tools: {selection_metadata.get('selected_tools')}")
 
-        plan = self._bind_selected_tools_to_plan(
-            plan,
-            selected_tools,
-        )
-
-        plan_metadata = getattr(
-            plan,
-            "metadata",
-            None,
-        )
-
-        if isinstance(plan_metadata, dict):
-            plan_metadata["tool_selection"] = (
-                selection_metadata
-            )
+        plan = self._bind_selected_tools_to_plan(plan, selected_tools)
 
         state["selected_tools"] = selected_tools
         state["selection_metadata"] = selection_metadata
@@ -270,17 +256,14 @@ class ToolInteractionGraph:
 
         return state
     
-    def _bind_selected_tools_to_plan(
-        self,
-        plan: Any,
-        selected_tools: list[str],
-    ) -> Any:
+    def _bind_selected_tools_to_plan(self, plan: Any, selected_tools: list[str]) -> Any:
         """
-        Build an executable plan containing only selected tools.
+        Bind concrete selected tools to the capability-first plan.
 
-        The planner produces capability-first steps. The selector chooses
-        concrete tools. Unselected capability steps must not remain in the
-        executable plan because they have no concrete tool_name.
+        The planner creates required capabilities.
+        The selector chooses concrete tools.
+        This method attaches selected tool names to plan steps so the executor
+        can run the plan without changing the executor contract.
         """
         if plan is None:
             return plan
@@ -297,84 +280,44 @@ class ToolInteractionGraph:
 
         tool_to_capability = {
             tool_name: capability
-            for capability, tool_name
-            in capability_to_tool.items()
+            for capability, tool_name in capability_to_tool.items()
         }
 
-        normalized_selected_tools = []
+        plan.selected_tools = selected_tools
 
-        for tool_name in selected_tools or []:
-            if (
-                isinstance(tool_name, str)
-                and tool_name
-                and tool_name
-                not in normalized_selected_tools
-            ):
-                normalized_selected_tools.append(tool_name)
-
-        original_steps = list(
-            getattr(plan, "steps", []) or []
-        )
-
-        executable_steps = []
+        steps = getattr(plan, "steps", []) or []
         assigned_tools = set()
 
-        # Preserve useful planner details only for capabilities whose
-        # concrete tool was actually selected.
-        for original_step in original_steps:
-            if not isinstance(original_step, dict):
+        for step in steps:
+            if not isinstance(step, dict):
                 continue
 
-            capability = original_step.get(
-                "required_capability"
-            )
+            capability = step.get("required_capability")
             tool_name = capability_to_tool.get(capability)
 
-            if tool_name not in normalized_selected_tools:
-                continue
+            if tool_name in selected_tools:
+                step["tool_name"] = tool_name
+                step["purpose"] = step.get("goal", f"Use {tool_name}")
+                assigned_tools.add(tool_name)
 
+        for tool_name in selected_tools:
             if tool_name in assigned_tools:
                 continue
 
-            bound_step = dict(original_step)
-            bound_step["step_id"] = len(executable_steps) + 1
-            bound_step["tool_name"] = tool_name
-            bound_step["purpose"] = bound_step.get(
-                "purpose"
-            ) or bound_step.get(
-                "goal",
-                f"Use {tool_name}",
-            )
+            capability = tool_to_capability.get(tool_name, "general_tool_support")
 
-            executable_steps.append(bound_step)
-            assigned_tools.add(tool_name)
-
-        # Ensure every selected tool has exactly one executable step.
-        for tool_name in normalized_selected_tools:
-            if tool_name in assigned_tools:
-                continue
-
-            capability = tool_to_capability.get(
-                tool_name,
-                "general_tool_support",
-            )
-
-            executable_steps.append(
+            steps.append(
                 {
-                    "step_id": len(executable_steps) + 1,
+                    "step_id": len(steps) + 1,
                     "tool_name": tool_name,
                     "purpose": f"Use {tool_name}",
                     "required_capability": capability,
-                    "goal": (
-                        f"Execute selected tool: {tool_name}"
-                    ),
+                    "goal": f"Execute selected tool: {tool_name}",
+                    "reason": "Tool selected by Adaptive Tool Selector.",
                 }
             )
-            assigned_tools.add(tool_name)
 
-        plan.selected_tools = normalized_selected_tools
-        plan.steps = executable_steps
-
+        plan.steps = steps
         return plan
 
     def _execute_tools_node(self, state: ToolInteractionState) -> ToolInteractionState:
@@ -385,47 +328,7 @@ class ToolInteractionGraph:
         attempt = state["attempt"]
         trace_bus = state["trace_bus"]
 
-        selected_tool_set = set(
-            state.get("selected_tools") or []
-        )
-
-        executable_steps = list(
-            getattr(plan, "steps", []) or []
-        )
-
-        missing_tool_steps = []
-        unexpected_tools = []
-
-        for step in executable_steps:
-            if not isinstance(step, dict):
-                missing_tool_steps.append(step)
-                continue
-
-            tool_name = step.get("tool_name")
-
-            if not tool_name:
-                missing_tool_steps.append(step)
-            elif tool_name not in selected_tool_set:
-                unexpected_tools.append(tool_name)
-
-        if missing_tool_steps:
-            raise RuntimeError(
-                "Executable plan contains steps without tool_name: "
-                f"{missing_tool_steps}"
-            )
-
-        if unexpected_tools:
-            raise RuntimeError(
-                "Executable plan contains unselected tools: "
-                f"{unexpected_tools}. Selected tools: "
-                f"{sorted(selected_tool_set)}"
-            )
-
-        results = self.executor.execute(
-            plan,
-            request,
-            attempt,
-        )
+        results = self.executor.execute(plan, request, attempt)
 
         state["results"] = results
         state["last_results"] = results
@@ -452,15 +355,7 @@ class ToolInteractionGraph:
         attempt = state["attempt"]
         trace_bus = state["trace_bus"]
 
-        report = self.validator.validate(
-            request=request,
-            tool_results=results,
-            attempt_number=attempt,
-            analyzed_task=state.get(
-                "analyzed_task",
-                {},
-            ),
-        )
+        report = self.validator.validate(request, results, attempt)
 
         state["report"] = report
         state["last_report"] = report
@@ -477,14 +372,7 @@ class ToolInteractionGraph:
             state["route_decision"] = "success"
             state["final_status"] = "validated"
         else:
-            recovery_decision = self.recovery.decide(
-                validation_report=report,
-                attempt_number=attempt,
-                analyzed_task=state.get(
-                    "analyzed_task",
-                    {},
-                ),
-            )
+            recovery_decision = self.recovery.decide(report, attempt)
             state["recovery_decision"] = recovery_decision
             trace_bus.emit("recovery_decision", recovery_decision)
 
@@ -518,9 +406,10 @@ class ToolInteractionGraph:
 
         required_tools = list(recovery_decision.get("required_tools", []))
 
-        # FailureRecovery already returned the minimum complete
-        # operation-aware tool set. Do not expand every visual failure
-        # into all registered tutoring tools.
+        if getattr(request, "task_type", None) == "visual_explanation":
+            for tool in ["RAGTool", "TraceSearchTool", "MatrixComputationTool", "VisualMatrixTool"]:
+                if tool not in required_tools:
+                    required_tools.append(tool)
 
         task_type = analyzed_task.get("task_type") or getattr(request, "task_type", None)
 
@@ -533,20 +422,6 @@ class ToolInteractionGraph:
             str(getattr(request, attr, "") or "")
             for attr in ["student_question", "user_query", "query"]
         ).lower()
-
-        no_code_phrases = (
-            "without code",
-            "no code",
-            "avoid code",
-            "do not use code",
-            "don't use code",
-            "code is confusing",
-            "code confusing",
-        )
-        no_code_requested = any(
-            phrase in global_text
-            for phrase in no_code_phrases
-        )
 
         code_keywords = ["code", "python", "numpy", "debug", "implement", "function", "script", "snippet"]
         retrieval_keywords = [
@@ -567,8 +442,7 @@ class ToolInteractionGraph:
         )
 
         is_code_task = (
-            not no_code_requested
-            and not retrieval_only_step
+            not retrieval_only_step
             and (
                 task_type in {"code_execution", "code_help", "programming", "debugging"}
                 or any(keyword in step_text for keyword in code_keywords)
@@ -576,18 +450,10 @@ class ToolInteractionGraph:
             )
         )
 
-        if no_code_requested:
-            required_tools = [
-                tool
-                for tool in required_tools
-                if tool != "CodeSandboxTool"
-            ]
-
         if is_code_task:
-            if "CodeSandboxTool" not in required_tools:
-                required_tools.append(
-                    "CodeSandboxTool"
-                )
+            for tool in ["RAGTool", "TraceSearchTool", "MatrixComputationTool", "CodeSandboxTool"]:
+                if tool not in required_tools:
+                    required_tools.append(tool)
 
             previous_code_errors = []
             for result in state.get("last_results", []):
@@ -610,19 +476,6 @@ class ToolInteractionGraph:
         analyzed_task["recovery_required_tools"] = required_tools
         analyzed_task["recovery_reason"] = recovery_decision.get("reason")
         state["analyzed_task"] = analyzed_task
-
-        # Preserve the failed attempt for recovery evidence,
-        # but validate the next attempt using only new results.
-        state["last_results"] = list(
-            state.get("results") or []
-        )
-        state["results"] = []
-
-        state["last_report"] = state.get("report")
-        state["report"] = None
-
-        state["selected_tools"] = []
-        state["selection_metadata"] = {}
 
         state["attempt"] = previous_attempt + 1
         state["recovery_used"] = True
@@ -673,10 +526,6 @@ class ToolInteractionGraph:
             tool_results=results,
             validation_report=report,
             trace_id=trace_bus.trace_id,
-            analyzed_task=state.get(
-                "analyzed_task",
-                {},
-            ),
         )
 
         trace_bus.emit("output_package_built", package)
@@ -710,10 +559,6 @@ class ToolInteractionGraph:
             tool_results=results,
             validation_report=report,
             trace_id=trace_bus.trace_id,
-            analyzed_task=state.get(
-                "analyzed_task",
-                {},
-            ),
         )
 
         trace_bus.emit("fallback_package_built", package)

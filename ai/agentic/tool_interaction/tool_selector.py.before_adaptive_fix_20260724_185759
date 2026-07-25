@@ -80,13 +80,7 @@ class ToolSelector:
         # Recovery has priority because validation already detected missing support.
         recovery_required_tools = analyzed_task.get("recovery_required_tools") or []
         if attempt > 1 and recovery_required_tools:
-            selected_tools = self._normalize_selected_tools(
-                recovery_required_tools
-            )
-            selected_tools = self._apply_hard_constraints(
-                selected_tools=selected_tools,
-                analyzed_task=analyzed_task,
-            )
+            selected_tools = self._normalize_selected_tools(recovery_required_tools)
 
             self.last_selection_metadata = {
                 "selection_strategy": "failure_recovery_policy",
@@ -102,70 +96,22 @@ class ToolSelector:
 
             return selected_tools
 
-        # Main behavior:
-        # The plan defines required capabilities. Similar successful traces
-        # inform the decision, but cannot introduce irrelevant tools.
+        # Main article-version behavior:
+        # select concrete tools from the plan produced by ToolPlanner.
         plan_required_tools = self._tools_from_plan(plan)
         if plan_required_tools:
-            best_trace = self._best_trace(analyzed_task)
-            trace_tools = self._normalize_selected_tools(
-                best_trace.get("selected_tools", [])
-                or best_trace.get("tools", [])
-                or []
-            )
-
-            selected_tools = self._normalize_selected_tools(
-                plan_required_tools
-            )
-
-            # Trace reuse confirms previously successful choices that are
-            # compatible with the current plan. It does not blindly copy
-            # every tool from the old trace.
-            trace_confirmed_tools = [
-                tool_name
-                for tool_name in trace_tools
-                if tool_name in selected_tools
-            ]
-
-            selected_tools = self._apply_hard_constraints(
-                selected_tools=selected_tools,
-                analyzed_task=analyzed_task,
-            )
+            selected_tools = self._normalize_selected_tools(plan_required_tools)
 
             self.last_selection_metadata = {
-                "selection_strategy": (
-                    "plan_and_trace_adaptive_selection"
-                    if best_trace
-                    else "minimal_plan_guided_selection"
-                ),
-                "selection_reason": (
-                    "minimum_tools_covering_current_plan_"
-                    "with_trace_informed_confirmation"
-                ),
-                "reference_trace_id": (
-                    best_trace.get("trace_id")
-                    if best_trace
-                    else None
-                ),
-                "reference_trace_path": (
-                    best_trace.get("trace_path")
-                    if best_trace
-                    else None
-                ),
-                "similarity_score": (
-                    best_trace.get("similarity_score", 0)
-                    if best_trace
-                    else 0
-                ),
-                "failed_trace_count_considered": (
-                    self._failed_trace_count(analyzed_task)
-                ),
-                "trace_confirmed_tools": trace_confirmed_tools,
+                "selection_strategy": "plan_guided_selection",
+                "selection_reason": "selected_tools_mapped_from_tool_use_plan",
+                "reference_trace_id": None,
+                "reference_trace_path": None,
+                "similarity_score": 0,
+                "failed_trace_count_considered": self._failed_trace_count(analyzed_task),
                 "selected_tools": selected_tools,
                 "attempt": attempt,
-                "plan_capabilities": (
-                    self._capabilities_from_plan(plan)
-                ),
+                "plan_capabilities": self._capabilities_from_plan(plan),
             }
 
             return selected_tools
@@ -320,202 +266,22 @@ class ToolSelector:
 
         return len(failed_traces)
 
-    def _apply_hard_constraints(
-        self,
-        selected_tools: List[str],
-        analyzed_task: Dict[str, Any],
-    ) -> List[str]:
-        tools = self._normalize_selected_tools(
-            selected_tools
-        )
-
+    def _default_policy(self, task_type: str, analyzed_task: Dict[str, Any]) -> List[str]:
         text = self._combined_text(analyzed_task)
-
-        operation_type = str(
-            analyzed_task.get("operation_type")
-            or ""
-        )
-
-        task_type = str(
-            analyzed_task.get("task_type")
-            or ""
-        )
-
-        no_code_requested = any(
-            phrase in text
-            for phrase in (
-                "without code",
-                "no code",
-                "avoid code",
-                "do not use code",
-                "don't use code",
-                "code is confusing",
-                "code confusing",
-            )
-        )
-
-        if no_code_requested:
-            tools = [
-                tool_name
-                for tool_name in tools
-                if tool_name != "CodeSandboxTool"
-            ]
-
-        history_required = any(
-            phrase in text
-            for phrase in (
-                "previous",
-                "earlier",
-                "last time",
-                "mistake",
-                "again",
-                "review",
-                "personalized",
-                "confusing",
-                "confused",
-                "my difficulty",
-                "my difficulties",
-            )
-        )
-
-        visual_required = bool(
-            analyzed_task.get(
-                "explicit_visual_requested",
-                False,
-            )
-        )
-
-        code_task = task_type in {
-            "code_help",
-            "programming",
-            "code_execution",
-            "debugging",
-        }
-
-        if not code_task:
-            if operation_type == "scalar_arithmetic":
-                if history_required or visual_required:
-                    if (
-                        "CalculatorTool"
-                        not in tools
-                    ):
-                        tools.append(
-                            "CalculatorTool"
-                        )
-                else:
-                    tools = ["CalculatorTool"]
-
-            elif (
-                operation_type
-                == "convolution_output_size"
-            ):
-                if history_required or visual_required:
-                    if (
-                        "CalculatorTool"
-                        not in tools
-                    ):
-                        tools.append(
-                            "CalculatorTool"
-                        )
-                else:
-                    tools = ["CalculatorTool"]
-
-            elif operation_type in {
-                "matrix_compatibility",
-                "matrix_multiplication",
-                "matrix_entry",
-                "dot_product",
-                "valid_2d_convolution",
-                "convolution_window_count",
-                "kernel_fit",
-            }:
-                if history_required or visual_required:
-                    if (
-                        "MatrixComputationTool"
-                        not in tools
-                    ):
-                        tools.append(
-                            "MatrixComputationTool"
-                        )
-                else:
-                    tools = [
-                        "MatrixComputationTool"
-                    ]
-
-        if (
-            history_required
-            and "TraceSearchTool" not in tools
-        ):
-            tools.append("TraceSearchTool")
-
-        return self._normalize_selected_tools(tools)
-
-    def _default_policy(
-        self,
-        task_type: str,
-        analyzed_task: Dict[str, Any],
-    ) -> List[str]:
-        operation_type = str(
-            analyzed_task.get("operation_type")
-            or ""
-        )
-
-        text = self._combined_text(analyzed_task)
-
-        if operation_type in {
-            "scalar_arithmetic",
-            "convolution_output_size",
-        }:
-            return ["CalculatorTool"]
-
-        if operation_type in {
-            "matrix_compatibility",
-            "matrix_multiplication",
-            "matrix_entry",
-            "dot_product",
-            "valid_2d_convolution",
-            "convolution_window_count",
-            "kernel_fit",
-        }:
-            return ["MatrixComputationTool"]
 
         if task_type == "visual_explanation":
-            tools = [
-                "RAGTool",
-                "VisualMatrixTool",
-            ]
+            if self._mentions_matrix_or_convolution(text):
+                return ["RAGTool", "MatrixComputationTool", "VisualMatrixTool"]
+            return ["RAGTool", "VisualMatrixTool"]
 
-            if operation_type in {
-                "matrix_concept",
-                "convolution_concept",
-            }:
-                tools.append(
-                    "MatrixComputationTool"
-                )
+        if task_type in {"code_help", "programming", "code_execution", "debugging"}:
+            return ["RAGTool", "CodeSandboxTool"]
 
-            return tools
+        if task_type in {"calculation_or_verification", "calculation", "math_verification"}:
+            return ["RAGTool", "CalculatorTool"]
 
-        if task_type in {
-            "code_help",
-            "programming",
-            "code_execution",
-            "debugging",
-        }:
-            tools = ["CodeSandboxTool"]
-
-            if any(
-                phrase in text
-                for phrase in (
-                    "explain",
-                    "explains",
-                    "why",
-                    "grounded",
-                    "course",
-                )
-            ):
-                tools.insert(0, "RAGTool")
-
-            return tools
+        if self._mentions_matrix_or_convolution(text):
+            return ["RAGTool", "MatrixComputationTool", "VisualMatrixTool"]
 
         return ["RAGTool"]
 
@@ -559,8 +325,7 @@ class ToolSelector:
             "matrix",
             "matrice",
             "matrices",
-            "matrix multiplication",
-            "multiply matrices",
+            "multiplication",
             "convolution",
             "kernel",
             "linear algebra",

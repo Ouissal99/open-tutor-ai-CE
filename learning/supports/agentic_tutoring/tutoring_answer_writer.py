@@ -82,6 +82,26 @@ class TutoringAnswerWriter:
         topic = self._infer_topic(student_question)
 
         package_dict = self._to_dict(output_package)
+
+        deterministic_output_size_answer = (
+            self._render_verified_output_size_explanation(
+                student_question=student_question,
+                package_dict=package_dict,
+            )
+        )
+
+        if deterministic_output_size_answer:
+            return deterministic_output_size_answer
+
+        deterministic_calculation_answer = (
+            self._render_verified_scalar_calculation(
+                student_question=student_question,
+                package_dict=package_dict,
+            )
+        )
+
+        if deterministic_calculation_answer:
+            return deterministic_calculation_answer
         scratchpad_dict = self._to_dict(scratchpad or [])
         scratchpad_summary = self._compact_scratchpad_summary(scratchpad_dict)
 
@@ -157,6 +177,8 @@ Rules:
 12. If the student asks for code, include code only when the validated OutputPackage contains CodeSandboxTool output or executed code.
 13. If no CodeSandboxTool output is present, say that executable code was not validated in the current tool step instead of inventing code.
 14. If the tool output gives a verified matrix/result/stdout, state it exactly and do not recalculate it differently.
+15. Do not claim that convolution output has the same dimensions as the input unless that exact result is explicitly verified in the validated OutputPackage.
+16. If MatrixComputationTool or CalculatorTool did not validate output dimensions, do not invent an output matrix shape.
 """.strip()
 
         user_prompt = (
@@ -184,6 +206,198 @@ Rules:
             topic=topic,
             package_dict=package_dict,
             dpm_context=dpm_context,
+        )
+
+    def _render_verified_output_size_explanation(
+        self,
+        student_question: str,
+        package_dict: Dict[str, Any],
+    ) -> Optional[str]:
+        package_metadata = (
+            package_dict.get("metadata", {})
+            or {}
+        )
+        tool_metadata = (
+            package_metadata.get(
+                "tool_metadata",
+                {},
+            )
+            or {}
+        )
+
+        calculator_entries = (
+            tool_metadata.get(
+                "CalculatorTool",
+                [],
+            )
+            or []
+        )
+
+        if isinstance(calculator_entries, dict):
+            calculator_entries = [
+                calculator_entries
+            ]
+
+        verified_entry = None
+
+        for entry in calculator_entries:
+            if (
+                isinstance(entry, dict)
+                and entry.get("operation")
+                == "convolution_output_size"
+                and entry.get("formula")
+                and "output_size" in entry
+            ):
+                verified_entry = entry
+                break
+
+        if not verified_entry:
+            return None
+
+        formula = verified_entry["formula"]
+        input_size = verified_entry.get("input_size")
+        kernel_size = verified_entry.get("kernel_size")
+        padding = verified_entry.get("padding")
+        stride = verified_entry.get("stride")
+        output_size = verified_entry.get("output_size")
+
+        evidence = (
+            package_dict.get("evidence", [])
+            or []
+        )
+        references = (
+            package_dict.get("references", [])
+            or []
+        )
+
+        evidence_lines = "\n".join(
+            f"- {item}"
+            for item in evidence[:5]
+        ) or "- CalculatorTool verified the formula and result."
+
+        reference_lines = "\n".join(
+            f"- {item}"
+            for item in references[:4]
+        ) or "- CalculatorTool"
+
+        return (
+            "**Convolution output size explained again**\n\n"
+            "The important correction is that a valid convolution "
+            "does not automatically preserve the input size. The "
+            "output depends on the input size, kernel, padding, and "
+            "stride.\n\n"
+            "**Formula**\n\n"
+            f"`{formula}`\n\n"
+            "Where:\n\n"
+            "- `N` is the input size.\n"
+            "- `K` is the kernel size.\n"
+            "- `P` is the padding.\n"
+            "- `S` is the stride.\n\n"
+            "**Verified example**\n\n"
+            f"- Input size: `N = {input_size}`\n"
+            f"- Kernel size: `K = {kernel_size}`\n"
+            f"- Padding: `P = {padding}`\n"
+            f"- Stride: `S = {stride}`\n\n"
+            f"`O = floor(({input_size} + 2({padding}) - "
+            f"{kernel_size}) / {stride}) + 1`\n\n"
+            f"`O = {output_size}`\n\n"
+            f"Therefore, the verified spatial output is "
+            f"**{output_size} × {output_size}**.\n\n"
+            "A common mistake is to assume that the output keeps the "
+            "same size as the input. That happens only under specific "
+            "padding and stride settings.\n\n"
+            "**Evidence used**\n\n"
+            f"{evidence_lines}\n\n"
+            "**References**\n\n"
+            f"{reference_lines}"
+        )
+
+    def _render_verified_scalar_calculation(
+        self,
+        student_question: str,
+        package_dict: Dict[str, Any],
+    ) -> Optional[str]:
+        package_metadata = (
+            package_dict.get("metadata", {})
+            or {}
+        )
+        tool_metadata = (
+            package_metadata.get(
+                "tool_metadata",
+                {},
+            )
+            or {}
+        )
+        calculator_entries = (
+            tool_metadata.get(
+                "CalculatorTool",
+                [],
+            )
+            or []
+        )
+
+        if isinstance(calculator_entries, dict):
+            calculator_entries = [
+                calculator_entries
+            ]
+
+        verified_entry = None
+
+        for entry in calculator_entries:
+            if (
+                isinstance(entry, dict)
+                and entry.get("operation")
+                == "arithmetic"
+                and entry.get("expression")
+                and "result" in entry
+            ):
+                verified_entry = entry
+                break
+
+        if not verified_entry:
+            return None
+
+        expression = str(
+            verified_entry["expression"]
+        )
+        result = verified_entry["result"]
+
+        display_expression = (
+            expression.replace("*", "×")
+        )
+
+        evidence = (
+            package_dict.get("evidence", [])
+            or []
+        )
+        references = (
+            package_dict.get("references", [])
+            or []
+        )
+
+        evidence_line = (
+            str(evidence[0])
+            if evidence
+            else (
+                "CalculatorTool verified the "
+                "arithmetic operation."
+            )
+        )
+        reference_line = (
+            str(references[0])
+            if references
+            else "CalculatorTool"
+        )
+
+        return (
+            "**Verified calculation**\n\n"
+            f"{display_expression} = **{result}**.\n\n"
+            "The result was computed by the calculator "
+            "rather than estimated by the language model.\n\n"
+            "**Evidence used**\n\n"
+            f"- {evidence_line}\n\n"
+            "**References**\n\n"
+            f"- {reference_line}"
         )
 
     def _truncate(self, value: Any, max_chars: int) -> Any:

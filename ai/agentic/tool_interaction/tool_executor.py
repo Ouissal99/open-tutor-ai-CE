@@ -31,7 +31,17 @@ class ToolExecutor:
 
         analyzed_task = {
             "task_type": plan_dict.get("task_type"),
-            "selected_tools": plan_dict.get("selected_tools", []),
+            "operation_type": metadata.get(
+                "operation_type"
+            ),
+            "operation_parameters": metadata.get(
+                "operation_parameters",
+                {},
+            ),
+            "selected_tools": plan_dict.get(
+                "selected_tools",
+                [],
+            ),
             "tool_selection": metadata.get("tool_selection", {}),
             "collected_context": collected_context,
             "topic": metadata.get("topic"),

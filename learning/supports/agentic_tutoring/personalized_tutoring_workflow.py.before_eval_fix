@@ -1,7 +1,6 @@
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-import re
 from typing import Any, Dict, List, Optional
 
 from learning.supports.agentic_tutoring.tutoring_answer_writer import TutoringAnswerWriter
@@ -81,12 +80,6 @@ class PersonalizedTutoringWorkflow:
         final_memory_update_summary = {}
         all_tool_packages = []
 
-        # A controlled recovery test must affect one manager
-        # interaction, not every tutoring-plan step.
-        force_recovery_pending = bool(
-            metadata.get("force_recovery_test", False)
-        )
-
         for step in solving_plan:
             round_item = self.scratchpad.add_round(
                 step_goal=step["step_goal"],
@@ -115,7 +108,7 @@ class PersonalizedTutoringWorkflow:
                         "current_plan_step": step,
                         "full_investigation_plan": solving_plan,
                         "workflow_metadata": metadata,
-                        "force_recovery_test": force_recovery_pending,
+                        "force_recovery_test": metadata.get("force_recovery_test", False),
                     },
                 )
                 final_request = request
@@ -125,10 +118,6 @@ class PersonalizedTutoringWorkflow:
 
                 print("\n[5] Central Tool Interaction Manager runs")
                 package, trace_path = self.tool_manager.run(request)
-
-                # Consume the controlled failure after one manager run.
-                force_recovery_pending = False
-
                 final_package = package
                 all_tool_packages.append(
                     {
@@ -265,20 +254,6 @@ class PersonalizedTutoringWorkflow:
         package_dict = final_package.to_dict() if final_package else {}
         trace_metadata = self._extract_trace_metadata(trace_path)
 
-        workflow_status = (
-            self._derive_workflow_status(
-                scratchpad_items=(
-                    scratchpad_items
-                ),
-                final_selection=(
-                    final_selection
-                ),
-                final_package=(
-                    final_package
-                ),
-            )
-        )
-
         return {
             # Main result
             "answer": final_answer,
@@ -291,24 +266,7 @@ class PersonalizedTutoringWorkflow:
             "task_type": final_request.task_type if final_request else None,
 
             # Package / validation information
-            "status": workflow_status,
-            "primary_request_required": (
-                final_selection.get(
-                    "primary_request_required",
-                    False,
-                )
-            ),
-            "primary_request_satisfied": (
-                final_selection.get(
-                    "primary_request_satisfied",
-                    False,
-                )
-            ),
-            "selected_package_role": (
-                final_selection.get(
-                    "selected_package_role"
-                )
-            ),
+            "status": package_dict.get("status", "no_package"),
             "confidence": package_dict.get("validation_report", {}).get("confidence_score"),
             "trace_id": package_dict.get("trace_id"),
             "trace_path": str(trace_path) if trace_path else None,
@@ -338,230 +296,34 @@ class PersonalizedTutoringWorkflow:
         fallback_trace_path: Any,
         fallback_request: Any,
     ) -> Dict[str, Any]:
-        """
-        Select the package that satisfies the original request.
+        question_text = (student_question or "").lower()
+        code_terms = ["code", "python", "numpy", "implement", "debug", "script", "program"]
 
-        The Tool Interaction Manager's Analyzer and Validator determine
-        package semantics. This workflow only consumes the resulting
-        package metadata; it does not classify the question or select
-        tools.
-        """
-
-        def package_dict(
-            item: Dict[str, Any],
-        ) -> Dict[str, Any]:
+        def package_tool_names(item: Dict[str, Any]) -> List[str]:
             package = item.get("package")
-
             if not package:
-                return {}
+                return []
 
-            if hasattr(package, "to_dict"):
-                return package.to_dict()
+            package_dict = package.to_dict() if hasattr(package, "to_dict") else {}
+            metadata = package_dict.get("metadata", {}) or {}
+            return metadata.get("tool_names", []) or []
 
-            return {}
+        if any(term in question_text for term in code_terms):
+            for item in reversed(all_tool_packages):
+                if "CodeSandboxTool" in package_tool_names(item):
+                    return item
 
-        def package_metadata(
-            item: Dict[str, Any],
-        ) -> Dict[str, Any]:
-            return (
-                package_dict(item).get(
-                    "metadata",
-                    {},
-                )
-                or {}
-            )
-
-        primary_items = [
-            item
-            for item in all_tool_packages
-            if package_metadata(item).get(
-                "request_role"
-            )
-            == "primary_execution"
-        ]
-
-        # Prefer the latest validated package that the manager marked
-        # as satisfying the primary request.
-        for item in reversed(primary_items):
-            current_package = package_dict(item)
-            metadata = package_metadata(item)
-
-            if (
-                current_package.get("status")
-                == "validated"
-                and metadata.get(
-                    "satisfies_primary_request"
-                )
-                is True
-            ):
-                return {
-                    **item,
-                    "primary_request_required": True,
-                    "primary_request_satisfied": True,
-                    "selected_package_role": (
-                        "primary_execution"
-                    ),
-                }
-
-        # A primary execution existed but none validated. Do not hide
-        # that failure behind a successful explanatory package.
-        if primary_items:
-            item = primary_items[-1]
-
-            return {
-                **item,
-                "primary_request_required": True,
-                "primary_request_satisfied": False,
-                "selected_package_role": (
-                    "primary_execution"
-                ),
-            }
-
-        # Purely conceptual requests have no execution package. Use
-        # the latest validated, topic-consistent support package.
         for item in reversed(all_tool_packages):
-            if (
-                package_dict(item).get("status")
-                == "validated"
-            ):
-                return {
-                    **item,
-                    "primary_request_required": False,
-                    "primary_request_satisfied": False,
-                    "selected_package_role": (
-                        "pedagogical_support"
-                    ),
-                }
+            package = item.get("package")
+            package_dict = package.to_dict() if hasattr(package, "to_dict") else {}
+            if package_dict.get("status") == "validated":
+                return item
 
-        fallback_item = {
+        return {
             "package": fallback_package,
             "trace_path": fallback_trace_path,
             "request": fallback_request,
         }
-
-        fallback_metadata = package_metadata(
-            fallback_item
-        )
-
-        fallback_primary = (
-            fallback_metadata.get(
-                "request_role"
-            )
-            == "primary_execution"
-        )
-
-        return {
-            **fallback_item,
-            "primary_request_required": (
-                fallback_primary
-            ),
-            "primary_request_satisfied": False,
-            "selected_package_role": (
-                fallback_metadata.get(
-                    "request_role",
-                    "none",
-                )
-            ),
-        }
-
-
-    def _derive_workflow_status(
-        self,
-        scratchpad_items: List[Dict[str, Any]],
-        final_selection: Dict[str, Any],
-        final_package: Any,
-    ) -> str:
-        """
-        Optional tutoring-round failures remain observable in the
-        scratchpad but cannot downgrade a validated primary result.
-        """
-        statuses = [
-            str(
-                item.get("status", "")
-                or ""
-            ).lower()
-            for item in scratchpad_items
-            if isinstance(item, dict)
-        ]
-
-        package_dict = (
-            final_package.to_dict()
-            if final_package
-            and hasattr(
-                final_package,
-                "to_dict",
-            )
-            else {}
-        )
-
-        package_status = str(
-            package_dict.get("status")
-            or ""
-        ).lower()
-
-        primary_required = bool(
-            final_selection.get(
-                "primary_request_required",
-                False,
-            )
-        )
-
-        primary_satisfied = bool(
-            final_selection.get(
-                "primary_request_satisfied",
-                False,
-            )
-        )
-
-        if primary_required:
-            if (
-                primary_satisfied
-                and package_status
-                == "validated"
-            ):
-                return "validated"
-
-            return "fallback"
-
-        # For conceptual tutoring, one validated relevant package is
-        # sufficient. Other rounds remain visible as partial support.
-        if (
-            package_status == "validated"
-            or "validated" in statuses
-        ):
-            return "validated"
-
-        if not statuses:
-            return (
-                package_status
-                or "no_package"
-            )
-
-        if all(
-            status
-            in {
-                "validated",
-                "completed_without_tool",
-            }
-            for status in statuses
-        ):
-            return (
-                package_status
-                or "validated"
-            )
-
-        if any(
-            status
-            in {
-                "fallback",
-                "failed",
-                "invalid",
-            }
-            for status in statuses
-        ):
-            return "fallback"
-
-        return "incomplete"
 
     def _compose_fallback_answer_from_package(
         self,
@@ -607,84 +369,6 @@ class PersonalizedTutoringWorkflow:
         investigation_result: Dict[str, Any],
         student_question: str = "",
     ) -> List[Dict[str, Any]]:
-        question_lower = (
-            student_question or ""
-        ).lower()
-
-        dimension_context = any(
-            term in question_lower
-            for term in (
-                "matrix",
-                "matrices",
-                "kernel",
-                "convolution",
-                "input size",
-                "output size",
-                "shape",
-                "dimension",
-                "window",
-            )
-        )
-
-        simple_scalar_arithmetic = bool(
-            re.search(
-                r"\b\d+(?:\.\d+)?\s*"
-                r"(?:times|\*|plus|\+|minus|-|"
-                r"divided\s+by|/)\s*"
-                r"\d+(?:\.\d+)?\b",
-                question_lower,
-            )
-        )
-
-        x_scalar_arithmetic = (
-            not dimension_context
-            and bool(
-                re.search(
-                    r"\b\d+(?:\.\d+)?\s*x\s*"
-                    r"\d+(?:\.\d+)?\b",
-                    question_lower,
-                )
-            )
-        )
-
-        squared_arithmetic = bool(
-            re.search(
-                r"\b\d+(?:\.\d+)?\s+squared\s*"
-                r"(?:plus|\+|minus|-)\s*"
-                r"\d+(?:\.\d+)?\s+squared\b",
-                question_lower,
-            )
-        )
-
-        scalar_arithmetic = (
-            not dimension_context
-            and (
-                simple_scalar_arithmetic
-                or x_scalar_arithmetic
-                or squared_arithmetic
-            )
-        )
-
-        if scalar_arithmetic:
-            return [
-                {
-                    "step_id": 1,
-                    "step_goal": (
-                        "Calculate the requested scalar arithmetic result"
-                    ),
-                    "needs_tool": True,
-                    "suggested_tools": ["CalculatorTool"],
-                    "task_type": "calculation_or_verification",
-                    "expected_output": (
-                        "verified scalar calculation result"
-                    ),
-                    "reason": (
-                        "Scalar arithmetic requires deterministic "
-                        "calculation rather than retrieval or visual tools."
-                    ),
-                }
-            ]
-
         raw_plan = investigation_result.get("initial_tutoring_plan") or []
 
         if not isinstance(raw_plan, list):
@@ -809,168 +493,6 @@ class PersonalizedTutoringWorkflow:
                 }
             )
 
-        no_code_requested = any(
-            phrase in student_question.lower()
-            for phrase in (
-                "without code",
-                "no code",
-                "avoid code",
-                "do not use code",
-                "don't use code",
-                "code is confusing",
-                "code confusing",
-            )
-        )
-
-        explicit_visual_requested = any(
-            phrase in question_text
-            for phrase in (
-                "visual",
-                "visualize",
-                "visualise",
-                "visually",
-                "diagram",
-                "draw",
-                "illustrate",
-                "show visually",
-            )
-        )
-
-        if not explicit_visual_requested:
-            adjusted_plan = []
-
-            for plan_step in normalized_plan:
-                updated_step = dict(plan_step)
-
-                original_tools = list(
-                    updated_step.get(
-                        "suggested_tools",
-                        [],
-                    )
-                    or []
-                )
-
-                updated_tools = [
-                    tool_name
-                    for tool_name in original_tools
-                    if tool_name != "VisualMatrixTool"
-                ]
-
-                step_goal_text = str(
-                    updated_step.get(
-                        "step_goal",
-                        "",
-                    )
-                    or ""
-                ).lower()
-
-                if (
-                    updated_step.get("task_type")
-                    == "visual_explanation"
-                ):
-                    computational_step = any(
-                        phrase in step_goal_text
-                        for phrase in (
-                            "calculate",
-                            "compute",
-                            "verify",
-                            "multiply",
-                            "dot product",
-                            "output size",
-                            "output shape",
-                            "convolution step",
-                        )
-                    )
-
-                    updated_step["task_type"] = (
-                        "calculation_or_verification"
-                        if computational_step
-                        else "conceptual_explanation"
-                    )
-
-                if (
-                    updated_step.get("needs_tool")
-                    and not updated_tools
-                ):
-                    if (
-                        updated_step.get("task_type")
-                        == "calculation_or_verification"
-                    ):
-                        matrix_operation = any(
-                            term in step_goal_text
-                            for term in (
-                                "matrix",
-                                "kernel",
-                                "convolution",
-                                "dot product",
-                            )
-                        )
-
-                        updated_tools = [
-                            (
-                                "MatrixComputationTool"
-                                if matrix_operation
-                                else "CalculatorTool"
-                            )
-                        ]
-
-                    else:
-                        updated_tools = ["RAGTool"]
-
-                updated_step["suggested_tools"] = (
-                    updated_tools
-                )
-
-                adjusted_plan.append(updated_step)
-
-            normalized_plan = adjusted_plan
-
-            if not normalized_plan:
-                normalized_plan = (
-                    self._fallback_solving_plan(
-                        investigation_result
-                    )
-                )
-
-        if no_code_requested:
-            filtered_plan = []
-
-            for plan_step in normalized_plan:
-                step_task_type = str(
-                    plan_step.get("task_type", "") or ""
-                )
-                step_goal = str(
-                    plan_step.get("step_goal", "") or ""
-                ).lower()
-                suggested_tools = (
-                    plan_step.get("suggested_tools", []) or []
-                )
-
-                is_code_step = (
-                    step_task_type in code_task_types
-                    or "CodeSandboxTool" in suggested_tools
-                    or "executable python" in step_goal
-                    or "code example" in step_goal
-                )
-
-                if not is_code_step:
-                    filtered_plan.append(plan_step)
-
-            normalized_plan = filtered_plan
-
-            for step_number, plan_step in enumerate(
-                normalized_plan,
-                start=1,
-            ):
-                plan_step["step_id"] = step_number
-
-        if not normalized_plan:
-            normalized_plan = (
-                self._fallback_solving_plan(
-                    investigation_result
-                )
-            )
-
         return normalized_plan
 
     def _step_requires_tool(self, step_goal: str, task_type: str) -> bool:
@@ -988,33 +510,10 @@ class PersonalizedTutoringWorkflow:
             "function",
         ]
 
-        if task_type in {
-            "code_help",
-            "code_execution",
-            "programming",
-            "debugging",
-            "calculation_or_verification",
-        }:
+        if task_type in {"code_help", "code_execution", "programming", "debugging"}:
             return True
 
-        calculation_terms = (
-            "calculate",
-            "compute",
-            "verify",
-            "solve",
-            "output size",
-            "output shape",
-            "formula",
-            "numeric result",
-        )
-
-        return (
-            any(term in text for term in code_terms)
-            or any(
-                term in text
-                for term in calculation_terms
-            )
-        )
+        return any(term in text for term in code_terms)
 
     def _normalize_tools_for_step(
         self,
@@ -1029,52 +528,25 @@ class PersonalizedTutoringWorkflow:
             if tool_name not in tools:
                 tools.append(tool_name)
 
-        if task_type in {
-            "code_help",
-            "code_execution",
-            "programming",
-            "debugging",
-        }:
+        if task_type in {"code_help", "code_execution", "programming", "debugging"}:
+            add("RAGTool")
+            add("TraceSearchTool")
+            add("MatrixComputationTool")
             add("CodeSandboxTool")
 
         elif task_type == "visual_explanation":
+            add("RAGTool")
+            add("TraceSearchTool")
+            add("MatrixComputationTool")
             add("VisualMatrixTool")
 
-            if any(
-                phrase in text
-                for phrase in (
-                    "matrix",
-                    "kernel",
-                    "convolution",
-                    "linear algebra",
-                )
-            ):
-                add("MatrixComputationTool")
-
         elif task_type == "calculation_or_verification":
-            add("CalculatorTool")
-
-        elif any(
-            term in text
-            for term in (
-                "evidence",
-                "grounded",
-                "retrieve",
-                "course",
-            )
-        ):
             add("RAGTool")
+            add("TraceSearchTool")
+            add("MatrixComputationTool")
 
-        if any(
-            phrase in text
-            for phrase in (
-                "previous",
-                "earlier",
-                "mistake",
-                "again",
-                "review",
-            )
-        ):
+        elif any(term in text for term in ["evidence", "grounded", "retrieve", "course"]):
+            add("RAGTool")
             add("TraceSearchTool")
 
         return tools
@@ -1085,103 +557,39 @@ class PersonalizedTutoringWorkflow:
         suggested_tools: List[str],
         fallback_task_type: str,
     ) -> str:
-        text = (
-            f"{step_goal} "
-            f"{' '.join(suggested_tools)}"
-        ).lower()
-
+        text = f"{step_goal} {' '.join(suggested_tools)}".lower()
         tool_set = set(suggested_tools)
 
-        if (
-            "CodeSandboxTool" in tool_set
-            or any(
-                word in text
-                for word in (
-                    "code",
-                    "python",
-                    "numpy",
-                    "implement",
-                    "implementation",
-                    "script",
-                    "program",
-                    "debug",
-                    "function",
-                )
-            )
+        if "CodeSandboxTool" in tool_set or any(
+            word in text
+            for word in [
+                "code",
+                "python",
+                "numpy",
+                "implement",
+                "implementation",
+                "script",
+                "program",
+                "debug",
+                "function",
+            ]
         ):
             return "code_help"
 
-        explicit_execution = any(
-            phrase in text
-            for phrase in (
-                "calculate",
-                "compute",
-                "verify",
-                "solve",
-                "perform",
-                "apply",
-                "determine",
-                "multiply",
-                "product",
-                "output size",
-                "output shape",
-                "numeric result",
-                "dot product",
-                "first entry",
-                "how many",
-            )
-        )
-
-        if (
-            "CalculatorTool" in tool_set
-            or explicit_execution
-        ):
+        if "CalculatorTool" in tool_set:
             return "calculation_or_verification"
 
-        explicit_visual = (
-            "VisualMatrixTool" in tool_set
-            or any(
-                phrase in text
-                for phrase in (
-                    "visualize",
-                    "visualise",
-                    "show visually",
-                    "visual explanation",
-                    "draw",
-                    "diagram",
-                    "illustrate",
-                    "illustration",
-                )
-            )
-        )
-
-        if explicit_visual:
+        if "VisualMatrixTool" in tool_set or any(
+            word in text for word in ["visual", "matrix", "kernel", "image", "diagram"]
+        ):
             return "visual_explanation"
 
-        if (
-            "RAGTool" in tool_set
-            or any(
-                word in text
-                for word in (
-                    "define",
-                    "explain",
-                    "evidence",
-                    "course",
-                    "grounded",
-                    "understand",
-                    "describe",
-                    "discuss",
-                    "concept",
-                )
-            )
+        if "RAGTool" in tool_set or any(
+            word in text for word in ["define", "explain", "evidence", "course", "grounded"]
         ):
             return "conceptual_explanation"
 
-        return (
-            fallback_task_type
-            or "general_tutoring"
-        )
-
+        return fallback_task_type or "general_tutoring"
 
     def _infer_expected_output_for_step(
         self,
@@ -1209,28 +617,27 @@ class PersonalizedTutoringWorkflow:
         self,
         investigation_result: Dict[str, Any],
     ) -> List[Dict[str, Any]]:
-        topic = investigation_result.get(
-            "topic",
-            "the topic",
-        )
+        topic = investigation_result.get("topic", "the topic")
 
         return [
             {
                 "step_id": 1,
-                "step_goal": (
-                    f"Retrieve course-grounded evidence about {topic}"
-                ),
+                "step_goal": f"Retrieve course-grounded evidence about {topic}",
                 "needs_tool": True,
-                "suggested_tools": ["RAGTool"],
+                "suggested_tools": ["RAGTool", "TraceSearchTool"],
                 "task_type": "conceptual_explanation",
-                "expected_output": (
-                    "course-grounded tutoring explanation"
-                ),
-                "reason": (
-                    "Fallback plan when InvestigationAgent "
-                    "output is incomplete."
-                ),
-            }
+                "expected_output": "course-grounded tutoring explanation",
+                "reason": "Fallback plan when InvestigationAgent output is incomplete.",
+            },
+            {
+                "step_id": 2,
+                "step_goal": f"Generate visual support for {topic}",
+                "needs_tool": True,
+                "suggested_tools": ["VisualMatrixTool", "TraceSearchTool"],
+                "task_type": "visual_explanation",
+                "expected_output": "visual explanation with grounded evidence",
+                "reason": "Fallback plan when InvestigationAgent output is incomplete.",
+            },
         ]
 
     def _append_dpm_trace_summary(

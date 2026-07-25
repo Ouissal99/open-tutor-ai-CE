@@ -26,20 +26,7 @@ class ToolPlanner:
         topic = analyzed_task.get("topic", "general topic")
         current_step = analyzed_task.get("current_step", "unknown step")
         expected_output = analyzed_task.get("expected_output")
-        student_question = analyzed_task.get(
-            "student_question",
-            "",
-        )
-
-        operation_type = analyzed_task.get(
-            "operation_type",
-            "",
-        )
-
-        operation_parameters = analyzed_task.get(
-            "operation_parameters",
-            {},
-        ) or {}
+        student_question = analyzed_task.get("student_question", "")
 
         context_summary = collected_context.get("summary", {}) or {}
 
@@ -75,18 +62,7 @@ class ToolPlanner:
                 reason="The tutoring answer should be supported by verified educational content.",
             )
 
-        # 2. Previous-trace support
-        if self._needs_trace_reuse(analyzed_task):
-            add_step(
-                goal="Retrieve relevant previous interaction evidence",
-                required_capability="trace_reuse",
-                reason=(
-                    "The learner request refers to previous work, "
-                    "a mistake, or personalized history."
-                ),
-            )
-
-        # 3. Calculation support
+        # 2. Calculation support
         if self._needs_calculation(task_type, analyzed_task):
             add_step(
                 goal="Perform deterministic calculation or verification",
@@ -176,10 +152,6 @@ class ToolPlanner:
                 "student_question": student_question,
                 "goal": analyzed_task.get("goal"),
                 "expected_output": expected_output,
-                "operation_type": operation_type,
-                "operation_parameters": (
-                    operation_parameters
-                ),
                 "learner_level": learner_level,
                 "is_weak_topic": is_weak_topic,
                 "collected_context": collected_context,
@@ -193,226 +165,38 @@ class ToolPlanner:
             },
         )
 
-    def _needs_grounding(
-        self,
-        task_type: str,
-        analyzed_task: Dict[str, Any],
-    ) -> bool:
-        operation_type = str(
-            analyzed_task.get("operation_type")
-            or ""
-        )
+    def _needs_grounding(self, task_type: str, analyzed_task: Dict[str, Any]) -> bool:
+        # Most tutoring tasks need grounding.
+        return task_type not in {"pure_calculation"}
 
+    def _needs_calculation(self, task_type: str, analyzed_task: Dict[str, Any]) -> bool:
         text = self._combined_text(analyzed_task)
-
-        history_required = self._needs_trace_reuse(
-            analyzed_task
+        calculation_keywords = [
+            "calculate",
+            "compute",
+            "verify",
+            "result",
+            "solve",
+            "arithmetic",
+            "number",
+            "equation",
+        ]
+        return task_type in {"calculation_or_verification", "calculation", "math_verification"} or any(
+            keyword in text for keyword in calculation_keywords
         )
 
-        code_task = task_type in {
-            "code_help",
-            "programming",
-            "code_execution",
-            "debugging",
-        }
-
-        if code_task:
-            return any(
-                phrase in text
-                for phrase in (
-                    "explain",
-                    "explains",
-                    "why",
-                    "grounded",
-                    "course",
-                    "evidence",
-                    "concept",
-                    "dimensions before",
-                )
-            )
-
-        if history_required:
-            return True
-
-        if task_type == "visual_explanation":
-            return True
-
-        deterministic_operations = {
-            "scalar_arithmetic",
-            "convolution_output_size",
-            "matrix_compatibility",
-            "matrix_multiplication",
-            "matrix_entry",
-            "dot_product",
-            "valid_2d_convolution",
-            "convolution_window_count",
-            "kernel_fit",
-        }
-
-        if operation_type in deterministic_operations:
-            return False
-
-        return operation_type in {
-            "conceptual_explanation",
-            "matrix_concept",
-            "convolution_concept",
-        } or task_type in {
-            "conceptual_explanation",
-            "personalized_support",
-        }
-
-    def _needs_trace_reuse(
-        self,
-        analyzed_task: Dict[str, Any],
-    ) -> bool:
+    def _needs_matrix_computation(self, task_type: str, analyzed_task: Dict[str, Any]) -> bool:
         text = self._combined_text(analyzed_task)
-
-        return any(
-            phrase in text
-            for phrase in (
-                "previous",
-                "earlier",
-                "last time",
-                "mistake",
-                "again",
-                "review",
-                "personalized",
-                "confusing",
-                "confused",
-                "my difficulty",
-                "my difficulties",
-            )
-        )
-
-    def _needs_calculation(
-        self,
-        task_type: str,
-        analyzed_task: Dict[str, Any],
-    ) -> bool:
-        operation_type = str(
-            analyzed_task.get("operation_type")
-            or ""
-        )
-
-        if operation_type in {
-            "scalar_arithmetic",
-            "convolution_output_size",
-        }:
-            return True
-
-        if operation_type in {
-            "matrix_compatibility",
-            "matrix_multiplication",
-            "matrix_entry",
-            "dot_product",
-            "valid_2d_convolution",
-            "convolution_window_count",
-            "kernel_fit",
-            "matrix_concept",
-            "convolution_concept",
-        }:
-            return False
-
-        text = self._combined_text(analyzed_task)
-
-        return (
-            task_type
-            in {
-                "calculation_or_verification",
-                "calculation",
-                "math_verification",
-            }
-            and any(
-                phrase in text
-                for phrase in (
-                    "calculate",
-                    "compute",
-                    "verify",
-                    "solve",
-                    "formula",
-                    "numeric result",
-                )
-            )
-        )
-
-    def _needs_matrix_computation(
-        self,
-        task_type: str,
-        analyzed_task: Dict[str, Any],
-    ) -> bool:
-        operation_type = str(
-            analyzed_task.get("operation_type")
-            or ""
-        )
-
-        text = self._combined_text(analyzed_task)
-
-        explicit_visual = any(
-            phrase in text
-            for phrase in (
-                "visual",
-                "visualize",
-                "visualise",
-                "diagram",
-                "draw",
-                "illustrate",
-                "step-by-step visual",
-                "text-based visualization",
-            )
-        )
-
-        code_task = task_type in {
-            "code_help",
-            "programming",
-            "code_execution",
-            "debugging",
-        }
-
-        deterministic_matrix_operations = {
-            "matrix_compatibility",
-            "matrix_multiplication",
-            "matrix_entry",
-            "dot_product",
-            "valid_2d_convolution",
-            "convolution_window_count",
-            "kernel_fit",
-        }
-
-        if operation_type in deterministic_matrix_operations:
-            return True
-
-        if code_task:
-            return (
-                explicit_visual
-                and operation_type == "matrix_concept"
-                and any(
-                    phrase in text
-                    for phrase in (
-                        "matrix multiplication",
-                        "multiply matrices",
-                        "row by column",
-                        "row-by-column",
-                    )
-                )
-            )
-
-        if operation_type == "matrix_concept":
-            return any(
-                phrase in text
-                for phrase in (
-                    "matrix multiplication",
-                    "multiply matrices",
-                    "multiplying matrices",
-                    "row by column",
-                    "row-by-column",
-                    "dot product",
-                )
-            )
-
-        if operation_type == "convolution_concept":
-            return explicit_visual
-
-        return False
+        matrix_keywords = [
+            "matrix",
+            "matrice",
+            "matrices",
+            "multiplication",
+            "convolution",
+            "kernel",
+            "linear algebra",
+        ]
+        return any(keyword in text for keyword in matrix_keywords)
 
     def _needs_visualization(
         self,
@@ -421,72 +205,28 @@ class ToolPlanner:
         learner_level: Optional[str],
         is_weak_topic: bool,
     ) -> bool:
-        """
-        Visual support is selected only when the learner explicitly
-        requested it. An InvestigationAgent-generated step containing
-        “visualize” cannot independently activate VisualMatrixTool.
-        """
-        return bool(
-            analyzed_task.get(
-                "explicit_visual_requested",
-                False,
-            )
-        )
-
-
-    def _needs_code_execution(
-        self,
-        task_type: str,
-        analyzed_task: Dict[str, Any],
-    ) -> bool:
         text = self._combined_text(analyzed_task)
-
-        no_code_requested = any(
-            phrase in text
-            for phrase in (
-                "without code",
-                "no code",
-                "avoid code",
-                "do not use code",
-                "don't use code",
-                "code is confusing",
-                "code confusing",
-            )
-        )
-
-        if no_code_requested:
-            return False
+        visual_keywords = [
+            "visual",
+            "diagram",
+            "show",
+            "step-by-step",
+            "simple example",
+            "explain simply",
+            "beginner",
+        ]
 
         return (
-            task_type
-            in {
-                "code_help",
-                "programming",
-                "code_execution",
-                "debugging",
-            }
-            or bool(
-                analyzed_task.get(
-                    "needs_code_execution",
-                    False,
-                )
-            )
+            task_type == "visual_explanation"
+            or learner_level == "beginner"
+            or is_weak_topic
+            or self._needs_matrix_computation(task_type, analyzed_task)
+            or any(keyword in text for keyword in visual_keywords)
         )
 
-    def _is_scalar_arithmetic(
-        self,
-        text: str,
-    ) -> bool:
-        import re
-
-        return bool(
-            re.search(
-                r"\b\d+(?:\.\d+)?\s*"
-                r"(?:times|x|\*|plus|\+|minus|-|"
-                r"divided\s+by|/)\s*"
-                r"\d+(?:\.\d+)?\b",
-                text or "",
-            )
+    def _needs_code_execution(self, task_type: str, analyzed_task: Dict[str, Any]) -> bool:
+        return task_type in {"code_help", "programming", "code_execution", "debugging"} or bool(
+            analyzed_task.get("needs_code_execution", False)
         )
 
     def _combined_text(self, analyzed_task: Dict[str, Any]) -> str:

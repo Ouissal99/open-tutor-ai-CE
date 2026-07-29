@@ -1,0 +1,9 @@
+DIRECT LLM — FIRST PASS
+
+Total cases: 100
+Provider-valid answers: 45
+Infrastructure-invalid: 55
+
+The infrastructure-invalid rows failed because the external
+Groq/OpenAI-compatible provider remained unavailable after three attempts.
+No provider-valid answer is eligible for rerun.

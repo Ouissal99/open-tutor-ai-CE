@@ -1,0 +1,11 @@
+category,category_display,system_name,case_count,final_validation_valid_case_rate_pct,strict_trace_complete_case_rate_pct,operational_completion_rate_pct,recovery_triggered_count,recovery_trigger_rate_pct,recovery_success_count,recovery_success_among_triggered_pct
+conceptual_grounded,Conceptual / Grounded,Manager Without Recovery,20,85.0,100.0,100.0,0,0.0,0,
+computation_verification,Computation / Verification,Manager Without Recovery,20,95.0,100.0,100.0,0,0.0,0,
+visual_step_by_step,Visual Step-by-Step,Manager Without Recovery,20,55.00000000000001,100.0,100.0,0,0.0,0,
+code_related,Code-Related,Manager Without Recovery,20,5.0,100.0,100.0,0,0.0,0,
+recovery_personalization_trace,Recovery / Personalization / Trace,Manager Without Recovery,20,80.0,100.0,100.0,0,0.0,0,
+conceptual_grounded,Conceptual / Grounded,Full Manager,20,85.0,100.0,100.0,5,25.0,0,0.0
+computation_verification,Computation / Verification,Full Manager,20,95.0,100.0,100.0,3,15.0,0,0.0
+visual_step_by_step,Visual Step-by-Step,Full Manager,20,70.0,100.0,100.0,8,40.0,1,12.5
+code_related,Code-Related,Full Manager,20,90.0,100.0,100.0,5,25.0,1,20.0
+recovery_personalization_trace,Recovery / Personalization / Trace,Full Manager,20,85.0,100.0,100.0,12,60.0,10,83.33333333333333

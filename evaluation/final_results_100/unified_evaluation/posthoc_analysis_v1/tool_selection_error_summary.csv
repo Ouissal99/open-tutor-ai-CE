@@ -1,0 +1,31 @@
+system_name,category,category_display,initial_selection_error_class,error_case_count,category_case_count,error_case_rate_pct
+Basic Tool Use,code_related,Code-Related,missing_expected_tools,1,20,5.0
+Basic Tool Use,code_related,Code-Related,mixed_missing_and_extra,4,20,20.0
+Basic Tool Use,code_related,Code-Related,unnecessary_extra_tools,11,20,55.0
+Basic Tool Use,computation_verification,Computation / Verification,mixed_missing_and_extra,11,20,55.0
+Basic Tool Use,computation_verification,Computation / Verification,unnecessary_extra_tools,3,20,15.0
+Basic Tool Use,conceptual_grounded,Conceptual / Grounded,unnecessary_extra_tools,10,20,50.0
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,missing_expected_tools,2,20,10.0
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,mixed_missing_and_extra,9,20,45.0
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,unnecessary_extra_tools,2,20,10.0
+Basic Tool Use,visual_step_by_step,Visual Step-by-Step,missing_expected_tools,10,20,50.0
+Full Manager,code_related,Code-Related,mixed_missing_and_extra,2,20,10.0
+Full Manager,code_related,Code-Related,unnecessary_extra_tools,18,20,90.0
+Full Manager,computation_verification,Computation / Verification,mixed_missing_and_extra,2,20,10.0
+Full Manager,computation_verification,Computation / Verification,unnecessary_extra_tools,14,20,70.0
+Full Manager,conceptual_grounded,Conceptual / Grounded,mixed_missing_and_extra,1,20,5.0
+Full Manager,conceptual_grounded,Conceptual / Grounded,unnecessary_extra_tools,13,20,65.0
+Full Manager,recovery_personalization_trace,Recovery / Personalization / Trace,mixed_missing_and_extra,8,20,40.0
+Full Manager,recovery_personalization_trace,Recovery / Personalization / Trace,unnecessary_extra_tools,11,20,55.0
+Full Manager,visual_step_by_step,Visual Step-by-Step,missing_expected_tools,8,20,40.0
+Full Manager,visual_step_by_step,Visual Step-by-Step,mixed_missing_and_extra,1,20,5.0
+Manager Without Recovery,code_related,Code-Related,mixed_missing_and_extra,1,20,5.0
+Manager Without Recovery,code_related,Code-Related,unnecessary_extra_tools,19,20,95.0
+Manager Without Recovery,computation_verification,Computation / Verification,mixed_missing_and_extra,2,20,10.0
+Manager Without Recovery,computation_verification,Computation / Verification,unnecessary_extra_tools,14,20,70.0
+Manager Without Recovery,conceptual_grounded,Conceptual / Grounded,mixed_missing_and_extra,1,20,5.0
+Manager Without Recovery,conceptual_grounded,Conceptual / Grounded,unnecessary_extra_tools,14,20,70.0
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,missing_expected_tools,1,20,5.0
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,mixed_missing_and_extra,7,20,35.0
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,unnecessary_extra_tools,11,20,55.0
+Manager Without Recovery,visual_step_by_step,Visual Step-by-Step,missing_expected_tools,10,20,50.0

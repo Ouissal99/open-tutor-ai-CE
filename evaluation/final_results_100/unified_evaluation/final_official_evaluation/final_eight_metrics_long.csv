@@ -1,0 +1,33 @@
+metric,system_name,applicable,value_pct
+Tool Call Success Rate,Direct LLM,False,
+Tool Call Success Rate,Basic Tool Use,True,63.21
+Tool Call Success Rate,Manager Without Recovery,True,84.72
+Tool Call Success Rate,Full Manager,True,81.62
+Tool Selection Accuracy,Direct LLM,False,
+Tool Selection Accuracy,Basic Tool Use,True,37.0
+Tool Selection Accuracy,Manager Without Recovery,True,20.0
+Tool Selection Accuracy,Full Manager,True,22.0
+Execution Success Rate,Direct LLM,False,
+Execution Success Rate,Basic Tool Use,True,34.0
+Execution Success Rate,Manager Without Recovery,True,60.0
+Execution Success Rate,Full Manager,True,78.0
+Validation Pass Rate,Direct LLM,False,
+Validation Pass Rate,Basic Tool Use,False,
+Validation Pass Rate,Manager Without Recovery,True,67.89
+Validation Pass Rate,Full Manager,True,65.85
+Recovery Success Rate,Direct LLM,False,
+Recovery Success Rate,Basic Tool Use,False,
+Recovery Success Rate,Manager Without Recovery,False,
+Recovery Success Rate,Full Manager,True,36.36
+Trace Completeness,Direct LLM,False,
+Trace Completeness,Basic Tool Use,False,
+Trace Completeness,Manager Without Recovery,True,100.0
+Trace Completeness,Full Manager,True,100.0
+End-to-End Success Rate,Direct LLM,True,73.0
+End-to-End Success Rate,Full Manager,True,63.0
+End-to-End Success Rate,Manager Without Recovery,True,47.0
+End-to-End Success Rate,Basic Tool Use,True,57.0
+Tutoring Answer Accuracy,Direct LLM,True,73.0
+Tutoring Answer Accuracy,Full Manager,True,63.0
+Tutoring Answer Accuracy,Manager Without Recovery,True,47.0
+Tutoring Answer Accuracy,Basic Tool Use,True,57.0

@@ -1,0 +1,29 @@
+BASIC TOOL USE WITHOUT CENTRAL MANAGER BASELINE
+======================================================================
+Total tests: 100
+Answer Generation Rate: 86.00% (86/100)
+Tool Execution Success Rate: 34.00% (34/100)
+Tool Selection Precision: 71.00%
+Tool Selection Recall: 79.17%
+Tool Selection F1-score: 72.40%
+Validation Used Rate: 0.00%
+Recovery Used Rate: 0.00%
+Trace Lifecycle Used Rate: 0.00%
+Memory Update Used Rate: 0.00%
+Average Attempts: 1.00
+
+Weak/error cases:
+T067: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T079: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T083: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T084: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T086: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T087: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T088: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T090: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T091: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T092: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T093: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T095: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T098: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.
+T100: status=error error=The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.

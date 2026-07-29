@@ -1,0 +1,9 @@
+metric,Direct LLM,Basic Tool Use,Manager Without Recovery,Full Manager
+Tool Call Success Rate,N/A,63.21%,84.72%,81.62%
+Tool Selection Accuracy,N/A,37.00%,20.00%,22.00%
+Execution Success Rate,N/A,34.00%,60.00%,78.00%
+Validation Pass Rate,N/A,N/A,67.89%,65.85%
+Recovery Success Rate,N/A,N/A,N/A,36.36%
+Trace Completeness,N/A,N/A,100.00%,100.00%
+End-to-End Success Rate,73.00%,57.00%,47.00%,63.00%
+Tutoring Answer Accuracy,73.00%,57.00%,47.00%,63.00%

@@ -1,0 +1,36 @@
+FINAL THREE-RUN GPT-4.1 JUDGE AUDIT
+========================================================================
+
+Input integrity
+- Run 1 rows: 400
+- Run 2 rows: 400
+- Run 3 rows: 400
+- Total judgments: 1200
+- Candidate IDs aligned across runs: Yes
+- Duplicate candidate IDs: 0
+
+Aggregation protocol
+- Three independent GPT-4.1 judgments per candidate
+- Final pass requires at least 2 of 3 runs
+- Rubric scores are averaged across all three runs
+- System identities were revealed only after all runs were locked
+
+Overall semantic results
+- Majority-pass candidates: 240/400
+- Pooled majority-pass rate: 60.00%
+- Unanimous decisions: 350/400
+- Unanimous-decision rate: 87.50%
+- Overall Fleiss' kappa: 0.826145
+
+Operational/E2E status
+- Operational completion was joined from per_case_system_metrics.csv.
+
+Combined metrics status
+- The corrected metric summary appears to use a long format or has no detectable system column. It was preserved unchanged and not automatically merged.
+
+Generated files
+- evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_candidate_aggregate_blind.csv
+- evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_candidate_aggregate_unblinded.csv
+- evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_system_summary.csv
+- evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_inter_run_agreement.csv
+- evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_error_type_summary.csv

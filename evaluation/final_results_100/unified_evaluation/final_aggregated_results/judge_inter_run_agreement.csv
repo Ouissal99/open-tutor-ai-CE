@@ -1,0 +1,16 @@
+scope,judge_pair,candidate_count,percent_agreement,cohen_kappa,overall_fleiss_kappa
+all_systems,run_1_vs_run_2,400,92.75,0.8481516389150696,0.826145411977422
+all_systems,run_1_vs_run_3,400,90.75,0.8071510476389033,
+all_systems,run_2_vs_run_3,400,91.5,0.8232985993815451,
+Basic Tool Use,run_1_vs_run_2,100,93.0,0.8576078112286413,
+Basic Tool Use,run_1_vs_run_3,100,91.0,0.8158756137479543,
+Basic Tool Use,run_2_vs_run_3,100,92.0,0.836867862969005,
+Direct LLM,run_1_vs_run_2,100,91.0,0.7575431034482759,
+Direct LLM,run_1_vs_run_3,100,88.0,0.6815286624203822,
+Direct LLM,run_2_vs_run_3,100,93.0,0.8244734202607825,
+Full Manager,run_1_vs_run_2,100,96.0,0.9141999141999141,
+Full Manager,run_1_vs_run_3,100,93.0,0.8539232053422372,
+Full Manager,run_2_vs_run_3,100,93.0,0.8539232053422372,
+Manager Without Recovery,run_1_vs_run_2,100,91.0,0.8197115384615385,
+Manager Without Recovery,run_1_vs_run_3,100,91.0,0.8197115384615385,
+Manager Without Recovery,run_2_vs_run_3,100,88.0,0.7599039615846339,

@@ -1,0 +1,15 @@
+FULL MANAGER OFFICIAL EVALUATION
+
+Total cases: 100
+Provider available: 100
+Workflow validated: 89
+Workflow fallback: 11
+Infrastructure invalid: 0
+Unresolved: 0
+
+Fallback IDs:
+T014, T018, T043, T051, T052, T053,
+T062, T073, T077, T086, T089
+
+No provider-available fallback or incorrect answer was rerun.
+One infrastructure-only retry batch was performed using the frozen source.

@@ -1,0 +1,16 @@
+DIRECT LLM OFFICIAL EVALUATION
+
+Total cases: 100
+Provider-valid answers: 100
+Remaining errors: 0
+Missing answers: 0
+Duplicate IDs: 0
+
+Tool use: Not applicable
+Validation: Not applicable
+Recovery: Not applicable
+Trace lifecycle: Not applicable
+Memory update: Not applicable
+
+Infrastructure-unavailable rows were retried without rerunning
+previously successful answers.

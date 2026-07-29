@@ -1,0 +1,26 @@
+metric_name,category,category_display,system_name,event_count,success_count,success_rate_pct,ci95_lower_pct,ci95_upper_pct,detected_success_column
+Tool Call Success Rate,conceptual_grounded,Conceptual / Grounded,Basic Tool Use,32,22,68.75,51.43332169904459,82.04745836639026,success
+Tool Call Success Rate,computation_verification,Computation / Verification,Basic Tool Use,33,14,42.42424242424242,27.235596633410207,59.19273666268755,success
+Tool Call Success Rate,visual_step_by_step,Visual Step-by-Step,Basic Tool Use,50,31,62.0,48.15044693099298,74.13721068980641,success
+Tool Call Success Rate,code_related,Code-Related,Basic Tool Use,53,36,67.9245283018868,54.518520149032604,78.90778592086491,success
+Tool Call Success Rate,recovery_personalization_trace,Recovery / Personalization / Trace,Basic Tool Use,44,31,70.45454545454545,55.77979987383978,81.84447088149513,success
+Tool Call Success Rate,conceptual_grounded,Conceptual / Grounded,Manager Without Recovery,66,59,89.39393939393939,79.68769124835198,94.76665274452051,success
+Tool Call Success Rate,computation_verification,Computation / Verification,Manager Without Recovery,68,66,97.05882352941177,89.89536863477694,99.18968204568701,success
+Tool Call Success Rate,visual_step_by_step,Visual Step-by-Step,Manager Without Recovery,96,82,85.41666666666667,76.99818497355328,91.10979421986139,success
+Tool Call Success Rate,code_related,Code-Related,Manager Without Recovery,135,96,71.11111111111111,62.965262171487815,78.0887576322167,success
+Tool Call Success Rate,recovery_personalization_trace,Recovery / Personalization / Trace,Manager Without Recovery,93,85,91.39784946236558,83.93470700891413,95.57669331247983,success
+Tool Call Success Rate,conceptual_grounded,Conceptual / Grounded,Full Manager,74,53,71.62162162162163,60.48274583682747,80.62645289197748,success
+Tool Call Success Rate,computation_verification,Computation / Verification,Full Manager,76,67,88.15789473684211,79.00078224920806,93.64318099582094,success
+Tool Call Success Rate,visual_step_by_step,Visual Step-by-Step,Full Manager,129,92,71.31782945736434,62.98564009894583,78.41709703467565,success
+Tool Call Success Rate,code_related,Code-Related,Full Manager,165,140,84.84848484848484,78.58953408730194,89.52169925742261,success
+Tool Call Success Rate,recovery_personalization_trace,Recovery / Personalization / Trace,Full Manager,138,123,89.1304347826087,82.83988864668123,93.30146022123044,success
+Validation Pass Rate,conceptual_grounded,Conceptual / Grounded,Manager Without Recovery,44,37,84.0909090909091,70.63379493775939,92.07332298779876,passed
+Validation Pass Rate,computation_verification,Computation / Verification,Manager Without Recovery,56,54,96.42857142857143,87.8812198195099,99.01505748517636,passed
+Validation Pass Rate,visual_step_by_step,Visual Step-by-Step,Manager Without Recovery,42,26,61.904761904761905,46.81404026715268,75.00027423604485,passed
+Validation Pass Rate,code_related,Code-Related,Manager Without Recovery,59,23,38.983050847457626,27.57936183396798,51.733658194588386,passed
+Validation Pass Rate,recovery_personalization_trace,Recovery / Personalization / Trace,Manager Without Recovery,45,27,60.0,45.45185459035139,72.97511343499083,passed
+Validation Pass Rate,conceptual_grounded,Conceptual / Grounded,Full Manager,54,33,61.111111111111114,47.788298538207684,72.95806617088351,passed
+Validation Pass Rate,computation_verification,Computation / Verification,Full Manager,61,52,85.24590163934427,74.2767647052789,92.03883149206723,passed
+Validation Pass Rate,visual_step_by_step,Visual Step-by-Step,Full Manager,69,32,46.3768115942029,35.11418406967511,58.0215931635789,passed
+Validation Pass Rate,code_related,Code-Related,Full Manager,75,55,73.33333333333333,62.369200982276226,82.02368636852614,passed
+Validation Pass Rate,recovery_personalization_trace,Recovery / Personalization / Trace,Full Manager,69,44,63.768115942028984,51.97977087380359,74.10427563983122,passed

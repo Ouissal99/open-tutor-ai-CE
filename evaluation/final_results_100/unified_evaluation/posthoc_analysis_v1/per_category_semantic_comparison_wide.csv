@@ -1,0 +1,6 @@
+category,category_display,tutoring_accuracy_pct__Basic Tool Use,tutoring_accuracy_pct__Direct LLM,tutoring_accuracy_pct__Full Manager,tutoring_accuracy_pct__Manager Without Recovery,mean_overall_score__Basic Tool Use,mean_overall_score__Direct LLM,mean_overall_score__Full Manager,mean_overall_score__Manager Without Recovery,end_to_end_success_rate_pct__Basic Tool Use,end_to_end_success_rate_pct__Direct LLM,end_to_end_success_rate_pct__Full Manager,end_to_end_success_rate_pct__Manager Without Recovery
+code_related,Code-Related,50.0,80.0,50.0,5.0,3.4066666666666663,4.516666666666667,3.4933333333333336,2.203333333333333,50.0,80.0,50.0,5.0
+computation_verification,Computation / Verification,45.0,80.0,85.0,85.0,3.3466666666666662,4.413333333333333,4.62,4.590000000000001,45.0,80.0,85.0,85.0
+conceptual_grounded,Conceptual / Grounded,95.0,85.0,55.0,45.0,4.513333333333334,4.556666666666667,3.3866666666666667,3.34,95.0,85.0,55.0,45.0
+recovery_personalization_trace,Recovery / Personalization / Trace,50.0,70.0,75.0,45.0,3.6133333333333333,4.076666666666666,4.140000000000001,3.276666666666666,50.0,70.0,75.0,45.0
+visual_step_by_step,Visual Step-by-Step,45.0,50.0,50.0,55.0,3.4666666666666663,3.6266666666666665,3.3899999999999997,3.656666666666667,45.0,50.0,50.0,55.0

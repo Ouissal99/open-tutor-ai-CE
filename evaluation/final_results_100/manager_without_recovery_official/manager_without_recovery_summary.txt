@@ -1,0 +1,24 @@
+MANAGER WITHOUT RECOVERY OFFICIAL EVALUATION
+
+Total cases: 100
+Provider statuses: {'available': 100}
+Workflow statuses: {'validated': 68, 'fallback': 32}
+Validation statuses: {'valid': 68, 'invalid': 32}
+Final answers: {'Yes': 100}
+
+Validated workflows: 68
+Fallback workflows: 32
+
+Attempt violations: 0
+Recovery violations: 0
+Missing reports: 0
+Missing traces: 0
+Duplicate IDs: 0
+
+Fallback IDs:
+T014, T018, T043, T044, T051, T052, T053, T054, T061, T062, T063, T064, T065, T066, T067, T068, T069, T070, T071, T072, T073, T074, T075, T076, T077, T078, T079, T080, T086, T089, T097, T098
+
+Ablation configuration:
+NO_RECOVERY_BASELINE=1
+Maximum manager attempts: 1
+FailureRecovery events permitted: No

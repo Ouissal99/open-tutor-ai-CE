@@ -1,0 +1,42 @@
+POST-HOC PER-CATEGORY AND ERROR ANALYSIS
+==============================================================================
+
+Dataset structure
+- Test cases: 100
+- Official categories: 5
+  - conceptual_grounded: 20
+  - computation_verification: 20
+  - visual_step_by_step: 20
+  - code_related: 20
+  - recovery_personalization_trace: 20
+
+Best semantic system by category
+- conceptual_grounded: Basic Tool Use (95.00% accuracy, mean score 4.513)
+- computation_verification: Full Manager (85.00% accuracy, mean score 4.620)
+- visual_step_by_step: Manager Without Recovery (55.00% accuracy, mean score 3.657)
+- code_related: Direct LLM (80.00% accuracy, mean score 4.517)
+- recovery_personalization_trace: Full Manager (75.00% accuracy, mean score 4.140)
+
+Full Manager versus Manager Without Recovery by category
+- conceptual_grounded: +10.00 percentage points
+- computation_verification: +0.00 percentage points
+- visual_step_by_step: -5.00 percentage points
+- code_related: +45.00 percentage points
+- recovery_personalization_trace: +30.00 percentage points
+
+Judge stability
+- Three repeated GPT-4.1 judge runs were analyzed by category.
+- These repeated runs measure judge stability, not system execution variance.
+
+Category limitation
+- The dataset does not provide separate official categories for personalization and recovery.
+- Both are combined with trace cases in 'recovery_personalization_trace'.
+- Designated recovery cases are additionally isolated through the recovery_test field.
+
+Attempt-level metric detection
+- Tool Call Success Rate: included using column 'success'.
+- Validation Pass Rate: included using column 'passed'.
+
+Scientific scope
+- This post-hoc analysis validates a controlled backend prototype.
+- It does not measure real classroom learning gains, long-term retention, student engagement, or teacher outcomes.

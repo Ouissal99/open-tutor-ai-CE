@@ -1,0 +1,8 @@
+BASIC TOOL USE — FIRST PASS
+
+Total cases: 100
+Provider-valid answers: 14
+Infrastructure-invalid cases: 86
+
+The remaining cases failed because the external provider was unavailable.
+No successful answer is eligible for rerun.

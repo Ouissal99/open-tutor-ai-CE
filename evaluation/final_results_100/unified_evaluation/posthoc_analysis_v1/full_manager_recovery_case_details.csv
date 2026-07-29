@@ -1,0 +1,101 @@
+test_id,category,category_display,recovery_test,question,recovery_triggered,recovery_successful,final_validation_status,strict_trace_complete,final_plan_execution_success,expected_tool_fulfillment,round_count,attempted_call_count,majority_pass,mean_overall_score,primary_error_type,any_critical_error
+T001,conceptual_grounded,Conceptual / Grounded,No,Explain convolution in simple terms for a beginner.,No,No,valid,Yes,Yes,Yes,2,3,True,5.0,none,False
+T002,conceptual_grounded,Conceptual / Grounded,No,What is a convolution kernel in image processing?,No,No,valid,Yes,Yes,Yes,2,4,True,5.0,none,False
+T003,conceptual_grounded,Conceptual / Grounded,No,Explain the difference between a filter and a feature map.,No,No,valid,Yes,Yes,Yes,3,3,False,1.8666666666666667,incomplete_answer,True
+T004,conceptual_grounded,Conceptual / Grounded,No,Why is convolution useful in convolutional neural networks?,No,No,valid,Yes,Yes,Yes,2,3,True,4.333333333333333,none,False
+T005,conceptual_grounded,Conceptual / Grounded,No,Explain padding in convolution using simple language.,No,No,valid,Yes,Yes,Yes,2,3,False,2.533333333333333,incomplete_answer,True
+T006,conceptual_grounded,Conceptual / Grounded,No,Explain stride in convolution using simple language.,No,No,valid,Yes,Yes,Yes,2,3,False,2.333333333333333,incomplete_answer,True
+T007,conceptual_grounded,Conceptual / Grounded,No,Explain the difference between padding and stride.,No,No,valid,Yes,Yes,Yes,2,3,False,2.0,incomplete_answer,True
+T008,conceptual_grounded,Conceptual / Grounded,No,What does valid convolution mean?,No,No,valid,Yes,Yes,Yes,2,3,True,5.0,none,False
+T009,conceptual_grounded,Conceptual / Grounded,No,What does same convolution mean?,No,No,valid,Yes,Yes,Yes,1,2,True,3.8666666666666663,none,False
+T010,conceptual_grounded,Conceptual / Grounded,No,Explain why a convolution kernel slides over an input matrix.,No,No,valid,Yes,Yes,Yes,2,3,True,4.866666666666666,none,False
+T011,conceptual_grounded,Conceptual / Grounded,No,Explain matrix multiplication in simple terms.,Yes,No,invalid,Yes,No,Yes,3,8,True,4.866666666666666,none,False
+T012,conceptual_grounded,Conceptual / Grounded,No,What is a row-by-column dot product?,No,No,valid,Yes,Yes,No,2,2,True,3.6,incomplete_answer,True
+T013,conceptual_grounded,Conceptual / Grounded,No,Explain the difference between matrix multiplication and convolution.,No,No,valid,Yes,Yes,Yes,3,6,True,4.666666666666667,none,False
+T014,conceptual_grounded,Conceptual / Grounded,No,Why is matrix multiplication not the same as sliding a kernel?,Yes,No,invalid,Yes,No,No,2,8,False,1.0,non_answer,True
+T015,conceptual_grounded,Conceptual / Grounded,No,Explain why matrix dimensions matter in matrix multiplication.,No,No,valid,Yes,Yes,Yes,2,4,True,4.2,incomplete_answer,True
+T016,conceptual_grounded,Conceptual / Grounded,No,What is the role of grounding in an AI tutoring answer?,Yes,No,valid,Yes,No,Yes,2,4,False,1.3333333333333333,non_answer,True
+T017,conceptual_grounded,Conceptual / Grounded,No,Explain why tool use can improve tutoring explanations.,No,No,valid,Yes,Yes,Yes,1,1,False,2.0,mixed:incomplete_answer|irrelevant_answer|non_answer,True
+T018,conceptual_grounded,Conceptual / Grounded,No,Explain what a visual matrix example helps a learner understand.,Yes,No,invalid,Yes,No,No,2,6,False,3.2666666666666666,mixed:calculation_error|factual_error,True
+T019,conceptual_grounded,Conceptual / Grounded,No,Explain why validation is important after using a tool.,Yes,No,valid,Yes,No,Yes,2,4,False,1.3333333333333333,irrelevant_answer,True
+T020,conceptual_grounded,Conceptual / Grounded,No,Explain why recovery is useful when a tool output is incomplete.,No,No,valid,Yes,Yes,Yes,1,1,True,4.666666666666667,none,False
+T021,computation_verification,Computation / Verification,No,What is 12 times 8?,No,No,valid,Yes,Yes,Yes,1,1,True,5.0,none,False
+T022,computation_verification,Computation / Verification,No,Calculate 45 plus 37.,No,No,valid,Yes,Yes,Yes,1,1,True,5.0,none,False
+T023,computation_verification,Computation / Verification,No,Calculate 144 divided by 12.,No,No,valid,Yes,Yes,Yes,1,1,True,5.0,none,False
+T024,computation_verification,Computation / Verification,No,Calculate 7 squared plus 3 squared.,No,No,valid,Yes,Yes,Yes,1,1,True,5.0,none,False
+T025,computation_verification,Computation / Verification,No,"Compute the output size of a valid convolution with input 5x5, kernel 3x3, stride 1, padding 0.",No,No,valid,Yes,Yes,Yes,4,5,True,5.0,none,False
+T026,computation_verification,Computation / Verification,No,"Compute the output size of a convolution with input 7x7, kernel 3x3, stride 2, padding 1.",No,No,valid,Yes,Yes,Yes,4,4,True,5.0,none,False
+T027,computation_verification,Computation / Verification,No,"Compute the output size of a convolution with input 10x10, kernel 5x5, stride 1, padding 0.",No,No,valid,Yes,Yes,Yes,4,5,True,5.0,none,False
+T028,computation_verification,Computation / Verification,No,"Compute the output size of a convolution with input 8x8, kernel 3x3, stride 1, padding 1.",No,No,valid,Yes,Yes,Yes,3,3,True,5.0,none,False
+T029,computation_verification,Computation / Verification,No,Can a 2x3 matrix be multiplied by a 3x2 matrix?,No,No,valid,Yes,Yes,Yes,2,4,False,2.1333333333333333,incomplete_answer,True
+T030,computation_verification,Computation / Verification,No,Can a 3x2 matrix be multiplied by a 3x3 matrix?,Yes,No,invalid,Yes,No,Yes,2,5,False,2.9333333333333336,factual_error,True
+T031,computation_verification,Computation / Verification,No,"Multiply the matrices [[1,2],[3,4]] and [[5,6],[7,8]].",Yes,No,valid,Yes,No,Yes,2,4,True,5.0,none,False
+T032,computation_verification,Computation / Verification,No,"Compute the first entry of the product [[1,2],[3,4]] times [[5,6],[7,8]].",No,No,valid,Yes,Yes,Yes,3,5,True,5.0,none,False
+T033,computation_verification,Computation / Verification,No,"Verify whether [[1,0],[0,1]] acts as an identity matrix when multiplied by [[3,4],[5,6]].",Yes,No,valid,Yes,No,Yes,3,6,True,5.0,none,False
+T034,computation_verification,Computation / Verification,No,"Compute one valid convolution step using input [[1,2,3],[4,5,6],[7,8,9]] and kernel [[1,0],[0,1]].",No,No,valid,Yes,Yes,Yes,4,5,True,5.0,none,False
+T035,computation_verification,Computation / Verification,No,"Compute the top-left convolution value for input [[1,2,3],[4,5,6],[7,8,9]] with kernel [[1,0],[0,-1]].",No,No,valid,Yes,Yes,Yes,5,6,True,5.0,none,False
+T036,computation_verification,Computation / Verification,No,Check whether a 2x2 kernel can slide over a 3x3 matrix in valid convolution.,No,No,valid,Yes,Yes,Yes,3,5,True,4.866666666666666,none,False
+T037,computation_verification,Computation / Verification,No,Compute how many valid 2x2 convolution windows exist in a 3x3 matrix.,No,No,valid,Yes,Yes,No,3,5,False,2.466666666666667,incomplete_answer,True
+T038,computation_verification,Computation / Verification,No,Compute how many valid 3x3 convolution windows exist in a 5x5 matrix.,No,No,valid,Yes,Yes,No,3,4,True,5.0,none,False
+T039,computation_verification,Computation / Verification,No,"Verify the result of multiplying row [1,2] by column [5,7].",No,No,valid,Yes,Yes,Yes,3,3,True,5.0,none,False
+T040,computation_verification,Computation / Verification,No,"Verify the result of multiplying row [3,4] by column [6,8].",No,No,valid,Yes,Yes,Yes,3,3,True,5.0,none,False
+T041,visual_step_by_step,Visual Step-by-Step,No,Visualize matrix multiplication with a small 2x2 example.,No,No,valid,Yes,Yes,Yes,2,6,True,5.0,none,False
+T042,visual_step_by_step,Visual Step-by-Step,No,Show matrix multiplication step by step using row-by-column dot products.,No,No,valid,Yes,Yes,No,3,4,False,1.6666666666666667,incomplete_answer,True
+T043,visual_step_by_step,Visual Step-by-Step,No,Show how the first entry of a matrix product is computed visually.,Yes,No,invalid,Yes,No,No,2,7,False,2.1333333333333333,factual_error,True
+T044,visual_step_by_step,Visual Step-by-Step,No,Visualize why matrix multiplication uses rows from the first matrix and columns from the second matrix.,No,No,valid,Yes,Yes,Yes,2,6,True,5.0,none,False
+T045,visual_step_by_step,Visual Step-by-Step,No,Visualize convolution using a 3x3 input and a 2x2 kernel.,No,No,valid,Yes,Yes,Yes,2,6,True,5.0,none,False
+T046,visual_step_by_step,Visual Step-by-Step,No,Show visually how a convolution kernel moves over a matrix.,No,No,valid,Yes,Yes,Yes,2,6,True,4.666666666666667,none,False
+T047,visual_step_by_step,Visual Step-by-Step,No,Illustrate stride 1 in a convolution operation.,No,No,valid,Yes,Yes,Yes,2,6,True,4.733333333333333,none,False
+T048,visual_step_by_step,Visual Step-by-Step,No,Illustrate stride 2 in a convolution operation.,No,No,valid,Yes,Yes,Yes,2,6,False,2.2,incomplete_answer,True
+T049,visual_step_by_step,Visual Step-by-Step,No,Show the difference between padding and no padding visually.,No,No,valid,Yes,Yes,No,2,4,False,2.066666666666667,incomplete_answer,True
+T050,visual_step_by_step,Visual Step-by-Step,No,Show how a filter detects a vertical edge in a simple image matrix.,Yes,No,invalid,Yes,No,No,2,4,False,2.933333333333333,incomplete_answer,True
+T051,visual_step_by_step,Visual Step-by-Step,No,Explain matrix multiplication visually without using convolution.,Yes,No,invalid,Yes,No,No,2,8,False,1.3333333333333333,non_answer,True
+T052,visual_step_by_step,Visual Step-by-Step,No,Explain convolution visually without calling it matrix multiplication.,Yes,No,invalid,Yes,No,No,2,8,False,1.0,non_answer,True
+T053,visual_step_by_step,Visual Step-by-Step,No,Show why kernel sliding is different from row-by-column multiplication.,Yes,No,invalid,Yes,No,No,3,11,False,1.0,non_answer,True
+T054,visual_step_by_step,Visual Step-by-Step,No,Visualize a dot product as part of matrix multiplication.,Yes,Yes,valid,Yes,Yes,Yes,2,8,True,5.0,none,False
+T055,visual_step_by_step,Visual Step-by-Step,No,Visualize one convolution output cell from a 2x2 kernel.,No,No,valid,Yes,Yes,Yes,3,9,True,4.866666666666666,none,False
+T056,visual_step_by_step,Visual Step-by-Step,No,Show a step-by-step visual explanation of valid convolution.,No,No,valid,Yes,Yes,Yes,2,6,True,4.866666666666666,none,False
+T057,visual_step_by_step,Visual Step-by-Step,No,Show a step-by-step visual explanation of matrix multiplication dimensions.,No,No,valid,Yes,Yes,Yes,2,6,True,5.0,none,False
+T058,visual_step_by_step,Visual Step-by-Step,No,Use a visual example to explain why a 2x3 matrix can multiply a 3x2 matrix.,Yes,No,valid,Yes,No,No,2,5,False,2.0,incomplete_answer,True
+T059,visual_step_by_step,Visual Step-by-Step,No,Use a visual example to explain why a 3x2 matrix cannot multiply a 3x3 matrix.,Yes,No,invalid,Yes,No,No,3,7,False,2.333333333333333,incomplete_answer,True
+T060,visual_step_by_step,Visual Step-by-Step,No,Compare convolution and matrix multiplication using a visual explanation.,No,No,valid,Yes,Yes,Yes,2,6,True,5.0,none,False
+T061,code_related,Code-Related,No,Write Python code to multiply two 2x2 matrices without NumPy.,No,No,valid,Yes,Yes,Yes,3,6,True,4.666666666666667,none,False
+T062,code_related,Code-Related,No,Write Python code to multiply two matrices using nested loops.,Yes,No,valid,Yes,No,No,3,10,True,5.0,none,False
+T063,code_related,Code-Related,No,Write Python code to check whether two matrices can be multiplied.,No,No,valid,Yes,Yes,Yes,3,6,True,5.0,none,False
+T064,code_related,Code-Related,No,Write Python code for a simple 2D valid convolution.,No,No,valid,Yes,Yes,Yes,3,5,False,2.066666666666667,incomplete_answer,True
+T065,code_related,Code-Related,No,Write Python code to compute convolution output size.,No,No,valid,Yes,Yes,Yes,4,9,False,3.333333333333333,none,False
+T066,code_related,Code-Related,No,Write a small NumPy example explaining matrix multiplication.,No,No,valid,Yes,Yes,Yes,3,6,True,5.0,none,False
+T067,code_related,Code-Related,No,Write a small NumPy example explaining 2D convolution.,No,No,valid,Yes,Yes,Yes,3,6,True,5.0,none,False
+T068,code_related,Code-Related,No,Debug this explanation in code: the kernel is added to the matrix instead of multiplied element-wise.,No,No,valid,Yes,Yes,Yes,2,4,True,3.733333333333333,contradictory_answer,True
+T069,code_related,Code-Related,No,Debug this matrix multiplication code idea: it multiplies matching positions instead of row-by-column dot products.,Yes,No,valid,Yes,No,Yes,4,11,False,2.8,incomplete_answer,True
+T070,code_related,Code-Related,No,Write Python code that prints each step of a 2x2 matrix multiplication.,No,No,valid,Yes,Yes,Yes,3,6,False,2.2,calculation_error,True
+T071,code_related,Code-Related,No,Write Python code that prints each valid convolution window in a 3x3 matrix.,No,No,valid,Yes,Yes,Yes,2,4,False,2.0,calculation_error,True
+T072,code_related,Code-Related,No,Explain this Python mistake: using A + B instead of A @ B for matrix multiplication.,No,No,valid,Yes,Yes,Yes,3,9,False,2.333333333333333,incomplete_answer,True
+T073,code_related,Code-Related,No,Explain this Python mistake: using matrix multiplication when the question asks for convolution.,Yes,No,invalid,Yes,No,No,3,23,False,1.2,non_answer,True
+T074,code_related,Code-Related,No,"Write Python code to compute the dot product of [1,2] and [5,7].",No,No,valid,Yes,Yes,No,3,8,True,5.0,none,False
+T075,code_related,Code-Related,No,Write Python code to apply a 2x2 kernel to the top-left window of a 3x3 matrix.,No,No,valid,Yes,Yes,Yes,3,5,False,1.9333333333333331,calculation_error,True
+T076,code_related,Code-Related,No,Write Python code to compare valid convolution output sizes for stride 1 and stride 2.,No,No,valid,Yes,Yes,Yes,4,9,False,2.466666666666667,calculation_error,True
+T077,code_related,Code-Related,No,Write Python code that explains matrix dimensions before multiplying matrices.,Yes,No,invalid,Yes,No,Yes,2,8,True,4.8,none,False
+T078,code_related,Code-Related,No,"Write Python code that validates input size, kernel size, stride, and padding for convolution.",Yes,Yes,valid,Yes,Yes,No,4,11,True,5.0,none,False
+T079,code_related,Code-Related,No,Write Python code to generate a simple text-based visualization of kernel sliding.,No,No,valid,Yes,Yes,Yes,4,12,True,4.133333333333334,none,False
+T080,code_related,Code-Related,No,Write Python code to generate a simple text-based visualization of matrix multiplication steps.,No,No,valid,Yes,Yes,Yes,2,7,False,2.2,irrelevant_answer,True
+T081,recovery_personalization_trace,Recovery / Personalization / Trace,No,"Explain convolution again, but make it easier than before.",No,No,valid,Yes,Yes,Yes,2,5,True,4.8,none,False
+T082,recovery_personalization_trace,Recovery / Personalization / Trace,No,Review my previous mistake about convolution output size and explain it again.,No,No,valid,Yes,Yes,Yes,3,8,True,4.866666666666666,none,False
+T083,recovery_personalization_trace,Recovery / Personalization / Trace,No,I still confuse filters and matrices. Explain the difference again.,No,No,valid,Yes,Yes,Yes,2,5,True,5.0,none,False
+T084,recovery_personalization_trace,Recovery / Personalization / Trace,No,I already understand kernels. Explain stride without repeating the kernel definition too much.,No,No,valid,Yes,Yes,No,2,3,False,1.6666666666666667,incomplete_answer,True
+T085,recovery_personalization_trace,Recovery / Personalization / Trace,No,I struggle with matrix dimensions. Explain matrix multiplication using a simpler example.,No,No,valid,Yes,Yes,No,2,4,True,5.0,none,False
+T086,recovery_personalization_trace,Recovery / Personalization / Trace,No,I confused matrix multiplication with convolution before. Correct that misunderstanding.,Yes,No,invalid,Yes,No,No,2,14,False,2.333333333333333,incomplete_answer,True
+T087,recovery_personalization_trace,Recovery / Personalization / Trace,No,Give me a simpler explanation than the previous one about padding.,No,No,valid,Yes,Yes,Yes,2,6,True,4.066666666666666,none,False
+T088,recovery_personalization_trace,Recovery / Personalization / Trace,No,Explain convolution without code because I found the code confusing.,No,No,valid,Yes,Yes,Yes,2,5,True,4.933333333333334,none,False
+T089,recovery_personalization_trace,Recovery / Personalization / Trace,No,Explain matrix multiplication again but avoid convolution examples.,Yes,No,invalid,Yes,No,No,2,14,False,1.3333333333333333,non_answer,True
+T090,recovery_personalization_trace,Recovery / Personalization / Trace,No,Use my previous learning trace to adapt an explanation about convolution output size.,No,No,valid,Yes,Yes,Yes,3,8,True,4.866666666666666,none,False
+T091,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain convolution, but force the first attempt without RAG grounding.",Yes,Yes,valid,Yes,Yes,Yes,3,6,True,5.0,none,False
+T092,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain padding and stride, but force the first attempt without grounding.",Yes,Yes,valid,Yes,Yes,Yes,3,4,True,4.866666666666666,none,False
+T093,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain visually how a kernel moves, but force the first attempt without grounding.",Yes,Yes,valid,Yes,Yes,No,3,6,True,5.0,none,False
+T094,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain convolution output size, but force the first attempt without grounding.",Yes,Yes,valid,Yes,Yes,No,2,3,True,5.0,none,False
+T095,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain, compute, and visualize convolution, but force the first attempt without grounding.",Yes,Yes,valid,Yes,Yes,Yes,3,10,True,4.066666666666666,none,False
+T096,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",Yes,Yes,valid,Yes,Yes,Yes,2,4,True,4.6,none,False
+T097,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Visualize matrix multiplication, but force the first attempt to miss the visual support.",Yes,Yes,invalid,Yes,No,Yes,2,13,True,5.0,none,False
+T098,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Write Python code for convolution, but force the first attempt to miss validation.",Yes,Yes,valid,Yes,Yes,Yes,3,6,False,2.7333333333333334,calculation_error,True
+T099,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,"Explain the difference between convolution and matrix multiplication, but force a topic-mismatch recovery.",Yes,Yes,valid,Yes,Yes,No,3,6,True,4.666666666666667,none,False
+T100,recovery_personalization_trace,Recovery / Personalization / Trace,Yes,Give a personalized explanation of convolution after a failed first attempt.,Yes,Yes,valid,Yes,Yes,Yes,3,8,False,3.0,incomplete_answer,False

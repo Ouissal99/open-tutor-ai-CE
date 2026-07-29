@@ -1,0 +1,64 @@
+UNIFIED EVALUATION AUDIT
+========================================================================
+
+Dataset cases: 100
+Per-case rows: 400
+Expected per-case rows: 400
+Anonymized judge candidates: 400
+
+DIRECT LLM
+------------------------------------------------------------------------
+Cases: 100
+Tool calls: 0
+Tool Call Success Rate: N/A or pending
+Tool Selection Accuracy: N/A or pending
+Execution Success Rate: N/A or pending
+Validation Pass Rate: N/A or pending
+Recovery Success Rate: N/A or pending
+Trace Completeness: N/A or pending
+Operational Answer Completion Rate: 100.0%
+
+BASIC TOOL USE
+------------------------------------------------------------------------
+Cases: 100
+Tool calls: 212
+Tool Call Success Rate: 63.21%
+Tool Selection Accuracy: 37.0%
+Execution Success Rate: 31.0%
+Validation Pass Rate: N/A or pending
+Recovery Success Rate: N/A or pending
+Trace Completeness: N/A or pending
+Operational Answer Completion Rate: 100.0%
+
+MANAGER WITHOUT RECOVERY
+------------------------------------------------------------------------
+Cases: 100
+Tool calls: 458
+Missing trace cases: none
+Tool Call Success Rate: 84.72%
+Tool Selection Accuracy: 20.0%
+Execution Success Rate: 54.0%
+Validation Pass Rate: 67.89%
+Recovery Success Rate: N/A or pending
+Trace Completeness: 100.0%
+Operational Answer Completion Rate: 100.0%
+
+FULL MANAGER
+------------------------------------------------------------------------
+Cases: 100
+Tool calls: 582
+Missing trace cases: none
+Tool Call Success Rate: 81.62%
+Tool Selection Accuracy: 22.0%
+Execution Success Rate: 76.0%
+Validation Pass Rate: 65.85%
+Recovery Success Rate: 36.36%
+Trace Completeness: 100.0%
+Operational Answer Completion Rate: 100.0%
+
+IMPORTANT INTERPRETATION
+------------------------------------------------------------------------
+Operational completion is not semantic tutoring correctness.
+End-to-End Success Rate and Tutoring Answer Accuracy remain pending until the three judge runs are completed.
+For manager systems, individual tool calls are extracted from tool_results_history when available, so recovery attempts are not omitted.
+Manager metrics use individual round traces and do not double count the duplicated case-level main trace.

@@ -1,0 +1,9 @@
+slice_type,slice_value,case_count,recovery_triggered_count,recovery_trigger_rate_pct,recovery_success_count,recovery_success_among_triggered_pct,final_plan_execution_success_pct,expected_tool_fulfillment_pct,tutoring_accuracy_pct,mean_overall_score
+overall,All Full Manager cases,100,33,33.0,12,36.36363636363637,78.0,75.0,63.0,3.806
+recovery_test,No,90,23,25.555555555555557,2,8.695652173913043,76.66666666666667,75.55555555555556,61.111111111111114,3.740740740740741
+recovery_test,Yes,10,10,100.0,10,100.0,90.0,70.0,80.0,4.393333333333333
+category,conceptual_grounded,20,5,25.0,0,0.0,75.0,85.0,55.00000000000001,3.3866666666666667
+category,computation_verification,20,3,15.0,0,0.0,85.0,90.0,85.0,4.62
+category,visual_step_by_step,20,8,40.0,1,12.5,65.0,55.00000000000001,50.0,3.3899999999999997
+category,code_related,20,5,25.0,1,20.0,80.0,80.0,50.0,3.4933333333333336
+category,recovery_personalization_trace,20,12,60.0,10,83.33333333333333,85.0,65.0,75.0,4.140000000000001

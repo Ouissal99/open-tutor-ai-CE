@@ -1,0 +1,75 @@
+system_name,category,category_display,primary_error_type,candidate_count
+Basic Tool Use,code_related,Code-Related,calculation_error,2
+Basic Tool Use,code_related,Code-Related,contradictory_answer,1
+Basic Tool Use,code_related,Code-Related,factual_error,5
+Basic Tool Use,code_related,Code-Related,incomplete_answer,1
+Basic Tool Use,code_related,Code-Related,mixed:calculation_error|contradictory_answer,1
+Basic Tool Use,code_related,Code-Related,mixed:calculation_error|contradictory_answer|factual_error,1
+Basic Tool Use,code_related,Code-Related,non_answer,1
+Basic Tool Use,computation_verification,Computation / Verification,calculation_error,2
+Basic Tool Use,computation_verification,Computation / Verification,contradictory_answer,1
+Basic Tool Use,computation_verification,Computation / Verification,factual_error,1
+Basic Tool Use,computation_verification,Computation / Verification,mixed:contradictory_answer|incomplete_answer|non_answer,1
+Basic Tool Use,computation_verification,Computation / Verification,non_answer,5
+Basic Tool Use,conceptual_grounded,Conceptual / Grounded,calculation_error,1
+Basic Tool Use,conceptual_grounded,Conceptual / Grounded,incomplete_answer,1
+Basic Tool Use,conceptual_grounded,Conceptual / Grounded,mixed:calculation_error|factual_error,1
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,calculation_error,2
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,contradictory_answer,2
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,factual_error,3
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,incomplete_answer,3
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,mixed:calculation_error|contradictory_answer|factual_error,1
+Basic Tool Use,recovery_personalization_trace,Recovery / Personalization / Trace,mixed:incomplete_answer|non_answer,1
+Basic Tool Use,visual_step_by_step,Visual Step-by-Step,calculation_error,3
+Basic Tool Use,visual_step_by_step,Visual Step-by-Step,contradictory_answer,1
+Basic Tool Use,visual_step_by_step,Visual Step-by-Step,factual_error,6
+Direct LLM,code_related,Code-Related,calculation_error,2
+Direct LLM,code_related,Code-Related,factual_error,1
+Direct LLM,code_related,Code-Related,mixed:calculation_error|factual_error,1
+Direct LLM,computation_verification,Computation / Verification,calculation_error,4
+Direct LLM,conceptual_grounded,Conceptual / Grounded,factual_error,3
+Direct LLM,conceptual_grounded,Conceptual / Grounded,mixed:factual_error|incomplete_answer|irrelevant_answer,1
+Direct LLM,recovery_personalization_trace,Recovery / Personalization / Trace,calculation_error,3
+Direct LLM,recovery_personalization_trace,Recovery / Personalization / Trace,factual_error,2
+Direct LLM,recovery_personalization_trace,Recovery / Personalization / Trace,incomplete_answer,1
+Direct LLM,recovery_personalization_trace,Recovery / Personalization / Trace,irrelevant_answer,1
+Direct LLM,recovery_personalization_trace,Recovery / Personalization / Trace,mixed:calculation_error|factual_error,1
+Direct LLM,visual_step_by_step,Visual Step-by-Step,calculation_error,6
+Direct LLM,visual_step_by_step,Visual Step-by-Step,factual_error,2
+Direct LLM,visual_step_by_step,Visual Step-by-Step,irrelevant_answer,1
+Direct LLM,visual_step_by_step,Visual Step-by-Step,mixed:calculation_error|factual_error,1
+Full Manager,code_related,Code-Related,calculation_error,4
+Full Manager,code_related,Code-Related,contradictory_answer,1
+Full Manager,code_related,Code-Related,incomplete_answer,3
+Full Manager,code_related,Code-Related,irrelevant_answer,1
+Full Manager,code_related,Code-Related,non_answer,1
+Full Manager,computation_verification,Computation / Verification,factual_error,1
+Full Manager,computation_verification,Computation / Verification,incomplete_answer,2
+Full Manager,conceptual_grounded,Conceptual / Grounded,incomplete_answer,6
+Full Manager,conceptual_grounded,Conceptual / Grounded,irrelevant_answer,1
+Full Manager,conceptual_grounded,Conceptual / Grounded,mixed:calculation_error|factual_error,1
+Full Manager,conceptual_grounded,Conceptual / Grounded,mixed:incomplete_answer|irrelevant_answer|non_answer,1
+Full Manager,conceptual_grounded,Conceptual / Grounded,non_answer,2
+Full Manager,recovery_personalization_trace,Recovery / Personalization / Trace,calculation_error,1
+Full Manager,recovery_personalization_trace,Recovery / Personalization / Trace,incomplete_answer,3
+Full Manager,recovery_personalization_trace,Recovery / Personalization / Trace,non_answer,1
+Full Manager,visual_step_by_step,Visual Step-by-Step,factual_error,1
+Full Manager,visual_step_by_step,Visual Step-by-Step,incomplete_answer,6
+Full Manager,visual_step_by_step,Visual Step-by-Step,non_answer,3
+Manager Without Recovery,code_related,Code-Related,incomplete_answer,10
+Manager Without Recovery,code_related,Code-Related,mixed:incomplete_answer|non_answer,2
+Manager Without Recovery,code_related,Code-Related,non_answer,6
+Manager Without Recovery,computation_verification,Computation / Verification,incomplete_answer,2
+Manager Without Recovery,computation_verification,Computation / Verification,mixed:contradictory_answer|factual_error|incomplete_answer,1
+Manager Without Recovery,conceptual_grounded,Conceptual / Grounded,incomplete_answer,6
+Manager Without Recovery,conceptual_grounded,Conceptual / Grounded,irrelevant_answer,1
+Manager Without Recovery,conceptual_grounded,Conceptual / Grounded,mixed:incomplete_answer|irrelevant_answer|non_answer,1
+Manager Without Recovery,conceptual_grounded,Conceptual / Grounded,non_answer,2
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,contradictory_answer,2
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,incomplete_answer,6
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,mixed:incomplete_answer|irrelevant_answer|non_answer,1
+Manager Without Recovery,recovery_personalization_trace,Recovery / Personalization / Trace,non_answer,1
+Manager Without Recovery,visual_step_by_step,Visual Step-by-Step,incomplete_answer,6
+Manager Without Recovery,visual_step_by_step,Visual Step-by-Step,irrelevant_answer,1
+Manager Without Recovery,visual_step_by_step,Visual Step-by-Step,mixed:factual_error|incomplete_answer,1
+Manager Without Recovery,visual_step_by_step,Visual Step-by-Step,non_answer,1

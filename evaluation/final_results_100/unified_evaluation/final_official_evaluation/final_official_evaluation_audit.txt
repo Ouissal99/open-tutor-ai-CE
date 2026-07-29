@@ -1,0 +1,87 @@
+FINAL OFFICIAL EVALUATION AUDIT
+========================================================================
+
+Evaluation scope
+- Test cases: 100
+- Evaluated systems: 4
+- System-answer candidates: 400
+- GPT-4.1 judge runs: 3 complete runs
+- Total semantic judgments: 1,200
+- Final semantic decision: majority vote, at least 2 of 3
+- Rubric scores: averaged across all three runs
+- Evaluation was anonymized until all judge runs were complete and locked
+- Human-validation sample: optional and explicitly excluded from official results
+
+Judge integrity
+- Run 1: 400 unique candidates, checksum verified
+- Run 2: 400 unique candidates, checksum verified
+- Run 3: 400 unique candidates, checksum verified
+- Duplicate candidate judgments: 0
+- Overall Fleiss' kappa: 0.826145
+- Unanimous judge decisions: 350/400 (87.50%)
+
+Authentication note
+- The GitHub Models authentication token was rotated during Run 3.
+- The endpoint, model, prompt, rubric, temperature, candidate data,
+  output schema, and run number remained unchanged.
+- The token change affected authentication/quota access only.
+
+Final semantic performance
+- Direct LLM: 73.00%
+- Basic Tool Use: 57.00%
+- Manager Without Recovery: 47.00%
+- Full Manager: 63.00%
+
+Primary recovery ablation
+- Execution Success Rate:
+  Manager Without Recovery = 60.00%
+  Full Manager = 78.00%
+  Improvement = +18 percentage points
+
+- Tutoring Answer Accuracy:
+  Manager Without Recovery = 47.00%
+  Full Manager = 63.00%
+  Improvement = +16 percentage points
+
+- Mean semantic score:
+  Manager Without Recovery = 3.413333
+  Full Manager = 3.806000
+  Improvement = +0.392667
+
+- Exact McNemar p-value:
+  0.000145
+
+- Holm-adjusted p-value:
+  0.000435
+
+- Result:
+  Statistically significant at alpha = 0.05
+
+Other semantic comparisons
+- Full Manager vs Direct LLM:
+  Accuracy difference = -10.00 percentage points
+  Holm-adjusted p = 0.367850
+  Pass-rate difference is not statistically significant.
+
+- Full Manager vs Basic Tool Use:
+  Accuracy difference = 6.00 percentage points
+  Holm-adjusted p = 0.440799
+  Difference is not statistically significant.
+
+Main conclusion
+- Validation-guided recovery significantly improves the centralized
+  manager compared with the same manager without recovery.
+- The Full Manager also achieves the strongest final-plan execution
+  success among the tool-using systems.
+- Direct LLM obtains the highest semantic answer accuracy in this
+  evaluation, so the Full Manager is not universally superior.
+- The contribution is supported primarily by improved execution
+  reliability, traceability, and recovery effectiveness.
+
+Official artifacts
+- final_eight_metrics.csv
+- final_eight_metrics_long.csv
+- judge_system_summary.csv
+- statistical_tests.csv
+- judge_inter_run_agreement.csv
+- final_judge_aggregation_audit.txt

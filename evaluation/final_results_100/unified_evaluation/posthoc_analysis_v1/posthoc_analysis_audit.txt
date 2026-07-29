@@ -1,0 +1,41 @@
+POST-HOC ANALYSIS AUDIT
+==============================================================================
+
+- Official locked evaluation package modified: No
+- New experiment executed: No
+- System answers regenerated: No
+- Judge calls repeated: No
+- Existing three-run judge results reused: Yes
+- Analysis type: exploratory post-hoc category and error analysis
+- Test cases: 100
+- Systems: 4
+- Semantic candidates: 400
+- Judge decisions analyzed: 1,200
+- Official categories: 5
+- Cases per category: 20
+- Confidence intervals for proportions: Wilson 95%
+- Confidence intervals for mean score: deterministic bootstrap 95%
+- Bootstrap samples per group: 10,000
+- Tool selection/execution source: corrected per-case metrics
+- Case-level validation diagnostic is not the same as the official attempt-level Validation Pass Rate.
+- Personalization cannot be isolated as a standalone official category from the current dataset schema.
+- Recovery-specific analysis uses recovery_test and actual Full Manager recovery evidence.
+- No per-category significance claims should be made without additional correction for multiple exploratory comparisons.
+
+Generated outputs:
+- candidate_error_type_by_system_category.csv
+- full_manager_recovery_case_details.csv
+- full_manager_recovery_slice_summary.csv
+- judge_error_occurrences_by_system_category.csv
+- judge_stability_by_category.csv
+- per_category_attempt_level_metrics.csv
+- per_category_corrected_tool_metrics.csv
+- per_category_manager_diagnostics.csv
+- per_category_semantic_comparison_wide.csv
+- per_category_semantic_metrics.csv
+- posthoc_analysis_summary.txt
+- recovery_personalization_trace_error_cases.csv
+- semantic_weak_and_error_cases.csv
+- source_manifest.sha256
+- tool_selection_error_cases.csv
+- tool_selection_error_summary.csv

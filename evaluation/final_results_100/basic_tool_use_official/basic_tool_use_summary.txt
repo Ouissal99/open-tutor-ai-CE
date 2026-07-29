@@ -1,0 +1,21 @@
+BASIC TOOL USE OFFICIAL EVALUATION
+
+Total cases: 100
+Provider-valid answers: 100
+Remaining errors: 0
+Missing answers: 0
+Duplicate IDs: 0
+
+Tool execution success: 34/100
+Tool selection precision: 71.00%
+Tool selection recall: 79.17%
+Tool selection F1: 72.40%
+
+Validation used: No
+Recovery used: No
+Trace lifecycle used: No
+Memory update used: No
+Average attempts: 1.00
+
+Infrastructure-unavailable rows were retried without rerunning
+previously successful answers.

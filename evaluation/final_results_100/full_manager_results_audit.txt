@@ -1,0 +1,16 @@
+FULL MANAGER RESULTS TABLE AUDIT
+======================================================================
+Rows extracted: 100
+JSON errors: 0
+
+Provider status: {'available': 100}
+Workflow status: {'validated': 89, 'fallback': 11}
+Final package roles: {'pedagogical_support': 55, 'primary_execution': 45}
+Primary request satisfied: {'False': 58, 'True': 42}
+
+Cases with actual recovery evidence: 33
+Cases with at least one recovered round: 12
+Estimated total validation failures: 112
+
+Fallback IDs: T014, T018, T043, T051, T052, T053, T062, T073, T077, T086, T089
+Final package explicitly marked primary_request_satisfied=False: T001, T002, T003, T004, T005, T006, T007, T008, T009, T010, T011, T013, T014, T015, T016, T017, T018, T019, T020, T029, T030, T036, T037, T041, T043, T044, T045, T046, T047, T048, T049, T050, T051, T052, T053, T055, T056, T057, T058, T059, T060, T062, T073, T077, T081, T083, T084, T085, T086, T087, T089, T091, T093, T095, T096, T097, T099, T100

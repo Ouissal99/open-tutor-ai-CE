@@ -1,0 +1,8 @@
+POST-HOC ANALYSIS SOURCE MANIFEST
+==============================================================================
+1fc7f83117e80db54773ba1d04cae63548bccefaefd5f6d37015b1eb6f57138e  evaluation/test_cases/test_cases_100_article.csv
+3578cae28e31994bfa07cfb542046e666fffb242fa34b8db1a37bc82403fc439  evaluation/final_results_100/unified_evaluation/core_metric_case_details_corrected.csv
+6c2cc714d0f2c96abd434af2298570daec544bb189b357b32e3926aeb12f0a99  evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_candidate_aggregate_unblinded.csv
+5005e8726e81a3f4cf5ac68f2d659f0a2ed281fd3648c170f80fd9b443ea5cf1  evaluation/final_results_100/unified_evaluation/per_case_system_metrics.csv
+9a16bc75938bc284f5b2927b5d9cd8472b9871384ca96f089866e9249fc8c497  evaluation/final_results_100/unified_evaluation/tool_call_details.csv
+44ae575e039fe0baab28ee5589dbbf5505bb92abc78066096b864bc6e0352f4d  evaluation/final_results_100/unified_evaluation/validation_details.csv

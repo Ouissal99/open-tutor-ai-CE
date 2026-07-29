@@ -1,0 +1,32 @@
+CORRECTED CORE METRIC AUDIT
+========================================================================
+
+BASIC TOOL USE
+------------------------------------------------------------------------
+Tool Selection Accuracy: 37/100 (37.0%)
+Execution Success Rate: 34/100 (34.0%)
+Final Tool Selection Accuracy: 37/100 (37.0%)
+Expected-Tool Fulfillment Rate: 31/100 (31.0%)
+All Attempted Calls Successful Case Rate: 34/100 (34.0%)
+
+MANAGER WITHOUT RECOVERY
+------------------------------------------------------------------------
+Tool Selection Accuracy: 20/100 (20.0%)
+Execution Success Rate: 60/100 (60.0%)
+Final Tool Selection Accuracy: 20/100 (20.0%)
+Expected-Tool Fulfillment Rate: 54/100 (54.0%)
+All Attempted Calls Successful Case Rate: 60/100 (60.0%)
+
+FULL MANAGER
+------------------------------------------------------------------------
+Tool Selection Accuracy: 22/100 (22.0%)
+Execution Success Rate: 78/100 (78.0%)
+Final Tool Selection Accuracy: 27/100 (27.0%)
+Expected-Tool Fulfillment Rate: 75/100 (75.0%)
+All Attempted Calls Successful Case Rate: 77/100 (77.0%)
+
+DEFINITION NOTES
+------------------------------------------------------------------------
+Tool Selection Accuracy uses only the initial selected tools, so recovery alternatives do not contaminate selection quality.
+Execution Success Rate uses the final attempt of every tutoring round. Earlier failed attempts are retained in Tool Call Success Rate and recovery diagnostics.
+Expected-Tool Fulfillment is reported only as a supplementary diagnostic and is not the official Execution Success Rate.

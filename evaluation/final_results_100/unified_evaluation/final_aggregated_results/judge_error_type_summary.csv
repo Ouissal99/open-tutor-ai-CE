@@ -1,0 +1,25 @@
+system_name,error_type,judge_run_occurrences
+Basic Tool Use,none,187
+Basic Tool Use,factual_error,39
+Basic Tool Use,calculation_error,27
+Basic Tool Use,contradictory_answer,18
+Basic Tool Use,non_answer,18
+Basic Tool Use,incomplete_answer,11
+Direct LLM,none,227
+Direct LLM,calculation_error,41
+Direct LLM,factual_error,24
+Direct LLM,irrelevant_answer,6
+Direct LLM,incomplete_answer,2
+Full Manager,none,193
+Full Manager,incomplete_answer,49
+Full Manager,non_answer,20
+Full Manager,calculation_error,15
+Full Manager,factual_error,12
+Full Manager,irrelevant_answer,9
+Full Manager,contradictory_answer,2
+Manager Without Recovery,none,167
+Manager Without Recovery,incomplete_answer,73
+Manager Without Recovery,non_answer,43
+Manager Without Recovery,irrelevant_answer,10
+Manager Without Recovery,contradictory_answer,4
+Manager Without Recovery,factual_error,3

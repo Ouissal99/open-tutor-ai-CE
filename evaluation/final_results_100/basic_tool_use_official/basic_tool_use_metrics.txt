@@ -1,0 +1,15 @@
+BASIC TOOL USE WITHOUT CENTRAL MANAGER BASELINE
+======================================================================
+Total tests: 100
+Answer Generation Rate: 100.00% (100/100)
+Tool Execution Success Rate: 34.00% (34/100)
+Tool Selection Precision: 71.00%
+Tool Selection Recall: 79.17%
+Tool Selection F1-score: 72.40%
+Validation Used Rate: 0.00%
+Recovery Used Rate: 0.00%
+Trace Lifecycle Used Rate: 0.00%
+Memory Update Used Rate: 0.00%
+Average Attempts: 1.00
+
+Weak/error cases:

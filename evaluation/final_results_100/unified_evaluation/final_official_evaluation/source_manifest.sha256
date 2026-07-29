@@ -1,0 +1,8 @@
+FINAL EVALUATION SOURCE MANIFEST
+========================================================================
+010be77bef4b2c1734678d4e4af9d56f2b6b290a75d02a1a6e319e27a040eae8  evaluation/final_results_100/unified_evaluation/judge_runs/github_gpt41_run_1.jsonl
+ad99406e16f51830498cd473d9f4bb082830c64d9a928a9427d57cb614e6902a  evaluation/final_results_100/unified_evaluation/judge_runs/github_gpt41_run_2.jsonl
+6c5d5eee9a18687cb5d90fcb4addfd9f73db7b123a87685c751de0e422d0bff1  evaluation/final_results_100/unified_evaluation/judge_runs/github_gpt41_run_3.jsonl
+dec5a139e24bd3c5f59d7b51839c9446d68ba140681c4307fc8dd3a03d7bd165  evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_system_summary.csv
+631d217e656a5658ab64728d85d426f46722756556d621a1f0b20530f121a075  evaluation/final_results_100/unified_evaluation/final_aggregated_results/statistical_tests.csv
+da06ab5d5ad5c4d769e59ee7e5a32b8ab62669e4b03e4f116a8e06031862963f  evaluation/final_results_100/unified_evaluation/final_aggregated_results/judge_inter_run_agreement.csv

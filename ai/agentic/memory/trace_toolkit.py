@@ -15,22 +15,67 @@ class TraceToolkit:
     def __init__(self, trace_store: Optional[TraceStore] = None):
         self.trace_store = trace_store or TraceStore()
 
-    def get_last_traces(self, limit: int = 5) -> List[Dict[str, Any]]:
-        traces = self.trace_store.list_traces()
-        return [self.trace_store.summarize_trace(trace) for trace in traces[:limit]]
+    def get_last_traces(
+        self,
+        limit: int = 5,
+        learner_id: Optional[str] = None,
+    ) -> List[Dict[str, Any]]:
+        results = []
+
+        for trace in self.trace_store.list_traces():
+            summary = self.trace_store.summarize_trace(
+                trace
+            )
+
+            if not self._matches_learner(
+                trace=trace,
+                summary=summary,
+                learner_id=learner_id,
+            ):
+                continue
+
+            results.append(
+                self._attach_learner_id(
+                    trace=trace,
+                    summary=summary,
+                )
+            )
+
+            if len(results) >= limit:
+                break
+
+        return results
 
     def find_successful_traces(
         self,
         task_type: Optional[str] = None,
         limit: int = 5,
+        learner_id: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
-        """Return traces that ended successfully."""
+        """Return successful traces for the requested learner."""
         results = []
 
         for trace in self.trace_store.list_traces():
-            summary = self.trace_store.summarize_trace(trace)
+            summary = self.trace_store.summarize_trace(
+                trace
+            )
 
-            if task_type and summary["task_type"] != task_type:
+            if not self._matches_learner(
+                trace=trace,
+                summary=summary,
+                learner_id=learner_id,
+            ):
+                continue
+
+            summary = self._attach_learner_id(
+                trace=trace,
+                summary=summary,
+            )
+
+            if (
+                task_type
+                and summary.get("task_type") != task_type
+            ):
                 continue
 
             if self._is_successful(trace, summary):
@@ -45,14 +90,32 @@ class TraceToolkit:
         self,
         task_type: Optional[str] = None,
         limit: int = 5,
+        learner_id: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
-        """Return traces that ended as failed, invalid, rejected, or requiring retry."""
+        """Return failed traces for the requested learner."""
         results = []
 
         for trace in self.trace_store.list_traces():
-            summary = self.trace_store.summarize_trace(trace)
+            summary = self.trace_store.summarize_trace(
+                trace
+            )
 
-            if task_type and summary["task_type"] != task_type:
+            if not self._matches_learner(
+                trace=trace,
+                summary=summary,
+                learner_id=learner_id,
+            ):
+                continue
+
+            summary = self._attach_learner_id(
+                trace=trace,
+                summary=summary,
+            )
+
+            if (
+                task_type
+                and summary.get("task_type") != task_type
+            ):
                 continue
 
             if self._is_failed(trace, summary):
@@ -69,11 +132,12 @@ class TraceToolkit:
         task_type: Optional[str] = None,
         limit: int = 5,
         only_successful: bool = False,
+        learner_id: Optional[str] = None,
     ) -> List[Dict[str, Any]]:
         """
-        Lightweight similarity search over real saved traces.
+        Search saved traces belonging to the requested learner.
 
-        The score is based on meaningful fields only:
+        Similarity uses:
         - student question
         - step goal
         - task type
@@ -84,16 +148,41 @@ class TraceToolkit:
         scored_results = []
 
         for trace in self.trace_store.list_traces():
-            summary = self.trace_store.summarize_trace(trace)
+            summary = self.trace_store.summarize_trace(
+                trace
+            )
 
-            if task_type and summary["task_type"] != task_type:
+            if not self._matches_learner(
+                trace=trace,
+                summary=summary,
+                learner_id=learner_id,
+            ):
                 continue
 
-            if only_successful and not self._is_successful(trace, summary):
+            summary = self._attach_learner_id(
+                trace=trace,
+                summary=summary,
+            )
+
+            if (
+                task_type
+                and summary.get("task_type") != task_type
+            ):
+                continue
+
+            if (
+                only_successful
+                and not self._is_successful(
+                    trace,
+                    summary,
+                )
+            ):
                 continue
 
             trace_words = self._summary_words(summary)
-            overlap = query_words.intersection(trace_words)
+            overlap = query_words.intersection(
+                trace_words
+            )
 
             score = float(len(overlap))
             score_breakdown = {
@@ -103,43 +192,235 @@ class TraceToolkit:
                 "confidence_boost": 0.0,
             }
 
-            if task_type and summary["task_type"] == task_type:
+            if (
+                task_type
+                and summary.get("task_type") == task_type
+            ):
                 score += 3.0
-                score_breakdown["task_type_boost"] = 3.0
+                score_breakdown[
+                    "task_type_boost"
+                ] = 3.0
 
-            selected_tools = set(summary.get("selected_tools", []))
-            if {"RAGTool", "TraceSearchTool"} <= selected_tools:
+            selected_tools = set(
+                summary.get(
+                    "selected_tools",
+                    [],
+                )
+                or []
+            )
+
+            if {
+                "RAGTool",
+                "TraceSearchTool",
+            } <= selected_tools:
                 score += 1.0
-                score_breakdown["tool_quality_boost"] += 1.0
+                score_breakdown[
+                    "tool_quality_boost"
+                ] += 1.0
 
-            if "MatrixComputationTool" in selected_tools:
+            if (
+                "MatrixComputationTool"
+                in selected_tools
+            ):
                 score += 0.75
-                score_breakdown["tool_quality_boost"] += 0.75
+                score_breakdown[
+                    "tool_quality_boost"
+                ] += 0.75
 
             if "VisualMatrixTool" in selected_tools:
                 score += 0.75
-                score_breakdown["tool_quality_boost"] += 0.75
+                score_breakdown[
+                    "tool_quality_boost"
+                ] += 0.75
 
-            confidence = summary.get("confidence_score")
-            if isinstance(confidence, (int, float)):
-                score += min(float(confidence), 1.0)
-                score_breakdown["confidence_boost"] = min(float(confidence), 1.0)
+            confidence = summary.get(
+                "confidence_score"
+            )
+
+            if isinstance(
+                confidence,
+                (int, float),
+            ):
+                confidence_boost = min(
+                    float(confidence),
+                    1.0,
+                )
+                score += confidence_boost
+                score_breakdown[
+                    "confidence_boost"
+                ] = confidence_boost
 
             if score > 0:
-                summary["similarity_score"] = round(score, 4)
-                summary["matched_terms"] = sorted(overlap)
-                summary["score_breakdown"] = score_breakdown
-                summary["memory_source"] = "real_trace_files"
+                summary["similarity_score"] = round(
+                    score,
+                    4,
+                )
+                summary["matched_terms"] = sorted(
+                    overlap
+                )
+                summary["score_breakdown"] = (
+                    score_breakdown
+                )
+                summary["memory_source"] = (
+                    "learner_filtered_trace_files"
+                )
                 scored_results.append(summary)
 
         scored_results.sort(
             key=lambda item: (
-                item.get("similarity_score", 0),
+                item.get(
+                    "similarity_score",
+                    0,
+                ),
                 item.get("created_at") or "",
             ),
             reverse=True,
         )
+
         return scored_results[:limit]
+
+    def _matches_learner(
+        self,
+        trace: Dict[str, Any],
+        summary: Dict[str, Any],
+        learner_id: Optional[str],
+    ) -> bool:
+        """
+        Restrict trace reuse to one learner.
+
+        When learner_id is provided, legacy traces without a learner
+        identifier are excluded rather than treated as global traces.
+        """
+        if not learner_id:
+            return True
+
+        return (
+            self._extract_learner_id(
+                trace=trace,
+                summary=summary,
+            )
+            == learner_id
+        )
+
+    def _attach_learner_id(
+        self,
+        trace: Dict[str, Any],
+        summary: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        result = dict(summary)
+
+        learner_id = self._extract_learner_id(
+            trace=trace,
+            summary=summary,
+        )
+
+        if learner_id:
+            result["learner_id"] = learner_id
+
+        return result
+
+    def _extract_learner_id(
+        self,
+        trace: Dict[str, Any],
+        summary: Dict[str, Any],
+    ) -> Optional[str]:
+        # Prefer direct and request-level locations before recursively
+        # examining the trace.
+        direct_candidates = [
+            summary.get("learner_id"),
+            trace.get("learner_id"),
+        ]
+
+        request = trace.get("request", {})
+
+        if isinstance(request, dict):
+            request_metadata = request.get(
+                "metadata",
+                {},
+            )
+            request_context = request.get(
+                "context",
+                {},
+            )
+
+            direct_candidates.extend(
+                [
+                    request.get("learner_id"),
+                    (
+                        request_metadata.get(
+                            "learner_id"
+                        )
+                        if isinstance(
+                            request_metadata,
+                            dict,
+                        )
+                        else None
+                    ),
+                    (
+                        request_context.get(
+                            "learner_id"
+                        )
+                        if isinstance(
+                            request_context,
+                            dict,
+                        )
+                        else None
+                    ),
+                ]
+            )
+
+        metadata = trace.get("metadata", {})
+
+        if isinstance(metadata, dict):
+            direct_candidates.append(
+                metadata.get("learner_id")
+            )
+
+        for candidate in direct_candidates:
+            if (
+                candidate is not None
+                and str(candidate).strip()
+            ):
+                return str(candidate).strip()
+
+        # Fallback for event-based trace structures.
+        return self._recursive_learner_id(trace)
+
+    def _recursive_learner_id(
+        self,
+        value: Any,
+    ) -> Optional[str]:
+        if isinstance(value, dict):
+            for key in (
+                "learner_id",
+                "learnerId",
+            ):
+                candidate = value.get(key)
+
+                if (
+                    candidate is not None
+                    and str(candidate).strip()
+                ):
+                    return str(candidate).strip()
+
+            for nested_value in value.values():
+                candidate = self._recursive_learner_id(
+                    nested_value
+                )
+
+                if candidate:
+                    return candidate
+
+        elif isinstance(value, list):
+            for item in value:
+                candidate = self._recursive_learner_id(
+                    item
+                )
+
+                if candidate:
+                    return candidate
+
+        return None
 
     def get_trace_summary(self, trace_id_or_path: str) -> Optional[Dict[str, Any]]:
         trace = self.trace_store.load_trace(trace_id_or_path)

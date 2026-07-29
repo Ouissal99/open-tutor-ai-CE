@@ -1,0 +1,101 @@
+test_id,category,question,expected_tools,recovery_test
+T001,conceptual_grounded,"Explain convolution in simple terms for a beginner.","RAGTool",No
+T002,conceptual_grounded,"What is a convolution kernel in image processing?","RAGTool",No
+T003,conceptual_grounded,"Explain the difference between a filter and a feature map.","RAGTool",No
+T004,conceptual_grounded,"Why is convolution useful in convolutional neural networks?","RAGTool",No
+T005,conceptual_grounded,"Explain padding in convolution using simple language.","RAGTool",No
+T006,conceptual_grounded,"Explain stride in convolution using simple language.","RAGTool",No
+T007,conceptual_grounded,"Explain the difference between padding and stride.","RAGTool",No
+T008,conceptual_grounded,"What does valid convolution mean?","RAGTool",No
+T009,conceptual_grounded,"What does same convolution mean?","RAGTool",No
+T010,conceptual_grounded,"Explain why a convolution kernel slides over an input matrix.","RAGTool",No
+T011,conceptual_grounded,"Explain matrix multiplication in simple terms.","RAGTool",No
+T012,conceptual_grounded,"What is a row-by-column dot product?","RAGTool",No
+T013,conceptual_grounded,"Explain the difference between matrix multiplication and convolution.","RAGTool",No
+T014,conceptual_grounded,"Why is matrix multiplication not the same as sliding a kernel?","RAGTool",No
+T015,conceptual_grounded,"Explain why matrix dimensions matter in matrix multiplication.","RAGTool",No
+T016,conceptual_grounded,"What is the role of grounding in an AI tutoring answer?","RAGTool",No
+T017,conceptual_grounded,"Explain why tool use can improve tutoring explanations.","RAGTool",No
+T018,conceptual_grounded,"Explain what a visual matrix example helps a learner understand.","RAGTool",No
+T019,conceptual_grounded,"Explain why validation is important after using a tool.","RAGTool",No
+T020,conceptual_grounded,"Explain why recovery is useful when a tool output is incomplete.","RAGTool",No
+T021,computation_verification,"What is 12 times 8?","CalculatorTool",No
+T022,computation_verification,"Calculate 45 plus 37.","CalculatorTool",No
+T023,computation_verification,"Calculate 144 divided by 12.","CalculatorTool",No
+T024,computation_verification,"Calculate 7 squared plus 3 squared.","CalculatorTool",No
+T025,computation_verification,"Compute the output size of a valid convolution with input 5x5, kernel 3x3, stride 1, padding 0.","CalculatorTool",No
+T026,computation_verification,"Compute the output size of a convolution with input 7x7, kernel 3x3, stride 2, padding 1.","CalculatorTool",No
+T027,computation_verification,"Compute the output size of a convolution with input 10x10, kernel 5x5, stride 1, padding 0.","CalculatorTool",No
+T028,computation_verification,"Compute the output size of a convolution with input 8x8, kernel 3x3, stride 1, padding 1.","CalculatorTool",No
+T029,computation_verification,"Can a 2x3 matrix be multiplied by a 3x2 matrix?","MatrixComputationTool",No
+T030,computation_verification,"Can a 3x2 matrix be multiplied by a 3x3 matrix?","MatrixComputationTool",No
+T031,computation_verification,"Multiply the matrices [[1,2],[3,4]] and [[5,6],[7,8]].","MatrixComputationTool",No
+T032,computation_verification,"Compute the first entry of the product [[1,2],[3,4]] times [[5,6],[7,8]].","MatrixComputationTool",No
+T033,computation_verification,"Verify whether [[1,0],[0,1]] acts as an identity matrix when multiplied by [[3,4],[5,6]].","MatrixComputationTool",No
+T034,computation_verification,"Compute one valid convolution step using input [[1,2,3],[4,5,6],[7,8,9]] and kernel [[1,0],[0,1]].","MatrixComputationTool",No
+T035,computation_verification,"Compute the top-left convolution value for input [[1,2,3],[4,5,6],[7,8,9]] with kernel [[1,0],[0,-1]].","MatrixComputationTool",No
+T036,computation_verification,"Check whether a 2x2 kernel can slide over a 3x3 matrix in valid convolution.","MatrixComputationTool",No
+T037,computation_verification,"Compute how many valid 2x2 convolution windows exist in a 3x3 matrix.","CalculatorTool;MatrixComputationTool",No
+T038,computation_verification,"Compute how many valid 3x3 convolution windows exist in a 5x5 matrix.","CalculatorTool;MatrixComputationTool",No
+T039,computation_verification,"Verify the result of multiplying row [1,2] by column [5,7].","MatrixComputationTool",No
+T040,computation_verification,"Verify the result of multiplying row [3,4] by column [6,8].","MatrixComputationTool",No
+T041,visual_step_by_step,"Visualize matrix multiplication with a small 2x2 example.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T042,visual_step_by_step,"Show matrix multiplication step by step using row-by-column dot products.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T043,visual_step_by_step,"Show how the first entry of a matrix product is computed visually.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T044,visual_step_by_step,"Visualize why matrix multiplication uses rows from the first matrix and columns from the second matrix.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T045,visual_step_by_step,"Visualize convolution using a 3x3 input and a 2x2 kernel.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T046,visual_step_by_step,"Show visually how a convolution kernel moves over a matrix.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T047,visual_step_by_step,"Illustrate stride 1 in a convolution operation.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T048,visual_step_by_step,"Illustrate stride 2 in a convolution operation.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T049,visual_step_by_step,"Show the difference between padding and no padding visually.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T050,visual_step_by_step,"Show how a filter detects a vertical edge in a simple image matrix.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T051,visual_step_by_step,"Explain matrix multiplication visually without using convolution.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T052,visual_step_by_step,"Explain convolution visually without calling it matrix multiplication.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T053,visual_step_by_step,"Show why kernel sliding is different from row-by-column multiplication.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T054,visual_step_by_step,"Visualize a dot product as part of matrix multiplication.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T055,visual_step_by_step,"Visualize one convolution output cell from a 2x2 kernel.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T056,visual_step_by_step,"Show a step-by-step visual explanation of valid convolution.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T057,visual_step_by_step,"Show a step-by-step visual explanation of matrix multiplication dimensions.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T058,visual_step_by_step,"Use a visual example to explain why a 2x3 matrix can multiply a 3x2 matrix.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T059,visual_step_by_step,"Use a visual example to explain why a 3x2 matrix cannot multiply a 3x3 matrix.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T060,visual_step_by_step,"Compare convolution and matrix multiplication using a visual explanation.","RAGTool;VisualMatrixTool;MatrixComputationTool",No
+T061,code_related,"Write Python code to multiply two 2x2 matrices without NumPy.","CodeSandboxTool",No
+T062,code_related,"Write Python code to multiply two matrices using nested loops.","CodeSandboxTool",No
+T063,code_related,"Write Python code to check whether two matrices can be multiplied.","CodeSandboxTool;MatrixComputationTool",No
+T064,code_related,"Write Python code for a simple 2D valid convolution.","CodeSandboxTool",No
+T065,code_related,"Write Python code to compute convolution output size.","CodeSandboxTool;CalculatorTool",No
+T066,code_related,"Write a small NumPy example explaining matrix multiplication.","CodeSandboxTool",No
+T067,code_related,"Write a small NumPy example explaining 2D convolution.","CodeSandboxTool",No
+T068,code_related,"Debug this explanation in code: the kernel is added to the matrix instead of multiplied element-wise.","CodeSandboxTool;RAGTool",No
+T069,code_related,"Debug this matrix multiplication code idea: it multiplies matching positions instead of row-by-column dot products.","CodeSandboxTool;MatrixComputationTool",No
+T070,code_related,"Write Python code that prints each step of a 2x2 matrix multiplication.","CodeSandboxTool;MatrixComputationTool",No
+T071,code_related,"Write Python code that prints each valid convolution window in a 3x3 matrix.","CodeSandboxTool;MatrixComputationTool",No
+T072,code_related,"Explain this Python mistake: using A + B instead of A @ B for matrix multiplication.","CodeSandboxTool;RAGTool",No
+T073,code_related,"Explain this Python mistake: using matrix multiplication when the question asks for convolution.","CodeSandboxTool;RAGTool",No
+T074,code_related,"Write Python code to compute the dot product of [1,2] and [5,7].","CodeSandboxTool;CalculatorTool",No
+T075,code_related,"Write Python code to apply a 2x2 kernel to the top-left window of a 3x3 matrix.","CodeSandboxTool;MatrixComputationTool",No
+T076,code_related,"Write Python code to compare valid convolution output sizes for stride 1 and stride 2.","CodeSandboxTool;CalculatorTool",No
+T077,code_related,"Write Python code that explains matrix dimensions before multiplying matrices.","CodeSandboxTool;RAGTool",No
+T078,code_related,"Write Python code that validates input size, kernel size, stride, and padding for convolution.","CodeSandboxTool;CalculatorTool",No
+T079,code_related,"Write Python code to generate a simple text-based visualization of kernel sliding.","CodeSandboxTool;VisualMatrixTool",No
+T080,code_related,"Write Python code to generate a simple text-based visualization of matrix multiplication steps.","CodeSandboxTool;VisualMatrixTool;MatrixComputationTool",No
+T081,recovery_personalization_trace,"Explain convolution again, but make it easier than before.","TraceSearchTool;RAGTool",No
+T082,recovery_personalization_trace,"Review my previous mistake about convolution output size and explain it again.","TraceSearchTool;RAGTool;CalculatorTool",No
+T083,recovery_personalization_trace,"I still confuse filters and matrices. Explain the difference again.","TraceSearchTool;RAGTool",No
+T084,recovery_personalization_trace,"I already understand kernels. Explain stride without repeating the kernel definition too much.","TraceSearchTool;RAGTool",No
+T085,recovery_personalization_trace,"I struggle with matrix dimensions. Explain matrix multiplication using a simpler example.","TraceSearchTool;RAGTool;VisualMatrixTool",No
+T086,recovery_personalization_trace,"I confused matrix multiplication with convolution before. Correct that misunderstanding.","TraceSearchTool;RAGTool;VisualMatrixTool",No
+T087,recovery_personalization_trace,"Give me a simpler explanation than the previous one about padding.","TraceSearchTool;RAGTool",No
+T088,recovery_personalization_trace,"Explain convolution without code because I found the code confusing.","TraceSearchTool;RAGTool",No
+T089,recovery_personalization_trace,"Explain matrix multiplication again but avoid convolution examples.","TraceSearchTool;RAGTool;VisualMatrixTool",No
+T090,recovery_personalization_trace,"Use my previous learning trace to adapt an explanation about convolution output size.","TraceSearchTool;RAGTool;CalculatorTool",No
+T091,recovery_personalization_trace,"Explain convolution, but force the first attempt without RAG grounding.","RAGTool",Yes
+T092,recovery_personalization_trace,"Explain padding and stride, but force the first attempt without grounding.","RAGTool",Yes
+T093,recovery_personalization_trace,"Explain visually how a kernel moves, but force the first attempt without grounding.","RAGTool;VisualMatrixTool;MatrixComputationTool",Yes
+T094,recovery_personalization_trace,"Explain convolution output size, but force the first attempt without grounding.","RAGTool;CalculatorTool",Yes
+T095,recovery_personalization_trace,"Explain, compute, and visualize convolution, but force the first attempt without grounding.","RAGTool;VisualMatrixTool;MatrixComputationTool",Yes
+T096,recovery_personalization_trace,"Explain matrix multiplication, but force the first attempt to use an incomplete tool output.","RAGTool;MatrixComputationTool",Yes
+T097,recovery_personalization_trace,"Visualize matrix multiplication, but force the first attempt to miss the visual support.","RAGTool;VisualMatrixTool;MatrixComputationTool",Yes
+T098,recovery_personalization_trace,"Write Python code for convolution, but force the first attempt to miss validation.","CodeSandboxTool;RAGTool",Yes
+T099,recovery_personalization_trace,"Explain the difference between convolution and matrix multiplication, but force a topic-mismatch recovery.","RAGTool;VisualMatrixTool",Yes
+T100,recovery_personalization_trace,"Give a personalized explanation of convolution after a failed first attempt.","TraceSearchTool;RAGTool",Yes

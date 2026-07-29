@@ -29,6 +29,7 @@ HEADER = [
     "recovery_used",
     "attempts",
     "trace_path",
+    "trace_paths",
     "report_path",
     "memory_updated",
     "final_answer_generated",
@@ -61,20 +62,80 @@ def extract_line_value(stdout, label):
     return value
 
 def extract_selected_tools(stdout, report):
-    value = extract_line_value(stdout, "Selected tools")
-    if value:
+    """Aggregate selected tools across every manager round."""
+    ordered_tools = []
+
+    def add_tools(value):
+        if not value:
+            return
+
         try:
             parsed = ast.literal_eval(value)
-            if isinstance(parsed, list):
-                return ";".join(str(x) for x in parsed)
         except Exception:
-            return value.replace("[", "").replace("]", "").replace("'", "").replace(", ", ";")
+            parsed = [
+                item.strip().strip("'").strip('"')
+                for item in value.strip("[]").split(",")
+                if item.strip()
+            ]
 
-    summary = report.get("summary", {})
-    selected = summary.get("selected_tools") or report.get("selected_tools") or []
-    if isinstance(selected, list):
-        return ";".join(selected)
-    return str(selected)
+        if not isinstance(parsed, list):
+            return
+
+        for tool_name in parsed:
+            tool_name = str(tool_name).strip()
+
+            if tool_name and tool_name not in ordered_tools:
+                ordered_tools.append(tool_name)
+
+    # Capture every manager selection, not only the final summary.
+    for value in re.findall(
+        r"selected_tools:\s*(\[[^\n]*\])",
+        stdout,
+    ):
+        add_tools(value)
+
+    # Also include the final demo summary when present.
+    add_tools(
+        extract_line_value(
+            stdout,
+            "Selected tools",
+        )
+    )
+
+    if not ordered_tools:
+        summary = report.get("summary", {})
+        selected = (
+            summary.get("selected_tools")
+            or report.get("selected_tools")
+            or []
+        )
+
+        if isinstance(selected, list):
+            for tool_name in selected:
+                tool_name = str(tool_name).strip()
+
+                if tool_name and tool_name not in ordered_tools:
+                    ordered_tools.append(tool_name)
+
+    return ";".join(ordered_tools)
+
+
+def extract_trace_ids(stdout):
+    """Return every manager trace ID in execution order."""
+    trace_ids = []
+
+    patterns = (
+        r"trace_id:\s*(TT-[A-Za-z0-9-]+)",
+        r"Trace ID:\s*(TT-[A-Za-z0-9-]+)",
+    )
+
+    for pattern in patterns:
+        for trace_id in re.findall(pattern, stdout):
+            if trace_id not in trace_ids:
+                trace_ids.append(trace_id)
+
+    return trace_ids
+
 
 def extract_attempts(stdout):
     attempts = [int(x) for x in re.findall(r"attempt:\s*(\d+)", stdout)]
@@ -93,6 +154,14 @@ def append_tracking(row):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--test-id", required=True)
+    parser.add_argument(
+        "--learner-id",
+        required=True,
+        help=(
+            "Isolated learner identifier used for DPM "
+            "and learner-specific trace retrieval."
+        ),
+    )
     parser.add_argument("--category", required=True)
     parser.add_argument("--question", required=True)
     parser.add_argument("--expected-tools", required=True)
@@ -106,11 +175,18 @@ def main():
     if clean_trace_path.exists():
         clean_trace_path.unlink()
 
+    for old_round_trace in TRACES_DIR.glob(
+        f"{args.test_id}_round*_trace.json"
+    ):
+        old_round_trace.unlink()
+
     cmd = [
         "python",
         "scripts/run_agentic_tutoring_demo.py",
         "--question",
         args.question,
+        "--learner-id",
+        args.learner_id,
     ]
 
     if args.recovery_test == "Yes":
@@ -138,21 +214,145 @@ def main():
 
     report = read_report(clean_report)
 
-    workflow_status = extract_line_value(stdout, "Workflow status") or "unknown"
-    trace_source = extract_line_value(stdout, "Trace path")
+    workflow_status = (
+        extract_line_value(stdout, "Workflow status")
+        or "unknown"
+    )
+    final_trace_source = extract_line_value(
+        stdout,
+        "Trace path",
+    )
+
+    trace_records = []
+    copied_source_paths = set()
+
+    for round_index, trace_id in enumerate(
+        extract_trace_ids(stdout),
+        start=1,
+    ):
+        source = Path(
+            f"var/agentic_traces/{trace_id}.json"
+        )
+
+        if not source.exists():
+            continue
+
+        destination = TRACES_DIR / (
+            f"{args.test_id}_round"
+            f"{round_index:02d}_{trace_id}_trace.json"
+        )
+
+        shutil.copyfile(source, destination)
+
+        trace_records.append(
+            {
+                "trace_id": trace_id,
+                "source": source,
+                "saved": destination,
+                "data": read_report(source),
+            }
+        )
+        copied_source_paths.add(
+            str(source.resolve())
+        )
+
+    # Fallback in case the final trace was not printed as trace_id.
+    if final_trace_source:
+        final_source = Path(final_trace_source)
+
+        if (
+            final_source.exists()
+            and str(final_source.resolve())
+            not in copied_source_paths
+        ):
+            round_index = len(trace_records) + 1
+
+            destination = TRACES_DIR / (
+                f"{args.test_id}_round"
+                f"{round_index:02d}_final_trace.json"
+            )
+
+            shutil.copyfile(
+                final_source,
+                destination,
+            )
+
+            trace_records.append(
+                {
+                    "trace_id": final_source.stem,
+                    "source": final_source,
+                    "saved": destination,
+                    "data": read_report(final_source),
+                }
+            )
+
+    # Preserve one primary trace for backward compatibility.
+    # For recovery cases, use the trace that contains recovery evidence.
+    primary_record = next(
+        (
+            record
+            for record in trace_records
+            if record["data"].get("recovery_used") is True
+        ),
+        trace_records[-1] if trace_records else None,
+    )
 
     saved_trace_value = ""
-    if trace_source and Path(trace_source).exists():
-        shutil.copyfile(trace_source, clean_trace_path)
+    trace_paths_value = ""
+
+    if primary_record:
+        shutil.copyfile(
+            primary_record["source"],
+            clean_trace_path,
+        )
         saved_trace_value = str(clean_trace_path)
 
-    selected_tools = extract_selected_tools(stdout, report)
+        trace_paths_value = ";".join(
+            str(record["saved"])
+            for record in trace_records
+        )
 
-    recovery_used = "Yes" if "FailureRecovery triggered" in stdout else "No"
-    attempts = extract_attempts(stdout)
+    selected_tools = extract_selected_tools(
+        stdout,
+        report,
+    )
+
+    trace_attempts = []
+
+    for record in trace_records:
+        value = record["data"].get("attempts", 1)
+
+        try:
+            trace_attempts.append(int(value))
+        except (TypeError, ValueError):
+            pass
+
+    recovery_from_traces = any(
+        record["data"].get("recovery_used") is True
+        for record in trace_records
+    )
+
+    recovery_used = (
+        "Yes"
+        if (
+            "FailureRecovery triggered" in stdout
+            or recovery_from_traces
+        )
+        else "No"
+    )
+
+    attempts = max(
+        [
+            extract_attempts(stdout),
+            *trace_attempts,
+        ]
+    )
 
     memory_updated = "Yes" if "DPM MemoryUpdateAgent updated learner memory" in stdout else "No"
-    final_answer_generated = "Yes" if "TutoringAnswerWriter generated" in stdout else "No"
+    final_answer_generated = "Yes" if (
+    "Final tutor answer generated" in stdout
+    or "TutoringAnswerWriter generated" in stdout
+    ) else "No"
 
     validation_status = "valid" if workflow_status == "validated" else "invalid"
 
@@ -175,6 +375,7 @@ def main():
         "recovery_used": recovery_used,
         "attempts": attempts,
         "trace_path": saved_trace_value,
+        "trace_paths": trace_paths_value,
         "report_path": str(clean_report) if clean_report.exists() else "",
         "memory_updated": memory_updated,
         "final_answer_generated": final_answer_generated,

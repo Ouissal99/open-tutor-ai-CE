@@ -1,0 +1,108 @@
+
+[CORE] AgenticCoreService received request
+       learner_id: article_T020
+       query: Explain why recovery is useful when a tool output is incomplete.
+
+[CORE] CapabilityRouter received request
+       request_type: personalized_tutoring
+[CORE] Selected capability: PersonalizedTutoringWorkflow
+
+[1] Student question received
+    Explain why recovery is useful when a tool output is incomplete.
+
+[2] LLM InvestigationAgent decomposed the question
+    topic: tool output recovery
+    task_type: conceptual_explanation
+    required_context: ['DPM', 'SKG', 'TraceToolkit']
+    meta_questions: ['What are the common scenarios where a tool output is incomplete?', 'How does recovery help in such scenarios?']
+    initial_tutoring_plan: [{'step_id': 1, 'step_goal': 'Understand the concept of incomplete tool output', 'needs_tool': False, 'suggested_tools': [], 'reason': 'To establish a common understanding of the problem'}, {'step_id': 2, 'step_goal': 'Explore the concept of recovery in tool output', 'needs_tool': False, 'suggested_tools': [], 'reason': 'To introduce the concept of recovery'}, {'step_id': 3, 'step_goal': 'Visualize the benefits of recovery with an example', 'needs_tool': True, 'suggested_tools': ['VisualMatrixTool', 'TraceSearchTool'], 'reason': 'To provide a concrete example of recovery'}]
+
+[3] Scratchpad solving plan created from LLM InvestigationAgent
+    step 1: Understand the concept of incomplete tool output | needs_tool=False | tools=[]
+    step 2: Explore the concept of recovery in tool output | needs_tool=False | tools=[]
+    step 3: Visualize the benefits of recovery with an example | needs_tool=True | tools=['TraceSearchTool']
+
+[4] Tool Request Agent creates a structured ToolRequest
+    request_id: REQ-c0e207d6
+    task_type: conceptual_explanation
+
+[5] Central Tool Interaction Manager runs
+
+[4.0] LangGraph ToolInteractionGraph started
+
+[4.0] LangGraph ContextCollector enriched task context
+    learner_id: article_T020
+    learner_level: unknown
+    is_weak_topic: False
+    retrieved_knowledge_chunks: 3
+    similar_successful_traces: 0
+    failed_traces: 0
+
+[4.1] LangGraph plan-guided tool selection
+    strategy: minimal_plan_guided_selection
+    reason: minimum_tools_covering_current_plan_with_trace_informed_confirmation
+    reference_trace_id: None
+    selected_tools: ['RAGTool']
+
+[12] OutputValidator checked grounding and learner fit
+    attempt: 1
+    status: valid
+    reason: None
+    recommended_action: accept
+    node_history: ['analyze_task', 'collect_context', 'plan_tools', 'select_tools', 'execute_tools', 'validate_output', 'build_success_package']
+    final_status: validated
+
+[6] OutputPackage received from central manager
+    status: validated
+    confidence: 0.9
+    trace_id: TT-129ee34a
+
+[7] Scratchpad updated with validated package
+
+[17] DPM MemoryUpdateAgent updated learner memory
+    diagnosed_gap: matrix-to-output transformation
+    recommended_future_strategy: use simple step-by-step explanation grounded in course evidence
+    updated_layers: L1, L2, L3
+
+[8] Final tutor answer generated
+## Grounded answer from validated tool output
+
+Question: Explain why recovery is useful when a tool output is incomplete.
+
+Validated tools used: RAGTool
+Validation confidence: 0.9
+
+### Validated output
+
+## RAGTool
+Topic-consistent support for tool failure recovery:
+- The validator first detects that an output is incomplete, failed, or unsupported.
+- Failure Recovery keeps the failure reason and requests the missing or alternative capability.
+- The corrected tool output is executed and validated again.
+- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.
+
+[9] Scratchpad state
+    rounds: 3
+    - round=1 | step=Understand the concept of incomplete tool output | status=completed_without_tool | tools=[] | confidence=None
+    - round=2 | step=Explore the concept of recovery in tool output | status=completed_without_tool | tools=[] | confidence=None
+    - round=3 | step=Visualize the benefits of recovery with an example | status=validated | tools=['RAGTool'] | confidence=0.9
+
+[10] Tool interaction trace saved
+var/agentic_traces/TT-129ee34a.json
+
+================================================================================
+AGENTIC DEMO EVIDENCE SAVED
+================================================================================
+Report path: var/agentic_demo_runs/agentic_demo_20260725_043144_TT-129ee34a.json
+Provider status: available
+Workflow status: validated
+Trace ID: TT-129ee34a
+Trace path: var/agentic_traces/TT-129ee34a.json
+Selected tools: ['RAGTool']
+Confidence: 0.9
+RAG mode: topic_consistency_fallback
+Similar traces: None
+Failed traces: None
+DPM learner level: unknown
+DPM weak topic: False
+================================================================================

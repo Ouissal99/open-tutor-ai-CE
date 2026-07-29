@@ -1,0 +1,2791 @@
+{
+  "trace_schema_version": "phase_13d_full_lifecycle_v1",
+  "trace_id": "TT-54e5682b",
+  "created_at": "2026-07-25T14:53:01.819819Z",
+  "request_id": "REQ-8db93c94",
+  "learner_id": "article_T100",
+  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+  "task_type": "conceptual_explanation",
+  "workflow_source": "personalized_problem_tutoring",
+  "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+  "expected_output": "visual explanation with grounded evidence",
+  "investigation_result": {
+    "topic": "convolution",
+    "task_type": "conceptual_explanation",
+    "student_intent": "understand convolution after failed attempt",
+    "difficulty_estimate": "intermediate",
+    "meta_questions": [
+      "What was the student's previous understanding of convolution?",
+      "What specific aspect of convolution did the student struggle with?"
+    ],
+    "required_context": [
+      "DPM",
+      "SKG",
+      "TraceToolkit"
+    ],
+    "initial_tutoring_plan": [
+      {
+        "step_id": 1,
+        "step_goal": "Review the student's previous understanding of convolution",
+        "needs_tool": false,
+        "suggested_tools": [],
+        "reason": "to understand the student's knowledge gap"
+      },
+      {
+        "step_id": 2,
+        "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+        "needs_tool": true,
+        "suggested_tools": [
+          "VisualMatrixTool",
+          "TraceSearchTool"
+        ],
+        "reason": "to provide a concrete example of convolution"
+      },
+      {
+        "step_id": 3,
+        "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+        "needs_tool": true,
+        "suggested_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "reason": "to provide relevant context for convolution"
+      }
+    ],
+    "tool_request_goal": "Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool",
+    "learner_id": "article_T100",
+    "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+    "llm_model": "llama-3.1-8b-instant",
+    "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand convolution after failed attempt\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What was the student's previous understanding of convolution?\",\n    \"What specific aspect of convolution did the student struggle with?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Review the student's previous understanding of convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"to understand the student's knowledge gap\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a small matrix/kernel example to illustrate convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"to provide a concrete example of convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Use RAGTool to provide course-grounded evidence for convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\"],\n      \"reason\": \"to provide relevant context for convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool\"\n}"
+  },
+  "analyzed_task": {
+    "request_id": "REQ-8db93c94",
+    "workflow_source": "personalized_problem_tutoring",
+    "original_task_type": "conceptual_explanation",
+    "task_type": "conceptual_explanation",
+    "operation_type": "convolution_concept",
+    "operation_parameters": {
+      "matrices": [],
+      "shapes": [],
+      "stride": 1,
+      "padding": 0
+    },
+    "topic": "convolution",
+    "goal": "Give a personalized explanation of convolution after a failed first attempt.",
+    "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+    "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+    "user_query": "Give a personalized explanation of convolution after a failed first attempt.",
+    "expected_output": "visual explanation with grounded evidence",
+    "learner_level": "beginner",
+    "needs_visual_support": false,
+    "explicit_visual_requested": false,
+    "needs_calculation": false,
+    "needs_code_execution": false,
+    "needs_debugging": false,
+    "needs_grounding": true,
+    "code_generation_required": false,
+    "tool_request_goal": "Give a personalized explanation of convolution after a failed first attempt.",
+    "code_generation_instruction": "",
+    "reasoning_summary": "Fallback task analysis generated from request text.",
+    "analysis_strategy": "deterministic_fallback_after_llm_failure",
+    "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+    "request_metadata": {
+      "source_component": "ToolRequestAgent",
+      "learner_id": "article_T100",
+      "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+      "plan_step_id": 2,
+      "step_reason": "to provide a concrete example of convolution",
+      "suggested_tools": [
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ],
+      "workflow_source": "personalized_problem_tutoring",
+      "investigation_result": {
+        "topic": "convolution",
+        "task_type": "conceptual_explanation",
+        "student_intent": "understand convolution after failed attempt",
+        "difficulty_estimate": "intermediate",
+        "meta_questions": [
+          "What was the student's previous understanding of convolution?",
+          "What specific aspect of convolution did the student struggle with?"
+        ],
+        "required_context": [
+          "DPM",
+          "SKG",
+          "TraceToolkit"
+        ],
+        "initial_tutoring_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Review the student's previous understanding of convolution",
+            "needs_tool": false,
+            "suggested_tools": [],
+            "reason": "to understand the student's knowledge gap"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+            "needs_tool": true,
+            "suggested_tools": [
+              "VisualMatrixTool",
+              "TraceSearchTool"
+            ],
+            "reason": "to provide a concrete example of convolution"
+          },
+          {
+            "step_id": 3,
+            "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "reason": "to provide relevant context for convolution"
+          }
+        ],
+        "tool_request_goal": "Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool",
+        "learner_id": "article_T100",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "llm_model": "llama-3.1-8b-instant",
+        "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand convolution after failed attempt\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What was the student's previous understanding of convolution?\",\n    \"What specific aspect of convolution did the student struggle with?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Review the student's previous understanding of convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"to understand the student's knowledge gap\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a small matrix/kernel example to illustrate convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"to provide a concrete example of convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Use RAGTool to provide course-grounded evidence for convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\"],\n      \"reason\": \"to provide relevant context for convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool\"\n}"
+      },
+      "current_plan_step": {
+        "step_id": 2,
+        "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+        "needs_tool": true,
+        "suggested_tools": [
+          "TraceSearchTool",
+          "MatrixComputationTool"
+        ],
+        "task_type": "conceptual_explanation",
+        "expected_output": "visual explanation with grounded evidence",
+        "reason": "to provide a concrete example of convolution"
+      },
+      "full_investigation_plan": [
+        {
+          "step_id": 1,
+          "step_goal": "Review the student's previous understanding of convolution",
+          "needs_tool": true,
+          "suggested_tools": [
+            "TraceSearchTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "course-grounded tutoring explanation",
+          "reason": "to understand the student's knowledge gap"
+        },
+        {
+          "step_id": 2,
+          "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+          "needs_tool": true,
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "visual explanation with grounded evidence",
+          "reason": "to provide a concrete example of convolution"
+        },
+        {
+          "step_id": 3,
+          "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+          "needs_tool": true,
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "course-grounded tutoring explanation",
+          "reason": "to provide relevant context for convolution"
+        }
+      ],
+      "workflow_metadata": {
+        "source": "run_agentic_tutoring_demo",
+        "force_recovery_test": true
+      },
+      "force_recovery_test": false
+    }
+  },
+  "collected_context_summary": {
+    "learner_level": "unknown",
+    "preferred_explanation_style": "unknown",
+    "is_weak_topic": false,
+    "retrieved_knowledge_chunks": 3,
+    "similar_successful_trace_count": 0,
+    "failed_trace_count": 1
+  },
+  "dpm_profile_snapshot": {
+    "memory_source": "DynamicPersonalMemory",
+    "memory_storage": "file_based_local",
+    "memory_layers": [
+      "L1_interaction_traces",
+      "L2_tutoring_notes",
+      "L3_profile_preferences"
+    ],
+    "learner_id": "article_T100",
+    "learner_level": "unknown",
+    "preferred_explanation_style": "unknown",
+    "preferred_examples": [],
+    "avoid": [],
+    "known_topics": [],
+    "weak_topics": [
+      "kernel movement"
+    ],
+    "learning_goals": [],
+    "is_weak_topic": false,
+    "is_known_topic": false,
+    "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:52:53.909596+00:00\n\nThe learner recently worked on: convolution.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use small matrix examples with step-by-step visual explanation.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+    "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:52:53.909596+00:00\n\n- Topic: convolution\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use small matrix examples with step-by-step visual explanation\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+    "recent_traces": [
+      {
+        "trace_type": "tool_interaction_summary",
+        "stored_from": "MemoryUpdateAgent",
+        "timestamp": "2026-07-25T14:52:53.909596+00:00",
+        "learner_id": "article_T100",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "topic": "convolution",
+        "task_type": "conceptual_explanation",
+        "step_goal": "Review the student's previous understanding of convolution",
+        "expected_output": "course-grounded tutoring explanation",
+        "request_id": "REQ-13122582",
+        "trace_id": "TT-0ff68151",
+        "trace_path": "var/agentic_traces/TT-0ff68151.json",
+        "status": "validated",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "selected_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "content_format": "structured_tool_sections",
+        "memory_update_summary": {
+          "memory_update_type": "post_tool_interaction_update",
+          "memory_update_agent": "MemoryUpdateAgent",
+          "updated_at": "2026-07-25T14:52:53.909596+00:00",
+          "learner_id": "article_T100",
+          "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+          "topic": "convolution",
+          "task_type": "conceptual_explanation",
+          "status": "validated",
+          "confidence_score": 0.9,
+          "failure_reason": null,
+          "selected_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "diagnosed_gap": "kernel movement",
+          "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+          "new_weak_topic": "kernel movement",
+          "content_format": "structured_tool_sections",
+          "retrieval_mode": "topic_consistency_fallback",
+          "trace_memory_used": {
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0,
+            "reference_trace_id": null
+          },
+          "profile_update_policy": "conservative_metadata_update"
+        },
+        "memory_layer": "L1_interaction_trace_summary",
+        "stored_at": "2026-07-25T14:52:53.909804+00:00"
+      }
+    ],
+    "recent_trace_count": 1,
+    "profile_loaded": true,
+    "preferences_loaded": false,
+    "recent_memory_loaded": true,
+    "tutoring_memory_loaded": true,
+    "memory_paths": {
+      "base_dir": "var/agentic_memory/dpm/article_T100",
+      "L1_traces": "var/agentic_memory/dpm/article_T100/L1/traces.jsonl",
+      "L2_tutoring": "var/agentic_memory/dpm/article_T100/L2/tutoring.md",
+      "L3_profile": "var/agentic_memory/dpm/article_T100/L3/profile.json",
+      "L3_preferences": "var/agentic_memory/dpm/article_T100/L3/preferences.json",
+      "L3_recent": "var/agentic_memory/dpm/article_T100/L3/recent.md"
+    },
+    "topic": "convolution",
+    "task_type": "conceptual_explanation"
+  },
+  "skg_context": {
+    "kb_name": "default",
+    "query": "Give a personalized explanation of convolution after a failed first attempt.",
+    "topic": "convolution",
+    "snippets": [
+      {
+        "chunk_id": "SKG-CONV-001",
+        "topic": "convolution",
+        "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+        "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+        "tags": [
+          "convolution",
+          "kernel",
+          "image processing",
+          "matrix"
+        ],
+        "retrieval_score": 4
+      },
+      {
+        "chunk_id": "SKG-CONV-002",
+        "topic": "convolution",
+        "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+        "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+        "tags": [
+          "convolution",
+          "kernel movement",
+          "output value",
+          "matrix"
+        ],
+        "retrieval_score": 4
+      },
+      {
+        "chunk_id": "SKG-CONV-003",
+        "topic": "kernel movement",
+        "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+        "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+        "tags": [
+          "visual explanation",
+          "kernel",
+          "3x3 matrix",
+          "2x2 kernel"
+        ],
+        "retrieval_score": 1
+      }
+    ],
+    "sources": [
+      "OpenTutorAI mock lesson: Image Processing / Convolution",
+      "OpenTutorAI mock lesson: Image Processing / Convolution",
+      "OpenTutorAI mock visual explanation: Kernel Movement"
+    ],
+    "grounding_text": "- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values."
+  },
+  "skg_retrieved_chunks": [
+    {
+      "tool_name": "RAGTool",
+      "retrieval_mode": "topic_consistency_fallback",
+      "scores": null,
+      "chunk_ids": null,
+      "matched_terms": null,
+      "score_breakdown": null,
+      "evidence": [
+        "Recovery is triggered only after output validation detects a failure.",
+        "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+        "Bounded attempts prevent uncontrolled retry loops."
+      ],
+      "references": [
+        "RAGTool supported topic fallback: tool failure recovery"
+      ]
+    }
+  ],
+  "similar_successful_traces": [],
+  "failed_traces": [
+    {
+      "trace_id": "TT-0ff68151",
+      "trace_path": "var/agentic_traces/TT-0ff68151.json",
+      "created_at": "2026-07-25T14:52:53.905395Z",
+      "task_type": "conceptual_explanation",
+      "status": "validated",
+      "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+      "step_goal": "Review the student's previous understanding of convolution",
+      "selected_tools": [
+        "RAGTool",
+        "TraceSearchTool"
+      ],
+      "attempts": 2,
+      "confidence_score": 0.9,
+      "failure_reason": "insufficient_grounding",
+      "recovery_used": true,
+      "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+      "learner_id": "article_T100"
+    }
+  ],
+  "tool_selection": {},
+  "selection_history": [],
+  "selection_strategy": null,
+  "reference_trace_id": null,
+  "tool_plan": {
+    "plan_id": "PLAN-3719d804",
+    "task_type": "conceptual_explanation",
+    "selected_tools": [],
+    "steps": [
+      {
+        "step_id": 1,
+        "goal": "Retrieve grounded educational knowledge",
+        "required_capability": "grounding",
+        "reason": "The tutoring answer should be supported by verified educational content.",
+        "topic": "convolution",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+      },
+      {
+        "step_id": 2,
+        "goal": "Retrieve relevant previous interaction evidence",
+        "required_capability": "trace_reuse",
+        "reason": "The learner request refers to previous work, a mistake, or personalized history.",
+        "topic": "convolution",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+      },
+      {
+        "step_id": 3,
+        "goal": "Compute or verify a matrix-based example",
+        "required_capability": "matrix_computation",
+        "reason": "The task involves matrix, convolution, kernel, or linear-algebra operations.",
+        "topic": "convolution",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+      }
+    ],
+    "metadata": {
+      "source_component": "ToolPlanner",
+      "planning_mode": "capability_first_no_retrieval",
+      "topic": "convolution",
+      "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+      "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+      "goal": "Give a personalized explanation of convolution after a failed first attempt.",
+      "expected_output": "visual explanation with grounded evidence",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "learner_level": "unknown",
+      "is_weak_topic": false,
+      "collected_context": {
+        "learner_id": "article_T100",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "task_type": "conceptual_explanation",
+        "topic": "convolution",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+        "dpm": {
+          "memory_source": "DynamicPersonalMemory",
+          "memory_storage": "file_based_local",
+          "memory_layers": [
+            "L1_interaction_traces",
+            "L2_tutoring_notes",
+            "L3_profile_preferences"
+          ],
+          "learner_id": "article_T100",
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "preferred_examples": [],
+          "avoid": [],
+          "known_topics": [],
+          "weak_topics": [
+            "kernel movement"
+          ],
+          "learning_goals": [],
+          "is_weak_topic": false,
+          "is_known_topic": false,
+          "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:52:53.909596+00:00\n\nThe learner recently worked on: convolution.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use small matrix examples with step-by-step visual explanation.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+          "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:52:53.909596+00:00\n\n- Topic: convolution\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use small matrix examples with step-by-step visual explanation\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+          "recent_traces": [
+            {
+              "trace_type": "tool_interaction_summary",
+              "stored_from": "MemoryUpdateAgent",
+              "timestamp": "2026-07-25T14:52:53.909596+00:00",
+              "learner_id": "article_T100",
+              "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+              "topic": "convolution",
+              "task_type": "conceptual_explanation",
+              "step_goal": "Review the student's previous understanding of convolution",
+              "expected_output": "course-grounded tutoring explanation",
+              "request_id": "REQ-13122582",
+              "trace_id": "TT-0ff68151",
+              "trace_path": "var/agentic_traces/TT-0ff68151.json",
+              "status": "validated",
+              "confidence_score": 0.9,
+              "failure_reason": null,
+              "selected_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "content_format": "structured_tool_sections",
+              "memory_update_summary": {
+                "memory_update_type": "post_tool_interaction_update",
+                "memory_update_agent": "MemoryUpdateAgent",
+                "updated_at": "2026-07-25T14:52:53.909596+00:00",
+                "learner_id": "article_T100",
+                "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                "topic": "convolution",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "diagnosed_gap": "kernel movement",
+                "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+                "new_weak_topic": "kernel movement",
+                "content_format": "structured_tool_sections",
+                "retrieval_mode": "topic_consistency_fallback",
+                "trace_memory_used": {
+                  "similar_successful_trace_count": 0,
+                  "failed_trace_count": 0,
+                  "reference_trace_id": null
+                },
+                "profile_update_policy": "conservative_metadata_update"
+              },
+              "memory_layer": "L1_interaction_trace_summary",
+              "stored_at": "2026-07-25T14:52:53.909804+00:00"
+            }
+          ],
+          "recent_trace_count": 1,
+          "profile_loaded": true,
+          "preferences_loaded": false,
+          "recent_memory_loaded": true,
+          "tutoring_memory_loaded": true,
+          "memory_paths": {
+            "base_dir": "var/agentic_memory/dpm/article_T100",
+            "L1_traces": "var/agentic_memory/dpm/article_T100/L1/traces.jsonl",
+            "L2_tutoring": "var/agentic_memory/dpm/article_T100/L2/tutoring.md",
+            "L3_profile": "var/agentic_memory/dpm/article_T100/L3/profile.json",
+            "L3_preferences": "var/agentic_memory/dpm/article_T100/L3/preferences.json",
+            "L3_recent": "var/agentic_memory/dpm/article_T100/L3/recent.md"
+          },
+          "topic": "convolution",
+          "task_type": "conceptual_explanation"
+        },
+        "skg": {
+          "kb_name": "default",
+          "query": "Give a personalized explanation of convolution after a failed first attempt.",
+          "topic": "convolution",
+          "snippets": [
+            {
+              "chunk_id": "SKG-CONV-001",
+              "topic": "convolution",
+              "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel",
+                "image processing",
+                "matrix"
+              ],
+              "retrieval_score": 4
+            },
+            {
+              "chunk_id": "SKG-CONV-002",
+              "topic": "convolution",
+              "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel movement",
+                "output value",
+                "matrix"
+              ],
+              "retrieval_score": 4
+            },
+            {
+              "chunk_id": "SKG-CONV-003",
+              "topic": "kernel movement",
+              "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+              "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+              "tags": [
+                "visual explanation",
+                "kernel",
+                "3x3 matrix",
+                "2x2 kernel"
+              ],
+              "retrieval_score": 1
+            }
+          ],
+          "sources": [
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock visual explanation: Kernel Movement"
+          ],
+          "grounding_text": "- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values."
+        },
+        "trace_memory": {
+          "similar_successful_traces": [],
+          "failed_traces": [
+            {
+              "trace_id": "TT-0ff68151",
+              "trace_path": "var/agentic_traces/TT-0ff68151.json",
+              "created_at": "2026-07-25T14:52:53.905395Z",
+              "task_type": "conceptual_explanation",
+              "status": "validated",
+              "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+              "step_goal": "Review the student's previous understanding of convolution",
+              "selected_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "attempts": 2,
+              "confidence_score": 0.9,
+              "failure_reason": "insufficient_grounding",
+              "recovery_used": true,
+              "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+              "learner_id": "article_T100"
+            }
+          ]
+        },
+        "summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 1
+        }
+      },
+      "collected_context_summary": {
+        "learner_level": "unknown",
+        "preferred_explanation_style": "unknown",
+        "is_weak_topic": false,
+        "retrieved_knowledge_chunks": 3,
+        "similar_successful_trace_count": 0,
+        "failed_trace_count": 1
+      },
+      "needs_code_execution": false,
+      "code_generation_required": false,
+      "code_generation_instruction": "",
+      "recovery_reason": null,
+      "recovery_required_tools": [],
+      "previous_code_execution_errors": []
+    }
+  },
+  "tool_plan_history": [
+    {
+      "plan_id": "PLAN-3719d804",
+      "task_type": "conceptual_explanation",
+      "selected_tools": [],
+      "steps": [
+        {
+          "step_id": 1,
+          "goal": "Retrieve grounded educational knowledge",
+          "required_capability": "grounding",
+          "reason": "The tutoring answer should be supported by verified educational content.",
+          "topic": "convolution",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+        },
+        {
+          "step_id": 2,
+          "goal": "Retrieve relevant previous interaction evidence",
+          "required_capability": "trace_reuse",
+          "reason": "The learner request refers to previous work, a mistake, or personalized history.",
+          "topic": "convolution",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+        },
+        {
+          "step_id": 3,
+          "goal": "Compute or verify a matrix-based example",
+          "required_capability": "matrix_computation",
+          "reason": "The task involves matrix, convolution, kernel, or linear-algebra operations.",
+          "topic": "convolution",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+        }
+      ],
+      "metadata": {
+        "source_component": "ToolPlanner",
+        "planning_mode": "capability_first_no_retrieval",
+        "topic": "convolution",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "goal": "Give a personalized explanation of convolution after a failed first attempt.",
+        "expected_output": "visual explanation with grounded evidence",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "learner_level": "unknown",
+        "is_weak_topic": false,
+        "collected_context": {
+          "learner_id": "article_T100",
+          "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T100",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [
+              "kernel movement"
+            ],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:52:53.909596+00:00\n\nThe learner recently worked on: convolution.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use small matrix examples with step-by-step visual explanation.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+            "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:52:53.909596+00:00\n\n- Topic: convolution\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use small matrix examples with step-by-step visual explanation\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+            "recent_traces": [
+              {
+                "trace_type": "tool_interaction_summary",
+                "stored_from": "MemoryUpdateAgent",
+                "timestamp": "2026-07-25T14:52:53.909596+00:00",
+                "learner_id": "article_T100",
+                "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                "topic": "convolution",
+                "task_type": "conceptual_explanation",
+                "step_goal": "Review the student's previous understanding of convolution",
+                "expected_output": "course-grounded tutoring explanation",
+                "request_id": "REQ-13122582",
+                "trace_id": "TT-0ff68151",
+                "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "content_format": "structured_tool_sections",
+                "memory_update_summary": {
+                  "memory_update_type": "post_tool_interaction_update",
+                  "memory_update_agent": "MemoryUpdateAgent",
+                  "updated_at": "2026-07-25T14:52:53.909596+00:00",
+                  "learner_id": "article_T100",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "topic": "convolution",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "diagnosed_gap": "kernel movement",
+                  "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+                  "new_weak_topic": "kernel movement",
+                  "content_format": "structured_tool_sections",
+                  "retrieval_mode": "topic_consistency_fallback",
+                  "trace_memory_used": {
+                    "similar_successful_trace_count": 0,
+                    "failed_trace_count": 0,
+                    "reference_trace_id": null
+                  },
+                  "profile_update_policy": "conservative_metadata_update"
+                },
+                "memory_layer": "L1_interaction_trace_summary",
+                "stored_at": "2026-07-25T14:52:53.909804+00:00"
+              }
+            ],
+            "recent_trace_count": 1,
+            "profile_loaded": true,
+            "preferences_loaded": false,
+            "recent_memory_loaded": true,
+            "tutoring_memory_loaded": true,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T100",
+              "L1_traces": "var/agentic_memory/dpm/article_T100/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T100/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T100/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T100/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T100/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "Give a personalized explanation of convolution after a failed first attempt.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-CONV-003",
+                "topic": "kernel movement",
+                "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+                "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+                "tags": [
+                  "visual explanation",
+                  "kernel",
+                  "3x3 matrix",
+                  "2x2 kernel"
+                ],
+                "retrieval_score": 1
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock visual explanation: Kernel Movement"
+            ],
+            "grounding_text": "- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [],
+            "failed_traces": [
+              {
+                "trace_id": "TT-0ff68151",
+                "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                "created_at": "2026-07-25T14:52:53.905395Z",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                "step_goal": "Review the student's previous understanding of convolution",
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "attempts": 2,
+                "confidence_score": 0.9,
+                "failure_reason": "insufficient_grounding",
+                "recovery_used": true,
+                "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                "learner_id": "article_T100"
+              }
+            ]
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 1
+          }
+        },
+        "collected_context_summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 1
+        },
+        "needs_code_execution": false,
+        "code_generation_required": false,
+        "code_generation_instruction": "",
+        "recovery_reason": null,
+        "recovery_required_tools": [],
+        "previous_code_execution_errors": []
+      }
+    }
+  ],
+  "tool_results": [
+    {
+      "tool_name": "RAGTool",
+      "status": "success",
+      "success": true,
+      "content": "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.",
+      "output": "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.",
+      "evidence": [
+        "Recovery is triggered only after output validation detects a failure.",
+        "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+        "Bounded attempts prevent uncontrolled retry loops."
+      ],
+      "references": [
+        "RAGTool supported topic fallback: tool failure recovery"
+      ],
+      "metadata": {
+        "attempt": 1,
+        "source_component": "RAGTool",
+        "grounding_source": "Supported topic-consistency fallback",
+        "retrieval_mode": "topic_consistency_fallback",
+        "query": "Give a personalized explanation of convolution after a failed first attempt. Provide a small matrix/kernel example to illustrate convolution visual explanation with grounded evidence convolution Provide a small matrix/kernel example to illustrate convolution Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+        "topic_key": "tool_recovery",
+        "topic_consistent": true,
+        "retrieved_knowledge_chunks": 0,
+        "original_retrieved_knowledge_chunks": 1,
+        "topic_filter_removed_chunks": 1,
+        "registry_tool": true
+      }
+    },
+    {
+      "tool_name": "TraceSearchTool",
+      "status": "success",
+      "success": true,
+      "content": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.",
+      "output": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.",
+      "evidence": [
+        "TraceToolkit found 0 similar successful trace(s).",
+        "TraceToolkit considered 1 failed trace(s)."
+      ],
+      "references": [
+        "TraceToolkit memory traces"
+      ],
+      "metadata": {
+        "attempt": 1,
+        "source_component": "TraceSearchTool",
+        "similar_successful_trace_count": 0,
+        "failed_trace_count": 1,
+        "reference_trace_id": null,
+        "trace_context": {
+          "similar_successful_traces": [],
+          "failed_traces": [
+            {
+              "trace_id": "TT-0ff68151",
+              "trace_path": "var/agentic_traces/TT-0ff68151.json",
+              "created_at": "2026-07-25T14:52:53.905395Z",
+              "task_type": "conceptual_explanation",
+              "status": "validated",
+              "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+              "step_goal": "Review the student's previous understanding of convolution",
+              "selected_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "attempts": 2,
+              "confidence_score": 0.9,
+              "failure_reason": "insufficient_grounding",
+              "recovery_used": true,
+              "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+              "learner_id": "article_T100"
+            }
+          ]
+        },
+        "registry_tool": true
+      }
+    },
+    {
+      "tool_name": "MatrixComputationTool",
+      "status": "success",
+      "success": true,
+      "content": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+      "output": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+      "evidence": [
+        "The kernel combines values from one local input region at a time.",
+        "The example valid output is [[6, 8], [12, 14]]."
+      ],
+      "references": [
+        "MatrixComputationTool pedagogical convolution example"
+      ],
+      "metadata": {
+        "attempt": 1,
+        "source_component": "MatrixComputationTool",
+        "operation": "convolution_concept",
+        "operation_type": "convolution_concept",
+        "registry_tool": true,
+        "input_matrix": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ],
+        "kernel": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "output_matrix": [
+          [
+            6,
+            8
+          ],
+          [
+            12,
+            14
+          ]
+        ],
+        "example_generated": true
+      }
+    }
+  ],
+  "tool_results_history": [
+    [
+      {
+        "tool_name": "RAGTool",
+        "status": "success",
+        "success": true,
+        "content": "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.",
+        "output": "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.",
+        "evidence": [
+          "Recovery is triggered only after output validation detects a failure.",
+          "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+          "Bounded attempts prevent uncontrolled retry loops."
+        ],
+        "references": [
+          "RAGTool supported topic fallback: tool failure recovery"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "RAGTool",
+          "grounding_source": "Supported topic-consistency fallback",
+          "retrieval_mode": "topic_consistency_fallback",
+          "query": "Give a personalized explanation of convolution after a failed first attempt. Provide a small matrix/kernel example to illustrate convolution visual explanation with grounded evidence convolution Provide a small matrix/kernel example to illustrate convolution Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+          "topic_key": "tool_recovery",
+          "topic_consistent": true,
+          "retrieved_knowledge_chunks": 0,
+          "original_retrieved_knowledge_chunks": 1,
+          "topic_filter_removed_chunks": 1,
+          "registry_tool": true
+        }
+      },
+      {
+        "tool_name": "TraceSearchTool",
+        "status": "success",
+        "success": true,
+        "content": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.",
+        "output": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.",
+        "evidence": [
+          "TraceToolkit found 0 similar successful trace(s).",
+          "TraceToolkit considered 1 failed trace(s)."
+        ],
+        "references": [
+          "TraceToolkit memory traces"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "TraceSearchTool",
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 1,
+          "reference_trace_id": null,
+          "trace_context": {
+            "similar_successful_traces": [],
+            "failed_traces": [
+              {
+                "trace_id": "TT-0ff68151",
+                "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                "created_at": "2026-07-25T14:52:53.905395Z",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                "step_goal": "Review the student's previous understanding of convolution",
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "attempts": 2,
+                "confidence_score": 0.9,
+                "failure_reason": "insufficient_grounding",
+                "recovery_used": true,
+                "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                "learner_id": "article_T100"
+              }
+            ]
+          },
+          "registry_tool": true
+        }
+      },
+      {
+        "tool_name": "MatrixComputationTool",
+        "status": "success",
+        "success": true,
+        "content": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+        "output": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+        "evidence": [
+          "The kernel combines values from one local input region at a time.",
+          "The example valid output is [[6, 8], [12, 14]]."
+        ],
+        "references": [
+          "MatrixComputationTool pedagogical convolution example"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "MatrixComputationTool",
+          "operation": "convolution_concept",
+          "operation_type": "convolution_concept",
+          "registry_tool": true,
+          "input_matrix": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "kernel": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "output_matrix": [
+            [
+              6,
+              8
+            ],
+            [
+              12,
+              14
+            ]
+          ],
+          "example_generated": true
+        }
+      }
+    ]
+  ],
+  "validation_report": {
+    "status": "valid",
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "recommended_action": "accept"
+  },
+  "validation_reports": [
+    {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    }
+  ],
+  "recovery_used": false,
+  "attempts": 1,
+  "recovery_decisions": [],
+  "failure_recovery_steps": [],
+  "output_package": {
+    "package_id": "PKG-4bb006e9",
+    "status": "validated",
+    "content": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.\n\n## MatrixComputationTool\nA convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+    "evidence": [
+      "Recovery is triggered only after output validation detects a failure.",
+      "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+      "Bounded attempts prevent uncontrolled retry loops.",
+      "TraceToolkit found 0 similar successful trace(s).",
+      "TraceToolkit considered 1 failed trace(s).",
+      "The kernel combines values from one local input region at a time.",
+      "The example valid output is [[6, 8], [12, 14]]."
+    ],
+    "references": [
+      "RAGTool supported topic fallback: tool failure recovery",
+      "TraceToolkit memory traces",
+      "MatrixComputationTool pedagogical convolution example"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-54e5682b",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package."
+        ],
+        "TraceSearchTool": [
+          "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1."
+        ],
+        "MatrixComputationTool": [
+          "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14"
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "Supported topic-consistency fallback",
+            "retrieval_mode": "topic_consistency_fallback",
+            "query": "Give a personalized explanation of convolution after a failed first attempt. Provide a small matrix/kernel example to illustrate convolution visual explanation with grounded evidence convolution Provide a small matrix/kernel example to illustrate convolution Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "topic_key": "tool_recovery",
+            "topic_consistent": true,
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 1,
+            "registry_tool": true
+          }
+        ],
+        "TraceSearchTool": [
+          {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 1,
+            "reference_trace_id": null,
+            "trace_context": {
+              "similar_successful_traces": [],
+              "failed_traces": [
+                {
+                  "trace_id": "TT-0ff68151",
+                  "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                  "created_at": "2026-07-25T14:52:53.905395Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "step_goal": "Review the student's previous understanding of convolution",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 2,
+                  "confidence_score": 0.9,
+                  "failure_reason": "insufficient_grounding",
+                  "recovery_used": true,
+                  "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                  "learner_id": "article_T100"
+                }
+              ]
+            },
+            "registry_tool": true
+          }
+        ],
+        "MatrixComputationTool": [
+          {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "convolution_concept",
+            "operation_type": "convolution_concept",
+            "registry_tool": true,
+            "input_matrix": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                4,
+                5,
+                6
+              ],
+              [
+                7,
+                8,
+                9
+              ]
+            ],
+            "kernel": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "output_matrix": [
+              [
+                6,
+                8
+              ],
+              [
+                12,
+                14
+              ]
+            ],
+            "example_generated": true
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool",
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "final_package": {
+    "package_id": "PKG-4bb006e9",
+    "status": "validated",
+    "content": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.\n\n## MatrixComputationTool\nA convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+    "evidence": [
+      "Recovery is triggered only after output validation detects a failure.",
+      "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+      "Bounded attempts prevent uncontrolled retry loops.",
+      "TraceToolkit found 0 similar successful trace(s).",
+      "TraceToolkit considered 1 failed trace(s).",
+      "The kernel combines values from one local input region at a time.",
+      "The example valid output is [[6, 8], [12, 14]]."
+    ],
+    "references": [
+      "RAGTool supported topic fallback: tool failure recovery",
+      "TraceToolkit memory traces",
+      "MatrixComputationTool pedagogical convolution example"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-54e5682b",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package."
+        ],
+        "TraceSearchTool": [
+          "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1."
+        ],
+        "MatrixComputationTool": [
+          "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14"
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "Supported topic-consistency fallback",
+            "retrieval_mode": "topic_consistency_fallback",
+            "query": "Give a personalized explanation of convolution after a failed first attempt. Provide a small matrix/kernel example to illustrate convolution visual explanation with grounded evidence convolution Provide a small matrix/kernel example to illustrate convolution Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "topic_key": "tool_recovery",
+            "topic_consistent": true,
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 1,
+            "registry_tool": true
+          }
+        ],
+        "TraceSearchTool": [
+          {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 1,
+            "reference_trace_id": null,
+            "trace_context": {
+              "similar_successful_traces": [],
+              "failed_traces": [
+                {
+                  "trace_id": "TT-0ff68151",
+                  "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                  "created_at": "2026-07-25T14:52:53.905395Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "step_goal": "Review the student's previous understanding of convolution",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 2,
+                  "confidence_score": 0.9,
+                  "failure_reason": "insufficient_grounding",
+                  "recovery_used": true,
+                  "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                  "learner_id": "article_T100"
+                }
+              ]
+            },
+            "registry_tool": true
+          }
+        ],
+        "MatrixComputationTool": [
+          {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "convolution_concept",
+            "operation_type": "convolution_concept",
+            "registry_tool": true,
+            "input_matrix": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                4,
+                5,
+                6
+              ],
+              [
+                7,
+                8,
+                9
+              ]
+            ],
+            "kernel": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "output_matrix": [
+              [
+                6,
+                8
+              ],
+              [
+                12,
+                14
+              ]
+            ],
+            "example_generated": true
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool",
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "final_answer_status": "not_generated_yet",
+  "final_answer": null,
+  "provider_failure": null,
+  "llm_calls_metadata": {
+    "investigation_agent": {
+      "model": "llama-3.1-8b-instant",
+      "raw_response_available": true
+    },
+    "final_answer_generator": {
+      "status": "not_generated_yet",
+      "component": "TutoringAnswerWriter"
+    }
+  },
+  "memory_update_summary": {
+    "memory_update_type": "post_tool_interaction_update",
+    "memory_update_agent": "MemoryUpdateAgent",
+    "updated_at": "2026-07-25T14:53:01.824386+00:00",
+    "learner_id": "article_T100",
+    "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+    "topic": "convolution",
+    "task_type": "conceptual_explanation",
+    "status": "validated",
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "selected_tools": [
+      "RAGTool",
+      "TraceSearchTool",
+      "MatrixComputationTool"
+    ],
+    "diagnosed_gap": "kernel movement",
+    "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+    "new_weak_topic": "kernel movement",
+    "content_format": "structured_tool_sections",
+    "retrieval_mode": "topic_consistency_fallback",
+    "trace_memory_used": {
+      "similar_successful_trace_count": 0,
+      "failed_trace_count": 1,
+      "reference_trace_id": null
+    },
+    "profile_update_policy": "conservative_metadata_update"
+  },
+  "memory_update_status": "updated",
+  "events": [
+    {
+      "timestamp": "2026-07-25T14:52:53.915370Z",
+      "event_type": "tool_request_received",
+      "payload": {
+        "request_id": "REQ-8db93c94",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "user_query": "Give a personalized explanation of convolution after a failed first attempt.",
+        "query": "Give a personalized explanation of convolution after a failed first attempt.",
+        "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+        "task_type": "conceptual_explanation",
+        "expected_output": "visual explanation with grounded evidence",
+        "workflow_source": "personalized_problem_tutoring",
+        "metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T100",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "plan_step_id": 2,
+          "step_reason": "to provide a concrete example of convolution",
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "convolution",
+            "task_type": "conceptual_explanation",
+            "student_intent": "understand convolution after failed attempt",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "What was the student's previous understanding of convolution?",
+              "What specific aspect of convolution did the student struggle with?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Review the student's previous understanding of convolution",
+                "needs_tool": false,
+                "suggested_tools": [],
+                "reason": "to understand the student's knowledge gap"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "to provide a concrete example of convolution"
+              },
+              {
+                "step_id": 3,
+                "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "to provide relevant context for convolution"
+              }
+            ],
+            "tool_request_goal": "Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool",
+            "learner_id": "article_T100",
+            "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand convolution after failed attempt\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What was the student's previous understanding of convolution?\",\n    \"What specific aspect of convolution did the student struggle with?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Review the student's previous understanding of convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"to understand the student's knowledge gap\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a small matrix/kernel example to illustrate convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"to provide a concrete example of convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Use RAGTool to provide course-grounded evidence for convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\"],\n      \"reason\": \"to provide relevant context for convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 2,
+            "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "to provide a concrete example of convolution"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Review the student's previous understanding of convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "to understand the student's knowledge gap"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "to provide a concrete example of convolution"
+            },
+            {
+              "step_id": 3,
+              "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "to provide relevant context for convolution"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": true
+          },
+          "force_recovery_test": false
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:53:00.931449Z",
+      "event_type": "task_analyzed",
+      "payload": {
+        "request_id": "REQ-8db93c94",
+        "workflow_source": "personalized_problem_tutoring",
+        "original_task_type": "conceptual_explanation",
+        "task_type": "conceptual_explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "topic": "convolution",
+        "goal": "Give a personalized explanation of convolution after a failed first attempt.",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "user_query": "Give a personalized explanation of convolution after a failed first attempt.",
+        "expected_output": "visual explanation with grounded evidence",
+        "learner_level": "beginner",
+        "needs_visual_support": false,
+        "explicit_visual_requested": false,
+        "needs_calculation": false,
+        "needs_code_execution": false,
+        "needs_debugging": false,
+        "needs_grounding": true,
+        "code_generation_required": false,
+        "tool_request_goal": "Give a personalized explanation of convolution after a failed first attempt.",
+        "code_generation_instruction": "",
+        "reasoning_summary": "Fallback task analysis generated from request text.",
+        "analysis_strategy": "deterministic_fallback_after_llm_failure",
+        "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+        "request_metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T100",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "plan_step_id": 2,
+          "step_reason": "to provide a concrete example of convolution",
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "convolution",
+            "task_type": "conceptual_explanation",
+            "student_intent": "understand convolution after failed attempt",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "What was the student's previous understanding of convolution?",
+              "What specific aspect of convolution did the student struggle with?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Review the student's previous understanding of convolution",
+                "needs_tool": false,
+                "suggested_tools": [],
+                "reason": "to understand the student's knowledge gap"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "to provide a concrete example of convolution"
+              },
+              {
+                "step_id": 3,
+                "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "to provide relevant context for convolution"
+              }
+            ],
+            "tool_request_goal": "Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool",
+            "learner_id": "article_T100",
+            "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand convolution after failed attempt\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What was the student's previous understanding of convolution?\",\n    \"What specific aspect of convolution did the student struggle with?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Review the student's previous understanding of convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"to understand the student's knowledge gap\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a small matrix/kernel example to illustrate convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"to provide a concrete example of convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Use RAGTool to provide course-grounded evidence for convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\"],\n      \"reason\": \"to provide relevant context for convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 2,
+            "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "to provide a concrete example of convolution"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Review the student's previous understanding of convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "to understand the student's knowledge gap"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "to provide a concrete example of convolution"
+            },
+            {
+              "step_id": 3,
+              "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "to provide relevant context for convolution"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": true
+          },
+          "force_recovery_test": false
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:53:01.815251Z",
+      "event_type": "task_context_analyzed",
+      "payload": {
+        "request_id": "REQ-8db93c94",
+        "workflow_source": "personalized_problem_tutoring",
+        "original_task_type": "conceptual_explanation",
+        "task_type": "conceptual_explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "topic": "convolution",
+        "goal": "Give a personalized explanation of convolution after a failed first attempt.",
+        "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+        "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+        "user_query": "Give a personalized explanation of convolution after a failed first attempt.",
+        "expected_output": "visual explanation with grounded evidence",
+        "learner_level": "unknown",
+        "needs_visual_support": false,
+        "explicit_visual_requested": false,
+        "needs_calculation": false,
+        "needs_code_execution": false,
+        "needs_debugging": false,
+        "needs_grounding": true,
+        "code_generation_required": false,
+        "tool_request_goal": "Give a personalized explanation of convolution after a failed first attempt.",
+        "code_generation_instruction": "",
+        "reasoning_summary": "Fallback task analysis generated from request text.",
+        "analysis_strategy": "deterministic_fallback_after_llm_failure",
+        "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+        "request_metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T100",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "plan_step_id": 2,
+          "step_reason": "to provide a concrete example of convolution",
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "convolution",
+            "task_type": "conceptual_explanation",
+            "student_intent": "understand convolution after failed attempt",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "What was the student's previous understanding of convolution?",
+              "What specific aspect of convolution did the student struggle with?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Review the student's previous understanding of convolution",
+                "needs_tool": false,
+                "suggested_tools": [],
+                "reason": "to understand the student's knowledge gap"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "to provide a concrete example of convolution"
+              },
+              {
+                "step_id": 3,
+                "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "to provide relevant context for convolution"
+              }
+            ],
+            "tool_request_goal": "Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool",
+            "learner_id": "article_T100",
+            "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand convolution after failed attempt\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What was the student's previous understanding of convolution?\",\n    \"What specific aspect of convolution did the student struggle with?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Review the student's previous understanding of convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"to understand the student's knowledge gap\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a small matrix/kernel example to illustrate convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"to provide a concrete example of convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Use RAGTool to provide course-grounded evidence for convolution\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\"],\n      \"reason\": \"to provide relevant context for convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a small matrix/kernel example to illustrate convolution using VisualMatrixTool\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 2,
+            "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "to provide a concrete example of convolution"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Review the student's previous understanding of convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "to understand the student's knowledge gap"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a small matrix/kernel example to illustrate convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "to provide a concrete example of convolution"
+            },
+            {
+              "step_id": 3,
+              "step_goal": "Use RAGTool to provide course-grounded evidence for convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "to provide relevant context for convolution"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": true
+          },
+          "force_recovery_test": false
+        },
+        "learner_id": "article_T100",
+        "query": "Give a personalized explanation of convolution after a failed first attempt.",
+        "collected_context": {
+          "learner_id": "article_T100",
+          "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T100",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [
+              "kernel movement"
+            ],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:52:53.909596+00:00\n\nThe learner recently worked on: convolution.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use small matrix examples with step-by-step visual explanation.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+            "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:52:53.909596+00:00\n\n- Topic: convolution\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use small matrix examples with step-by-step visual explanation\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+            "recent_traces": [
+              {
+                "trace_type": "tool_interaction_summary",
+                "stored_from": "MemoryUpdateAgent",
+                "timestamp": "2026-07-25T14:52:53.909596+00:00",
+                "learner_id": "article_T100",
+                "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                "topic": "convolution",
+                "task_type": "conceptual_explanation",
+                "step_goal": "Review the student's previous understanding of convolution",
+                "expected_output": "course-grounded tutoring explanation",
+                "request_id": "REQ-13122582",
+                "trace_id": "TT-0ff68151",
+                "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "content_format": "structured_tool_sections",
+                "memory_update_summary": {
+                  "memory_update_type": "post_tool_interaction_update",
+                  "memory_update_agent": "MemoryUpdateAgent",
+                  "updated_at": "2026-07-25T14:52:53.909596+00:00",
+                  "learner_id": "article_T100",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "topic": "convolution",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "diagnosed_gap": "kernel movement",
+                  "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+                  "new_weak_topic": "kernel movement",
+                  "content_format": "structured_tool_sections",
+                  "retrieval_mode": "topic_consistency_fallback",
+                  "trace_memory_used": {
+                    "similar_successful_trace_count": 0,
+                    "failed_trace_count": 0,
+                    "reference_trace_id": null
+                  },
+                  "profile_update_policy": "conservative_metadata_update"
+                },
+                "memory_layer": "L1_interaction_trace_summary",
+                "stored_at": "2026-07-25T14:52:53.909804+00:00"
+              }
+            ],
+            "recent_trace_count": 1,
+            "profile_loaded": true,
+            "preferences_loaded": false,
+            "recent_memory_loaded": true,
+            "tutoring_memory_loaded": true,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T100",
+              "L1_traces": "var/agentic_memory/dpm/article_T100/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T100/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T100/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T100/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T100/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "Give a personalized explanation of convolution after a failed first attempt.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-CONV-003",
+                "topic": "kernel movement",
+                "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+                "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+                "tags": [
+                  "visual explanation",
+                  "kernel",
+                  "3x3 matrix",
+                  "2x2 kernel"
+                ],
+                "retrieval_score": 1
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock visual explanation: Kernel Movement"
+            ],
+            "grounding_text": "- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [],
+            "failed_traces": [
+              {
+                "trace_id": "TT-0ff68151",
+                "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                "created_at": "2026-07-25T14:52:53.905395Z",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                "step_goal": "Review the student's previous understanding of convolution",
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "attempts": 2,
+                "confidence_score": 0.9,
+                "failure_reason": "insufficient_grounding",
+                "recovery_used": true,
+                "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                "learner_id": "article_T100"
+              }
+            ]
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 1
+          }
+        },
+        "is_weak_topic": false,
+        "knowledge_snippets": [
+          {
+            "chunk_id": "SKG-CONV-001",
+            "topic": "convolution",
+            "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+            "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "tags": [
+              "convolution",
+              "kernel",
+              "image processing",
+              "matrix"
+            ],
+            "retrieval_score": 4
+          },
+          {
+            "chunk_id": "SKG-CONV-002",
+            "topic": "convolution",
+            "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+            "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "tags": [
+              "convolution",
+              "kernel movement",
+              "output value",
+              "matrix"
+            ],
+            "retrieval_score": 4
+          },
+          {
+            "chunk_id": "SKG-CONV-003",
+            "topic": "kernel movement",
+            "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+            "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+            "tags": [
+              "visual explanation",
+              "kernel",
+              "3x3 matrix",
+              "2x2 kernel"
+            ],
+            "retrieval_score": 1
+          }
+        ],
+        "grounding_text": "- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+        "similar_successful_traces": [],
+        "failed_traces": [
+          {
+            "trace_id": "TT-0ff68151",
+            "trace_path": "var/agentic_traces/TT-0ff68151.json",
+            "created_at": "2026-07-25T14:52:53.905395Z",
+            "task_type": "conceptual_explanation",
+            "status": "validated",
+            "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+            "step_goal": "Review the student's previous understanding of convolution",
+            "selected_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "attempts": 2,
+            "confidence_score": 0.9,
+            "failure_reason": "insufficient_grounding",
+            "recovery_used": true,
+            "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+            "learner_id": "article_T100"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:53:01.816219Z",
+      "event_type": "tool_plan_created",
+      "payload": {
+        "plan_id": "PLAN-3719d804",
+        "task_type": "conceptual_explanation",
+        "selected_tools": [],
+        "steps": [
+          {
+            "step_id": 1,
+            "goal": "Retrieve grounded educational knowledge",
+            "required_capability": "grounding",
+            "reason": "The tutoring answer should be supported by verified educational content.",
+            "topic": "convolution",
+            "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+          },
+          {
+            "step_id": 2,
+            "goal": "Retrieve relevant previous interaction evidence",
+            "required_capability": "trace_reuse",
+            "reason": "The learner request refers to previous work, a mistake, or personalized history.",
+            "topic": "convolution",
+            "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+          },
+          {
+            "step_id": 3,
+            "goal": "Compute or verify a matrix-based example",
+            "required_capability": "matrix_computation",
+            "reason": "The task involves matrix, convolution, kernel, or linear-algebra operations.",
+            "topic": "convolution",
+            "current_step": "Provide a small matrix/kernel example to illustrate convolution"
+          }
+        ],
+        "metadata": {
+          "source_component": "ToolPlanner",
+          "planning_mode": "capability_first_no_retrieval",
+          "topic": "convolution",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+          "goal": "Give a personalized explanation of convolution after a failed first attempt.",
+          "expected_output": "visual explanation with grounded evidence",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "learner_level": "unknown",
+          "is_weak_topic": false,
+          "collected_context": {
+            "learner_id": "article_T100",
+            "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+            "task_type": "conceptual_explanation",
+            "topic": "convolution",
+            "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+            "dpm": {
+              "memory_source": "DynamicPersonalMemory",
+              "memory_storage": "file_based_local",
+              "memory_layers": [
+                "L1_interaction_traces",
+                "L2_tutoring_notes",
+                "L3_profile_preferences"
+              ],
+              "learner_id": "article_T100",
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "preferred_examples": [],
+              "avoid": [],
+              "known_topics": [],
+              "weak_topics": [
+                "kernel movement"
+              ],
+              "learning_goals": [],
+              "is_weak_topic": false,
+              "is_known_topic": false,
+              "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:52:53.909596+00:00\n\nThe learner recently worked on: convolution.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use small matrix examples with step-by-step visual explanation.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+              "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:52:53.909596+00:00\n\n- Topic: convolution\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use small matrix examples with step-by-step visual explanation\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+              "recent_traces": [
+                {
+                  "trace_type": "tool_interaction_summary",
+                  "stored_from": "MemoryUpdateAgent",
+                  "timestamp": "2026-07-25T14:52:53.909596+00:00",
+                  "learner_id": "article_T100",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "topic": "convolution",
+                  "task_type": "conceptual_explanation",
+                  "step_goal": "Review the student's previous understanding of convolution",
+                  "expected_output": "course-grounded tutoring explanation",
+                  "request_id": "REQ-13122582",
+                  "trace_id": "TT-0ff68151",
+                  "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                  "status": "validated",
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "content_format": "structured_tool_sections",
+                  "memory_update_summary": {
+                    "memory_update_type": "post_tool_interaction_update",
+                    "memory_update_agent": "MemoryUpdateAgent",
+                    "updated_at": "2026-07-25T14:52:53.909596+00:00",
+                    "learner_id": "article_T100",
+                    "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                    "topic": "convolution",
+                    "task_type": "conceptual_explanation",
+                    "status": "validated",
+                    "confidence_score": 0.9,
+                    "failure_reason": null,
+                    "selected_tools": [
+                      "RAGTool",
+                      "TraceSearchTool"
+                    ],
+                    "diagnosed_gap": "kernel movement",
+                    "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+                    "new_weak_topic": "kernel movement",
+                    "content_format": "structured_tool_sections",
+                    "retrieval_mode": "topic_consistency_fallback",
+                    "trace_memory_used": {
+                      "similar_successful_trace_count": 0,
+                      "failed_trace_count": 0,
+                      "reference_trace_id": null
+                    },
+                    "profile_update_policy": "conservative_metadata_update"
+                  },
+                  "memory_layer": "L1_interaction_trace_summary",
+                  "stored_at": "2026-07-25T14:52:53.909804+00:00"
+                }
+              ],
+              "recent_trace_count": 1,
+              "profile_loaded": true,
+              "preferences_loaded": false,
+              "recent_memory_loaded": true,
+              "tutoring_memory_loaded": true,
+              "memory_paths": {
+                "base_dir": "var/agentic_memory/dpm/article_T100",
+                "L1_traces": "var/agentic_memory/dpm/article_T100/L1/traces.jsonl",
+                "L2_tutoring": "var/agentic_memory/dpm/article_T100/L2/tutoring.md",
+                "L3_profile": "var/agentic_memory/dpm/article_T100/L3/profile.json",
+                "L3_preferences": "var/agentic_memory/dpm/article_T100/L3/preferences.json",
+                "L3_recent": "var/agentic_memory/dpm/article_T100/L3/recent.md"
+              },
+              "topic": "convolution",
+              "task_type": "conceptual_explanation"
+            },
+            "skg": {
+              "kb_name": "default",
+              "query": "Give a personalized explanation of convolution after a failed first attempt.",
+              "topic": "convolution",
+              "snippets": [
+                {
+                  "chunk_id": "SKG-CONV-001",
+                  "topic": "convolution",
+                  "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel",
+                    "image processing",
+                    "matrix"
+                  ],
+                  "retrieval_score": 4
+                },
+                {
+                  "chunk_id": "SKG-CONV-002",
+                  "topic": "convolution",
+                  "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel movement",
+                    "output value",
+                    "matrix"
+                  ],
+                  "retrieval_score": 4
+                },
+                {
+                  "chunk_id": "SKG-CONV-003",
+                  "topic": "kernel movement",
+                  "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+                  "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+                  "tags": [
+                    "visual explanation",
+                    "kernel",
+                    "3x3 matrix",
+                    "2x2 kernel"
+                  ],
+                  "retrieval_score": 1
+                }
+              ],
+              "sources": [
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock visual explanation: Kernel Movement"
+              ],
+              "grounding_text": "- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values."
+            },
+            "trace_memory": {
+              "similar_successful_traces": [],
+              "failed_traces": [
+                {
+                  "trace_id": "TT-0ff68151",
+                  "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                  "created_at": "2026-07-25T14:52:53.905395Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "step_goal": "Review the student's previous understanding of convolution",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 2,
+                  "confidence_score": 0.9,
+                  "failure_reason": "insufficient_grounding",
+                  "recovery_used": true,
+                  "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                  "learner_id": "article_T100"
+                }
+              ]
+            },
+            "summary": {
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "is_weak_topic": false,
+              "retrieved_knowledge_chunks": 3,
+              "similar_successful_trace_count": 0,
+              "failed_trace_count": 1
+            }
+          },
+          "collected_context_summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 1
+          },
+          "needs_code_execution": false,
+          "code_generation_required": false,
+          "code_generation_instruction": "",
+          "recovery_reason": null,
+          "recovery_required_tools": [],
+          "previous_code_execution_errors": []
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:53:01.816933Z",
+      "event_type": "tools_selected",
+      "payload": [
+        "RAGTool",
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:53:01.818103Z",
+      "event_type": "tools_executed",
+      "payload": [
+        {
+          "tool_name": "RAGTool",
+          "status": "success",
+          "success": true,
+          "content": "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.",
+          "output": "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.",
+          "evidence": [
+            "Recovery is triggered only after output validation detects a failure.",
+            "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+            "Bounded attempts prevent uncontrolled retry loops."
+          ],
+          "references": [
+            "RAGTool supported topic fallback: tool failure recovery"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "Supported topic-consistency fallback",
+            "retrieval_mode": "topic_consistency_fallback",
+            "query": "Give a personalized explanation of convolution after a failed first attempt. Provide a small matrix/kernel example to illustrate convolution visual explanation with grounded evidence convolution Provide a small matrix/kernel example to illustrate convolution Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "topic_key": "tool_recovery",
+            "topic_consistent": true,
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 1,
+            "registry_tool": true
+          }
+        },
+        {
+          "tool_name": "TraceSearchTool",
+          "status": "success",
+          "success": true,
+          "content": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.",
+          "output": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.",
+          "evidence": [
+            "TraceToolkit found 0 similar successful trace(s).",
+            "TraceToolkit considered 1 failed trace(s)."
+          ],
+          "references": [
+            "TraceToolkit memory traces"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 1,
+            "reference_trace_id": null,
+            "trace_context": {
+              "similar_successful_traces": [],
+              "failed_traces": [
+                {
+                  "trace_id": "TT-0ff68151",
+                  "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                  "created_at": "2026-07-25T14:52:53.905395Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                  "step_goal": "Review the student's previous understanding of convolution",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 2,
+                  "confidence_score": 0.9,
+                  "failure_reason": "insufficient_grounding",
+                  "recovery_used": true,
+                  "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                  "learner_id": "article_T100"
+                }
+              ]
+            },
+            "registry_tool": true
+          }
+        },
+        {
+          "tool_name": "MatrixComputationTool",
+          "status": "success",
+          "success": true,
+          "content": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+          "output": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+          "evidence": [
+            "The kernel combines values from one local input region at a time.",
+            "The example valid output is [[6, 8], [12, 14]]."
+          ],
+          "references": [
+            "MatrixComputationTool pedagogical convolution example"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "convolution_concept",
+            "operation_type": "convolution_concept",
+            "registry_tool": true,
+            "input_matrix": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                4,
+                5,
+                6
+              ],
+              [
+                7,
+                8,
+                9
+              ]
+            ],
+            "kernel": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "output_matrix": [
+              [
+                6,
+                8
+              ],
+              [
+                12,
+                14
+              ]
+            ],
+            "example_generated": true
+          }
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:53:01.818704Z",
+      "event_type": "output_validated",
+      "payload": {
+        "status": "valid",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "recommended_action": "accept"
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:53:01.819336Z",
+      "event_type": "output_package_built",
+      "payload": {
+        "package_id": "PKG-4bb006e9",
+        "status": "validated",
+        "content": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1.\n\n## MatrixComputationTool\nA convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+        "evidence": [
+          "Recovery is triggered only after output validation detects a failure.",
+          "Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.",
+          "Bounded attempts prevent uncontrolled retry loops.",
+          "TraceToolkit found 0 similar successful trace(s).",
+          "TraceToolkit considered 1 failed trace(s).",
+          "The kernel combines values from one local input region at a time.",
+          "The example valid output is [[6, 8], [12, 14]]."
+        ],
+        "references": [
+          "RAGTool supported topic fallback: tool failure recovery",
+          "TraceToolkit memory traces",
+          "MatrixComputationTool pedagogical convolution example"
+        ],
+        "validation_report": {
+          "status": "valid",
+          "confidence_score": 0.9,
+          "failure_reason": null,
+          "recommended_action": "accept"
+        },
+        "trace_id": "TT-54e5682b",
+        "metadata": {
+          "workflow_source": "personalized_problem_tutoring",
+          "task_type": "conceptual_explanation",
+          "current_step": "Provide a small matrix/kernel example to illustrate convolution",
+          "analyzed_task_type": "conceptual_explanation",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "request_role": "pedagogical_support",
+          "satisfies_primary_request": false,
+          "tool_outputs": {
+            "RAGTool": [
+              "Topic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package."
+            ],
+            "TraceSearchTool": [
+              "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 1."
+            ],
+            "MatrixComputationTool": [
+              "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14"
+            ]
+          },
+          "tool_metadata": {
+            "RAGTool": [
+              {
+                "attempt": 1,
+                "source_component": "RAGTool",
+                "grounding_source": "Supported topic-consistency fallback",
+                "retrieval_mode": "topic_consistency_fallback",
+                "query": "Give a personalized explanation of convolution after a failed first attempt. Provide a small matrix/kernel example to illustrate convolution visual explanation with grounded evidence convolution Provide a small matrix/kernel example to illustrate convolution Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+                "topic_key": "tool_recovery",
+                "topic_consistent": true,
+                "retrieved_knowledge_chunks": 0,
+                "original_retrieved_knowledge_chunks": 1,
+                "topic_filter_removed_chunks": 1,
+                "registry_tool": true
+              }
+            ],
+            "TraceSearchTool": [
+              {
+                "attempt": 1,
+                "source_component": "TraceSearchTool",
+                "similar_successful_trace_count": 0,
+                "failed_trace_count": 1,
+                "reference_trace_id": null,
+                "trace_context": {
+                  "similar_successful_traces": [],
+                  "failed_traces": [
+                    {
+                      "trace_id": "TT-0ff68151",
+                      "trace_path": "var/agentic_traces/TT-0ff68151.json",
+                      "created_at": "2026-07-25T14:52:53.905395Z",
+                      "task_type": "conceptual_explanation",
+                      "status": "validated",
+                      "student_question": "Give a personalized explanation of convolution after a failed first attempt.",
+                      "step_goal": "Review the student's previous understanding of convolution",
+                      "selected_tools": [
+                        "RAGTool",
+                        "TraceSearchTool"
+                      ],
+                      "attempts": 2,
+                      "confidence_score": 0.9,
+                      "failure_reason": "insufficient_grounding",
+                      "recovery_used": true,
+                      "content_preview": "## RAGTool\nTopic-consistent support for tool failure recovery:\n- The validator first detects that an output is incomplete, failed, or unsupported.\n- Failure Recovery keeps the failure reason and requests the missing or alternative capability.\n- The corrected tool output is executed and validated again.\n- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 0. Fail",
+                      "learner_id": "article_T100"
+                    }
+                  ]
+                },
+                "registry_tool": true
+              }
+            ],
+            "MatrixComputationTool": [
+              {
+                "attempt": 1,
+                "source_component": "MatrixComputationTool",
+                "operation": "convolution_concept",
+                "operation_type": "convolution_concept",
+                "registry_tool": true,
+                "input_matrix": [
+                  [
+                    1,
+                    2,
+                    3
+                  ],
+                  [
+                    4,
+                    5,
+                    6
+                  ],
+                  [
+                    7,
+                    8,
+                    9
+                  ]
+                ],
+                "kernel": [
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ]
+                ],
+                "output_matrix": [
+                  [
+                    6,
+                    8
+                  ],
+                  [
+                    12,
+                    14
+                  ]
+                ],
+                "example_generated": true
+              }
+            ]
+          },
+          "tool_names": [
+            "RAGTool",
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "content_format": "structured_tool_sections"
+        }
+      }
+    }
+  ],
+  "trace_path": "var/agentic_traces/TT-54e5682b.json",
+  "updated_at": "2026-07-25T14:53:01.826673Z"
+}

@@ -1,0 +1,2451 @@
+{
+  "trace_schema_version": "phase_13d_full_lifecycle_v1",
+  "trace_id": "TT-79be4fbe",
+  "created_at": "2026-07-25T14:48:11.470655Z",
+  "request_id": "REQ-4b34042c",
+  "learner_id": "article_T091",
+  "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+  "task_type": "conceptual_explanation",
+  "workflow_source": "personalized_problem_tutoring",
+  "current_step": "Define convolution and its purpose",
+  "expected_output": "course-grounded tutoring explanation",
+  "investigation_result": {
+    "topic": "convolution",
+    "task_type": "conceptual_explanation",
+    "student_intent": "explain convolution without RAG grounding",
+    "difficulty_estimate": "intermediate",
+    "meta_questions": [
+      "What is the student's prior knowledge of convolution?",
+      "How will the student apply the concept of convolution?"
+    ],
+    "required_context": [
+      "DPM",
+      "SKG",
+      "TraceToolkit"
+    ],
+    "initial_tutoring_plan": [
+      {
+        "step_id": 1,
+        "step_goal": "Define convolution and its purpose",
+        "needs_tool": true,
+        "suggested_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "reason": "Establish a clear understanding of convolution"
+      },
+      {
+        "step_id": 2,
+        "step_goal": "Visualize a small 2D convolution operation",
+        "needs_tool": true,
+        "suggested_tools": [
+          "VisualMatrixTool",
+          "TraceSearchTool"
+        ],
+        "reason": "Use a visual example to illustrate convolution"
+      },
+      {
+        "step_id": 3,
+        "step_goal": "Explain the role of the kernel in convolution",
+        "needs_tool": true,
+        "suggested_tools": [
+          "RAGTool",
+          "VisualMatrixTool",
+          "TraceSearchTool"
+        ],
+        "reason": "Highlight the importance of the kernel in convolution"
+      }
+    ],
+    "tool_request_goal": "Visualize a small 2D convolution operation using VisualMatrixTool",
+    "learner_id": "article_T091",
+    "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+    "llm_model": "llama-3.1-8b-instant",
+    "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"explain convolution without RAG grounding\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What is the student's prior knowledge of convolution?\",\n    \"How will the student apply the concept of convolution?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define convolution and its purpose\",\n      \"needs_tool\": false,\n      \"reason\": \"Establish a clear understanding of convolution\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small 2D convolution operation\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"Use a visual example to illustrate convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Explain the role of the kernel in convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"Highlight the importance of the kernel in convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a small 2D convolution operation using VisualMatrixTool\"\n}"
+  },
+  "analyzed_task": {
+    "request_id": "REQ-4b34042c",
+    "workflow_source": "personalized_problem_tutoring",
+    "original_task_type": "conceptual_explanation",
+    "task_type": "conceptual_explanation",
+    "operation_type": "convolution_concept",
+    "operation_parameters": {
+      "matrices": [],
+      "shapes": [],
+      "stride": 1,
+      "padding": 0
+    },
+    "topic": "convolution",
+    "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+    "current_step": "Define convolution and its purpose",
+    "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+    "user_query": "Explain convolution, but force the first attempt without RAG grounding.",
+    "expected_output": "course-grounded tutoring explanation",
+    "learner_level": "beginner",
+    "needs_visual_support": false,
+    "explicit_visual_requested": false,
+    "needs_calculation": false,
+    "needs_code_execution": false,
+    "needs_debugging": false,
+    "needs_grounding": true,
+    "code_generation_required": false,
+    "tool_request_goal": "Explain convolution, but force the first attempt without RAG grounding.",
+    "code_generation_instruction": "",
+    "reasoning_summary": "Fallback task analysis generated from request text.",
+    "analysis_strategy": "deterministic_fallback_after_llm_failure",
+    "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+    "request_metadata": {
+      "source_component": "ToolRequestAgent",
+      "learner_id": "article_T091",
+      "current_step": "Define convolution and its purpose",
+      "plan_step_id": 1,
+      "step_reason": "Establish a clear understanding of convolution",
+      "suggested_tools": [
+        "RAGTool",
+        "TraceSearchTool"
+      ],
+      "workflow_source": "personalized_problem_tutoring",
+      "investigation_result": {
+        "topic": "convolution",
+        "task_type": "conceptual_explanation",
+        "student_intent": "explain convolution without RAG grounding",
+        "difficulty_estimate": "intermediate",
+        "meta_questions": [
+          "What is the student's prior knowledge of convolution?",
+          "How will the student apply the concept of convolution?"
+        ],
+        "required_context": [
+          "DPM",
+          "SKG",
+          "TraceToolkit"
+        ],
+        "initial_tutoring_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Define convolution and its purpose",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "reason": "Establish a clear understanding of convolution"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Visualize a small 2D convolution operation",
+            "needs_tool": true,
+            "suggested_tools": [
+              "VisualMatrixTool",
+              "TraceSearchTool"
+            ],
+            "reason": "Use a visual example to illustrate convolution"
+          },
+          {
+            "step_id": 3,
+            "step_goal": "Explain the role of the kernel in convolution",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "VisualMatrixTool",
+              "TraceSearchTool"
+            ],
+            "reason": "Highlight the importance of the kernel in convolution"
+          }
+        ],
+        "tool_request_goal": "Visualize a small 2D convolution operation using VisualMatrixTool",
+        "learner_id": "article_T091",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "llm_model": "llama-3.1-8b-instant",
+        "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"explain convolution without RAG grounding\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What is the student's prior knowledge of convolution?\",\n    \"How will the student apply the concept of convolution?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define convolution and its purpose\",\n      \"needs_tool\": false,\n      \"reason\": \"Establish a clear understanding of convolution\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small 2D convolution operation\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"Use a visual example to illustrate convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Explain the role of the kernel in convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"Highlight the importance of the kernel in convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a small 2D convolution operation using VisualMatrixTool\"\n}"
+      },
+      "current_plan_step": {
+        "step_id": 1,
+        "step_goal": "Define convolution and its purpose",
+        "needs_tool": true,
+        "suggested_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "task_type": "conceptual_explanation",
+        "expected_output": "course-grounded tutoring explanation",
+        "reason": "Establish a clear understanding of convolution"
+      },
+      "full_investigation_plan": [
+        {
+          "step_id": 1,
+          "step_goal": "Define convolution and its purpose",
+          "needs_tool": true,
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "course-grounded tutoring explanation",
+          "reason": "Establish a clear understanding of convolution"
+        },
+        {
+          "step_id": 2,
+          "step_goal": "Visualize a small 2D convolution operation",
+          "needs_tool": true,
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "visual explanation with grounded evidence",
+          "reason": "Use a visual example to illustrate convolution"
+        },
+        {
+          "step_id": 3,
+          "step_goal": "Explain the role of the kernel in convolution",
+          "needs_tool": true,
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "visual explanation with grounded evidence",
+          "reason": "Highlight the importance of the kernel in convolution"
+        }
+      ],
+      "workflow_metadata": {
+        "source": "run_agentic_tutoring_demo",
+        "force_recovery_test": true
+      },
+      "force_recovery_test": true
+    },
+    "force_recovery_test": true
+  },
+  "collected_context_summary": {
+    "learner_level": "unknown",
+    "preferred_explanation_style": "unknown",
+    "is_weak_topic": false,
+    "retrieved_knowledge_chunks": 3,
+    "similar_successful_trace_count": 0,
+    "failed_trace_count": 0
+  },
+  "dpm_profile_snapshot": {
+    "memory_source": "DynamicPersonalMemory",
+    "memory_storage": "file_based_local",
+    "memory_layers": [
+      "L1_interaction_traces",
+      "L2_tutoring_notes",
+      "L3_profile_preferences"
+    ],
+    "learner_id": "article_T091",
+    "learner_level": "unknown",
+    "preferred_explanation_style": "unknown",
+    "preferred_examples": [],
+    "avoid": [],
+    "known_topics": [],
+    "weak_topics": [],
+    "learning_goals": [],
+    "is_weak_topic": false,
+    "is_known_topic": false,
+    "recent_memory": "",
+    "tutoring_memory": "",
+    "recent_traces": [],
+    "recent_trace_count": 0,
+    "profile_loaded": false,
+    "preferences_loaded": false,
+    "recent_memory_loaded": false,
+    "tutoring_memory_loaded": false,
+    "memory_paths": {
+      "base_dir": "var/agentic_memory/dpm/article_T091",
+      "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+      "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+      "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+      "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+      "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+    },
+    "topic": "convolution",
+    "task_type": "conceptual_explanation"
+  },
+  "skg_context": {
+    "kb_name": "default",
+    "query": "Explain convolution, but force the first attempt without RAG grounding.",
+    "topic": "convolution",
+    "snippets": [
+      {
+        "chunk_id": "SKG-CONV-002",
+        "topic": "convolution",
+        "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+        "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+        "tags": [
+          "convolution",
+          "kernel movement",
+          "output value",
+          "matrix"
+        ],
+        "retrieval_score": 5
+      },
+      {
+        "chunk_id": "SKG-CONV-001",
+        "topic": "convolution",
+        "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+        "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+        "tags": [
+          "convolution",
+          "kernel",
+          "image processing",
+          "matrix"
+        ],
+        "retrieval_score": 4
+      },
+      {
+        "chunk_id": "SKG-OVERFIT-001",
+        "topic": "overfitting",
+        "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+        "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+        "tags": [
+          "machine learning",
+          "overfitting",
+          "generalization"
+        ],
+        "retrieval_score": 1
+      }
+    ],
+    "sources": [
+      "OpenTutorAI mock lesson: Image Processing / Convolution",
+      "OpenTutorAI mock lesson: Image Processing / Convolution",
+      "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+    ],
+    "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+  },
+  "skg_retrieved_chunks": [
+    {
+      "tool_name": "RAGTool",
+      "retrieval_mode": "jsonl_hybrid_lexical",
+      "scores": [
+        7.605422
+      ],
+      "chunk_ids": [
+        "SKG-9636f398"
+      ],
+      "matched_terms": [
+        [
+          "cnn",
+          "convolution",
+          "correlation",
+          "kernel",
+          "matrix",
+          "patch",
+          "sliding"
+        ]
+      ],
+      "score_breakdown": [
+        {
+          "lexical_score": 6.105422,
+          "phrase_score": 0.0,
+          "important_term_score": 1.5,
+          "title_source_score": 0.0,
+          "matched_phrases": []
+        }
+      ],
+      "evidence": [
+        "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+      ],
+      "references": [
+        "var/agentic_memory/skg_index/documents/convolution_demo.md"
+      ]
+    }
+  ],
+  "similar_successful_traces": [],
+  "failed_traces": [],
+  "tool_selection": {},
+  "selection_history": [],
+  "selection_strategy": null,
+  "reference_trace_id": null,
+  "tool_plan": {
+    "plan_id": "PLAN-0b197f2e",
+    "task_type": "conceptual_explanation",
+    "selected_tools": [],
+    "steps": [
+      {
+        "step_id": 1,
+        "goal": "Retrieve grounded educational knowledge",
+        "required_capability": "grounding",
+        "reason": "The tutoring answer should be supported by verified educational content.",
+        "topic": "convolution",
+        "current_step": "Define convolution and its purpose"
+      }
+    ],
+    "metadata": {
+      "source_component": "ToolPlanner",
+      "planning_mode": "capability_first_no_retrieval",
+      "topic": "convolution",
+      "current_step": "Define convolution and its purpose",
+      "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+      "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+      "expected_output": "course-grounded tutoring explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "learner_level": "unknown",
+      "is_weak_topic": false,
+      "collected_context": {
+        "learner_id": "article_T091",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "task_type": "conceptual_explanation",
+        "topic": "convolution",
+        "current_step": "Define convolution and its purpose",
+        "dpm": {
+          "memory_source": "DynamicPersonalMemory",
+          "memory_storage": "file_based_local",
+          "memory_layers": [
+            "L1_interaction_traces",
+            "L2_tutoring_notes",
+            "L3_profile_preferences"
+          ],
+          "learner_id": "article_T091",
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "preferred_examples": [],
+          "avoid": [],
+          "known_topics": [],
+          "weak_topics": [],
+          "learning_goals": [],
+          "is_weak_topic": false,
+          "is_known_topic": false,
+          "recent_memory": "",
+          "tutoring_memory": "",
+          "recent_traces": [],
+          "recent_trace_count": 0,
+          "profile_loaded": false,
+          "preferences_loaded": false,
+          "recent_memory_loaded": false,
+          "tutoring_memory_loaded": false,
+          "memory_paths": {
+            "base_dir": "var/agentic_memory/dpm/article_T091",
+            "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+            "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+            "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+            "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+            "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+          },
+          "topic": "convolution",
+          "task_type": "conceptual_explanation"
+        },
+        "skg": {
+          "kb_name": "default",
+          "query": "Explain convolution, but force the first attempt without RAG grounding.",
+          "topic": "convolution",
+          "snippets": [
+            {
+              "chunk_id": "SKG-CONV-002",
+              "topic": "convolution",
+              "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel movement",
+                "output value",
+                "matrix"
+              ],
+              "retrieval_score": 5
+            },
+            {
+              "chunk_id": "SKG-CONV-001",
+              "topic": "convolution",
+              "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel",
+                "image processing",
+                "matrix"
+              ],
+              "retrieval_score": 4
+            },
+            {
+              "chunk_id": "SKG-OVERFIT-001",
+              "topic": "overfitting",
+              "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+              "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+              "tags": [
+                "machine learning",
+                "overfitting",
+                "generalization"
+              ],
+              "retrieval_score": 1
+            }
+          ],
+          "sources": [
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+          ],
+          "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+        },
+        "trace_memory": {
+          "similar_successful_traces": [],
+          "failed_traces": []
+        },
+        "summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0
+        }
+      },
+      "collected_context_summary": {
+        "learner_level": "unknown",
+        "preferred_explanation_style": "unknown",
+        "is_weak_topic": false,
+        "retrieved_knowledge_chunks": 3,
+        "similar_successful_trace_count": 0,
+        "failed_trace_count": 0
+      },
+      "needs_code_execution": false,
+      "code_generation_required": false,
+      "code_generation_instruction": "",
+      "recovery_reason": "insufficient_grounding",
+      "recovery_required_tools": [
+        "RAGTool"
+      ],
+      "previous_code_execution_errors": []
+    }
+  },
+  "tool_plan_history": [
+    {
+      "plan_id": "PLAN-5ff5be6f",
+      "task_type": "conceptual_explanation",
+      "selected_tools": [],
+      "steps": [
+        {
+          "step_id": 1,
+          "goal": "Retrieve grounded educational knowledge",
+          "required_capability": "grounding",
+          "reason": "The tutoring answer should be supported by verified educational content.",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose"
+        }
+      ],
+      "metadata": {
+        "source_component": "ToolPlanner",
+        "planning_mode": "capability_first_no_retrieval",
+        "topic": "convolution",
+        "current_step": "Define convolution and its purpose",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+        "expected_output": "course-grounded tutoring explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "learner_level": "unknown",
+        "is_weak_topic": false,
+        "collected_context": {
+          "learner_id": "article_T091",
+          "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T091",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "",
+            "tutoring_memory": "",
+            "recent_traces": [],
+            "recent_trace_count": 0,
+            "profile_loaded": false,
+            "preferences_loaded": false,
+            "recent_memory_loaded": false,
+            "tutoring_memory_loaded": false,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T091",
+              "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "Explain convolution, but force the first attempt without RAG grounding.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 5
+              },
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-OVERFIT-001",
+                "topic": "overfitting",
+                "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                "tags": [
+                  "machine learning",
+                  "overfitting",
+                  "generalization"
+                ],
+                "retrieval_score": 1
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+            ],
+            "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [],
+            "failed_traces": []
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0
+          }
+        },
+        "collected_context_summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0
+        },
+        "needs_code_execution": false,
+        "code_generation_required": false,
+        "code_generation_instruction": "",
+        "recovery_reason": null,
+        "recovery_required_tools": [],
+        "previous_code_execution_errors": []
+      }
+    },
+    {
+      "plan_id": "PLAN-0b197f2e",
+      "task_type": "conceptual_explanation",
+      "selected_tools": [],
+      "steps": [
+        {
+          "step_id": 1,
+          "goal": "Retrieve grounded educational knowledge",
+          "required_capability": "grounding",
+          "reason": "The tutoring answer should be supported by verified educational content.",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose"
+        }
+      ],
+      "metadata": {
+        "source_component": "ToolPlanner",
+        "planning_mode": "capability_first_no_retrieval",
+        "topic": "convolution",
+        "current_step": "Define convolution and its purpose",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+        "expected_output": "course-grounded tutoring explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "learner_level": "unknown",
+        "is_weak_topic": false,
+        "collected_context": {
+          "learner_id": "article_T091",
+          "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T091",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "",
+            "tutoring_memory": "",
+            "recent_traces": [],
+            "recent_trace_count": 0,
+            "profile_loaded": false,
+            "preferences_loaded": false,
+            "recent_memory_loaded": false,
+            "tutoring_memory_loaded": false,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T091",
+              "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "Explain convolution, but force the first attempt without RAG grounding.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 5
+              },
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-OVERFIT-001",
+                "topic": "overfitting",
+                "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                "tags": [
+                  "machine learning",
+                  "overfitting",
+                  "generalization"
+                ],
+                "retrieval_score": 1
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+            ],
+            "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [],
+            "failed_traces": []
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0
+          }
+        },
+        "collected_context_summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0
+        },
+        "needs_code_execution": false,
+        "code_generation_required": false,
+        "code_generation_instruction": "",
+        "recovery_reason": "insufficient_grounding",
+        "recovery_required_tools": [
+          "RAGTool"
+        ],
+        "previous_code_execution_errors": []
+      }
+    }
+  ],
+  "tool_results": [
+    {
+      "tool_name": "RAGTool",
+      "status": "success",
+      "success": true,
+      "content": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+      "output": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+      "evidence": [
+        "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+      ],
+      "references": [
+        "var/agentic_memory/skg_index/documents/convolution_demo.md"
+      ],
+      "metadata": {
+        "attempt": 2,
+        "source_component": "RAGTool",
+        "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+        "retrieval_mode": "jsonl_hybrid_lexical",
+        "query": "Explain convolution, but force the first attempt without RAG grounding. Define convolution and its purpose course-grounded tutoring explanation convolution Define convolution and its purpose Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+        "retrieved_knowledge_chunks": 1,
+        "original_retrieved_knowledge_chunks": 1,
+        "topic_filter_removed_chunks": 0,
+        "scores": [
+          7.605422
+        ],
+        "chunk_ids": [
+          "SKG-9636f398"
+        ],
+        "matched_terms": [
+          [
+            "cnn",
+            "convolution",
+            "correlation",
+            "kernel",
+            "matrix",
+            "patch",
+            "sliding"
+          ]
+        ],
+        "score_breakdown": [
+          {
+            "lexical_score": 6.105422,
+            "phrase_score": 0.0,
+            "important_term_score": 1.5,
+            "title_source_score": 0.0,
+            "matched_phrases": []
+          }
+        ],
+        "expanded_terms": [
+          "cnn",
+          "correlation",
+          "filter",
+          "kernel",
+          "matrix",
+          "patch",
+          "sliding"
+        ],
+        "registry_tool": true,
+        "topic_consistent": true,
+        "topic_key": "convolution"
+      }
+    }
+  ],
+  "tool_results_history": [
+    [
+      {
+        "tool_name": "TraceSearchTool",
+        "status": "success",
+        "success": true,
+        "content": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 0.",
+        "output": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 0.",
+        "evidence": [
+          "TraceToolkit found 0 similar successful trace(s).",
+          "TraceToolkit considered 0 failed trace(s)."
+        ],
+        "references": [
+          "TraceToolkit memory traces"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "TraceSearchTool",
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0,
+          "reference_trace_id": null,
+          "trace_context": {
+            "similar_successful_traces": [],
+            "failed_traces": []
+          },
+          "registry_tool": true
+        }
+      }
+    ],
+    [
+      {
+        "tool_name": "RAGTool",
+        "status": "success",
+        "success": true,
+        "content": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+        "output": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+        "evidence": [
+          "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ],
+        "references": [
+          "var/agentic_memory/skg_index/documents/convolution_demo.md"
+        ],
+        "metadata": {
+          "attempt": 2,
+          "source_component": "RAGTool",
+          "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+          "retrieval_mode": "jsonl_hybrid_lexical",
+          "query": "Explain convolution, but force the first attempt without RAG grounding. Define convolution and its purpose course-grounded tutoring explanation convolution Define convolution and its purpose Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+          "retrieved_knowledge_chunks": 1,
+          "original_retrieved_knowledge_chunks": 1,
+          "topic_filter_removed_chunks": 0,
+          "scores": [
+            7.605422
+          ],
+          "chunk_ids": [
+            "SKG-9636f398"
+          ],
+          "matched_terms": [
+            [
+              "cnn",
+              "convolution",
+              "correlation",
+              "kernel",
+              "matrix",
+              "patch",
+              "sliding"
+            ]
+          ],
+          "score_breakdown": [
+            {
+              "lexical_score": 6.105422,
+              "phrase_score": 0.0,
+              "important_term_score": 1.5,
+              "title_source_score": 0.0,
+              "matched_phrases": []
+            }
+          ],
+          "expanded_terms": [
+            "cnn",
+            "correlation",
+            "filter",
+            "kernel",
+            "matrix",
+            "patch",
+            "sliding"
+          ],
+          "registry_tool": true,
+          "topic_consistent": true,
+          "topic_key": "convolution"
+        }
+      }
+    ]
+  ],
+  "validation_report": {
+    "status": "valid",
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "recommended_action": "accept"
+  },
+  "validation_reports": [
+    {
+      "status": "invalid",
+      "confidence_score": 0.42,
+      "failure_reason": "insufficient_grounding",
+      "recommended_action": "retry_with_grounding_tool"
+    },
+    {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    }
+  ],
+  "recovery_used": true,
+  "attempts": 2,
+  "recovery_decisions": [
+    {
+      "should_retry": true,
+      "action": "retry_grounding",
+      "reason": "insufficient_grounding",
+      "failure_reason": "insufficient_grounding",
+      "required_tools": [
+        "RAGTool"
+      ]
+    }
+  ],
+  "failure_recovery_steps": [
+    {
+      "previous_attempt": 1,
+      "next_attempt": 2,
+      "recovery_decision": {
+        "should_retry": true,
+        "action": "retry_grounding",
+        "reason": "insufficient_grounding",
+        "failure_reason": "insufficient_grounding",
+        "required_tools": [
+          "RAGTool"
+        ]
+      },
+      "required_tools": [
+        "RAGTool"
+      ],
+      "recovery_used": true
+    }
+  ],
+  "output_package": {
+    "package_id": "PKG-53e27ad8",
+    "status": "validated",
+    "content": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+    "evidence": [
+      "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+    ],
+    "references": [
+      "var/agentic_memory/skg_index/documents/convolution_demo.md"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-79be4fbe",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Define convolution and its purpose",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 2,
+            "source_component": "RAGTool",
+            "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+            "retrieval_mode": "jsonl_hybrid_lexical",
+            "query": "Explain convolution, but force the first attempt without RAG grounding. Define convolution and its purpose course-grounded tutoring explanation convolution Define convolution and its purpose Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "retrieved_knowledge_chunks": 1,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 0,
+            "scores": [
+              7.605422
+            ],
+            "chunk_ids": [
+              "SKG-9636f398"
+            ],
+            "matched_terms": [
+              [
+                "cnn",
+                "convolution",
+                "correlation",
+                "kernel",
+                "matrix",
+                "patch",
+                "sliding"
+              ]
+            ],
+            "score_breakdown": [
+              {
+                "lexical_score": 6.105422,
+                "phrase_score": 0.0,
+                "important_term_score": 1.5,
+                "title_source_score": 0.0,
+                "matched_phrases": []
+              }
+            ],
+            "expanded_terms": [
+              "cnn",
+              "correlation",
+              "filter",
+              "kernel",
+              "matrix",
+              "patch",
+              "sliding"
+            ],
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "convolution"
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "final_package": {
+    "package_id": "PKG-53e27ad8",
+    "status": "validated",
+    "content": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+    "evidence": [
+      "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+    ],
+    "references": [
+      "var/agentic_memory/skg_index/documents/convolution_demo.md"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-79be4fbe",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Define convolution and its purpose",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 2,
+            "source_component": "RAGTool",
+            "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+            "retrieval_mode": "jsonl_hybrid_lexical",
+            "query": "Explain convolution, but force the first attempt without RAG grounding. Define convolution and its purpose course-grounded tutoring explanation convolution Define convolution and its purpose Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "retrieved_knowledge_chunks": 1,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 0,
+            "scores": [
+              7.605422
+            ],
+            "chunk_ids": [
+              "SKG-9636f398"
+            ],
+            "matched_terms": [
+              [
+                "cnn",
+                "convolution",
+                "correlation",
+                "kernel",
+                "matrix",
+                "patch",
+                "sliding"
+              ]
+            ],
+            "score_breakdown": [
+              {
+                "lexical_score": 6.105422,
+                "phrase_score": 0.0,
+                "important_term_score": 1.5,
+                "title_source_score": 0.0,
+                "matched_phrases": []
+              }
+            ],
+            "expanded_terms": [
+              "cnn",
+              "correlation",
+              "filter",
+              "kernel",
+              "matrix",
+              "patch",
+              "sliding"
+            ],
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "convolution"
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "final_answer_status": "not_generated_yet",
+  "final_answer": null,
+  "provider_failure": null,
+  "llm_calls_metadata": {
+    "investigation_agent": {
+      "model": "llama-3.1-8b-instant",
+      "raw_response_available": true
+    },
+    "final_answer_generator": {
+      "status": "not_generated_yet",
+      "component": "TutoringAnswerWriter"
+    }
+  },
+  "memory_update_summary": {
+    "memory_update_type": "post_tool_interaction_update",
+    "memory_update_agent": "MemoryUpdateAgent",
+    "updated_at": "2026-07-25T14:48:11.475091+00:00",
+    "learner_id": "article_T091",
+    "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+    "topic": "convolution",
+    "task_type": "conceptual_explanation",
+    "status": "validated",
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "selected_tools": [
+      "RAGTool"
+    ],
+    "diagnosed_gap": "kernel movement",
+    "recommended_future_strategy": "use small matrix examples with step-by-step visual explanation",
+    "new_weak_topic": "kernel movement",
+    "content_format": "structured_tool_sections",
+    "retrieval_mode": "jsonl_hybrid_lexical",
+    "trace_memory_used": {},
+    "profile_update_policy": "conservative_metadata_update"
+  },
+  "memory_update_status": "updated",
+  "events": [
+    {
+      "timestamp": "2026-07-25T14:48:03.452773Z",
+      "event_type": "tool_request_received",
+      "payload": {
+        "request_id": "REQ-4b34042c",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "user_query": "Explain convolution, but force the first attempt without RAG grounding.",
+        "query": "Explain convolution, but force the first attempt without RAG grounding.",
+        "step_goal": "Define convolution and its purpose",
+        "current_step": "Define convolution and its purpose",
+        "task_type": "conceptual_explanation",
+        "expected_output": "course-grounded tutoring explanation",
+        "workflow_source": "personalized_problem_tutoring",
+        "metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T091",
+          "current_step": "Define convolution and its purpose",
+          "plan_step_id": 1,
+          "step_reason": "Establish a clear understanding of convolution",
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "convolution",
+            "task_type": "conceptual_explanation",
+            "student_intent": "explain convolution without RAG grounding",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "What is the student's prior knowledge of convolution?",
+              "How will the student apply the concept of convolution?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Define convolution and its purpose",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Establish a clear understanding of convolution"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Visualize a small 2D convolution operation",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Use a visual example to illustrate convolution"
+              },
+              {
+                "step_id": 3,
+                "step_goal": "Explain the role of the kernel in convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Highlight the importance of the kernel in convolution"
+              }
+            ],
+            "tool_request_goal": "Visualize a small 2D convolution operation using VisualMatrixTool",
+            "learner_id": "article_T091",
+            "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"explain convolution without RAG grounding\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What is the student's prior knowledge of convolution?\",\n    \"How will the student apply the concept of convolution?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define convolution and its purpose\",\n      \"needs_tool\": false,\n      \"reason\": \"Establish a clear understanding of convolution\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small 2D convolution operation\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"Use a visual example to illustrate convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Explain the role of the kernel in convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"Highlight the importance of the kernel in convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a small 2D convolution operation using VisualMatrixTool\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 1,
+            "step_goal": "Define convolution and its purpose",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "course-grounded tutoring explanation",
+            "reason": "Establish a clear understanding of convolution"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Define convolution and its purpose",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "Establish a clear understanding of convolution"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Visualize a small 2D convolution operation",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "Use a visual example to illustrate convolution"
+            },
+            {
+              "step_id": 3,
+              "step_goal": "Explain the role of the kernel in convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "Highlight the importance of the kernel in convolution"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": true
+          },
+          "force_recovery_test": true
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:10.679762Z",
+      "event_type": "task_analyzed",
+      "payload": {
+        "request_id": "REQ-4b34042c",
+        "workflow_source": "personalized_problem_tutoring",
+        "original_task_type": "conceptual_explanation",
+        "task_type": "conceptual_explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "topic": "convolution",
+        "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+        "current_step": "Define convolution and its purpose",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "user_query": "Explain convolution, but force the first attempt without RAG grounding.",
+        "expected_output": "course-grounded tutoring explanation",
+        "learner_level": "beginner",
+        "needs_visual_support": false,
+        "explicit_visual_requested": false,
+        "needs_calculation": false,
+        "needs_code_execution": false,
+        "needs_debugging": false,
+        "needs_grounding": true,
+        "code_generation_required": false,
+        "tool_request_goal": "Explain convolution, but force the first attempt without RAG grounding.",
+        "code_generation_instruction": "",
+        "reasoning_summary": "Fallback task analysis generated from request text.",
+        "analysis_strategy": "deterministic_fallback_after_llm_failure",
+        "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+        "request_metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T091",
+          "current_step": "Define convolution and its purpose",
+          "plan_step_id": 1,
+          "step_reason": "Establish a clear understanding of convolution",
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "convolution",
+            "task_type": "conceptual_explanation",
+            "student_intent": "explain convolution without RAG grounding",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "What is the student's prior knowledge of convolution?",
+              "How will the student apply the concept of convolution?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Define convolution and its purpose",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Establish a clear understanding of convolution"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Visualize a small 2D convolution operation",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Use a visual example to illustrate convolution"
+              },
+              {
+                "step_id": 3,
+                "step_goal": "Explain the role of the kernel in convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Highlight the importance of the kernel in convolution"
+              }
+            ],
+            "tool_request_goal": "Visualize a small 2D convolution operation using VisualMatrixTool",
+            "learner_id": "article_T091",
+            "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"explain convolution without RAG grounding\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What is the student's prior knowledge of convolution?\",\n    \"How will the student apply the concept of convolution?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define convolution and its purpose\",\n      \"needs_tool\": false,\n      \"reason\": \"Establish a clear understanding of convolution\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small 2D convolution operation\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"Use a visual example to illustrate convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Explain the role of the kernel in convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"Highlight the importance of the kernel in convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a small 2D convolution operation using VisualMatrixTool\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 1,
+            "step_goal": "Define convolution and its purpose",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "course-grounded tutoring explanation",
+            "reason": "Establish a clear understanding of convolution"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Define convolution and its purpose",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "Establish a clear understanding of convolution"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Visualize a small 2D convolution operation",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "Use a visual example to illustrate convolution"
+            },
+            {
+              "step_id": 3,
+              "step_goal": "Explain the role of the kernel in convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "Highlight the importance of the kernel in convolution"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": true
+          },
+          "force_recovery_test": true
+        },
+        "force_recovery_test": true
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.463078Z",
+      "event_type": "task_context_analyzed",
+      "payload": {
+        "request_id": "REQ-4b34042c",
+        "workflow_source": "personalized_problem_tutoring",
+        "original_task_type": "conceptual_explanation",
+        "task_type": "conceptual_explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "topic": "convolution",
+        "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+        "current_step": "Define convolution and its purpose",
+        "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+        "user_query": "Explain convolution, but force the first attempt without RAG grounding.",
+        "expected_output": "course-grounded tutoring explanation",
+        "learner_level": "unknown",
+        "needs_visual_support": false,
+        "explicit_visual_requested": false,
+        "needs_calculation": false,
+        "needs_code_execution": false,
+        "needs_debugging": false,
+        "needs_grounding": true,
+        "code_generation_required": false,
+        "tool_request_goal": "Explain convolution, but force the first attempt without RAG grounding.",
+        "code_generation_instruction": "",
+        "reasoning_summary": "Fallback task analysis generated from request text.",
+        "analysis_strategy": "deterministic_fallback_after_llm_failure",
+        "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+        "request_metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T091",
+          "current_step": "Define convolution and its purpose",
+          "plan_step_id": 1,
+          "step_reason": "Establish a clear understanding of convolution",
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "convolution",
+            "task_type": "conceptual_explanation",
+            "student_intent": "explain convolution without RAG grounding",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "What is the student's prior knowledge of convolution?",
+              "How will the student apply the concept of convolution?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Define convolution and its purpose",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Establish a clear understanding of convolution"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Visualize a small 2D convolution operation",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Use a visual example to illustrate convolution"
+              },
+              {
+                "step_id": 3,
+                "step_goal": "Explain the role of the kernel in convolution",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "Highlight the importance of the kernel in convolution"
+              }
+            ],
+            "tool_request_goal": "Visualize a small 2D convolution operation using VisualMatrixTool",
+            "learner_id": "article_T091",
+            "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"convolution\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"explain convolution without RAG grounding\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What is the student's prior knowledge of convolution?\",\n    \"How will the student apply the concept of convolution?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define convolution and its purpose\",\n      \"needs_tool\": false,\n      \"reason\": \"Establish a clear understanding of convolution\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small 2D convolution operation\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"Use a visual example to illustrate convolution\"\n    },\n    {\n      \"step_id\": 3,\n      \"step_goal\": \"Explain the role of the kernel in convolution\",\n      \"needs_tool\": false,\n      \"reason\": \"Highlight the importance of the kernel in convolution\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a small 2D convolution operation using VisualMatrixTool\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 1,
+            "step_goal": "Define convolution and its purpose",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "course-grounded tutoring explanation",
+            "reason": "Establish a clear understanding of convolution"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Define convolution and its purpose",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "Establish a clear understanding of convolution"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Visualize a small 2D convolution operation",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "Use a visual example to illustrate convolution"
+            },
+            {
+              "step_id": 3,
+              "step_goal": "Explain the role of the kernel in convolution",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "Highlight the importance of the kernel in convolution"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": true
+          },
+          "force_recovery_test": true
+        },
+        "force_recovery_test": true,
+        "learner_id": "article_T091",
+        "query": "Explain convolution, but force the first attempt without RAG grounding.",
+        "collected_context": {
+          "learner_id": "article_T091",
+          "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T091",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "",
+            "tutoring_memory": "",
+            "recent_traces": [],
+            "recent_trace_count": 0,
+            "profile_loaded": false,
+            "preferences_loaded": false,
+            "recent_memory_loaded": false,
+            "tutoring_memory_loaded": false,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T091",
+              "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "Explain convolution, but force the first attempt without RAG grounding.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 5
+              },
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 4
+              },
+              {
+                "chunk_id": "SKG-OVERFIT-001",
+                "topic": "overfitting",
+                "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                "tags": [
+                  "machine learning",
+                  "overfitting",
+                  "generalization"
+                ],
+                "retrieval_score": 1
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+            ],
+            "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [],
+            "failed_traces": []
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0
+          }
+        },
+        "is_weak_topic": false,
+        "knowledge_snippets": [
+          {
+            "chunk_id": "SKG-CONV-002",
+            "topic": "convolution",
+            "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+            "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "tags": [
+              "convolution",
+              "kernel movement",
+              "output value",
+              "matrix"
+            ],
+            "retrieval_score": 5
+          },
+          {
+            "chunk_id": "SKG-CONV-001",
+            "topic": "convolution",
+            "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+            "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "tags": [
+              "convolution",
+              "kernel",
+              "image processing",
+              "matrix"
+            ],
+            "retrieval_score": 4
+          },
+          {
+            "chunk_id": "SKG-OVERFIT-001",
+            "topic": "overfitting",
+            "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+            "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+            "tags": [
+              "machine learning",
+              "overfitting",
+              "generalization"
+            ],
+            "retrieval_score": 1
+          }
+        ],
+        "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+        "similar_successful_traces": [],
+        "failed_traces": []
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.464152Z",
+      "event_type": "tool_plan_created",
+      "payload": {
+        "plan_id": "PLAN-5ff5be6f",
+        "task_type": "conceptual_explanation",
+        "selected_tools": [],
+        "steps": [
+          {
+            "step_id": 1,
+            "goal": "Retrieve grounded educational knowledge",
+            "required_capability": "grounding",
+            "reason": "The tutoring answer should be supported by verified educational content.",
+            "topic": "convolution",
+            "current_step": "Define convolution and its purpose"
+          }
+        ],
+        "metadata": {
+          "source_component": "ToolPlanner",
+          "planning_mode": "capability_first_no_retrieval",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose",
+          "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+          "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+          "expected_output": "course-grounded tutoring explanation",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "learner_level": "unknown",
+          "is_weak_topic": false,
+          "collected_context": {
+            "learner_id": "article_T091",
+            "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+            "task_type": "conceptual_explanation",
+            "topic": "convolution",
+            "current_step": "Define convolution and its purpose",
+            "dpm": {
+              "memory_source": "DynamicPersonalMemory",
+              "memory_storage": "file_based_local",
+              "memory_layers": [
+                "L1_interaction_traces",
+                "L2_tutoring_notes",
+                "L3_profile_preferences"
+              ],
+              "learner_id": "article_T091",
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "preferred_examples": [],
+              "avoid": [],
+              "known_topics": [],
+              "weak_topics": [],
+              "learning_goals": [],
+              "is_weak_topic": false,
+              "is_known_topic": false,
+              "recent_memory": "",
+              "tutoring_memory": "",
+              "recent_traces": [],
+              "recent_trace_count": 0,
+              "profile_loaded": false,
+              "preferences_loaded": false,
+              "recent_memory_loaded": false,
+              "tutoring_memory_loaded": false,
+              "memory_paths": {
+                "base_dir": "var/agentic_memory/dpm/article_T091",
+                "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+                "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+                "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+                "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+                "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+              },
+              "topic": "convolution",
+              "task_type": "conceptual_explanation"
+            },
+            "skg": {
+              "kb_name": "default",
+              "query": "Explain convolution, but force the first attempt without RAG grounding.",
+              "topic": "convolution",
+              "snippets": [
+                {
+                  "chunk_id": "SKG-CONV-002",
+                  "topic": "convolution",
+                  "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel movement",
+                    "output value",
+                    "matrix"
+                  ],
+                  "retrieval_score": 5
+                },
+                {
+                  "chunk_id": "SKG-CONV-001",
+                  "topic": "convolution",
+                  "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel",
+                    "image processing",
+                    "matrix"
+                  ],
+                  "retrieval_score": 4
+                },
+                {
+                  "chunk_id": "SKG-OVERFIT-001",
+                  "topic": "overfitting",
+                  "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                  "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                  "tags": [
+                    "machine learning",
+                    "overfitting",
+                    "generalization"
+                  ],
+                  "retrieval_score": 1
+                }
+              ],
+              "sources": [
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+              ],
+              "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+            },
+            "trace_memory": {
+              "similar_successful_traces": [],
+              "failed_traces": []
+            },
+            "summary": {
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "is_weak_topic": false,
+              "retrieved_knowledge_chunks": 3,
+              "similar_successful_trace_count": 0,
+              "failed_trace_count": 0
+            }
+          },
+          "collected_context_summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0
+          },
+          "needs_code_execution": false,
+          "code_generation_required": false,
+          "code_generation_instruction": "",
+          "recovery_reason": null,
+          "recovery_required_tools": [],
+          "previous_code_execution_errors": []
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.464835Z",
+      "event_type": "tools_selected",
+      "payload": [
+        "TraceSearchTool"
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.465398Z",
+      "event_type": "tools_executed",
+      "payload": [
+        {
+          "tool_name": "TraceSearchTool",
+          "status": "success",
+          "success": true,
+          "content": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 0.",
+          "output": "Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 0.",
+          "evidence": [
+            "TraceToolkit found 0 similar successful trace(s).",
+            "TraceToolkit considered 0 failed trace(s)."
+          ],
+          "references": [
+            "TraceToolkit memory traces"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0,
+            "reference_trace_id": null,
+            "trace_context": {
+              "similar_successful_traces": [],
+              "failed_traces": []
+            },
+            "registry_tool": true
+          }
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.465953Z",
+      "event_type": "output_validated",
+      "payload": {
+        "status": "invalid",
+        "confidence_score": 0.42,
+        "failure_reason": "insufficient_grounding",
+        "recommended_action": "retry_with_grounding_tool"
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.465993Z",
+      "event_type": "recovery_decision",
+      "payload": {
+        "should_retry": true,
+        "action": "retry_grounding",
+        "reason": "insufficient_grounding",
+        "failure_reason": "insufficient_grounding",
+        "required_tools": [
+          "RAGTool"
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.466729Z",
+      "event_type": "failure_recovery_applied",
+      "payload": {
+        "previous_attempt": 1,
+        "next_attempt": 2,
+        "recovery_decision": {
+          "should_retry": true,
+          "action": "retry_grounding",
+          "reason": "insufficient_grounding",
+          "failure_reason": "insufficient_grounding",
+          "required_tools": [
+            "RAGTool"
+          ]
+        },
+        "required_tools": [
+          "RAGTool"
+        ],
+        "recovery_used": true
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.467294Z",
+      "event_type": "tool_plan_created",
+      "payload": {
+        "plan_id": "PLAN-0b197f2e",
+        "task_type": "conceptual_explanation",
+        "selected_tools": [],
+        "steps": [
+          {
+            "step_id": 1,
+            "goal": "Retrieve grounded educational knowledge",
+            "required_capability": "grounding",
+            "reason": "The tutoring answer should be supported by verified educational content.",
+            "topic": "convolution",
+            "current_step": "Define convolution and its purpose"
+          }
+        ],
+        "metadata": {
+          "source_component": "ToolPlanner",
+          "planning_mode": "capability_first_no_retrieval",
+          "topic": "convolution",
+          "current_step": "Define convolution and its purpose",
+          "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+          "goal": "Explain convolution, but force the first attempt without RAG grounding.",
+          "expected_output": "course-grounded tutoring explanation",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "learner_level": "unknown",
+          "is_weak_topic": false,
+          "collected_context": {
+            "learner_id": "article_T091",
+            "student_question": "Explain convolution, but force the first attempt without RAG grounding.",
+            "task_type": "conceptual_explanation",
+            "topic": "convolution",
+            "current_step": "Define convolution and its purpose",
+            "dpm": {
+              "memory_source": "DynamicPersonalMemory",
+              "memory_storage": "file_based_local",
+              "memory_layers": [
+                "L1_interaction_traces",
+                "L2_tutoring_notes",
+                "L3_profile_preferences"
+              ],
+              "learner_id": "article_T091",
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "preferred_examples": [],
+              "avoid": [],
+              "known_topics": [],
+              "weak_topics": [],
+              "learning_goals": [],
+              "is_weak_topic": false,
+              "is_known_topic": false,
+              "recent_memory": "",
+              "tutoring_memory": "",
+              "recent_traces": [],
+              "recent_trace_count": 0,
+              "profile_loaded": false,
+              "preferences_loaded": false,
+              "recent_memory_loaded": false,
+              "tutoring_memory_loaded": false,
+              "memory_paths": {
+                "base_dir": "var/agentic_memory/dpm/article_T091",
+                "L1_traces": "var/agentic_memory/dpm/article_T091/L1/traces.jsonl",
+                "L2_tutoring": "var/agentic_memory/dpm/article_T091/L2/tutoring.md",
+                "L3_profile": "var/agentic_memory/dpm/article_T091/L3/profile.json",
+                "L3_preferences": "var/agentic_memory/dpm/article_T091/L3/preferences.json",
+                "L3_recent": "var/agentic_memory/dpm/article_T091/L3/recent.md"
+              },
+              "topic": "convolution",
+              "task_type": "conceptual_explanation"
+            },
+            "skg": {
+              "kb_name": "default",
+              "query": "Explain convolution, but force the first attempt without RAG grounding.",
+              "topic": "convolution",
+              "snippets": [
+                {
+                  "chunk_id": "SKG-CONV-002",
+                  "topic": "convolution",
+                  "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel movement",
+                    "output value",
+                    "matrix"
+                  ],
+                  "retrieval_score": 5
+                },
+                {
+                  "chunk_id": "SKG-CONV-001",
+                  "topic": "convolution",
+                  "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel",
+                    "image processing",
+                    "matrix"
+                  ],
+                  "retrieval_score": 4
+                },
+                {
+                  "chunk_id": "SKG-OVERFIT-001",
+                  "topic": "overfitting",
+                  "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                  "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                  "tags": [
+                    "machine learning",
+                    "overfitting",
+                    "generalization"
+                  ],
+                  "retrieval_score": 1
+                }
+              ],
+              "sources": [
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+              ],
+              "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+            },
+            "trace_memory": {
+              "similar_successful_traces": [],
+              "failed_traces": []
+            },
+            "summary": {
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "is_weak_topic": false,
+              "retrieved_knowledge_chunks": 3,
+              "similar_successful_trace_count": 0,
+              "failed_trace_count": 0
+            }
+          },
+          "collected_context_summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0
+          },
+          "needs_code_execution": false,
+          "code_generation_required": false,
+          "code_generation_instruction": "",
+          "recovery_reason": "insufficient_grounding",
+          "recovery_required_tools": [
+            "RAGTool"
+          ],
+          "previous_code_execution_errors": []
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.467824Z",
+      "event_type": "tools_selected",
+      "payload": [
+        "RAGTool"
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.468895Z",
+      "event_type": "tools_executed",
+      "payload": [
+        {
+          "tool_name": "RAGTool",
+          "status": "success",
+          "success": true,
+          "content": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+          "output": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+          "evidence": [
+            "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+          ],
+          "references": [
+            "var/agentic_memory/skg_index/documents/convolution_demo.md"
+          ],
+          "metadata": {
+            "attempt": 2,
+            "source_component": "RAGTool",
+            "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+            "retrieval_mode": "jsonl_hybrid_lexical",
+            "query": "Explain convolution, but force the first attempt without RAG grounding. Define convolution and its purpose course-grounded tutoring explanation convolution Define convolution and its purpose Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "retrieved_knowledge_chunks": 1,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 0,
+            "scores": [
+              7.605422
+            ],
+            "chunk_ids": [
+              "SKG-9636f398"
+            ],
+            "matched_terms": [
+              [
+                "cnn",
+                "convolution",
+                "correlation",
+                "kernel",
+                "matrix",
+                "patch",
+                "sliding"
+              ]
+            ],
+            "score_breakdown": [
+              {
+                "lexical_score": 6.105422,
+                "phrase_score": 0.0,
+                "important_term_score": 1.5,
+                "title_source_score": 0.0,
+                "matched_phrases": []
+              }
+            ],
+            "expanded_terms": [
+              "cnn",
+              "correlation",
+              "filter",
+              "kernel",
+              "matrix",
+              "patch",
+              "sliding"
+            ],
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "convolution"
+          }
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.469457Z",
+      "event_type": "output_validated",
+      "payload": {
+        "status": "valid",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "recommended_action": "accept"
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:48:11.470095Z",
+      "event_type": "output_package_built",
+      "payload": {
+        "package_id": "PKG-53e27ad8",
+        "status": "validated",
+        "content": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+        "evidence": [
+          "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ],
+        "references": [
+          "var/agentic_memory/skg_index/documents/convolution_demo.md"
+        ],
+        "validation_report": {
+          "status": "valid",
+          "confidence_score": 0.9,
+          "failure_reason": null,
+          "recommended_action": "accept"
+        },
+        "trace_id": "TT-79be4fbe",
+        "metadata": {
+          "workflow_source": "personalized_problem_tutoring",
+          "task_type": "conceptual_explanation",
+          "current_step": "Define convolution and its purpose",
+          "analyzed_task_type": "conceptual_explanation",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "request_role": "pedagogical_support",
+          "satisfies_primary_request": false,
+          "tool_outputs": {
+            "RAGTool": [
+              "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+            ]
+          },
+          "tool_metadata": {
+            "RAGTool": [
+              {
+                "attempt": 2,
+                "source_component": "RAGTool",
+                "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+                "retrieval_mode": "jsonl_hybrid_lexical",
+                "query": "Explain convolution, but force the first attempt without RAG grounding. Define convolution and its purpose course-grounded tutoring explanation convolution Define convolution and its purpose Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+                "retrieved_knowledge_chunks": 1,
+                "original_retrieved_knowledge_chunks": 1,
+                "topic_filter_removed_chunks": 0,
+                "scores": [
+                  7.605422
+                ],
+                "chunk_ids": [
+                  "SKG-9636f398"
+                ],
+                "matched_terms": [
+                  [
+                    "cnn",
+                    "convolution",
+                    "correlation",
+                    "kernel",
+                    "matrix",
+                    "patch",
+                    "sliding"
+                  ]
+                ],
+                "score_breakdown": [
+                  {
+                    "lexical_score": 6.105422,
+                    "phrase_score": 0.0,
+                    "important_term_score": 1.5,
+                    "title_source_score": 0.0,
+                    "matched_phrases": []
+                  }
+                ],
+                "expanded_terms": [
+                  "cnn",
+                  "correlation",
+                  "filter",
+                  "kernel",
+                  "matrix",
+                  "patch",
+                  "sliding"
+                ],
+                "registry_tool": true,
+                "topic_consistent": true,
+                "topic_key": "convolution"
+              }
+            ]
+          },
+          "tool_names": [
+            "RAGTool"
+          ],
+          "content_format": "structured_tool_sections"
+        }
+      }
+    }
+  ],
+  "trace_path": "var/agentic_traces/TT-79be4fbe.json",
+  "updated_at": "2026-07-25T14:48:11.476762Z"
+}

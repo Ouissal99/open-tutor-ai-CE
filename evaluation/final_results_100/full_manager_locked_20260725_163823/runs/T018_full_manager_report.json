@@ -1,0 +1,966 @@
+{
+  "report_type": "implementation_demo_evidence",
+  "created_at": "2026-07-25T15:17:02.824152+00:00",
+  "summary": {
+    "question": "Explain what a visual matrix example helps a learner understand.",
+    "learner_id": "article_T018",
+    "provider_status": "available",
+    "workflow_status": "fallback",
+    "trace_id": "TT-e66451c3",
+    "trace_path": "var/agentic_traces/TT-e66451c3.json",
+    "confidence": 0.2,
+    "selected_tools": [
+      "RAGTool"
+    ],
+    "recovery_used": true,
+    "attempts": 3,
+    "recovery_steps": [
+      {
+        "timestamp": "2026-07-25T15:17:01.691991Z",
+        "event_type": "failure_recovery_applied",
+        "payload": {
+          "previous_attempt": 1,
+          "next_attempt": 2,
+          "recovery_decision": {
+            "should_retry": true,
+            "action": "retry_primary_operation",
+            "reason": "tool_execution_failed",
+            "failure_reason": "tool_execution_failed",
+            "required_tools": [
+              "RAGTool"
+            ]
+          },
+          "required_tools": [
+            "RAGTool"
+          ],
+          "recovery_used": true
+        }
+      },
+      {
+        "previous_attempt": 1,
+        "next_attempt": 2,
+        "recovery_decision": {
+          "should_retry": true,
+          "action": "retry_primary_operation",
+          "reason": "tool_execution_failed",
+          "failure_reason": "tool_execution_failed",
+          "required_tools": [
+            "RAGTool"
+          ]
+        },
+        "required_tools": [
+          "RAGTool"
+        ],
+        "recovery_used": true
+      },
+      {
+        "previous_attempt": 1,
+        "next_attempt": 2,
+        "recovery_decision": {
+          "should_retry": true,
+          "action": "retry_primary_operation",
+          "reason": "tool_execution_failed",
+          "failure_reason": "tool_execution_failed",
+          "required_tools": [
+            "RAGTool"
+          ]
+        },
+        "required_tools": [
+          "RAGTool"
+        ],
+        "recovery_used": true
+      },
+      {
+        "timestamp": "2026-07-25T15:17:01.696979Z",
+        "event_type": "failure_recovery_applied",
+        "payload": {
+          "previous_attempt": 2,
+          "next_attempt": 3,
+          "recovery_decision": {
+            "should_retry": true,
+            "action": "retry_primary_operation",
+            "reason": "tool_execution_failed",
+            "failure_reason": "tool_execution_failed",
+            "required_tools": [
+              "RAGTool"
+            ]
+          },
+          "required_tools": [
+            "RAGTool"
+          ],
+          "recovery_used": true
+        }
+      },
+      {
+        "previous_attempt": 2,
+        "next_attempt": 3,
+        "recovery_decision": {
+          "should_retry": true,
+          "action": "retry_primary_operation",
+          "reason": "tool_execution_failed",
+          "failure_reason": "tool_execution_failed",
+          "required_tools": [
+            "RAGTool"
+          ]
+        },
+        "required_tools": [
+          "RAGTool"
+        ],
+        "recovery_used": true
+      },
+      {
+        "previous_attempt": 2,
+        "next_attempt": 3,
+        "recovery_decision": {
+          "should_retry": true,
+          "action": "retry_primary_operation",
+          "reason": "tool_execution_failed",
+          "failure_reason": "tool_execution_failed",
+          "required_tools": [
+            "RAGTool"
+          ]
+        },
+        "required_tools": [
+          "RAGTool"
+        ],
+        "recovery_used": true
+      }
+    ],
+    "content_format": "structured_tool_sections",
+    "rag_retrieval_mode": "no_topic_consistent_grounding",
+    "rag_grounding_source": "Topic-consistency rejection",
+    "rag_scores": null,
+    "rag_matched_terms": null,
+    "trace_memory_similar_count": null,
+    "trace_memory_failed_count": null,
+    "trace_memory_reference_trace": null,
+    "dpm_learner_level": "unknown",
+    "dpm_is_weak_topic": false,
+    "dpm_recent_trace_count": 1,
+    "provider_error": null
+  },
+  "inputs": {
+    "question": "Explain what a visual matrix example helps a learner understand.",
+    "learner_id": "article_T018"
+  },
+  "response": {
+    "answer": "**What a Visual Matrix Example Helps a Learner Understand**\n\nA visual matrix example is a helpful tool for learners to understand how a matrix is transformed into an output value. Let's consider a simple example to illustrate this concept.\n\nImagine a 3x3 matrix:\n\n```\n1 2 3\n4 5 6\n7 8 9\n```\n\nNow, let's apply a 2x2 kernel (a small matrix) to this input matrix by sliding it across local regions. The kernel values are:\n\n```\n0 1\n2 3\n```\n\nAt each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value. For example, when the kernel is applied to the top-left corner of the input matrix, the products are:\n\n```\n(0 * 1) + (1 * 2) = 2\n(2 * 1) + (3 * 2) = 8\n```\n\nThe sum of these products is 10, which is the output value for that position.\n\nThis process is repeated for each position in the input matrix, resulting in a new output matrix.\n\n**Evidence used**\n\n* Static Knowledge Grounding: SKG-CONV-003, SKG-CONV-001, SKG-CONV-002\n\n**References**\n\n* OpenTutorAI mock visual explanation: Kernel Movement\n* OpenTutorAI mock lesson: Image Processing / Convolution\n* OpenTutorAI mock lesson: Image Processing / Convolution",
+    "status": "fallback",
+    "confidence": 0.2,
+    "trace_id": "TT-e66451c3",
+    "trace_path": "var/agentic_traces/TT-e66451c3.json",
+    "attempts": 3,
+    "selected_tools": [
+      "RAGTool"
+    ],
+    "recovery_used": true,
+    "output_package": {
+      "package_id": "PKG-930670dd",
+      "status": "fallback",
+      "content": "The system could not produce a fully validated tool output. Returning safe partial support.\n\n## RAGTool\nRAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected.",
+      "evidence": [],
+      "references": [],
+      "validation_report": {
+        "status": "invalid",
+        "confidence_score": 0.2,
+        "failure_reason": "tool_execution_failed",
+        "recommended_action": "re_execute_relevant_tool"
+      },
+      "trace_id": "TT-e66451c3",
+      "metadata": {
+        "workflow_source": "personalized_problem_tutoring",
+        "task_type": "visual_explanation",
+        "current_step": "Provide a concrete visual matrix example",
+        "analyzed_task_type": "conceptual_explanation",
+        "operation_type": "matrix_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "request_role": "pedagogical_support",
+        "satisfies_primary_request": false,
+        "fallback_reason": "tool_execution_failed",
+        "tool_outputs": {
+          "RAGTool": [
+            "RAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected."
+          ]
+        },
+        "tool_metadata": {
+          "RAGTool": [
+            {
+              "attempt": 3,
+              "source_component": "RAGTool",
+              "grounding_source": "Topic-consistency rejection",
+              "retrieval_mode": "no_topic_consistent_grounding",
+              "query": "Explain what a visual matrix example helps a learner understand. Provide a concrete visual matrix example visual explanation with grounded evidence general topic Provide a concrete visual matrix example Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+              "topic_key": "matrix",
+              "topic_consistent": false,
+              "retrieved_knowledge_chunks": 0,
+              "original_retrieved_knowledge_chunks": 1,
+              "failure_reason": "no_topic_consistent_grounding",
+              "registry_tool": true
+            }
+          ]
+        },
+        "tool_names": [
+          "RAGTool"
+        ],
+        "content_format": "structured_tool_sections"
+      }
+    },
+    "scratchpad": [
+      {
+        "round_id": 1,
+        "step_goal": "Explain the purpose of a visual matrix example",
+        "analysis": "The tutor prepares the current solving step.",
+        "tool_request_summary": "visual_explanation / visual explanation with grounded evidence",
+        "output_package": {
+          "package_id": "PKG-b77beec2",
+          "status": "fallback",
+          "content": "The system could not produce a fully validated tool output. Returning safe partial support.\n\n## RAGTool\nRAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected.",
+          "evidence": [],
+          "references": [],
+          "validation_report": {
+            "status": "invalid",
+            "confidence_score": 0.2,
+            "failure_reason": "tool_execution_failed",
+            "recommended_action": "re_execute_relevant_tool"
+          },
+          "trace_id": "TT-18f45b45",
+          "metadata": {
+            "workflow_source": "personalized_problem_tutoring",
+            "task_type": "visual_explanation",
+            "current_step": "Explain the purpose of a visual matrix example",
+            "analyzed_task_type": "conceptual_explanation",
+            "operation_type": "matrix_concept",
+            "operation_parameters": {
+              "matrices": [],
+              "shapes": [],
+              "stride": 1,
+              "padding": 0
+            },
+            "request_role": "pedagogical_support",
+            "satisfies_primary_request": false,
+            "fallback_reason": "tool_execution_failed",
+            "tool_outputs": {
+              "RAGTool": [
+                "RAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected."
+              ]
+            },
+            "tool_metadata": {
+              "RAGTool": [
+                {
+                  "attempt": 3,
+                  "source_component": "RAGTool",
+                  "grounding_source": "Topic-consistency rejection",
+                  "retrieval_mode": "no_topic_consistent_grounding",
+                  "query": "Explain what a visual matrix example helps a learner understand. Explain the purpose of a visual matrix example visual explanation with grounded evidence general topic Explain the purpose of a visual matrix example Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+                  "topic_key": "matrix",
+                  "topic_consistent": false,
+                  "retrieved_knowledge_chunks": 0,
+                  "original_retrieved_knowledge_chunks": 1,
+                  "failure_reason": "no_topic_consistent_grounding",
+                  "registry_tool": true
+                }
+              ]
+            },
+            "tool_names": [
+              "RAGTool"
+            ],
+            "content_format": "structured_tool_sections"
+          }
+        },
+        "status": "fallback"
+      },
+      {
+        "round_id": 2,
+        "step_goal": "Provide a concrete visual matrix example",
+        "analysis": "The tutor prepares the current solving step.",
+        "tool_request_summary": "visual_explanation / visual explanation with grounded evidence",
+        "output_package": {
+          "package_id": "PKG-930670dd",
+          "status": "fallback",
+          "content": "The system could not produce a fully validated tool output. Returning safe partial support.\n\n## RAGTool\nRAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected.",
+          "evidence": [],
+          "references": [],
+          "validation_report": {
+            "status": "invalid",
+            "confidence_score": 0.2,
+            "failure_reason": "tool_execution_failed",
+            "recommended_action": "re_execute_relevant_tool"
+          },
+          "trace_id": "TT-e66451c3",
+          "metadata": {
+            "workflow_source": "personalized_problem_tutoring",
+            "task_type": "visual_explanation",
+            "current_step": "Provide a concrete visual matrix example",
+            "analyzed_task_type": "conceptual_explanation",
+            "operation_type": "matrix_concept",
+            "operation_parameters": {
+              "matrices": [],
+              "shapes": [],
+              "stride": 1,
+              "padding": 0
+            },
+            "request_role": "pedagogical_support",
+            "satisfies_primary_request": false,
+            "fallback_reason": "tool_execution_failed",
+            "tool_outputs": {
+              "RAGTool": [
+                "RAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected."
+              ]
+            },
+            "tool_metadata": {
+              "RAGTool": [
+                {
+                  "attempt": 3,
+                  "source_component": "RAGTool",
+                  "grounding_source": "Topic-consistency rejection",
+                  "retrieval_mode": "no_topic_consistent_grounding",
+                  "query": "Explain what a visual matrix example helps a learner understand. Provide a concrete visual matrix example visual explanation with grounded evidence general topic Provide a concrete visual matrix example Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+                  "topic_key": "matrix",
+                  "topic_consistent": false,
+                  "retrieved_knowledge_chunks": 0,
+                  "original_retrieved_knowledge_chunks": 1,
+                  "failure_reason": "no_topic_consistent_grounding",
+                  "registry_tool": true
+                }
+              ]
+            },
+            "tool_names": [
+              "RAGTool"
+            ],
+            "content_format": "structured_tool_sections"
+          }
+        },
+        "status": "fallback"
+      }
+    ],
+    "metadata": {
+      "agentic_core": "AgenticCoreService",
+      "workflow": "personalized_problem_tutoring",
+      "source": "terminal_backend_prototype",
+      "final_answer_generator": "TutoringAnswerWriter",
+      "memory_update_summary": {
+        "memory_update_type": "post_tool_interaction_update",
+        "memory_update_agent": "MemoryUpdateAgent",
+        "updated_at": "2026-07-25T15:17:01.707490+00:00",
+        "learner_id": "article_T018",
+        "student_question": "Explain what a visual matrix example helps a learner understand.",
+        "topic": "visual_matrix_example",
+        "task_type": "visual_explanation",
+        "status": "fallback",
+        "confidence_score": 0.2,
+        "failure_reason": "tool_execution_failed",
+        "selected_tools": [
+          "RAGTool"
+        ],
+        "diagnosed_gap": "matrix-to-output transformation",
+        "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+        "new_weak_topic": null,
+        "content_format": "structured_tool_sections",
+        "retrieval_mode": "no_topic_consistent_grounding",
+        "trace_memory_used": {},
+        "profile_update_policy": "conservative_metadata_update"
+      },
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "visual_explanation",
+      "current_step": "Provide a concrete visual matrix example",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "matrix_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "fallback_reason": "tool_execution_failed",
+      "tool_outputs": {
+        "RAGTool": [
+          "RAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected."
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 3,
+            "source_component": "RAGTool",
+            "grounding_source": "Topic-consistency rejection",
+            "retrieval_mode": "no_topic_consistent_grounding",
+            "query": "Explain what a visual matrix example helps a learner understand. Provide a concrete visual matrix example visual explanation with grounded evidence general topic Provide a concrete visual matrix example Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "topic_key": "matrix",
+            "topic_consistent": false,
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "failure_reason": "no_topic_consistent_grounding",
+            "registry_tool": true
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "trace_summary": {
+    "trace_id": "TT-e66451c3",
+    "trace_path": "var/agentic_traces/TT-e66451c3.json",
+    "created_at": "2026-07-25T15:17:01.701548Z",
+    "task_type": "visual_explanation",
+    "status": "fallback",
+    "student_question": "Explain what a visual matrix example helps a learner understand.",
+    "step_goal": "Provide a concrete visual matrix example",
+    "selected_tools": [
+      "RAGTool"
+    ],
+    "attempts": 3,
+    "confidence_score": 0.2,
+    "failure_reason": "tool_execution_failed",
+    "recovery_used": true,
+    "content_preview": "The system could not produce a fully validated tool output. Returning safe partial support.\n\n## RAGTool\nRAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected."
+  },
+  "trace_events": {
+    "tool_request_received": {
+      "request_id": "REQ-0fb383ea",
+      "student_question": "Explain what a visual matrix example helps a learner understand.",
+      "user_query": "Explain what a visual matrix example helps a learner understand.",
+      "query": "Explain what a visual matrix example helps a learner understand.",
+      "step_goal": "Provide a concrete visual matrix example",
+      "current_step": "Provide a concrete visual matrix example",
+      "task_type": "visual_explanation",
+      "expected_output": "visual explanation with grounded evidence",
+      "workflow_source": "personalized_problem_tutoring",
+      "metadata": {
+        "source_component": "ToolRequestAgent",
+        "learner_id": "article_T018",
+        "current_step": "Provide a concrete visual matrix example",
+        "plan_step_id": 2,
+        "step_reason": "To illustrate the concept with a specific example",
+        "suggested_tools": [
+          "VisualMatrixTool",
+          "TraceSearchTool",
+          "MatrixComputationTool"
+        ],
+        "workflow_source": "personalized_problem_tutoring",
+        "investigation_result": {
+          "topic": "visual_matrix_example",
+          "task_type": "conceptual_explanation",
+          "student_intent": "understand the purpose of a visual matrix example",
+          "difficulty_estimate": "beginner",
+          "meta_questions": [
+            "What is the purpose of a visual matrix example in learning?",
+            "How does a visual matrix example help learners understand a concept?"
+          ],
+          "required_context": [
+            "DPM",
+            "SKG",
+            "TraceToolkit"
+          ],
+          "initial_tutoring_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Explain the purpose of a visual matrix example",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To provide a clear understanding of the concept"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a concrete visual matrix example",
+              "needs_tool": true,
+              "suggested_tools": [
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To illustrate the concept with a specific example"
+            }
+          ],
+          "tool_request_goal": "Request VisualMatrixTool to provide a concrete visual matrix example",
+          "learner_id": "article_T018",
+          "student_question": "Explain what a visual matrix example helps a learner understand.",
+          "llm_model": "llama-3.1-8b-instant",
+          "raw_response": "{\n  \"topic\": \"visual_matrix_example\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the purpose of a visual matrix example\",\n  \"difficulty_estimate\": \"beginner\",\n  \"meta_questions\": [\n    \"What is the purpose of a visual matrix example in learning?\",\n    \"How does a visual matrix example help learners understand a concept?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Explain the purpose of a visual matrix example\",\n      \"needs_tool\": false,\n      \"reason\": \"To provide a clear understanding of the concept\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a concrete visual matrix example\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"To illustrate the concept with a specific example\"\n    }\n  ],\n  \"tool_request_goal\": \"Request VisualMatrixTool to provide a concrete visual matrix example\"\n}"
+        },
+        "current_plan_step": {
+          "step_id": 2,
+          "step_goal": "Provide a concrete visual matrix example",
+          "needs_tool": true,
+          "suggested_tools": [
+            "VisualMatrixTool",
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "task_type": "visual_explanation",
+          "expected_output": "visual explanation with grounded evidence",
+          "reason": "To illustrate the concept with a specific example"
+        },
+        "full_investigation_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Explain the purpose of a visual matrix example",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "VisualMatrixTool",
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "visual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "To provide a clear understanding of the concept"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Provide a concrete visual matrix example",
+            "needs_tool": true,
+            "suggested_tools": [
+              "VisualMatrixTool",
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "visual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "To illustrate the concept with a specific example"
+          }
+        ],
+        "workflow_metadata": {
+          "source": "run_agentic_tutoring_demo",
+          "force_recovery_test": false
+        },
+        "force_recovery_test": false
+      }
+    },
+    "task_context_analyzed": {
+      "request_id": "REQ-0fb383ea",
+      "workflow_source": "personalized_problem_tutoring",
+      "original_task_type": "visual_explanation",
+      "task_type": "conceptual_explanation",
+      "operation_type": "matrix_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "topic": "general topic",
+      "goal": "Explain what a visual matrix example helps a learner understand.",
+      "current_step": "Provide a concrete visual matrix example",
+      "student_question": "Explain what a visual matrix example helps a learner understand.",
+      "user_query": "Explain what a visual matrix example helps a learner understand.",
+      "expected_output": "visual explanation with grounded evidence",
+      "learner_level": "unknown",
+      "needs_visual_support": false,
+      "explicit_visual_requested": false,
+      "needs_calculation": false,
+      "needs_code_execution": false,
+      "needs_debugging": false,
+      "needs_grounding": true,
+      "code_generation_required": false,
+      "tool_request_goal": "Explain what a visual matrix example helps a learner understand.",
+      "code_generation_instruction": "",
+      "reasoning_summary": "Fallback task analysis generated from request text.",
+      "analysis_strategy": "deterministic_fallback_after_llm_failure",
+      "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+      "request_metadata": {
+        "source_component": "ToolRequestAgent",
+        "learner_id": "article_T018",
+        "current_step": "Provide a concrete visual matrix example",
+        "plan_step_id": 2,
+        "step_reason": "To illustrate the concept with a specific example",
+        "suggested_tools": [
+          "VisualMatrixTool",
+          "TraceSearchTool",
+          "MatrixComputationTool"
+        ],
+        "workflow_source": "personalized_problem_tutoring",
+        "investigation_result": {
+          "topic": "visual_matrix_example",
+          "task_type": "conceptual_explanation",
+          "student_intent": "understand the purpose of a visual matrix example",
+          "difficulty_estimate": "beginner",
+          "meta_questions": [
+            "What is the purpose of a visual matrix example in learning?",
+            "How does a visual matrix example help learners understand a concept?"
+          ],
+          "required_context": [
+            "DPM",
+            "SKG",
+            "TraceToolkit"
+          ],
+          "initial_tutoring_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Explain the purpose of a visual matrix example",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To provide a clear understanding of the concept"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a concrete visual matrix example",
+              "needs_tool": true,
+              "suggested_tools": [
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To illustrate the concept with a specific example"
+            }
+          ],
+          "tool_request_goal": "Request VisualMatrixTool to provide a concrete visual matrix example",
+          "learner_id": "article_T018",
+          "student_question": "Explain what a visual matrix example helps a learner understand.",
+          "llm_model": "llama-3.1-8b-instant",
+          "raw_response": "{\n  \"topic\": \"visual_matrix_example\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the purpose of a visual matrix example\",\n  \"difficulty_estimate\": \"beginner\",\n  \"meta_questions\": [\n    \"What is the purpose of a visual matrix example in learning?\",\n    \"How does a visual matrix example help learners understand a concept?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\",\n    \"VisualMatrixTool\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Explain the purpose of a visual matrix example\",\n      \"needs_tool\": false,\n      \"reason\": \"To provide a clear understanding of the concept\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a concrete visual matrix example\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"To illustrate the concept with a specific example\"\n    }\n  ],\n  \"tool_request_goal\": \"Request VisualMatrixTool to provide a concrete visual matrix example\"\n}"
+        },
+        "current_plan_step": {
+          "step_id": 2,
+          "step_goal": "Provide a concrete visual matrix example",
+          "needs_tool": true,
+          "suggested_tools": [
+            "VisualMatrixTool",
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "task_type": "visual_explanation",
+          "expected_output": "visual explanation with grounded evidence",
+          "reason": "To illustrate the concept with a specific example"
+        },
+        "full_investigation_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Explain the purpose of a visual matrix example",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "VisualMatrixTool",
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "visual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "To provide a clear understanding of the concept"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Provide a concrete visual matrix example",
+            "needs_tool": true,
+            "suggested_tools": [
+              "VisualMatrixTool",
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "visual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "To illustrate the concept with a specific example"
+          }
+        ],
+        "workflow_metadata": {
+          "source": "run_agentic_tutoring_demo",
+          "force_recovery_test": false
+        },
+        "force_recovery_test": false
+      },
+      "learner_id": "article_T018",
+      "query": "Explain what a visual matrix example helps a learner understand.",
+      "collected_context": {
+        "learner_id": "article_T018",
+        "student_question": "Explain what a visual matrix example helps a learner understand.",
+        "task_type": "conceptual_explanation",
+        "topic": "general topic",
+        "current_step": "Provide a concrete visual matrix example",
+        "dpm": {
+          "memory_source": "DynamicPersonalMemory",
+          "memory_storage": "file_based_local",
+          "memory_layers": [
+            "L1_interaction_traces",
+            "L2_tutoring_notes",
+            "L3_profile_preferences"
+          ],
+          "learner_id": "article_T018",
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "preferred_examples": [],
+          "avoid": [],
+          "known_topics": [],
+          "weak_topics": [],
+          "learning_goals": [],
+          "is_weak_topic": false,
+          "is_known_topic": false,
+          "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T15:16:53.613482+00:00\n\nThe learner recently worked on: visual_matrix_example.\nObserved learning gap: matrix-to-output transformation.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: visual_explanation.\nLast selected tools: RAGTool.\n",
+          "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T15:16:53.613482+00:00\n\n- Topic: visual_matrix_example\n- Task type: visual_explanation\n- Status: fallback\n- Confidence: 0.2\n- Diagnosed gap: matrix-to-output transformation\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool\n\n",
+          "recent_traces": [
+            {
+              "trace_type": "tool_interaction_summary",
+              "stored_from": "MemoryUpdateAgent",
+              "timestamp": "2026-07-25T15:16:53.613482+00:00",
+              "learner_id": "article_T018",
+              "student_question": "Explain what a visual matrix example helps a learner understand.",
+              "topic": "visual_matrix_example",
+              "task_type": "visual_explanation",
+              "step_goal": "Explain the purpose of a visual matrix example",
+              "expected_output": "visual explanation with grounded evidence",
+              "request_id": "REQ-60d3be03",
+              "trace_id": "TT-18f45b45",
+              "trace_path": "var/agentic_traces/TT-18f45b45.json",
+              "status": "fallback",
+              "confidence_score": 0.2,
+              "failure_reason": "tool_execution_failed",
+              "selected_tools": [
+                "RAGTool"
+              ],
+              "content_format": "structured_tool_sections",
+              "memory_update_summary": {
+                "memory_update_type": "post_tool_interaction_update",
+                "memory_update_agent": "MemoryUpdateAgent",
+                "updated_at": "2026-07-25T15:16:53.613482+00:00",
+                "learner_id": "article_T018",
+                "student_question": "Explain what a visual matrix example helps a learner understand.",
+                "topic": "visual_matrix_example",
+                "task_type": "visual_explanation",
+                "status": "fallback",
+                "confidence_score": 0.2,
+                "failure_reason": "tool_execution_failed",
+                "selected_tools": [
+                  "RAGTool"
+                ],
+                "diagnosed_gap": "matrix-to-output transformation",
+                "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                "new_weak_topic": null,
+                "content_format": "structured_tool_sections",
+                "retrieval_mode": "no_topic_consistent_grounding",
+                "trace_memory_used": {},
+                "profile_update_policy": "conservative_metadata_update"
+              },
+              "memory_layer": "L1_interaction_trace_summary",
+              "stored_at": "2026-07-25T15:16:53.613760+00:00"
+            }
+          ],
+          "recent_trace_count": 1,
+          "profile_loaded": true,
+          "preferences_loaded": false,
+          "recent_memory_loaded": true,
+          "tutoring_memory_loaded": true,
+          "memory_paths": {
+            "base_dir": "var/agentic_memory/dpm/article_T018",
+            "L1_traces": "var/agentic_memory/dpm/article_T018/L1/traces.jsonl",
+            "L2_tutoring": "var/agentic_memory/dpm/article_T018/L2/tutoring.md",
+            "L3_profile": "var/agentic_memory/dpm/article_T018/L3/profile.json",
+            "L3_preferences": "var/agentic_memory/dpm/article_T018/L3/preferences.json",
+            "L3_recent": "var/agentic_memory/dpm/article_T018/L3/recent.md"
+          },
+          "topic": "general topic",
+          "task_type": "conceptual_explanation"
+        },
+        "skg": {
+          "kb_name": "default",
+          "query": "Explain what a visual matrix example helps a learner understand.",
+          "topic": "general topic",
+          "snippets": [
+            {
+              "chunk_id": "SKG-CONV-003",
+              "topic": "kernel movement",
+              "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+              "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+              "tags": [
+                "visual explanation",
+                "kernel",
+                "3x3 matrix",
+                "2x2 kernel"
+              ],
+              "retrieval_score": 2
+            },
+            {
+              "chunk_id": "SKG-CONV-001",
+              "topic": "convolution",
+              "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel",
+                "image processing",
+                "matrix"
+              ],
+              "retrieval_score": 1
+            },
+            {
+              "chunk_id": "SKG-CONV-002",
+              "topic": "convolution",
+              "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel movement",
+                "output value",
+                "matrix"
+              ],
+              "retrieval_score": 1
+            }
+          ],
+          "sources": [
+            "OpenTutorAI mock visual explanation: Kernel Movement",
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock lesson: Image Processing / Convolution"
+          ],
+          "grounding_text": "- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value."
+        },
+        "trace_memory": {
+          "similar_successful_traces": [],
+          "failed_traces": []
+        },
+        "summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0
+        }
+      },
+      "is_weak_topic": false,
+      "knowledge_snippets": [
+        {
+          "chunk_id": "SKG-CONV-003",
+          "topic": "kernel movement",
+          "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+          "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+          "tags": [
+            "visual explanation",
+            "kernel",
+            "3x3 matrix",
+            "2x2 kernel"
+          ],
+          "retrieval_score": 2
+        },
+        {
+          "chunk_id": "SKG-CONV-001",
+          "topic": "convolution",
+          "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+          "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+          "tags": [
+            "convolution",
+            "kernel",
+            "image processing",
+            "matrix"
+          ],
+          "retrieval_score": 1
+        },
+        {
+          "chunk_id": "SKG-CONV-002",
+          "topic": "convolution",
+          "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+          "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+          "tags": [
+            "convolution",
+            "kernel movement",
+            "output value",
+            "matrix"
+          ],
+          "retrieval_score": 1
+        }
+      ],
+      "grounding_text": "- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+      "similar_successful_traces": [],
+      "failed_traces": []
+    },
+    "tools_selected": {},
+    "output_validated": {
+      "status": "invalid",
+      "confidence_score": 0.2,
+      "failure_reason": "tool_execution_failed",
+      "recommended_action": "re_execute_relevant_tool"
+    }
+  },
+  "output_package": {
+    "package_id": "PKG-930670dd",
+    "status": "fallback",
+    "content": "The system could not produce a fully validated tool output. Returning safe partial support.\n\n## RAGTool\nRAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected.",
+    "evidence": [],
+    "references": [],
+    "validation_report": {
+      "status": "invalid",
+      "confidence_score": 0.2,
+      "failure_reason": "tool_execution_failed",
+      "recommended_action": "re_execute_relevant_tool"
+    },
+    "trace_id": "TT-e66451c3",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "visual_explanation",
+      "current_step": "Provide a concrete visual matrix example",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "matrix_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "fallback_reason": "tool_execution_failed",
+      "tool_outputs": {
+        "RAGTool": [
+          "RAGTool found no topic-consistent knowledge for the current request. Unrelated retrieved chunks were rejected."
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 3,
+            "source_component": "RAGTool",
+            "grounding_source": "Topic-consistency rejection",
+            "retrieval_mode": "no_topic_consistent_grounding",
+            "query": "Explain what a visual matrix example helps a learner understand. Provide a concrete visual matrix example visual explanation with grounded evidence general topic Provide a concrete visual matrix example Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "topic_key": "matrix",
+            "topic_consistent": false,
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "failure_reason": "no_topic_consistent_grounding",
+            "registry_tool": true
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "tool_metadata": {
+    "MatrixComputationTool": [],
+    "RAGTool": [
+      {
+        "attempt": 3,
+        "source_component": "RAGTool",
+        "grounding_source": "Topic-consistency rejection",
+        "retrieval_mode": "no_topic_consistent_grounding",
+        "query": "Explain what a visual matrix example helps a learner understand. Provide a concrete visual matrix example visual explanation with grounded evidence general topic Provide a concrete visual matrix example Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+        "topic_key": "matrix",
+        "topic_consistent": false,
+        "retrieved_knowledge_chunks": 0,
+        "original_retrieved_knowledge_chunks": 1,
+        "failure_reason": "no_topic_consistent_grounding",
+        "registry_tool": true
+      }
+    ],
+    "TraceSearchTool": [],
+    "VisualMatrixTool": []
+  },
+  "provider": {
+    "status": "available",
+    "error": null
+  }
+}

@@ -1,0 +1,820 @@
+{
+  "report_type": "implementation_demo_evidence",
+  "created_at": "2026-07-25T04:20:00.865055+00:00",
+  "summary": {
+    "question": "What is a row-by-column dot product?",
+    "learner_id": "article_T012",
+    "provider_status": "available",
+    "workflow_status": "validated",
+    "trace_id": "TT-2573f1b2",
+    "trace_path": "var/agentic_traces/TT-2573f1b2.json",
+    "confidence": 0.9,
+    "selected_tools": [
+      "MatrixComputationTool"
+    ],
+    "recovery_used": true,
+    "attempts": 1,
+    "recovery_steps": [],
+    "content_format": "structured_tool_sections",
+    "rag_retrieval_mode": null,
+    "rag_grounding_source": null,
+    "rag_scores": null,
+    "rag_matched_terms": null,
+    "trace_memory_similar_count": null,
+    "trace_memory_failed_count": null,
+    "trace_memory_reference_trace": null,
+    "dpm_learner_level": "unknown",
+    "dpm_is_weak_topic": false,
+    "dpm_recent_trace_count": 1,
+    "provider_error": null
+  },
+  "inputs": {
+    "question": "What is a row-by-column dot product?",
+    "learner_id": "article_T012"
+  },
+  "response": {
+    "answer": "## Grounded answer from validated tool output\n\nQuestion: What is a row-by-column dot product?\n\nValidated tools used: MatrixComputationTool\nValidation confidence: 0.9\n\n### Validated output\n\n## MatrixComputationTool\nA dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19",
+    "status": "validated",
+    "confidence": 0.9,
+    "trace_id": "TT-2573f1b2",
+    "trace_path": "var/agentic_traces/TT-2573f1b2.json",
+    "attempts": 1,
+    "selected_tools": [
+      "MatrixComputationTool"
+    ],
+    "recovery_used": true,
+    "output_package": {
+      "package_id": "PKG-c1ba5674",
+      "status": "validated",
+      "content": "## MatrixComputationTool\nA dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19",
+      "evidence": [
+        "The verified dot product is 19."
+      ],
+      "references": [
+        "MatrixComputationTool exact dot-product evaluator"
+      ],
+      "validation_report": {
+        "status": "valid",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "recommended_action": "accept"
+      },
+      "trace_id": "TT-2573f1b2",
+      "metadata": {
+        "workflow_source": "personalized_problem_tutoring",
+        "task_type": "calculation_or_verification",
+        "current_step": "Provide a visual example of a row-by-column dot product",
+        "analyzed_task_type": "visual_explanation",
+        "operation_type": "dot_product",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "request_role": "primary_execution",
+        "satisfies_primary_request": true,
+        "tool_outputs": {
+          "MatrixComputationTool": [
+            "A dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19"
+          ]
+        },
+        "tool_metadata": {
+          "MatrixComputationTool": [
+            {
+              "attempt": 1,
+              "source_component": "MatrixComputationTool",
+              "operation": "dot_product",
+              "operation_type": "dot_product",
+              "registry_tool": true,
+              "left_vector": [
+                1,
+                2
+              ],
+              "right_vector": [
+                5,
+                7
+              ],
+              "products": [
+                5,
+                14
+              ],
+              "result": 19,
+              "used_default_example": true
+            }
+          ]
+        },
+        "tool_names": [
+          "MatrixComputationTool"
+        ],
+        "content_format": "structured_tool_sections"
+      }
+    },
+    "scratchpad": [
+      {
+        "round_id": 1,
+        "step_goal": "Explain the concept of row-by-column dot product",
+        "analysis": "The tutor prepares the current solving step.",
+        "tool_request_summary": "calculation_or_verification / verified calculation with evidence",
+        "output_package": {
+          "package_id": "PKG-534b514b",
+          "status": "validated",
+          "content": "## MatrixComputationTool\nA dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19",
+          "evidence": [
+            "The verified dot product is 19."
+          ],
+          "references": [
+            "MatrixComputationTool exact dot-product evaluator"
+          ],
+          "validation_report": {
+            "status": "valid",
+            "confidence_score": 0.9,
+            "failure_reason": null,
+            "recommended_action": "accept"
+          },
+          "trace_id": "TT-5f8bc4ec",
+          "metadata": {
+            "workflow_source": "personalized_problem_tutoring",
+            "task_type": "calculation_or_verification",
+            "current_step": "Explain the concept of row-by-column dot product",
+            "analyzed_task_type": "calculation_or_verification",
+            "operation_type": "dot_product",
+            "operation_parameters": {
+              "matrices": [],
+              "shapes": [],
+              "stride": 1,
+              "padding": 0
+            },
+            "request_role": "primary_execution",
+            "satisfies_primary_request": true,
+            "tool_outputs": {
+              "MatrixComputationTool": [
+                "A dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19"
+              ]
+            },
+            "tool_metadata": {
+              "MatrixComputationTool": [
+                {
+                  "attempt": 1,
+                  "source_component": "MatrixComputationTool",
+                  "operation": "dot_product",
+                  "operation_type": "dot_product",
+                  "registry_tool": true,
+                  "left_vector": [
+                    1,
+                    2
+                  ],
+                  "right_vector": [
+                    5,
+                    7
+                  ],
+                  "products": [
+                    5,
+                    14
+                  ],
+                  "result": 19,
+                  "used_default_example": true
+                }
+              ]
+            },
+            "tool_names": [
+              "MatrixComputationTool"
+            ],
+            "content_format": "structured_tool_sections"
+          }
+        },
+        "status": "validated"
+      },
+      {
+        "round_id": 2,
+        "step_goal": "Provide a visual example of a row-by-column dot product",
+        "analysis": "The tutor prepares the current solving step.",
+        "tool_request_summary": "calculation_or_verification / verified calculation with evidence",
+        "output_package": {
+          "package_id": "PKG-c1ba5674",
+          "status": "validated",
+          "content": "## MatrixComputationTool\nA dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19",
+          "evidence": [
+            "The verified dot product is 19."
+          ],
+          "references": [
+            "MatrixComputationTool exact dot-product evaluator"
+          ],
+          "validation_report": {
+            "status": "valid",
+            "confidence_score": 0.9,
+            "failure_reason": null,
+            "recommended_action": "accept"
+          },
+          "trace_id": "TT-2573f1b2",
+          "metadata": {
+            "workflow_source": "personalized_problem_tutoring",
+            "task_type": "calculation_or_verification",
+            "current_step": "Provide a visual example of a row-by-column dot product",
+            "analyzed_task_type": "visual_explanation",
+            "operation_type": "dot_product",
+            "operation_parameters": {
+              "matrices": [],
+              "shapes": [],
+              "stride": 1,
+              "padding": 0
+            },
+            "request_role": "primary_execution",
+            "satisfies_primary_request": true,
+            "tool_outputs": {
+              "MatrixComputationTool": [
+                "A dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19"
+              ]
+            },
+            "tool_metadata": {
+              "MatrixComputationTool": [
+                {
+                  "attempt": 1,
+                  "source_component": "MatrixComputationTool",
+                  "operation": "dot_product",
+                  "operation_type": "dot_product",
+                  "registry_tool": true,
+                  "left_vector": [
+                    1,
+                    2
+                  ],
+                  "right_vector": [
+                    5,
+                    7
+                  ],
+                  "products": [
+                    5,
+                    14
+                  ],
+                  "result": 19,
+                  "used_default_example": true
+                }
+              ]
+            },
+            "tool_names": [
+              "MatrixComputationTool"
+            ],
+            "content_format": "structured_tool_sections"
+          }
+        },
+        "status": "validated"
+      }
+    ],
+    "metadata": {
+      "agentic_core": "AgenticCoreService",
+      "workflow": "personalized_problem_tutoring",
+      "source": "terminal_backend_prototype",
+      "final_answer_generator": "TutoringAnswerWriter",
+      "memory_update_summary": {
+        "memory_update_type": "post_tool_interaction_update",
+        "memory_update_agent": "MemoryUpdateAgent",
+        "updated_at": "2026-07-25T04:19:53.838098+00:00",
+        "learner_id": "article_T012",
+        "student_question": "What is a row-by-column dot product?",
+        "topic": "matrix_multiplication",
+        "task_type": "calculation_or_verification",
+        "status": "validated",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "selected_tools": [
+          "MatrixComputationTool"
+        ],
+        "diagnosed_gap": "matrix-to-output transformation",
+        "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+        "new_weak_topic": null,
+        "content_format": "structured_tool_sections",
+        "retrieval_mode": null,
+        "trace_memory_used": {},
+        "profile_update_policy": "conservative_metadata_update"
+      },
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "calculation_or_verification",
+      "current_step": "Provide a visual example of a row-by-column dot product",
+      "analyzed_task_type": "visual_explanation",
+      "operation_type": "dot_product",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "primary_execution",
+      "satisfies_primary_request": true,
+      "tool_outputs": {
+        "MatrixComputationTool": [
+          "A dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19"
+        ]
+      },
+      "tool_metadata": {
+        "MatrixComputationTool": [
+          {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "dot_product",
+            "operation_type": "dot_product",
+            "registry_tool": true,
+            "left_vector": [
+              1,
+              2
+            ],
+            "right_vector": [
+              5,
+              7
+            ],
+            "products": [
+              5,
+              14
+            ],
+            "result": 19,
+            "used_default_example": true
+          }
+        ]
+      },
+      "tool_names": [
+        "MatrixComputationTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "trace_summary": {
+    "trace_id": "TT-2573f1b2",
+    "trace_path": "var/agentic_traces/TT-2573f1b2.json",
+    "created_at": "2026-07-25T04:19:53.834804Z",
+    "task_type": "calculation_or_verification",
+    "status": "validated",
+    "student_question": "What is a row-by-column dot product?",
+    "step_goal": "Provide a visual example of a row-by-column dot product",
+    "selected_tools": [
+      "MatrixComputationTool"
+    ],
+    "attempts": 1,
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "recovery_used": false,
+    "content_preview": "## MatrixComputationTool\nA dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19"
+  },
+  "trace_events": {
+    "tool_request_received": {
+      "request_id": "REQ-16323c6b",
+      "student_question": "What is a row-by-column dot product?",
+      "user_query": "What is a row-by-column dot product?",
+      "query": "What is a row-by-column dot product?",
+      "step_goal": "Provide a visual example of a row-by-column dot product",
+      "current_step": "Provide a visual example of a row-by-column dot product",
+      "task_type": "calculation_or_verification",
+      "expected_output": "verified calculation with evidence",
+      "workflow_source": "personalized_problem_tutoring",
+      "metadata": {
+        "source_component": "ToolRequestAgent",
+        "learner_id": "article_T012",
+        "current_step": "Provide a visual example of a row-by-column dot product",
+        "plan_step_id": 2,
+        "step_reason": "A visual example will help the student understand the concept better",
+        "suggested_tools": [
+          "TraceSearchTool",
+          "CalculatorTool"
+        ],
+        "workflow_source": "personalized_problem_tutoring",
+        "investigation_result": {
+          "topic": "matrix_multiplication",
+          "task_type": "conceptual_explanation",
+          "student_intent": "understand the row-by-column dot product",
+          "difficulty_estimate": "intermediate",
+          "meta_questions": [
+            "Can you provide an example of a row-by-column dot product?",
+            "How does the row-by-column dot product relate to matrix multiplication?"
+          ],
+          "required_context": [
+            "DPM",
+            "SKG",
+            "TraceToolkit"
+          ],
+          "initial_tutoring_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Explain the concept of row-by-column dot product",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "reason": "This is a foundational concept that can be explained without tools"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a visual example of a row-by-column dot product",
+              "needs_tool": true,
+              "suggested_tools": [
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "A visual example will help the student understand the concept better"
+            }
+          ],
+          "tool_request_goal": "Visualize a row-by-column dot product using a small matrix example",
+          "learner_id": "article_T012",
+          "student_question": "What is a row-by-column dot product?",
+          "llm_model": "llama-3.1-8b-instant",
+          "raw_response": "{\n  \"topic\": \"matrix_multiplication\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the row-by-column dot product\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a row-by-column dot product?\",\n    \"How does the row-by-column dot product relate to matrix multiplication?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Explain the concept of row-by-column dot product\",\n      \"needs_tool\": false,\n      \"reason\": \"This is a foundational concept that can be explained without tools\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a visual example of a row-by-column dot product\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student understand the concept better\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a row-by-column dot product using a small matrix example\"\n}"
+        },
+        "current_plan_step": {
+          "step_id": 2,
+          "step_goal": "Provide a visual example of a row-by-column dot product",
+          "needs_tool": true,
+          "suggested_tools": [
+            "TraceSearchTool",
+            "CalculatorTool"
+          ],
+          "task_type": "calculation_or_verification",
+          "expected_output": "verified calculation with evidence",
+          "reason": "A visual example will help the student understand the concept better"
+        },
+        "full_investigation_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Explain the concept of row-by-column dot product",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool",
+              "CalculatorTool"
+            ],
+            "task_type": "calculation_or_verification",
+            "expected_output": "verified calculation with evidence",
+            "reason": "This is a foundational concept that can be explained without tools"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Provide a visual example of a row-by-column dot product",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "CalculatorTool"
+            ],
+            "task_type": "calculation_or_verification",
+            "expected_output": "verified calculation with evidence",
+            "reason": "A visual example will help the student understand the concept better"
+          }
+        ],
+        "workflow_metadata": {
+          "source": "run_agentic_tutoring_demo",
+          "force_recovery_test": false
+        },
+        "force_recovery_test": false
+      }
+    },
+    "task_context_analyzed": {
+      "request_id": "REQ-16323c6b",
+      "workflow_source": "personalized_problem_tutoring",
+      "original_task_type": "calculation_or_verification",
+      "task_type": "visual_explanation",
+      "operation_type": "dot_product",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "topic": "general topic",
+      "goal": "What is a row-by-column dot product?",
+      "current_step": "Provide a visual example of a row-by-column dot product",
+      "student_question": "What is a row-by-column dot product?",
+      "user_query": "What is a row-by-column dot product?",
+      "expected_output": "verified calculation with evidence",
+      "learner_level": "unknown",
+      "needs_visual_support": false,
+      "explicit_visual_requested": false,
+      "needs_calculation": false,
+      "needs_code_execution": false,
+      "needs_debugging": false,
+      "needs_grounding": true,
+      "code_generation_required": false,
+      "tool_request_goal": "What is a row-by-column dot product?",
+      "code_generation_instruction": "",
+      "reasoning_summary": "Fallback task analysis generated from request text.",
+      "analysis_strategy": "deterministic_fallback_after_llm_failure",
+      "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+      "request_metadata": {
+        "source_component": "ToolRequestAgent",
+        "learner_id": "article_T012",
+        "current_step": "Provide a visual example of a row-by-column dot product",
+        "plan_step_id": 2,
+        "step_reason": "A visual example will help the student understand the concept better",
+        "suggested_tools": [
+          "TraceSearchTool",
+          "CalculatorTool"
+        ],
+        "workflow_source": "personalized_problem_tutoring",
+        "investigation_result": {
+          "topic": "matrix_multiplication",
+          "task_type": "conceptual_explanation",
+          "student_intent": "understand the row-by-column dot product",
+          "difficulty_estimate": "intermediate",
+          "meta_questions": [
+            "Can you provide an example of a row-by-column dot product?",
+            "How does the row-by-column dot product relate to matrix multiplication?"
+          ],
+          "required_context": [
+            "DPM",
+            "SKG",
+            "TraceToolkit"
+          ],
+          "initial_tutoring_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Explain the concept of row-by-column dot product",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "reason": "This is a foundational concept that can be explained without tools"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Provide a visual example of a row-by-column dot product",
+              "needs_tool": true,
+              "suggested_tools": [
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "A visual example will help the student understand the concept better"
+            }
+          ],
+          "tool_request_goal": "Visualize a row-by-column dot product using a small matrix example",
+          "learner_id": "article_T012",
+          "student_question": "What is a row-by-column dot product?",
+          "llm_model": "llama-3.1-8b-instant",
+          "raw_response": "{\n  \"topic\": \"matrix_multiplication\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the row-by-column dot product\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a row-by-column dot product?\",\n    \"How does the row-by-column dot product relate to matrix multiplication?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Explain the concept of row-by-column dot product\",\n      \"needs_tool\": false,\n      \"reason\": \"This is a foundational concept that can be explained without tools\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Provide a visual example of a row-by-column dot product\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student understand the concept better\"\n    }\n  ],\n  \"tool_request_goal\": \"Visualize a row-by-column dot product using a small matrix example\"\n}"
+        },
+        "current_plan_step": {
+          "step_id": 2,
+          "step_goal": "Provide a visual example of a row-by-column dot product",
+          "needs_tool": true,
+          "suggested_tools": [
+            "TraceSearchTool",
+            "CalculatorTool"
+          ],
+          "task_type": "calculation_or_verification",
+          "expected_output": "verified calculation with evidence",
+          "reason": "A visual example will help the student understand the concept better"
+        },
+        "full_investigation_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Explain the concept of row-by-column dot product",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool",
+              "CalculatorTool"
+            ],
+            "task_type": "calculation_or_verification",
+            "expected_output": "verified calculation with evidence",
+            "reason": "This is a foundational concept that can be explained without tools"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Provide a visual example of a row-by-column dot product",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "CalculatorTool"
+            ],
+            "task_type": "calculation_or_verification",
+            "expected_output": "verified calculation with evidence",
+            "reason": "A visual example will help the student understand the concept better"
+          }
+        ],
+        "workflow_metadata": {
+          "source": "run_agentic_tutoring_demo",
+          "force_recovery_test": false
+        },
+        "force_recovery_test": false
+      },
+      "learner_id": "article_T012",
+      "query": "What is a row-by-column dot product?",
+      "collected_context": {
+        "learner_id": "article_T012",
+        "student_question": "What is a row-by-column dot product?",
+        "task_type": "visual_explanation",
+        "topic": "general topic",
+        "current_step": "Provide a visual example of a row-by-column dot product",
+        "dpm": {
+          "memory_source": "DynamicPersonalMemory",
+          "memory_storage": "file_based_local",
+          "memory_layers": [
+            "L1_interaction_traces",
+            "L2_tutoring_notes",
+            "L3_profile_preferences"
+          ],
+          "learner_id": "article_T012",
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "preferred_examples": [],
+          "avoid": [],
+          "known_topics": [],
+          "weak_topics": [],
+          "learning_goals": [],
+          "is_weak_topic": false,
+          "is_known_topic": false,
+          "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T04:19:46.562337+00:00\n\nThe learner recently worked on: matrix_multiplication.\nObserved learning gap: matrix-to-output transformation.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: calculation_or_verification.\nLast selected tools: MatrixComputationTool.\n",
+          "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T04:19:46.562337+00:00\n\n- Topic: matrix_multiplication\n- Task type: calculation_or_verification\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: matrix-to-output transformation\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: MatrixComputationTool\n\n",
+          "recent_traces": [
+            {
+              "trace_type": "tool_interaction_summary",
+              "stored_from": "MemoryUpdateAgent",
+              "timestamp": "2026-07-25T04:19:46.562337+00:00",
+              "learner_id": "article_T012",
+              "student_question": "What is a row-by-column dot product?",
+              "topic": "matrix_multiplication",
+              "task_type": "calculation_or_verification",
+              "step_goal": "Explain the concept of row-by-column dot product",
+              "expected_output": "verified calculation with evidence",
+              "request_id": "REQ-af6b559a",
+              "trace_id": "TT-5f8bc4ec",
+              "trace_path": "var/agentic_traces/TT-5f8bc4ec.json",
+              "status": "validated",
+              "confidence_score": 0.9,
+              "failure_reason": null,
+              "selected_tools": [
+                "MatrixComputationTool"
+              ],
+              "content_format": "structured_tool_sections",
+              "memory_update_summary": {
+                "memory_update_type": "post_tool_interaction_update",
+                "memory_update_agent": "MemoryUpdateAgent",
+                "updated_at": "2026-07-25T04:19:46.562337+00:00",
+                "learner_id": "article_T012",
+                "student_question": "What is a row-by-column dot product?",
+                "topic": "matrix_multiplication",
+                "task_type": "calculation_or_verification",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "MatrixComputationTool"
+                ],
+                "diagnosed_gap": "matrix-to-output transformation",
+                "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                "new_weak_topic": null,
+                "content_format": "structured_tool_sections",
+                "retrieval_mode": null,
+                "trace_memory_used": {},
+                "profile_update_policy": "conservative_metadata_update"
+              },
+              "memory_layer": "L1_interaction_trace_summary",
+              "stored_at": "2026-07-25T04:19:46.562532+00:00"
+            }
+          ],
+          "recent_trace_count": 1,
+          "profile_loaded": true,
+          "preferences_loaded": false,
+          "recent_memory_loaded": true,
+          "tutoring_memory_loaded": true,
+          "memory_paths": {
+            "base_dir": "var/agentic_memory/dpm/article_T012",
+            "L1_traces": "var/agentic_memory/dpm/article_T012/L1/traces.jsonl",
+            "L2_tutoring": "var/agentic_memory/dpm/article_T012/L2/tutoring.md",
+            "L3_profile": "var/agentic_memory/dpm/article_T012/L3/profile.json",
+            "L3_preferences": "var/agentic_memory/dpm/article_T012/L3/preferences.json",
+            "L3_recent": "var/agentic_memory/dpm/article_T012/L3/recent.md"
+          },
+          "topic": "general topic",
+          "task_type": "visual_explanation"
+        },
+        "skg": {
+          "kb_name": "default",
+          "query": "What is a row-by-column dot product?",
+          "topic": "general topic",
+          "snippets": [],
+          "sources": [],
+          "grounding_text": ""
+        },
+        "trace_memory": {
+          "similar_successful_traces": [],
+          "failed_traces": []
+        },
+        "summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 0,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0
+        }
+      },
+      "is_weak_topic": false,
+      "knowledge_snippets": [],
+      "grounding_text": "",
+      "similar_successful_traces": [],
+      "failed_traces": []
+    },
+    "tools_selected": {},
+    "output_validated": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    }
+  },
+  "output_package": {
+    "package_id": "PKG-c1ba5674",
+    "status": "validated",
+    "content": "## MatrixComputationTool\nA dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19",
+    "evidence": [
+      "The verified dot product is 19."
+    ],
+    "references": [
+      "MatrixComputationTool exact dot-product evaluator"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-2573f1b2",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "calculation_or_verification",
+      "current_step": "Provide a visual example of a row-by-column dot product",
+      "analyzed_task_type": "visual_explanation",
+      "operation_type": "dot_product",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "primary_execution",
+      "satisfies_primary_request": true,
+      "tool_outputs": {
+        "MatrixComputationTool": [
+          "A dot product multiplies corresponding values and then adds those products.\n\n(1x5) + (2x7) = 19"
+        ]
+      },
+      "tool_metadata": {
+        "MatrixComputationTool": [
+          {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "dot_product",
+            "operation_type": "dot_product",
+            "registry_tool": true,
+            "left_vector": [
+              1,
+              2
+            ],
+            "right_vector": [
+              5,
+              7
+            ],
+            "products": [
+              5,
+              14
+            ],
+            "result": 19,
+            "used_default_example": true
+          }
+        ]
+      },
+      "tool_names": [
+        "MatrixComputationTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "tool_metadata": {
+    "MatrixComputationTool": [
+      {
+        "attempt": 1,
+        "source_component": "MatrixComputationTool",
+        "operation": "dot_product",
+        "operation_type": "dot_product",
+        "registry_tool": true,
+        "left_vector": [
+          1,
+          2
+        ],
+        "right_vector": [
+          5,
+          7
+        ],
+        "products": [
+          5,
+          14
+        ],
+        "result": 19,
+        "used_default_example": true
+      }
+    ],
+    "RAGTool": [],
+    "TraceSearchTool": [],
+    "VisualMatrixTool": []
+  },
+  "provider": {
+    "status": "available",
+    "error": null
+  }
+}

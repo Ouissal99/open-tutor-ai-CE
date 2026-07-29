@@ -1,0 +1,3218 @@
+{
+  "trace_schema_version": "phase_13d_full_lifecycle_v1",
+  "trace_id": "TT-a485cc00",
+  "created_at": "2026-07-25T14:44:25.537386Z",
+  "request_id": "REQ-bf28efb0",
+  "learner_id": "article_T083",
+  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+  "task_type": "conceptual_explanation",
+  "workflow_source": "personalized_problem_tutoring",
+  "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+  "expected_output": "visual explanation with grounded evidence",
+  "investigation_result": {
+    "topic": "filters and matrices",
+    "task_type": "conceptual_explanation",
+    "student_intent": "understand the difference between filters and matrices",
+    "difficulty_estimate": "intermediate",
+    "meta_questions": [
+      "Can you provide an example of a filter in a neural network?",
+      "How do filters relate to matrices in the context of convolutional neural networks?"
+    ],
+    "required_context": [
+      "DPM",
+      "SKG",
+      "TraceToolkit"
+    ],
+    "initial_tutoring_plan": [
+      {
+        "step_id": 1,
+        "step_goal": "Define filters and matrices in the context of neural networks",
+        "needs_tool": true,
+        "suggested_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "reason": "This step is necessary to establish a clear understanding of the concepts"
+      },
+      {
+        "step_id": 2,
+        "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+        "needs_tool": true,
+        "suggested_tools": [
+          "VisualMatrixTool",
+          "TraceSearchTool"
+        ],
+        "reason": "A visual example will help the student better understand the difference between filters and matrices"
+      }
+    ],
+    "tool_request_goal": "Request conceptual explanation and visual matrix example",
+    "learner_id": "article_T083",
+    "student_question": "I still confuse filters and matrices. Explain the difference again.",
+    "llm_model": "llama-3.1-8b-instant",
+    "raw_response": "{\n  \"topic\": \"Filters and Matrices\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the difference between filters and matrices\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a filter in a neural network?\",\n    \"How do filters relate to matrices in the context of convolutional neural networks?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define filters and matrices in the context of neural networks\",\n      \"needs_tool\": false,\n      \"reason\": \"This step is necessary to establish a clear understanding of the concepts\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small matrix/kernel example to illustrate the difference\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student better understand the difference between filters and matrices\"\n    }\n  ],\n  \"tool_request_goal\": \"Request conceptual explanation and visual matrix example\"\n}"
+  },
+  "analyzed_task": {
+    "request_id": "REQ-bf28efb0",
+    "workflow_source": "personalized_problem_tutoring",
+    "original_task_type": "conceptual_explanation",
+    "task_type": "conceptual_explanation",
+    "operation_type": "convolution_concept",
+    "operation_parameters": {
+      "matrices": [],
+      "shapes": [],
+      "stride": 1,
+      "padding": 0
+    },
+    "topic": "convolution",
+    "goal": "I still confuse filters and matrices. Explain the difference again.",
+    "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+    "student_question": "I still confuse filters and matrices. Explain the difference again.",
+    "user_query": "I still confuse filters and matrices. Explain the difference again.",
+    "expected_output": "visual explanation with grounded evidence",
+    "learner_level": "beginner",
+    "needs_visual_support": false,
+    "explicit_visual_requested": false,
+    "needs_calculation": false,
+    "needs_code_execution": false,
+    "needs_debugging": false,
+    "needs_grounding": true,
+    "code_generation_required": false,
+    "tool_request_goal": "I still confuse filters and matrices. Explain the difference again.",
+    "code_generation_instruction": "",
+    "reasoning_summary": "Fallback task analysis generated from request text.",
+    "analysis_strategy": "deterministic_fallback_after_llm_failure",
+    "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+    "request_metadata": {
+      "source_component": "ToolRequestAgent",
+      "learner_id": "article_T083",
+      "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+      "plan_step_id": 2,
+      "step_reason": "A visual example will help the student better understand the difference between filters and matrices",
+      "suggested_tools": [
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ],
+      "workflow_source": "personalized_problem_tutoring",
+      "investigation_result": {
+        "topic": "filters and matrices",
+        "task_type": "conceptual_explanation",
+        "student_intent": "understand the difference between filters and matrices",
+        "difficulty_estimate": "intermediate",
+        "meta_questions": [
+          "Can you provide an example of a filter in a neural network?",
+          "How do filters relate to matrices in the context of convolutional neural networks?"
+        ],
+        "required_context": [
+          "DPM",
+          "SKG",
+          "TraceToolkit"
+        ],
+        "initial_tutoring_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Define filters and matrices in the context of neural networks",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "reason": "This step is necessary to establish a clear understanding of the concepts"
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+            "needs_tool": true,
+            "suggested_tools": [
+              "VisualMatrixTool",
+              "TraceSearchTool"
+            ],
+            "reason": "A visual example will help the student better understand the difference between filters and matrices"
+          }
+        ],
+        "tool_request_goal": "Request conceptual explanation and visual matrix example",
+        "learner_id": "article_T083",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "llm_model": "llama-3.1-8b-instant",
+        "raw_response": "{\n  \"topic\": \"Filters and Matrices\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the difference between filters and matrices\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a filter in a neural network?\",\n    \"How do filters relate to matrices in the context of convolutional neural networks?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define filters and matrices in the context of neural networks\",\n      \"needs_tool\": false,\n      \"reason\": \"This step is necessary to establish a clear understanding of the concepts\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small matrix/kernel example to illustrate the difference\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student better understand the difference between filters and matrices\"\n    }\n  ],\n  \"tool_request_goal\": \"Request conceptual explanation and visual matrix example\"\n}"
+      },
+      "current_plan_step": {
+        "step_id": 2,
+        "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+        "needs_tool": true,
+        "suggested_tools": [
+          "TraceSearchTool",
+          "MatrixComputationTool"
+        ],
+        "task_type": "conceptual_explanation",
+        "expected_output": "visual explanation with grounded evidence",
+        "reason": "A visual example will help the student better understand the difference between filters and matrices"
+      },
+      "full_investigation_plan": [
+        {
+          "step_id": 1,
+          "step_goal": "Define filters and matrices in the context of neural networks",
+          "needs_tool": true,
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "course-grounded tutoring explanation",
+          "reason": "This step is necessary to establish a clear understanding of the concepts"
+        },
+        {
+          "step_id": 2,
+          "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+          "needs_tool": true,
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "visual explanation with grounded evidence",
+          "reason": "A visual example will help the student better understand the difference between filters and matrices"
+        }
+      ],
+      "workflow_metadata": {
+        "source": "run_agentic_tutoring_demo",
+        "force_recovery_test": false
+      },
+      "force_recovery_test": false
+    }
+  },
+  "collected_context_summary": {
+    "learner_level": "unknown",
+    "preferred_explanation_style": "unknown",
+    "is_weak_topic": false,
+    "retrieved_knowledge_chunks": 3,
+    "similar_successful_trace_count": 1,
+    "failed_trace_count": 0
+  },
+  "dpm_profile_snapshot": {
+    "memory_source": "DynamicPersonalMemory",
+    "memory_storage": "file_based_local",
+    "memory_layers": [
+      "L1_interaction_traces",
+      "L2_tutoring_notes",
+      "L3_profile_preferences"
+    ],
+    "learner_id": "article_T083",
+    "learner_level": "unknown",
+    "preferred_explanation_style": "unknown",
+    "preferred_examples": [],
+    "avoid": [],
+    "known_topics": [],
+    "weak_topics": [],
+    "learning_goals": [],
+    "is_weak_topic": false,
+    "is_known_topic": false,
+    "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:44:17.455261+00:00\n\nThe learner recently worked on: filters and matrices.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+    "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:44:17.455261+00:00\n\n- Topic: filters and matrices\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+    "recent_traces": [
+      {
+        "trace_type": "tool_interaction_summary",
+        "stored_from": "MemoryUpdateAgent",
+        "timestamp": "2026-07-25T14:44:17.455261+00:00",
+        "learner_id": "article_T083",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "topic": "filters and matrices",
+        "task_type": "conceptual_explanation",
+        "step_goal": "Define filters and matrices in the context of neural networks",
+        "expected_output": "course-grounded tutoring explanation",
+        "request_id": "REQ-984095f5",
+        "trace_id": "TT-526dd2cc",
+        "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+        "status": "validated",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "selected_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "content_format": "structured_tool_sections",
+        "memory_update_summary": {
+          "memory_update_type": "post_tool_interaction_update",
+          "memory_update_agent": "MemoryUpdateAgent",
+          "updated_at": "2026-07-25T14:44:17.455261+00:00",
+          "learner_id": "article_T083",
+          "student_question": "I still confuse filters and matrices. Explain the difference again.",
+          "topic": "filters and matrices",
+          "task_type": "conceptual_explanation",
+          "status": "validated",
+          "confidence_score": 0.9,
+          "failure_reason": null,
+          "selected_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "diagnosed_gap": "kernel movement",
+          "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+          "new_weak_topic": null,
+          "content_format": "structured_tool_sections",
+          "retrieval_mode": "jsonl_hybrid_lexical",
+          "trace_memory_used": {
+            "similar_successful_trace_count": 0,
+            "failed_trace_count": 0,
+            "reference_trace_id": null
+          },
+          "profile_update_policy": "conservative_metadata_update"
+        },
+        "memory_layer": "L1_interaction_trace_summary",
+        "stored_at": "2026-07-25T14:44:17.455486+00:00"
+      }
+    ],
+    "recent_trace_count": 1,
+    "profile_loaded": true,
+    "preferences_loaded": false,
+    "recent_memory_loaded": true,
+    "tutoring_memory_loaded": true,
+    "memory_paths": {
+      "base_dir": "var/agentic_memory/dpm/article_T083",
+      "L1_traces": "var/agentic_memory/dpm/article_T083/L1/traces.jsonl",
+      "L2_tutoring": "var/agentic_memory/dpm/article_T083/L2/tutoring.md",
+      "L3_profile": "var/agentic_memory/dpm/article_T083/L3/profile.json",
+      "L3_preferences": "var/agentic_memory/dpm/article_T083/L3/preferences.json",
+      "L3_recent": "var/agentic_memory/dpm/article_T083/L3/recent.md"
+    },
+    "topic": "convolution",
+    "task_type": "conceptual_explanation"
+  },
+  "skg_context": {
+    "kb_name": "default",
+    "query": "I still confuse filters and matrices. Explain the difference again.",
+    "topic": "convolution",
+    "snippets": [
+      {
+        "chunk_id": "SKG-CONV-002",
+        "topic": "convolution",
+        "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+        "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+        "tags": [
+          "convolution",
+          "kernel movement",
+          "output value",
+          "matrix"
+        ],
+        "retrieval_score": 5
+      },
+      {
+        "chunk_id": "SKG-CONV-001",
+        "topic": "convolution",
+        "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+        "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+        "tags": [
+          "convolution",
+          "kernel",
+          "image processing",
+          "matrix"
+        ],
+        "retrieval_score": 3
+      },
+      {
+        "chunk_id": "SKG-OVERFIT-001",
+        "topic": "overfitting",
+        "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+        "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+        "tags": [
+          "machine learning",
+          "overfitting",
+          "generalization"
+        ],
+        "retrieval_score": 2
+      }
+    ],
+    "sources": [
+      "OpenTutorAI mock lesson: Image Processing / Convolution",
+      "OpenTutorAI mock lesson: Image Processing / Convolution",
+      "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+    ],
+    "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+  },
+  "skg_retrieved_chunks": [
+    {
+      "tool_name": "RAGTool",
+      "retrieval_mode": "jsonl_hybrid_lexical",
+      "scores": [
+        12.729905
+      ],
+      "chunk_ids": [
+        "SKG-9636f398"
+      ],
+      "matched_terms": [
+        [
+          "cnn",
+          "convolution",
+          "correlation",
+          "input",
+          "kernel",
+          "matrix",
+          "output",
+          "patch",
+          "sliding",
+          "small"
+        ]
+      ],
+      "score_breakdown": [
+        {
+          "lexical_score": 5.729905,
+          "phrase_score": 5.0,
+          "important_term_score": 2.0,
+          "title_source_score": 0.0,
+          "matched_phrases": [
+            "small matrix",
+            "input matrix",
+            "output matrix",
+            "kernel sliding"
+          ]
+        }
+      ],
+      "evidence": [
+        "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+      ],
+      "references": [
+        "var/agentic_memory/skg_index/documents/convolution_demo.md"
+      ]
+    }
+  ],
+  "similar_successful_traces": [
+    {
+      "trace_id": "TT-526dd2cc",
+      "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+      "created_at": "2026-07-25T14:44:17.451630Z",
+      "task_type": "conceptual_explanation",
+      "status": "validated",
+      "student_question": "I still confuse filters and matrices. Explain the difference again.",
+      "step_goal": "Define filters and matrices in the context of neural networks",
+      "selected_tools": [
+        "RAGTool",
+        "TraceSearchTool"
+      ],
+      "attempts": 1,
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recovery_used": false,
+      "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+      "learner_id": "article_T083",
+      "similarity_score": 10.9,
+      "matched_terms": [
+        "again",
+        "confuse",
+        "difference",
+        "filters",
+        "matrices",
+        "still"
+      ],
+      "score_breakdown": {
+        "word_overlap": 6,
+        "task_type_boost": 3.0,
+        "tool_quality_boost": 1.0,
+        "confidence_boost": 0.9
+      },
+      "memory_source": "learner_filtered_trace_files"
+    }
+  ],
+  "failed_traces": [],
+  "tool_selection": {},
+  "selection_history": [],
+  "selection_strategy": null,
+  "reference_trace_id": null,
+  "tool_plan": {
+    "plan_id": "PLAN-3b7349e0",
+    "task_type": "conceptual_explanation",
+    "selected_tools": [],
+    "steps": [
+      {
+        "step_id": 1,
+        "goal": "Retrieve grounded educational knowledge",
+        "required_capability": "grounding",
+        "reason": "The tutoring answer should be supported by verified educational content.",
+        "topic": "convolution",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+      },
+      {
+        "step_id": 2,
+        "goal": "Retrieve relevant previous interaction evidence",
+        "required_capability": "trace_reuse",
+        "reason": "The learner request refers to previous work, a mistake, or personalized history.",
+        "topic": "convolution",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+      },
+      {
+        "step_id": 3,
+        "goal": "Compute or verify a matrix-based example",
+        "required_capability": "matrix_computation",
+        "reason": "The task involves matrix, convolution, kernel, or linear-algebra operations.",
+        "topic": "convolution",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+      }
+    ],
+    "metadata": {
+      "source_component": "ToolPlanner",
+      "planning_mode": "capability_first_no_retrieval",
+      "topic": "convolution",
+      "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+      "student_question": "I still confuse filters and matrices. Explain the difference again.",
+      "goal": "I still confuse filters and matrices. Explain the difference again.",
+      "expected_output": "visual explanation with grounded evidence",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "learner_level": "unknown",
+      "is_weak_topic": false,
+      "collected_context": {
+        "learner_id": "article_T083",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "task_type": "conceptual_explanation",
+        "topic": "convolution",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+        "dpm": {
+          "memory_source": "DynamicPersonalMemory",
+          "memory_storage": "file_based_local",
+          "memory_layers": [
+            "L1_interaction_traces",
+            "L2_tutoring_notes",
+            "L3_profile_preferences"
+          ],
+          "learner_id": "article_T083",
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "preferred_examples": [],
+          "avoid": [],
+          "known_topics": [],
+          "weak_topics": [],
+          "learning_goals": [],
+          "is_weak_topic": false,
+          "is_known_topic": false,
+          "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:44:17.455261+00:00\n\nThe learner recently worked on: filters and matrices.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+          "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:44:17.455261+00:00\n\n- Topic: filters and matrices\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+          "recent_traces": [
+            {
+              "trace_type": "tool_interaction_summary",
+              "stored_from": "MemoryUpdateAgent",
+              "timestamp": "2026-07-25T14:44:17.455261+00:00",
+              "learner_id": "article_T083",
+              "student_question": "I still confuse filters and matrices. Explain the difference again.",
+              "topic": "filters and matrices",
+              "task_type": "conceptual_explanation",
+              "step_goal": "Define filters and matrices in the context of neural networks",
+              "expected_output": "course-grounded tutoring explanation",
+              "request_id": "REQ-984095f5",
+              "trace_id": "TT-526dd2cc",
+              "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+              "status": "validated",
+              "confidence_score": 0.9,
+              "failure_reason": null,
+              "selected_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "content_format": "structured_tool_sections",
+              "memory_update_summary": {
+                "memory_update_type": "post_tool_interaction_update",
+                "memory_update_agent": "MemoryUpdateAgent",
+                "updated_at": "2026-07-25T14:44:17.455261+00:00",
+                "learner_id": "article_T083",
+                "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                "topic": "filters and matrices",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "diagnosed_gap": "kernel movement",
+                "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                "new_weak_topic": null,
+                "content_format": "structured_tool_sections",
+                "retrieval_mode": "jsonl_hybrid_lexical",
+                "trace_memory_used": {
+                  "similar_successful_trace_count": 0,
+                  "failed_trace_count": 0,
+                  "reference_trace_id": null
+                },
+                "profile_update_policy": "conservative_metadata_update"
+              },
+              "memory_layer": "L1_interaction_trace_summary",
+              "stored_at": "2026-07-25T14:44:17.455486+00:00"
+            }
+          ],
+          "recent_trace_count": 1,
+          "profile_loaded": true,
+          "preferences_loaded": false,
+          "recent_memory_loaded": true,
+          "tutoring_memory_loaded": true,
+          "memory_paths": {
+            "base_dir": "var/agentic_memory/dpm/article_T083",
+            "L1_traces": "var/agentic_memory/dpm/article_T083/L1/traces.jsonl",
+            "L2_tutoring": "var/agentic_memory/dpm/article_T083/L2/tutoring.md",
+            "L3_profile": "var/agentic_memory/dpm/article_T083/L3/profile.json",
+            "L3_preferences": "var/agentic_memory/dpm/article_T083/L3/preferences.json",
+            "L3_recent": "var/agentic_memory/dpm/article_T083/L3/recent.md"
+          },
+          "topic": "convolution",
+          "task_type": "conceptual_explanation"
+        },
+        "skg": {
+          "kb_name": "default",
+          "query": "I still confuse filters and matrices. Explain the difference again.",
+          "topic": "convolution",
+          "snippets": [
+            {
+              "chunk_id": "SKG-CONV-002",
+              "topic": "convolution",
+              "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel movement",
+                "output value",
+                "matrix"
+              ],
+              "retrieval_score": 5
+            },
+            {
+              "chunk_id": "SKG-CONV-001",
+              "topic": "convolution",
+              "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel",
+                "image processing",
+                "matrix"
+              ],
+              "retrieval_score": 3
+            },
+            {
+              "chunk_id": "SKG-OVERFIT-001",
+              "topic": "overfitting",
+              "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+              "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+              "tags": [
+                "machine learning",
+                "overfitting",
+                "generalization"
+              ],
+              "retrieval_score": 2
+            }
+          ],
+          "sources": [
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+          ],
+          "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+        },
+        "trace_memory": {
+          "similar_successful_traces": [
+            {
+              "trace_id": "TT-526dd2cc",
+              "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+              "created_at": "2026-07-25T14:44:17.451630Z",
+              "task_type": "conceptual_explanation",
+              "status": "validated",
+              "student_question": "I still confuse filters and matrices. Explain the difference again.",
+              "step_goal": "Define filters and matrices in the context of neural networks",
+              "selected_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "attempts": 1,
+              "confidence_score": 0.9,
+              "failure_reason": null,
+              "recovery_used": false,
+              "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+              "learner_id": "article_T083",
+              "similarity_score": 10.9,
+              "matched_terms": [
+                "again",
+                "confuse",
+                "difference",
+                "filters",
+                "matrices",
+                "still"
+              ],
+              "score_breakdown": {
+                "word_overlap": 6,
+                "task_type_boost": 3.0,
+                "tool_quality_boost": 1.0,
+                "confidence_boost": 0.9
+              },
+              "memory_source": "learner_filtered_trace_files"
+            }
+          ],
+          "failed_traces": []
+        },
+        "summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 1,
+          "failed_trace_count": 0
+        }
+      },
+      "collected_context_summary": {
+        "learner_level": "unknown",
+        "preferred_explanation_style": "unknown",
+        "is_weak_topic": false,
+        "retrieved_knowledge_chunks": 3,
+        "similar_successful_trace_count": 1,
+        "failed_trace_count": 0
+      },
+      "needs_code_execution": false,
+      "code_generation_required": false,
+      "code_generation_instruction": "",
+      "recovery_reason": null,
+      "recovery_required_tools": [],
+      "previous_code_execution_errors": []
+    }
+  },
+  "tool_plan_history": [
+    {
+      "plan_id": "PLAN-3b7349e0",
+      "task_type": "conceptual_explanation",
+      "selected_tools": [],
+      "steps": [
+        {
+          "step_id": 1,
+          "goal": "Retrieve grounded educational knowledge",
+          "required_capability": "grounding",
+          "reason": "The tutoring answer should be supported by verified educational content.",
+          "topic": "convolution",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+        },
+        {
+          "step_id": 2,
+          "goal": "Retrieve relevant previous interaction evidence",
+          "required_capability": "trace_reuse",
+          "reason": "The learner request refers to previous work, a mistake, or personalized history.",
+          "topic": "convolution",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+        },
+        {
+          "step_id": 3,
+          "goal": "Compute or verify a matrix-based example",
+          "required_capability": "matrix_computation",
+          "reason": "The task involves matrix, convolution, kernel, or linear-algebra operations.",
+          "topic": "convolution",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+        }
+      ],
+      "metadata": {
+        "source_component": "ToolPlanner",
+        "planning_mode": "capability_first_no_retrieval",
+        "topic": "convolution",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "goal": "I still confuse filters and matrices. Explain the difference again.",
+        "expected_output": "visual explanation with grounded evidence",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "learner_level": "unknown",
+        "is_weak_topic": false,
+        "collected_context": {
+          "learner_id": "article_T083",
+          "student_question": "I still confuse filters and matrices. Explain the difference again.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T083",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:44:17.455261+00:00\n\nThe learner recently worked on: filters and matrices.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+            "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:44:17.455261+00:00\n\n- Topic: filters and matrices\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+            "recent_traces": [
+              {
+                "trace_type": "tool_interaction_summary",
+                "stored_from": "MemoryUpdateAgent",
+                "timestamp": "2026-07-25T14:44:17.455261+00:00",
+                "learner_id": "article_T083",
+                "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                "topic": "filters and matrices",
+                "task_type": "conceptual_explanation",
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "expected_output": "course-grounded tutoring explanation",
+                "request_id": "REQ-984095f5",
+                "trace_id": "TT-526dd2cc",
+                "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "content_format": "structured_tool_sections",
+                "memory_update_summary": {
+                  "memory_update_type": "post_tool_interaction_update",
+                  "memory_update_agent": "MemoryUpdateAgent",
+                  "updated_at": "2026-07-25T14:44:17.455261+00:00",
+                  "learner_id": "article_T083",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "topic": "filters and matrices",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "diagnosed_gap": "kernel movement",
+                  "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                  "new_weak_topic": null,
+                  "content_format": "structured_tool_sections",
+                  "retrieval_mode": "jsonl_hybrid_lexical",
+                  "trace_memory_used": {
+                    "similar_successful_trace_count": 0,
+                    "failed_trace_count": 0,
+                    "reference_trace_id": null
+                  },
+                  "profile_update_policy": "conservative_metadata_update"
+                },
+                "memory_layer": "L1_interaction_trace_summary",
+                "stored_at": "2026-07-25T14:44:17.455486+00:00"
+              }
+            ],
+            "recent_trace_count": 1,
+            "profile_loaded": true,
+            "preferences_loaded": false,
+            "recent_memory_loaded": true,
+            "tutoring_memory_loaded": true,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T083",
+              "L1_traces": "var/agentic_memory/dpm/article_T083/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T083/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T083/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T083/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T083/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "I still confuse filters and matrices. Explain the difference again.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 5
+              },
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 3
+              },
+              {
+                "chunk_id": "SKG-OVERFIT-001",
+                "topic": "overfitting",
+                "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                "tags": [
+                  "machine learning",
+                  "overfitting",
+                  "generalization"
+                ],
+                "retrieval_score": 2
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+            ],
+            "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [
+              {
+                "trace_id": "TT-526dd2cc",
+                "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                "created_at": "2026-07-25T14:44:17.451630Z",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "attempts": 1,
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "recovery_used": false,
+                "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                "learner_id": "article_T083",
+                "similarity_score": 10.9,
+                "matched_terms": [
+                  "again",
+                  "confuse",
+                  "difference",
+                  "filters",
+                  "matrices",
+                  "still"
+                ],
+                "score_breakdown": {
+                  "word_overlap": 6,
+                  "task_type_boost": 3.0,
+                  "tool_quality_boost": 1.0,
+                  "confidence_boost": 0.9
+                },
+                "memory_source": "learner_filtered_trace_files"
+              }
+            ],
+            "failed_traces": []
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 1,
+            "failed_trace_count": 0
+          }
+        },
+        "collected_context_summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 1,
+          "failed_trace_count": 0
+        },
+        "needs_code_execution": false,
+        "code_generation_required": false,
+        "code_generation_instruction": "",
+        "recovery_reason": null,
+        "recovery_required_tools": [],
+        "previous_code_execution_errors": []
+      }
+    }
+  ],
+  "tool_results": [
+    {
+      "tool_name": "RAGTool",
+      "status": "success",
+      "success": true,
+      "content": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+      "output": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+      "evidence": [
+        "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+      ],
+      "references": [
+        "var/agentic_memory/skg_index/documents/convolution_demo.md"
+      ],
+      "metadata": {
+        "attempt": 1,
+        "source_component": "RAGTool",
+        "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+        "retrieval_mode": "jsonl_hybrid_lexical",
+        "query": "I still confuse filters and matrices. Explain the difference again. Visualize a small matrix/kernel example to illustrate the difference visual explanation with grounded evidence convolution Visualize a small matrix/kernel example to illustrate the difference Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+        "retrieved_knowledge_chunks": 1,
+        "original_retrieved_knowledge_chunks": 1,
+        "topic_filter_removed_chunks": 0,
+        "scores": [
+          12.729905
+        ],
+        "chunk_ids": [
+          "SKG-9636f398"
+        ],
+        "matched_terms": [
+          [
+            "cnn",
+            "convolution",
+            "correlation",
+            "input",
+            "kernel",
+            "matrix",
+            "output",
+            "patch",
+            "sliding",
+            "small"
+          ]
+        ],
+        "score_breakdown": [
+          {
+            "lexical_score": 5.729905,
+            "phrase_score": 5.0,
+            "important_term_score": 2.0,
+            "title_source_score": 0.0,
+            "matched_phrases": [
+              "small matrix",
+              "input matrix",
+              "output matrix",
+              "kernel sliding"
+            ]
+          }
+        ],
+        "expanded_terms": [
+          "array",
+          "cnn",
+          "correlation",
+          "diagram",
+          "example",
+          "filter",
+          "grid",
+          "input",
+          "kernel",
+          "mask",
+          "matrix",
+          "output",
+          "patch",
+          "sliding",
+          "step",
+          "window"
+        ],
+        "registry_tool": true,
+        "topic_consistent": true,
+        "topic_key": "convolution"
+      }
+    },
+    {
+      "tool_name": "TraceSearchTool",
+      "status": "success",
+      "success": true,
+      "content": "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.",
+      "output": "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.",
+      "evidence": [
+        "TraceToolkit found 1 similar successful trace(s).",
+        "TraceToolkit considered 0 failed trace(s).",
+        "Reference trace used for tool selection: TT-526dd2cc."
+      ],
+      "references": [
+        "TraceToolkit memory traces"
+      ],
+      "metadata": {
+        "attempt": 1,
+        "source_component": "TraceSearchTool",
+        "similar_successful_trace_count": 1,
+        "failed_trace_count": 0,
+        "reference_trace_id": "TT-526dd2cc",
+        "trace_context": {
+          "similar_successful_traces": [
+            {
+              "trace_id": "TT-526dd2cc",
+              "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+              "created_at": "2026-07-25T14:44:17.451630Z",
+              "task_type": "conceptual_explanation",
+              "status": "validated",
+              "student_question": "I still confuse filters and matrices. Explain the difference again.",
+              "step_goal": "Define filters and matrices in the context of neural networks",
+              "selected_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "attempts": 1,
+              "confidence_score": 0.9,
+              "failure_reason": null,
+              "recovery_used": false,
+              "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+              "learner_id": "article_T083",
+              "similarity_score": 10.9,
+              "matched_terms": [
+                "again",
+                "confuse",
+                "difference",
+                "filters",
+                "matrices",
+                "still"
+              ],
+              "score_breakdown": {
+                "word_overlap": 6,
+                "task_type_boost": 3.0,
+                "tool_quality_boost": 1.0,
+                "confidence_boost": 0.9
+              },
+              "memory_source": "learner_filtered_trace_files"
+            }
+          ],
+          "failed_traces": []
+        },
+        "registry_tool": true
+      }
+    },
+    {
+      "tool_name": "MatrixComputationTool",
+      "status": "success",
+      "success": true,
+      "content": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+      "output": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+      "evidence": [
+        "The kernel combines values from one local input region at a time.",
+        "The example valid output is [[6, 8], [12, 14]]."
+      ],
+      "references": [
+        "MatrixComputationTool pedagogical convolution example"
+      ],
+      "metadata": {
+        "attempt": 1,
+        "source_component": "MatrixComputationTool",
+        "operation": "convolution_concept",
+        "operation_type": "convolution_concept",
+        "registry_tool": true,
+        "input_matrix": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ],
+          [
+            7,
+            8,
+            9
+          ]
+        ],
+        "kernel": [
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            1
+          ]
+        ],
+        "output_matrix": [
+          [
+            6,
+            8
+          ],
+          [
+            12,
+            14
+          ]
+        ],
+        "example_generated": true
+      }
+    }
+  ],
+  "tool_results_history": [
+    [
+      {
+        "tool_name": "RAGTool",
+        "status": "success",
+        "success": true,
+        "content": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+        "output": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+        "evidence": [
+          "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ],
+        "references": [
+          "var/agentic_memory/skg_index/documents/convolution_demo.md"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "RAGTool",
+          "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+          "retrieval_mode": "jsonl_hybrid_lexical",
+          "query": "I still confuse filters and matrices. Explain the difference again. Visualize a small matrix/kernel example to illustrate the difference visual explanation with grounded evidence convolution Visualize a small matrix/kernel example to illustrate the difference Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+          "retrieved_knowledge_chunks": 1,
+          "original_retrieved_knowledge_chunks": 1,
+          "topic_filter_removed_chunks": 0,
+          "scores": [
+            12.729905
+          ],
+          "chunk_ids": [
+            "SKG-9636f398"
+          ],
+          "matched_terms": [
+            [
+              "cnn",
+              "convolution",
+              "correlation",
+              "input",
+              "kernel",
+              "matrix",
+              "output",
+              "patch",
+              "sliding",
+              "small"
+            ]
+          ],
+          "score_breakdown": [
+            {
+              "lexical_score": 5.729905,
+              "phrase_score": 5.0,
+              "important_term_score": 2.0,
+              "title_source_score": 0.0,
+              "matched_phrases": [
+                "small matrix",
+                "input matrix",
+                "output matrix",
+                "kernel sliding"
+              ]
+            }
+          ],
+          "expanded_terms": [
+            "array",
+            "cnn",
+            "correlation",
+            "diagram",
+            "example",
+            "filter",
+            "grid",
+            "input",
+            "kernel",
+            "mask",
+            "matrix",
+            "output",
+            "patch",
+            "sliding",
+            "step",
+            "window"
+          ],
+          "registry_tool": true,
+          "topic_consistent": true,
+          "topic_key": "convolution"
+        }
+      },
+      {
+        "tool_name": "TraceSearchTool",
+        "status": "success",
+        "success": true,
+        "content": "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.",
+        "output": "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.",
+        "evidence": [
+          "TraceToolkit found 1 similar successful trace(s).",
+          "TraceToolkit considered 0 failed trace(s).",
+          "Reference trace used for tool selection: TT-526dd2cc."
+        ],
+        "references": [
+          "TraceToolkit memory traces"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "TraceSearchTool",
+          "similar_successful_trace_count": 1,
+          "failed_trace_count": 0,
+          "reference_trace_id": "TT-526dd2cc",
+          "trace_context": {
+            "similar_successful_traces": [
+              {
+                "trace_id": "TT-526dd2cc",
+                "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                "created_at": "2026-07-25T14:44:17.451630Z",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "attempts": 1,
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "recovery_used": false,
+                "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                "learner_id": "article_T083",
+                "similarity_score": 10.9,
+                "matched_terms": [
+                  "again",
+                  "confuse",
+                  "difference",
+                  "filters",
+                  "matrices",
+                  "still"
+                ],
+                "score_breakdown": {
+                  "word_overlap": 6,
+                  "task_type_boost": 3.0,
+                  "tool_quality_boost": 1.0,
+                  "confidence_boost": 0.9
+                },
+                "memory_source": "learner_filtered_trace_files"
+              }
+            ],
+            "failed_traces": []
+          },
+          "registry_tool": true
+        }
+      },
+      {
+        "tool_name": "MatrixComputationTool",
+        "status": "success",
+        "success": true,
+        "content": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+        "output": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+        "evidence": [
+          "The kernel combines values from one local input region at a time.",
+          "The example valid output is [[6, 8], [12, 14]]."
+        ],
+        "references": [
+          "MatrixComputationTool pedagogical convolution example"
+        ],
+        "metadata": {
+          "attempt": 1,
+          "source_component": "MatrixComputationTool",
+          "operation": "convolution_concept",
+          "operation_type": "convolution_concept",
+          "registry_tool": true,
+          "input_matrix": [
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              4,
+              5,
+              6
+            ],
+            [
+              7,
+              8,
+              9
+            ]
+          ],
+          "kernel": [
+            [
+              1,
+              0
+            ],
+            [
+              0,
+              1
+            ]
+          ],
+          "output_matrix": [
+            [
+              6,
+              8
+            ],
+            [
+              12,
+              14
+            ]
+          ],
+          "example_generated": true
+        }
+      }
+    ]
+  ],
+  "validation_report": {
+    "status": "valid",
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "recommended_action": "accept"
+  },
+  "validation_reports": [
+    {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    }
+  ],
+  "recovery_used": false,
+  "attempts": 1,
+  "recovery_decisions": [],
+  "failure_recovery_steps": [],
+  "output_package": {
+    "package_id": "PKG-c783cd34",
+    "status": "validated",
+    "content": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.\n\n## MatrixComputationTool\nA convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+    "evidence": [
+      "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+      "TraceToolkit found 1 similar successful trace(s).",
+      "TraceToolkit considered 0 failed trace(s).",
+      "Reference trace used for tool selection: TT-526dd2cc.",
+      "The kernel combines values from one local input region at a time.",
+      "The example valid output is [[6, 8], [12, 14]]."
+    ],
+    "references": [
+      "var/agentic_memory/skg_index/documents/convolution_demo.md",
+      "TraceToolkit memory traces",
+      "MatrixComputationTool pedagogical convolution example"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-a485cc00",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ],
+        "TraceSearchTool": [
+          "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc."
+        ],
+        "MatrixComputationTool": [
+          "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14"
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+            "retrieval_mode": "jsonl_hybrid_lexical",
+            "query": "I still confuse filters and matrices. Explain the difference again. Visualize a small matrix/kernel example to illustrate the difference visual explanation with grounded evidence convolution Visualize a small matrix/kernel example to illustrate the difference Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "retrieved_knowledge_chunks": 1,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 0,
+            "scores": [
+              12.729905
+            ],
+            "chunk_ids": [
+              "SKG-9636f398"
+            ],
+            "matched_terms": [
+              [
+                "cnn",
+                "convolution",
+                "correlation",
+                "input",
+                "kernel",
+                "matrix",
+                "output",
+                "patch",
+                "sliding",
+                "small"
+              ]
+            ],
+            "score_breakdown": [
+              {
+                "lexical_score": 5.729905,
+                "phrase_score": 5.0,
+                "important_term_score": 2.0,
+                "title_source_score": 0.0,
+                "matched_phrases": [
+                  "small matrix",
+                  "input matrix",
+                  "output matrix",
+                  "kernel sliding"
+                ]
+              }
+            ],
+            "expanded_terms": [
+              "array",
+              "cnn",
+              "correlation",
+              "diagram",
+              "example",
+              "filter",
+              "grid",
+              "input",
+              "kernel",
+              "mask",
+              "matrix",
+              "output",
+              "patch",
+              "sliding",
+              "step",
+              "window"
+            ],
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "convolution"
+          }
+        ],
+        "TraceSearchTool": [
+          {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 1,
+            "failed_trace_count": 0,
+            "reference_trace_id": "TT-526dd2cc",
+            "trace_context": {
+              "similar_successful_traces": [
+                {
+                  "trace_id": "TT-526dd2cc",
+                  "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                  "created_at": "2026-07-25T14:44:17.451630Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "step_goal": "Define filters and matrices in the context of neural networks",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 1,
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "recovery_used": false,
+                  "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                  "learner_id": "article_T083",
+                  "similarity_score": 10.9,
+                  "matched_terms": [
+                    "again",
+                    "confuse",
+                    "difference",
+                    "filters",
+                    "matrices",
+                    "still"
+                  ],
+                  "score_breakdown": {
+                    "word_overlap": 6,
+                    "task_type_boost": 3.0,
+                    "tool_quality_boost": 1.0,
+                    "confidence_boost": 0.9
+                  },
+                  "memory_source": "learner_filtered_trace_files"
+                }
+              ],
+              "failed_traces": []
+            },
+            "registry_tool": true
+          }
+        ],
+        "MatrixComputationTool": [
+          {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "convolution_concept",
+            "operation_type": "convolution_concept",
+            "registry_tool": true,
+            "input_matrix": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                4,
+                5,
+                6
+              ],
+              [
+                7,
+                8,
+                9
+              ]
+            ],
+            "kernel": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "output_matrix": [
+              [
+                6,
+                8
+              ],
+              [
+                12,
+                14
+              ]
+            ],
+            "example_generated": true
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool",
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "final_package": {
+    "package_id": "PKG-c783cd34",
+    "status": "validated",
+    "content": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.\n\n## MatrixComputationTool\nA convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+    "evidence": [
+      "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+      "TraceToolkit found 1 similar successful trace(s).",
+      "TraceToolkit considered 0 failed trace(s).",
+      "Reference trace used for tool selection: TT-526dd2cc.",
+      "The kernel combines values from one local input region at a time.",
+      "The example valid output is [[6, 8], [12, 14]]."
+    ],
+    "references": [
+      "var/agentic_memory/skg_index/documents/convolution_demo.md",
+      "TraceToolkit memory traces",
+      "MatrixComputationTool pedagogical convolution example"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-a485cc00",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+      "analyzed_task_type": "conceptual_explanation",
+      "operation_type": "convolution_concept",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+        ],
+        "TraceSearchTool": [
+          "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc."
+        ],
+        "MatrixComputationTool": [
+          "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14"
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+            "retrieval_mode": "jsonl_hybrid_lexical",
+            "query": "I still confuse filters and matrices. Explain the difference again. Visualize a small matrix/kernel example to illustrate the difference visual explanation with grounded evidence convolution Visualize a small matrix/kernel example to illustrate the difference Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "retrieved_knowledge_chunks": 1,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 0,
+            "scores": [
+              12.729905
+            ],
+            "chunk_ids": [
+              "SKG-9636f398"
+            ],
+            "matched_terms": [
+              [
+                "cnn",
+                "convolution",
+                "correlation",
+                "input",
+                "kernel",
+                "matrix",
+                "output",
+                "patch",
+                "sliding",
+                "small"
+              ]
+            ],
+            "score_breakdown": [
+              {
+                "lexical_score": 5.729905,
+                "phrase_score": 5.0,
+                "important_term_score": 2.0,
+                "title_source_score": 0.0,
+                "matched_phrases": [
+                  "small matrix",
+                  "input matrix",
+                  "output matrix",
+                  "kernel sliding"
+                ]
+              }
+            ],
+            "expanded_terms": [
+              "array",
+              "cnn",
+              "correlation",
+              "diagram",
+              "example",
+              "filter",
+              "grid",
+              "input",
+              "kernel",
+              "mask",
+              "matrix",
+              "output",
+              "patch",
+              "sliding",
+              "step",
+              "window"
+            ],
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "convolution"
+          }
+        ],
+        "TraceSearchTool": [
+          {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 1,
+            "failed_trace_count": 0,
+            "reference_trace_id": "TT-526dd2cc",
+            "trace_context": {
+              "similar_successful_traces": [
+                {
+                  "trace_id": "TT-526dd2cc",
+                  "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                  "created_at": "2026-07-25T14:44:17.451630Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "step_goal": "Define filters and matrices in the context of neural networks",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 1,
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "recovery_used": false,
+                  "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                  "learner_id": "article_T083",
+                  "similarity_score": 10.9,
+                  "matched_terms": [
+                    "again",
+                    "confuse",
+                    "difference",
+                    "filters",
+                    "matrices",
+                    "still"
+                  ],
+                  "score_breakdown": {
+                    "word_overlap": 6,
+                    "task_type_boost": 3.0,
+                    "tool_quality_boost": 1.0,
+                    "confidence_boost": 0.9
+                  },
+                  "memory_source": "learner_filtered_trace_files"
+                }
+              ],
+              "failed_traces": []
+            },
+            "registry_tool": true
+          }
+        ],
+        "MatrixComputationTool": [
+          {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "convolution_concept",
+            "operation_type": "convolution_concept",
+            "registry_tool": true,
+            "input_matrix": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                4,
+                5,
+                6
+              ],
+              [
+                7,
+                8,
+                9
+              ]
+            ],
+            "kernel": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "output_matrix": [
+              [
+                6,
+                8
+              ],
+              [
+                12,
+                14
+              ]
+            ],
+            "example_generated": true
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool",
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "final_answer_status": "generated",
+  "final_answer": "**Filters and Matrices: A Step-by-Step Explanation**\n\nLet's break down the difference between filters and matrices in the context of neural networks.\n\n**Intuitive Example:**\n\nImagine you have a 3x3 input matrix:\n\n```\n1  2  3\n4  5  6\n7  8  9\n```\n\nNow, let's apply a small 2x2 kernel (or filter) to this input matrix:\n\n```\n1  0\n0  1\n```\n\nThe kernel is slid across the input matrix, and at each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value.\n\n**Formal Explanation:**\n\nA **matrix** is a two-dimensional array of numbers, used to represent data in a neural network. In the example above, the input matrix is a 3x3 array of numbers.\n\nA **filter** (or kernel) is a small matrix that is applied to a local region of the input matrix. In the example above, the filter is a 2x2 matrix that is applied to the top-left 2x2 region of the input matrix.\n\nWhen a filter is applied to an input matrix, the values in the filter are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. This process is repeated for each position of the filter across the input matrix, resulting in a new output matrix.\n\n**Evidence used:**\n\n* RAGTool: Retrieved course evidence from OpenTutorAI Agentic SKG index, explaining convolution in image processing.\n* MatrixComputationTool: Provided a pedagogical convolution example, illustrating the application of a filter to an input matrix.\n\n**References:**\n\n* var/agentic_memory/skg_index/documents/convolution_demo.md\n* TraceToolkit memory traces\n* MatrixComputationTool pedagogical convolution example",
+  "provider_failure": null,
+  "llm_calls_metadata": {
+    "final_answer_generator": {
+      "status": "generated",
+      "component": "TutoringAnswerWriter"
+    }
+  },
+  "memory_update_summary": {
+    "memory_update_type": "post_tool_interaction_update",
+    "memory_update_agent": "MemoryUpdateAgent",
+    "updated_at": "2026-07-25T14:44:25.543409+00:00",
+    "learner_id": "article_T083",
+    "student_question": "I still confuse filters and matrices. Explain the difference again.",
+    "topic": "filters and matrices",
+    "task_type": "conceptual_explanation",
+    "status": "validated",
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "selected_tools": [
+      "RAGTool",
+      "TraceSearchTool",
+      "MatrixComputationTool"
+    ],
+    "diagnosed_gap": "kernel movement",
+    "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+    "new_weak_topic": null,
+    "content_format": "structured_tool_sections",
+    "retrieval_mode": "jsonl_hybrid_lexical",
+    "trace_memory_used": {
+      "similar_successful_trace_count": 1,
+      "failed_trace_count": 0,
+      "reference_trace_id": "TT-526dd2cc"
+    },
+    "profile_update_policy": "conservative_metadata_update"
+  },
+  "memory_update_status": "updated",
+  "events": [
+    {
+      "timestamp": "2026-07-25T14:44:17.460584Z",
+      "event_type": "tool_request_received",
+      "payload": {
+        "request_id": "REQ-bf28efb0",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "user_query": "I still confuse filters and matrices. Explain the difference again.",
+        "query": "I still confuse filters and matrices. Explain the difference again.",
+        "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+        "task_type": "conceptual_explanation",
+        "expected_output": "visual explanation with grounded evidence",
+        "workflow_source": "personalized_problem_tutoring",
+        "metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T083",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "plan_step_id": 2,
+          "step_reason": "A visual example will help the student better understand the difference between filters and matrices",
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "filters and matrices",
+            "task_type": "conceptual_explanation",
+            "student_intent": "understand the difference between filters and matrices",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "Can you provide an example of a filter in a neural network?",
+              "How do filters relate to matrices in the context of convolutional neural networks?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "This step is necessary to establish a clear understanding of the concepts"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "A visual example will help the student better understand the difference between filters and matrices"
+              }
+            ],
+            "tool_request_goal": "Request conceptual explanation and visual matrix example",
+            "learner_id": "article_T083",
+            "student_question": "I still confuse filters and matrices. Explain the difference again.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"Filters and Matrices\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the difference between filters and matrices\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a filter in a neural network?\",\n    \"How do filters relate to matrices in the context of convolutional neural networks?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define filters and matrices in the context of neural networks\",\n      \"needs_tool\": false,\n      \"reason\": \"This step is necessary to establish a clear understanding of the concepts\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small matrix/kernel example to illustrate the difference\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student better understand the difference between filters and matrices\"\n    }\n  ],\n  \"tool_request_goal\": \"Request conceptual explanation and visual matrix example\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 2,
+            "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "A visual example will help the student better understand the difference between filters and matrices"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Define filters and matrices in the context of neural networks",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "This step is necessary to establish a clear understanding of the concepts"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "A visual example will help the student better understand the difference between filters and matrices"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": false
+          },
+          "force_recovery_test": false
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:44:24.805737Z",
+      "event_type": "task_analyzed",
+      "payload": {
+        "request_id": "REQ-bf28efb0",
+        "workflow_source": "personalized_problem_tutoring",
+        "original_task_type": "conceptual_explanation",
+        "task_type": "conceptual_explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "topic": "convolution",
+        "goal": "I still confuse filters and matrices. Explain the difference again.",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "user_query": "I still confuse filters and matrices. Explain the difference again.",
+        "expected_output": "visual explanation with grounded evidence",
+        "learner_level": "beginner",
+        "needs_visual_support": false,
+        "explicit_visual_requested": false,
+        "needs_calculation": false,
+        "needs_code_execution": false,
+        "needs_debugging": false,
+        "needs_grounding": true,
+        "code_generation_required": false,
+        "tool_request_goal": "I still confuse filters and matrices. Explain the difference again.",
+        "code_generation_instruction": "",
+        "reasoning_summary": "Fallback task analysis generated from request text.",
+        "analysis_strategy": "deterministic_fallback_after_llm_failure",
+        "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+        "request_metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T083",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "plan_step_id": 2,
+          "step_reason": "A visual example will help the student better understand the difference between filters and matrices",
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "filters and matrices",
+            "task_type": "conceptual_explanation",
+            "student_intent": "understand the difference between filters and matrices",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "Can you provide an example of a filter in a neural network?",
+              "How do filters relate to matrices in the context of convolutional neural networks?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "This step is necessary to establish a clear understanding of the concepts"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "A visual example will help the student better understand the difference between filters and matrices"
+              }
+            ],
+            "tool_request_goal": "Request conceptual explanation and visual matrix example",
+            "learner_id": "article_T083",
+            "student_question": "I still confuse filters and matrices. Explain the difference again.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"Filters and Matrices\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the difference between filters and matrices\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a filter in a neural network?\",\n    \"How do filters relate to matrices in the context of convolutional neural networks?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define filters and matrices in the context of neural networks\",\n      \"needs_tool\": false,\n      \"reason\": \"This step is necessary to establish a clear understanding of the concepts\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small matrix/kernel example to illustrate the difference\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student better understand the difference between filters and matrices\"\n    }\n  ],\n  \"tool_request_goal\": \"Request conceptual explanation and visual matrix example\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 2,
+            "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "A visual example will help the student better understand the difference between filters and matrices"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Define filters and matrices in the context of neural networks",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "This step is necessary to establish a clear understanding of the concepts"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "A visual example will help the student better understand the difference between filters and matrices"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": false
+          },
+          "force_recovery_test": false
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:44:25.532089Z",
+      "event_type": "task_context_analyzed",
+      "payload": {
+        "request_id": "REQ-bf28efb0",
+        "workflow_source": "personalized_problem_tutoring",
+        "original_task_type": "conceptual_explanation",
+        "task_type": "conceptual_explanation",
+        "operation_type": "convolution_concept",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "topic": "convolution",
+        "goal": "I still confuse filters and matrices. Explain the difference again.",
+        "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+        "student_question": "I still confuse filters and matrices. Explain the difference again.",
+        "user_query": "I still confuse filters and matrices. Explain the difference again.",
+        "expected_output": "visual explanation with grounded evidence",
+        "learner_level": "unknown",
+        "needs_visual_support": false,
+        "explicit_visual_requested": false,
+        "needs_calculation": false,
+        "needs_code_execution": false,
+        "needs_debugging": false,
+        "needs_grounding": true,
+        "code_generation_required": false,
+        "tool_request_goal": "I still confuse filters and matrices. Explain the difference again.",
+        "code_generation_instruction": "",
+        "reasoning_summary": "Fallback task analysis generated from request text.",
+        "analysis_strategy": "deterministic_fallback_after_llm_failure",
+        "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+        "request_metadata": {
+          "source_component": "ToolRequestAgent",
+          "learner_id": "article_T083",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "plan_step_id": 2,
+          "step_reason": "A visual example will help the student better understand the difference between filters and matrices",
+          "suggested_tools": [
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "workflow_source": "personalized_problem_tutoring",
+          "investigation_result": {
+            "topic": "filters and matrices",
+            "task_type": "conceptual_explanation",
+            "student_intent": "understand the difference between filters and matrices",
+            "difficulty_estimate": "intermediate",
+            "meta_questions": [
+              "Can you provide an example of a filter in a neural network?",
+              "How do filters relate to matrices in the context of convolutional neural networks?"
+            ],
+            "required_context": [
+              "DPM",
+              "SKG",
+              "TraceToolkit"
+            ],
+            "initial_tutoring_plan": [
+              {
+                "step_id": 1,
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "This step is necessary to establish a clear understanding of the concepts"
+              },
+              {
+                "step_id": 2,
+                "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+                "needs_tool": true,
+                "suggested_tools": [
+                  "VisualMatrixTool",
+                  "TraceSearchTool"
+                ],
+                "reason": "A visual example will help the student better understand the difference between filters and matrices"
+              }
+            ],
+            "tool_request_goal": "Request conceptual explanation and visual matrix example",
+            "learner_id": "article_T083",
+            "student_question": "I still confuse filters and matrices. Explain the difference again.",
+            "llm_model": "llama-3.1-8b-instant",
+            "raw_response": "{\n  \"topic\": \"Filters and Matrices\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand the difference between filters and matrices\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"Can you provide an example of a filter in a neural network?\",\n    \"How do filters relate to matrices in the context of convolutional neural networks?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Define filters and matrices in the context of neural networks\",\n      \"needs_tool\": false,\n      \"reason\": \"This step is necessary to establish a clear understanding of the concepts\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Visualize a small matrix/kernel example to illustrate the difference\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"VisualMatrixTool\"],\n      \"reason\": \"A visual example will help the student better understand the difference between filters and matrices\"\n    }\n  ],\n  \"tool_request_goal\": \"Request conceptual explanation and visual matrix example\"\n}"
+          },
+          "current_plan_step": {
+            "step_id": 2,
+            "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+            "needs_tool": true,
+            "suggested_tools": [
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "A visual example will help the student better understand the difference between filters and matrices"
+          },
+          "full_investigation_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Define filters and matrices in the context of neural networks",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "course-grounded tutoring explanation",
+              "reason": "This step is necessary to establish a clear understanding of the concepts"
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Visualize a small matrix/kernel example to illustrate the difference",
+              "needs_tool": true,
+              "suggested_tools": [
+                "TraceSearchTool",
+                "MatrixComputationTool"
+              ],
+              "task_type": "conceptual_explanation",
+              "expected_output": "visual explanation with grounded evidence",
+              "reason": "A visual example will help the student better understand the difference between filters and matrices"
+            }
+          ],
+          "workflow_metadata": {
+            "source": "run_agentic_tutoring_demo",
+            "force_recovery_test": false
+          },
+          "force_recovery_test": false
+        },
+        "learner_id": "article_T083",
+        "query": "I still confuse filters and matrices. Explain the difference again.",
+        "collected_context": {
+          "learner_id": "article_T083",
+          "student_question": "I still confuse filters and matrices. Explain the difference again.",
+          "task_type": "conceptual_explanation",
+          "topic": "convolution",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "dpm": {
+            "memory_source": "DynamicPersonalMemory",
+            "memory_storage": "file_based_local",
+            "memory_layers": [
+              "L1_interaction_traces",
+              "L2_tutoring_notes",
+              "L3_profile_preferences"
+            ],
+            "learner_id": "article_T083",
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "preferred_examples": [],
+            "avoid": [],
+            "known_topics": [],
+            "weak_topics": [],
+            "learning_goals": [],
+            "is_weak_topic": false,
+            "is_known_topic": false,
+            "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:44:17.455261+00:00\n\nThe learner recently worked on: filters and matrices.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+            "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:44:17.455261+00:00\n\n- Topic: filters and matrices\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+            "recent_traces": [
+              {
+                "trace_type": "tool_interaction_summary",
+                "stored_from": "MemoryUpdateAgent",
+                "timestamp": "2026-07-25T14:44:17.455261+00:00",
+                "learner_id": "article_T083",
+                "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                "topic": "filters and matrices",
+                "task_type": "conceptual_explanation",
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "expected_output": "course-grounded tutoring explanation",
+                "request_id": "REQ-984095f5",
+                "trace_id": "TT-526dd2cc",
+                "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "content_format": "structured_tool_sections",
+                "memory_update_summary": {
+                  "memory_update_type": "post_tool_interaction_update",
+                  "memory_update_agent": "MemoryUpdateAgent",
+                  "updated_at": "2026-07-25T14:44:17.455261+00:00",
+                  "learner_id": "article_T083",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "topic": "filters and matrices",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "diagnosed_gap": "kernel movement",
+                  "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                  "new_weak_topic": null,
+                  "content_format": "structured_tool_sections",
+                  "retrieval_mode": "jsonl_hybrid_lexical",
+                  "trace_memory_used": {
+                    "similar_successful_trace_count": 0,
+                    "failed_trace_count": 0,
+                    "reference_trace_id": null
+                  },
+                  "profile_update_policy": "conservative_metadata_update"
+                },
+                "memory_layer": "L1_interaction_trace_summary",
+                "stored_at": "2026-07-25T14:44:17.455486+00:00"
+              }
+            ],
+            "recent_trace_count": 1,
+            "profile_loaded": true,
+            "preferences_loaded": false,
+            "recent_memory_loaded": true,
+            "tutoring_memory_loaded": true,
+            "memory_paths": {
+              "base_dir": "var/agentic_memory/dpm/article_T083",
+              "L1_traces": "var/agentic_memory/dpm/article_T083/L1/traces.jsonl",
+              "L2_tutoring": "var/agentic_memory/dpm/article_T083/L2/tutoring.md",
+              "L3_profile": "var/agentic_memory/dpm/article_T083/L3/profile.json",
+              "L3_preferences": "var/agentic_memory/dpm/article_T083/L3/preferences.json",
+              "L3_recent": "var/agentic_memory/dpm/article_T083/L3/recent.md"
+            },
+            "topic": "convolution",
+            "task_type": "conceptual_explanation"
+          },
+          "skg": {
+            "kb_name": "default",
+            "query": "I still confuse filters and matrices. Explain the difference again.",
+            "topic": "convolution",
+            "snippets": [
+              {
+                "chunk_id": "SKG-CONV-002",
+                "topic": "convolution",
+                "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel movement",
+                  "output value",
+                  "matrix"
+                ],
+                "retrieval_score": 5
+              },
+              {
+                "chunk_id": "SKG-CONV-001",
+                "topic": "convolution",
+                "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "tags": [
+                  "convolution",
+                  "kernel",
+                  "image processing",
+                  "matrix"
+                ],
+                "retrieval_score": 3
+              },
+              {
+                "chunk_id": "SKG-OVERFIT-001",
+                "topic": "overfitting",
+                "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                "tags": [
+                  "machine learning",
+                  "overfitting",
+                  "generalization"
+                ],
+                "retrieval_score": 2
+              }
+            ],
+            "sources": [
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+            ],
+            "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+          },
+          "trace_memory": {
+            "similar_successful_traces": [
+              {
+                "trace_id": "TT-526dd2cc",
+                "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                "created_at": "2026-07-25T14:44:17.451630Z",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                "step_goal": "Define filters and matrices in the context of neural networks",
+                "selected_tools": [
+                  "RAGTool",
+                  "TraceSearchTool"
+                ],
+                "attempts": 1,
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "recovery_used": false,
+                "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                "learner_id": "article_T083",
+                "similarity_score": 10.9,
+                "matched_terms": [
+                  "again",
+                  "confuse",
+                  "difference",
+                  "filters",
+                  "matrices",
+                  "still"
+                ],
+                "score_breakdown": {
+                  "word_overlap": 6,
+                  "task_type_boost": 3.0,
+                  "tool_quality_boost": 1.0,
+                  "confidence_boost": 0.9
+                },
+                "memory_source": "learner_filtered_trace_files"
+              }
+            ],
+            "failed_traces": []
+          },
+          "summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 1,
+            "failed_trace_count": 0
+          }
+        },
+        "is_weak_topic": false,
+        "knowledge_snippets": [
+          {
+            "chunk_id": "SKG-CONV-002",
+            "topic": "convolution",
+            "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+            "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "tags": [
+              "convolution",
+              "kernel movement",
+              "output value",
+              "matrix"
+            ],
+            "retrieval_score": 5
+          },
+          {
+            "chunk_id": "SKG-CONV-001",
+            "topic": "convolution",
+            "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+            "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "tags": [
+              "convolution",
+              "kernel",
+              "image processing",
+              "matrix"
+            ],
+            "retrieval_score": 3
+          },
+          {
+            "chunk_id": "SKG-OVERFIT-001",
+            "topic": "overfitting",
+            "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+            "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+            "tags": [
+              "machine learning",
+              "overfitting",
+              "generalization"
+            ],
+            "retrieval_score": 2
+          }
+        ],
+        "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+        "similar_successful_traces": [
+          {
+            "trace_id": "TT-526dd2cc",
+            "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+            "created_at": "2026-07-25T14:44:17.451630Z",
+            "task_type": "conceptual_explanation",
+            "status": "validated",
+            "student_question": "I still confuse filters and matrices. Explain the difference again.",
+            "step_goal": "Define filters and matrices in the context of neural networks",
+            "selected_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "attempts": 1,
+            "confidence_score": 0.9,
+            "failure_reason": null,
+            "recovery_used": false,
+            "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+            "learner_id": "article_T083",
+            "similarity_score": 10.9,
+            "matched_terms": [
+              "again",
+              "confuse",
+              "difference",
+              "filters",
+              "matrices",
+              "still"
+            ],
+            "score_breakdown": {
+              "word_overlap": 6,
+              "task_type_boost": 3.0,
+              "tool_quality_boost": 1.0,
+              "confidence_boost": 0.9
+            },
+            "memory_source": "learner_filtered_trace_files"
+          }
+        ],
+        "failed_traces": []
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:44:25.533194Z",
+      "event_type": "tool_plan_created",
+      "payload": {
+        "plan_id": "PLAN-3b7349e0",
+        "task_type": "conceptual_explanation",
+        "selected_tools": [],
+        "steps": [
+          {
+            "step_id": 1,
+            "goal": "Retrieve grounded educational knowledge",
+            "required_capability": "grounding",
+            "reason": "The tutoring answer should be supported by verified educational content.",
+            "topic": "convolution",
+            "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+          },
+          {
+            "step_id": 2,
+            "goal": "Retrieve relevant previous interaction evidence",
+            "required_capability": "trace_reuse",
+            "reason": "The learner request refers to previous work, a mistake, or personalized history.",
+            "topic": "convolution",
+            "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+          },
+          {
+            "step_id": 3,
+            "goal": "Compute or verify a matrix-based example",
+            "required_capability": "matrix_computation",
+            "reason": "The task involves matrix, convolution, kernel, or linear-algebra operations.",
+            "topic": "convolution",
+            "current_step": "Visualize a small matrix/kernel example to illustrate the difference"
+          }
+        ],
+        "metadata": {
+          "source_component": "ToolPlanner",
+          "planning_mode": "capability_first_no_retrieval",
+          "topic": "convolution",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "student_question": "I still confuse filters and matrices. Explain the difference again.",
+          "goal": "I still confuse filters and matrices. Explain the difference again.",
+          "expected_output": "visual explanation with grounded evidence",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "learner_level": "unknown",
+          "is_weak_topic": false,
+          "collected_context": {
+            "learner_id": "article_T083",
+            "student_question": "I still confuse filters and matrices. Explain the difference again.",
+            "task_type": "conceptual_explanation",
+            "topic": "convolution",
+            "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+            "dpm": {
+              "memory_source": "DynamicPersonalMemory",
+              "memory_storage": "file_based_local",
+              "memory_layers": [
+                "L1_interaction_traces",
+                "L2_tutoring_notes",
+                "L3_profile_preferences"
+              ],
+              "learner_id": "article_T083",
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "preferred_examples": [],
+              "avoid": [],
+              "known_topics": [],
+              "weak_topics": [],
+              "learning_goals": [],
+              "is_weak_topic": false,
+              "is_known_topic": false,
+              "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:44:17.455261+00:00\n\nThe learner recently worked on: filters and matrices.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, TraceSearchTool.\n",
+              "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:44:17.455261+00:00\n\n- Topic: filters and matrices\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool, TraceSearchTool\n\n",
+              "recent_traces": [
+                {
+                  "trace_type": "tool_interaction_summary",
+                  "stored_from": "MemoryUpdateAgent",
+                  "timestamp": "2026-07-25T14:44:17.455261+00:00",
+                  "learner_id": "article_T083",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "topic": "filters and matrices",
+                  "task_type": "conceptual_explanation",
+                  "step_goal": "Define filters and matrices in the context of neural networks",
+                  "expected_output": "course-grounded tutoring explanation",
+                  "request_id": "REQ-984095f5",
+                  "trace_id": "TT-526dd2cc",
+                  "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                  "status": "validated",
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "content_format": "structured_tool_sections",
+                  "memory_update_summary": {
+                    "memory_update_type": "post_tool_interaction_update",
+                    "memory_update_agent": "MemoryUpdateAgent",
+                    "updated_at": "2026-07-25T14:44:17.455261+00:00",
+                    "learner_id": "article_T083",
+                    "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                    "topic": "filters and matrices",
+                    "task_type": "conceptual_explanation",
+                    "status": "validated",
+                    "confidence_score": 0.9,
+                    "failure_reason": null,
+                    "selected_tools": [
+                      "RAGTool",
+                      "TraceSearchTool"
+                    ],
+                    "diagnosed_gap": "kernel movement",
+                    "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                    "new_weak_topic": null,
+                    "content_format": "structured_tool_sections",
+                    "retrieval_mode": "jsonl_hybrid_lexical",
+                    "trace_memory_used": {
+                      "similar_successful_trace_count": 0,
+                      "failed_trace_count": 0,
+                      "reference_trace_id": null
+                    },
+                    "profile_update_policy": "conservative_metadata_update"
+                  },
+                  "memory_layer": "L1_interaction_trace_summary",
+                  "stored_at": "2026-07-25T14:44:17.455486+00:00"
+                }
+              ],
+              "recent_trace_count": 1,
+              "profile_loaded": true,
+              "preferences_loaded": false,
+              "recent_memory_loaded": true,
+              "tutoring_memory_loaded": true,
+              "memory_paths": {
+                "base_dir": "var/agentic_memory/dpm/article_T083",
+                "L1_traces": "var/agentic_memory/dpm/article_T083/L1/traces.jsonl",
+                "L2_tutoring": "var/agentic_memory/dpm/article_T083/L2/tutoring.md",
+                "L3_profile": "var/agentic_memory/dpm/article_T083/L3/profile.json",
+                "L3_preferences": "var/agentic_memory/dpm/article_T083/L3/preferences.json",
+                "L3_recent": "var/agentic_memory/dpm/article_T083/L3/recent.md"
+              },
+              "topic": "convolution",
+              "task_type": "conceptual_explanation"
+            },
+            "skg": {
+              "kb_name": "default",
+              "query": "I still confuse filters and matrices. Explain the difference again.",
+              "topic": "convolution",
+              "snippets": [
+                {
+                  "chunk_id": "SKG-CONV-002",
+                  "topic": "convolution",
+                  "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel movement",
+                    "output value",
+                    "matrix"
+                  ],
+                  "retrieval_score": 5
+                },
+                {
+                  "chunk_id": "SKG-CONV-001",
+                  "topic": "convolution",
+                  "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+                  "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+                  "tags": [
+                    "convolution",
+                    "kernel",
+                    "image processing",
+                    "matrix"
+                  ],
+                  "retrieval_score": 3
+                },
+                {
+                  "chunk_id": "SKG-OVERFIT-001",
+                  "topic": "overfitting",
+                  "content": "Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data.",
+                  "source": "OpenTutorAI mock lesson: Machine Learning / Overfitting",
+                  "tags": [
+                    "machine learning",
+                    "overfitting",
+                    "generalization"
+                  ],
+                  "retrieval_score": 2
+                }
+              ],
+              "sources": [
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Image Processing / Convolution",
+                "OpenTutorAI mock lesson: Machine Learning / Overfitting"
+              ],
+              "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.\n- Overfitting happens when a model learns the training data too specifically and performs poorly on unseen data."
+            },
+            "trace_memory": {
+              "similar_successful_traces": [
+                {
+                  "trace_id": "TT-526dd2cc",
+                  "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                  "created_at": "2026-07-25T14:44:17.451630Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "step_goal": "Define filters and matrices in the context of neural networks",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 1,
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "recovery_used": false,
+                  "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                  "learner_id": "article_T083",
+                  "similarity_score": 10.9,
+                  "matched_terms": [
+                    "again",
+                    "confuse",
+                    "difference",
+                    "filters",
+                    "matrices",
+                    "still"
+                  ],
+                  "score_breakdown": {
+                    "word_overlap": 6,
+                    "task_type_boost": 3.0,
+                    "tool_quality_boost": 1.0,
+                    "confidence_boost": 0.9
+                  },
+                  "memory_source": "learner_filtered_trace_files"
+                }
+              ],
+              "failed_traces": []
+            },
+            "summary": {
+              "learner_level": "unknown",
+              "preferred_explanation_style": "unknown",
+              "is_weak_topic": false,
+              "retrieved_knowledge_chunks": 3,
+              "similar_successful_trace_count": 1,
+              "failed_trace_count": 0
+            }
+          },
+          "collected_context_summary": {
+            "learner_level": "unknown",
+            "preferred_explanation_style": "unknown",
+            "is_weak_topic": false,
+            "retrieved_knowledge_chunks": 3,
+            "similar_successful_trace_count": 1,
+            "failed_trace_count": 0
+          },
+          "needs_code_execution": false,
+          "code_generation_required": false,
+          "code_generation_instruction": "",
+          "recovery_reason": null,
+          "recovery_required_tools": [],
+          "previous_code_execution_errors": []
+        }
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:44:25.533973Z",
+      "event_type": "tools_selected",
+      "payload": [
+        "RAGTool",
+        "TraceSearchTool",
+        "MatrixComputationTool"
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:44:25.535362Z",
+      "event_type": "tools_executed",
+      "payload": [
+        {
+          "tool_name": "RAGTool",
+          "status": "success",
+          "success": true,
+          "content": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+          "output": "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+          "evidence": [
+            "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+          ],
+          "references": [
+            "var/agentic_memory/skg_index/documents/convolution_demo.md"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+            "retrieval_mode": "jsonl_hybrid_lexical",
+            "query": "I still confuse filters and matrices. Explain the difference again. Visualize a small matrix/kernel example to illustrate the difference visual explanation with grounded evidence convolution Visualize a small matrix/kernel example to illustrate the difference Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+            "retrieved_knowledge_chunks": 1,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 0,
+            "scores": [
+              12.729905
+            ],
+            "chunk_ids": [
+              "SKG-9636f398"
+            ],
+            "matched_terms": [
+              [
+                "cnn",
+                "convolution",
+                "correlation",
+                "input",
+                "kernel",
+                "matrix",
+                "output",
+                "patch",
+                "sliding",
+                "small"
+              ]
+            ],
+            "score_breakdown": [
+              {
+                "lexical_score": 5.729905,
+                "phrase_score": 5.0,
+                "important_term_score": 2.0,
+                "title_source_score": 0.0,
+                "matched_phrases": [
+                  "small matrix",
+                  "input matrix",
+                  "output matrix",
+                  "kernel sliding"
+                ]
+              }
+            ],
+            "expanded_terms": [
+              "array",
+              "cnn",
+              "correlation",
+              "diagram",
+              "example",
+              "filter",
+              "grid",
+              "input",
+              "kernel",
+              "mask",
+              "matrix",
+              "output",
+              "patch",
+              "sliding",
+              "step",
+              "window"
+            ],
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "convolution"
+          }
+        },
+        {
+          "tool_name": "TraceSearchTool",
+          "status": "success",
+          "success": true,
+          "content": "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.",
+          "output": "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.",
+          "evidence": [
+            "TraceToolkit found 1 similar successful trace(s).",
+            "TraceToolkit considered 0 failed trace(s).",
+            "Reference trace used for tool selection: TT-526dd2cc."
+          ],
+          "references": [
+            "TraceToolkit memory traces"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "TraceSearchTool",
+            "similar_successful_trace_count": 1,
+            "failed_trace_count": 0,
+            "reference_trace_id": "TT-526dd2cc",
+            "trace_context": {
+              "similar_successful_traces": [
+                {
+                  "trace_id": "TT-526dd2cc",
+                  "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                  "created_at": "2026-07-25T14:44:17.451630Z",
+                  "task_type": "conceptual_explanation",
+                  "status": "validated",
+                  "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                  "step_goal": "Define filters and matrices in the context of neural networks",
+                  "selected_tools": [
+                    "RAGTool",
+                    "TraceSearchTool"
+                  ],
+                  "attempts": 1,
+                  "confidence_score": 0.9,
+                  "failure_reason": null,
+                  "recovery_used": false,
+                  "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                  "learner_id": "article_T083",
+                  "similarity_score": 10.9,
+                  "matched_terms": [
+                    "again",
+                    "confuse",
+                    "difference",
+                    "filters",
+                    "matrices",
+                    "still"
+                  ],
+                  "score_breakdown": {
+                    "word_overlap": 6,
+                    "task_type_boost": 3.0,
+                    "tool_quality_boost": 1.0,
+                    "confidence_boost": 0.9
+                  },
+                  "memory_source": "learner_filtered_trace_files"
+                }
+              ],
+              "failed_traces": []
+            },
+            "registry_tool": true
+          }
+        },
+        {
+          "tool_name": "MatrixComputationTool",
+          "status": "success",
+          "success": true,
+          "content": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+          "output": "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+          "evidence": [
+            "The kernel combines values from one local input region at a time.",
+            "The example valid output is [[6, 8], [12, 14]]."
+          ],
+          "references": [
+            "MatrixComputationTool pedagogical convolution example"
+          ],
+          "metadata": {
+            "attempt": 1,
+            "source_component": "MatrixComputationTool",
+            "operation": "convolution_concept",
+            "operation_type": "convolution_concept",
+            "registry_tool": true,
+            "input_matrix": [
+              [
+                1,
+                2,
+                3
+              ],
+              [
+                4,
+                5,
+                6
+              ],
+              [
+                7,
+                8,
+                9
+              ]
+            ],
+            "kernel": [
+              [
+                1,
+                0
+              ],
+              [
+                0,
+                1
+              ]
+            ],
+            "output_matrix": [
+              [
+                6,
+                8
+              ],
+              [
+                12,
+                14
+              ]
+            ],
+            "example_generated": true
+          }
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-07-25T14:44:25.536083Z",
+      "event_type": "output_validated",
+      "payload": {
+        "status": "valid",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "recommended_action": "accept"
+      }
+    },
+    {
+      "timestamp": "2026-07-25T14:44:25.536763Z",
+      "event_type": "output_package_built",
+      "payload": {
+        "package_id": "PKG-c783cd34",
+        "status": "validated",
+        "content": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.\n\n## TraceSearchTool\nTrace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc.\n\n## MatrixComputationTool\nA convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14",
+        "evidence": [
+          "# Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value.",
+          "TraceToolkit found 1 similar successful trace(s).",
+          "TraceToolkit considered 0 failed trace(s).",
+          "Reference trace used for tool selection: TT-526dd2cc.",
+          "The kernel combines values from one local input region at a time.",
+          "The example valid output is [[6, 8], [12, 14]]."
+        ],
+        "references": [
+          "var/agentic_memory/skg_index/documents/convolution_demo.md",
+          "TraceToolkit memory traces",
+          "MatrixComputationTool pedagogical convolution example"
+        ],
+        "validation_report": {
+          "status": "valid",
+          "confidence_score": 0.9,
+          "failure_reason": null,
+          "recommended_action": "accept"
+        },
+        "trace_id": "TT-a485cc00",
+        "metadata": {
+          "workflow_source": "personalized_problem_tutoring",
+          "task_type": "conceptual_explanation",
+          "current_step": "Visualize a small matrix/kernel example to illustrate the difference",
+          "analyzed_task_type": "conceptual_explanation",
+          "operation_type": "convolution_concept",
+          "operation_parameters": {
+            "matrices": [],
+            "shapes": [],
+            "stride": 1,
+            "padding": 0
+          },
+          "request_role": "pedagogical_support",
+          "satisfies_primary_request": false,
+          "tool_outputs": {
+            "RAGTool": [
+              "Course evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flipped. However, it is commonly called convolution in deep learning explanations. A simple beginner-friendly example uses a 2x2 kernel sliding over a 3x3 input matrix. For the input matrix: 1 2 3 4 5 6 7 8 9 and the kernel: 1 0 0 1 the top-left output value is computed as: (1×1) + (2×0) + (4×0) + (5×1) = 6 The full valid output matrix is: 6 8 12 14 This example helps learners see how a local input patch is transformed into an output value."
+            ],
+            "TraceSearchTool": [
+              "Trace guidance retrieved. Similar successful traces: 1. Failed traces considered: 0. Reusing strategy from trace TT-526dd2cc."
+            ],
+            "MatrixComputationTool": [
+              "A convolution-style operation moves a small kernel across local regions of an input matrix.\n\nInput matrix:\n1  2  3\n4  5  6\n7  8  9\n\nKernel:\n1  0\n0  1\n\nAt the top-left position:\n(1x1) + (2x0) + (4x0) + (5x1) = 6\n\nFull valid output:\n6  8\n12  14"
+            ]
+          },
+          "tool_metadata": {
+            "RAGTool": [
+              {
+                "attempt": 1,
+                "source_component": "RAGTool",
+                "grounding_source": "OpenTutorAI Agentic SKG Hybrid Retriever",
+                "retrieval_mode": "jsonl_hybrid_lexical",
+                "query": "I still confuse filters and matrices. Explain the difference again. Visualize a small matrix/kernel example to illustrate the difference visual explanation with grounded evidence convolution Visualize a small matrix/kernel example to illustrate the difference Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding",
+                "retrieved_knowledge_chunks": 1,
+                "original_retrieved_knowledge_chunks": 1,
+                "topic_filter_removed_chunks": 0,
+                "scores": [
+                  12.729905
+                ],
+                "chunk_ids": [
+                  "SKG-9636f398"
+                ],
+                "matched_terms": [
+                  [
+                    "cnn",
+                    "convolution",
+                    "correlation",
+                    "input",
+                    "kernel",
+                    "matrix",
+                    "output",
+                    "patch",
+                    "sliding",
+                    "small"
+                  ]
+                ],
+                "score_breakdown": [
+                  {
+                    "lexical_score": 5.729905,
+                    "phrase_score": 5.0,
+                    "important_term_score": 2.0,
+                    "title_source_score": 0.0,
+                    "matched_phrases": [
+                      "small matrix",
+                      "input matrix",
+                      "output matrix",
+                      "kernel sliding"
+                    ]
+                  }
+                ],
+                "expanded_terms": [
+                  "array",
+                  "cnn",
+                  "correlation",
+                  "diagram",
+                  "example",
+                  "filter",
+                  "grid",
+                  "input",
+                  "kernel",
+                  "mask",
+                  "matrix",
+                  "output",
+                  "patch",
+                  "sliding",
+                  "step",
+                  "window"
+                ],
+                "registry_tool": true,
+                "topic_consistent": true,
+                "topic_key": "convolution"
+              }
+            ],
+            "TraceSearchTool": [
+              {
+                "attempt": 1,
+                "source_component": "TraceSearchTool",
+                "similar_successful_trace_count": 1,
+                "failed_trace_count": 0,
+                "reference_trace_id": "TT-526dd2cc",
+                "trace_context": {
+                  "similar_successful_traces": [
+                    {
+                      "trace_id": "TT-526dd2cc",
+                      "trace_path": "var/agentic_traces/TT-526dd2cc.json",
+                      "created_at": "2026-07-25T14:44:17.451630Z",
+                      "task_type": "conceptual_explanation",
+                      "status": "validated",
+                      "student_question": "I still confuse filters and matrices. Explain the difference again.",
+                      "step_goal": "Define filters and matrices in the context of neural networks",
+                      "selected_tools": [
+                        "RAGTool",
+                        "TraceSearchTool"
+                      ],
+                      "attempts": 1,
+                      "confidence_score": 0.9,
+                      "failure_reason": null,
+                      "recovery_used": false,
+                      "content_preview": "## RAGTool\nCourse evidence retrieved from OpenTutorAI Agentic SKG index:\n- # Convolution in Image Processing Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions. At each position, the values in the kernel are multiplied element-wise with the corresponding values in the input patch, and the products are summed to produce one output value. In many CNN tutorials, the operation used is technically cross-correlation because the kernel is not flip",
+                      "learner_id": "article_T083",
+                      "similarity_score": 10.9,
+                      "matched_terms": [
+                        "again",
+                        "confuse",
+                        "difference",
+                        "filters",
+                        "matrices",
+                        "still"
+                      ],
+                      "score_breakdown": {
+                        "word_overlap": 6,
+                        "task_type_boost": 3.0,
+                        "tool_quality_boost": 1.0,
+                        "confidence_boost": 0.9
+                      },
+                      "memory_source": "learner_filtered_trace_files"
+                    }
+                  ],
+                  "failed_traces": []
+                },
+                "registry_tool": true
+              }
+            ],
+            "MatrixComputationTool": [
+              {
+                "attempt": 1,
+                "source_component": "MatrixComputationTool",
+                "operation": "convolution_concept",
+                "operation_type": "convolution_concept",
+                "registry_tool": true,
+                "input_matrix": [
+                  [
+                    1,
+                    2,
+                    3
+                  ],
+                  [
+                    4,
+                    5,
+                    6
+                  ],
+                  [
+                    7,
+                    8,
+                    9
+                  ]
+                ],
+                "kernel": [
+                  [
+                    1,
+                    0
+                  ],
+                  [
+                    0,
+                    1
+                  ]
+                ],
+                "output_matrix": [
+                  [
+                    6,
+                    8
+                  ],
+                  [
+                    12,
+                    14
+                  ]
+                ],
+                "example_generated": true
+              }
+            ]
+          },
+          "tool_names": [
+            "RAGTool",
+            "TraceSearchTool",
+            "MatrixComputationTool"
+          ],
+          "content_format": "structured_tool_sections"
+        }
+      }
+    }
+  ],
+  "trace_path": "var/agentic_traces/TT-a485cc00.json",
+  "updated_at": "2026-07-25T14:44:29.232660Z"
+}

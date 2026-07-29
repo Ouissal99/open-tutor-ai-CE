@@ -1,0 +1,912 @@
+{
+  "report_type": "implementation_demo_evidence",
+  "created_at": "2026-07-25T14:50:52.419504+00:00",
+  "summary": {
+    "question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+    "learner_id": "article_T096",
+    "provider_status": "available",
+    "workflow_status": "validated",
+    "trace_id": "TT-58268f3e",
+    "trace_path": "var/agentic_traces/TT-58268f3e.json",
+    "confidence": 0.9,
+    "selected_tools": [
+      "RAGTool"
+    ],
+    "recovery_used": true,
+    "attempts": 1,
+    "recovery_steps": [],
+    "content_format": "structured_tool_sections",
+    "rag_retrieval_mode": "topic_consistency_fallback",
+    "rag_grounding_source": "Topic-consistency fallback after SKG topic filtering",
+    "rag_scores": null,
+    "rag_matched_terms": null,
+    "trace_memory_similar_count": null,
+    "trace_memory_failed_count": null,
+    "trace_memory_reference_trace": null,
+    "dpm_learner_level": "unknown",
+    "dpm_is_weak_topic": false,
+    "dpm_recent_trace_count": 1,
+    "provider_error": null
+  },
+  "inputs": {
+    "question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+    "learner_id": "article_T096"
+  },
+  "response": {
+    "answer": "**Matrix Multiplication Explanation**\n\nGiven the incomplete tool output, let's attempt to explain matrix multiplication step by step.\n\n**Step 1: Understanding Matrix Multiplication**\n\nMatrix multiplication is a way to combine two matrices (A and B) to produce a new matrix (C). The process involves taking the rows of matrix A and combining them with the columns of matrix B.\n\n**Step 2: Example with Incomplete Tool Output**\n\nLet's consider an example with two matrices:\n\nA = [[1, 2], [3, 4]]\nB = [[5, 6], [7, 8]]\n\nThe tool output shows us that the result of multiplying these matrices is:\n\nC[1,1] = (1×5) + (2×7) = 19\nC[1,2] = (1×6) + (2×8) = 22\nC[2,1] = (3×5) + (4×7) = 43\nC[2,2] = (3×6) + (4×8) = 50\n\nHowever, the tool output is incomplete, and we don't have the full result matrix C.\n\n**Step 3: Understanding the Dot Product**\n\nEach output value in the result matrix C is calculated as a dot product between one row of matrix A and one column of matrix B. The dot product is the sum of the products of corresponding elements in the two matrices.\n\n**Evidence used**\n\n* RAGTool topic-consistency fallback: matrix multiplication\n* Matrix multiplication computes each result cell as a row-by-column dot product.\n* For A = [[1, 2], [3, 4]] and B = [[5, 6], [7, 8]], the result is [[19, 22], [43, 50]].\n\n**References**\n\n* RAGTool topic-consistency fallback: matrix multiplication\n\nNote: The learner's recent memory and tutoring memory suggest that they have worked on matrix multiplication before and have a diagnosed gap in understanding kernel movement. The recommended next tutoring strategy is to use a simple step-by-step explanation grounded in course evidence.",
+    "status": "validated",
+    "confidence": 0.9,
+    "trace_id": "TT-58268f3e",
+    "trace_path": "var/agentic_traces/TT-58268f3e.json",
+    "attempts": 1,
+    "selected_tools": [
+      "MatrixComputationTool",
+      "RAGTool"
+    ],
+    "recovery_used": true,
+    "output_package": {
+      "package_id": "PKG-f96e0ef4",
+      "status": "validated",
+      "content": "## RAGTool\nTopic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]].",
+      "evidence": [
+        "Matrix multiplication computes each result cell as a row-by-column dot product.",
+        "For A = [[1, 2], [3, 4]] and B = [[5, 6], [7, 8]], the result is [[19, 22], [43, 50]]."
+      ],
+      "references": [
+        "RAGTool topic-consistency fallback: matrix multiplication"
+      ],
+      "validation_report": {
+        "status": "valid",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "recommended_action": "accept"
+      },
+      "trace_id": "TT-58268f3e",
+      "metadata": {
+        "workflow_source": "personalized_problem_tutoring",
+        "task_type": "conceptual_explanation",
+        "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+        "analyzed_task_type": "calculation_or_verification",
+        "operation_type": "conceptual_explanation",
+        "operation_parameters": {
+          "matrices": [],
+          "shapes": [],
+          "stride": 1,
+          "padding": 0
+        },
+        "request_role": "pedagogical_support",
+        "satisfies_primary_request": false,
+        "tool_outputs": {
+          "RAGTool": [
+            "Topic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]]."
+          ]
+        },
+        "tool_metadata": {
+          "RAGTool": [
+            {
+              "attempt": 1,
+              "source_component": "RAGTool",
+              "grounding_source": "Topic-consistency fallback after SKG topic filtering",
+              "retrieval_mode": "topic_consistency_fallback",
+              "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output. Use an incomplete tool output to demonstrate the multiplication process course-grounded tutoring explanation general topic Use an incomplete tool output to demonstrate the multiplication process Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding row by column dot product matrix product A times B",
+              "retrieved_knowledge_chunks": 0,
+              "original_retrieved_knowledge_chunks": 1,
+              "topic_filter_removed_chunks": 1,
+              "registry_tool": true,
+              "topic_consistent": true,
+              "topic_key": "matrix_multiplication"
+            }
+          ]
+        },
+        "tool_names": [
+          "RAGTool"
+        ],
+        "content_format": "structured_tool_sections"
+      }
+    },
+    "scratchpad": [
+      {
+        "round_id": 1,
+        "step_goal": "Explain the concept of matrix multiplication",
+        "analysis": "The tutor prepares the current solving step.",
+        "tool_request_summary": "conceptual_explanation / visual explanation with grounded evidence",
+        "output_package": {
+          "package_id": "PKG-ffda879b",
+          "status": "validated",
+          "content": "## RAGTool\nTopic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]].\n\n## MatrixComputationTool\nMatrix multiplication uses rows from the first matrix and columns from the second matrix.\n\nExample matrices:\n\nA:\n1  2\n3  4\n\nB:\n5  6\n7  8\n\nThe first output entry is:\n(1x5) + (2x7) = 19\n\nFull product:\n19  22\n43  50",
+          "evidence": [
+            "Matrix multiplication computes each result cell as a row-by-column dot product.",
+            "For A = [[1, 2], [3, 4]] and B = [[5, 6], [7, 8]], the result is [[19, 22], [43, 50]].",
+            "Matrix multiplication is performed with row-by-column dot products.",
+            "The example product is [[19, 22], [43, 50]]."
+          ],
+          "references": [
+            "RAGTool topic-consistency fallback: matrix multiplication",
+            "MatrixComputationTool pedagogical matrix example"
+          ],
+          "validation_report": {
+            "status": "valid",
+            "confidence_score": 0.9,
+            "failure_reason": null,
+            "recommended_action": "accept"
+          },
+          "trace_id": "TT-89931203",
+          "metadata": {
+            "workflow_source": "personalized_problem_tutoring",
+            "task_type": "conceptual_explanation",
+            "current_step": "Explain the concept of matrix multiplication",
+            "analyzed_task_type": "conceptual_explanation",
+            "operation_type": "matrix_concept",
+            "operation_parameters": {
+              "matrices": [],
+              "shapes": [],
+              "stride": 1,
+              "padding": 0
+            },
+            "request_role": "pedagogical_support",
+            "satisfies_primary_request": false,
+            "tool_outputs": {
+              "RAGTool": [
+                "Topic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]]."
+              ],
+              "MatrixComputationTool": [
+                "Matrix multiplication uses rows from the first matrix and columns from the second matrix.\n\nExample matrices:\n\nA:\n1  2\n3  4\n\nB:\n5  6\n7  8\n\nThe first output entry is:\n(1x5) + (2x7) = 19\n\nFull product:\n19  22\n43  50"
+              ]
+            },
+            "tool_metadata": {
+              "RAGTool": [
+                {
+                  "attempt": 2,
+                  "source_component": "RAGTool",
+                  "grounding_source": "Topic-consistency fallback after SKG topic filtering",
+                  "retrieval_mode": "topic_consistency_fallback",
+                  "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output. Explain the concept of matrix multiplication visual explanation with grounded evidence general topic Explain the concept of matrix multiplication Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding row by column dot product matrix product A times B",
+                  "retrieved_knowledge_chunks": 0,
+                  "original_retrieved_knowledge_chunks": 1,
+                  "topic_filter_removed_chunks": 1,
+                  "registry_tool": true,
+                  "topic_consistent": true,
+                  "topic_key": "matrix_multiplication"
+                }
+              ],
+              "MatrixComputationTool": [
+                {
+                  "attempt": 2,
+                  "source_component": "MatrixComputationTool",
+                  "operation": "matrix_concept",
+                  "operation_type": "matrix_concept",
+                  "registry_tool": true,
+                  "matrix_a": [
+                    [
+                      1,
+                      2
+                    ],
+                    [
+                      3,
+                      4
+                    ]
+                  ],
+                  "matrix_b": [
+                    [
+                      5,
+                      6
+                    ],
+                    [
+                      7,
+                      8
+                    ]
+                  ],
+                  "output_matrix": [
+                    [
+                      19,
+                      22
+                    ],
+                    [
+                      43,
+                      50
+                    ]
+                  ],
+                  "example_generated": true
+                }
+              ]
+            },
+            "tool_names": [
+              "RAGTool",
+              "MatrixComputationTool"
+            ],
+            "content_format": "structured_tool_sections"
+          }
+        },
+        "status": "validated"
+      },
+      {
+        "round_id": 2,
+        "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+        "analysis": "The tutor prepares the current solving step.",
+        "tool_request_summary": "conceptual_explanation / course-grounded tutoring explanation",
+        "output_package": {
+          "package_id": "PKG-f96e0ef4",
+          "status": "validated",
+          "content": "## RAGTool\nTopic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]].",
+          "evidence": [
+            "Matrix multiplication computes each result cell as a row-by-column dot product.",
+            "For A = [[1, 2], [3, 4]] and B = [[5, 6], [7, 8]], the result is [[19, 22], [43, 50]]."
+          ],
+          "references": [
+            "RAGTool topic-consistency fallback: matrix multiplication"
+          ],
+          "validation_report": {
+            "status": "valid",
+            "confidence_score": 0.9,
+            "failure_reason": null,
+            "recommended_action": "accept"
+          },
+          "trace_id": "TT-58268f3e",
+          "metadata": {
+            "workflow_source": "personalized_problem_tutoring",
+            "task_type": "conceptual_explanation",
+            "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+            "analyzed_task_type": "calculation_or_verification",
+            "operation_type": "conceptual_explanation",
+            "operation_parameters": {
+              "matrices": [],
+              "shapes": [],
+              "stride": 1,
+              "padding": 0
+            },
+            "request_role": "pedagogical_support",
+            "satisfies_primary_request": false,
+            "tool_outputs": {
+              "RAGTool": [
+                "Topic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]]."
+              ]
+            },
+            "tool_metadata": {
+              "RAGTool": [
+                {
+                  "attempt": 1,
+                  "source_component": "RAGTool",
+                  "grounding_source": "Topic-consistency fallback after SKG topic filtering",
+                  "retrieval_mode": "topic_consistency_fallback",
+                  "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output. Use an incomplete tool output to demonstrate the multiplication process course-grounded tutoring explanation general topic Use an incomplete tool output to demonstrate the multiplication process Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding row by column dot product matrix product A times B",
+                  "retrieved_knowledge_chunks": 0,
+                  "original_retrieved_knowledge_chunks": 1,
+                  "topic_filter_removed_chunks": 1,
+                  "registry_tool": true,
+                  "topic_consistent": true,
+                  "topic_key": "matrix_multiplication"
+                }
+              ]
+            },
+            "tool_names": [
+              "RAGTool"
+            ],
+            "content_format": "structured_tool_sections"
+          }
+        },
+        "status": "validated"
+      }
+    ],
+    "metadata": {
+      "agentic_core": "AgenticCoreService",
+      "workflow": "personalized_problem_tutoring",
+      "source": "terminal_backend_prototype",
+      "final_answer_generator": "TutoringAnswerWriter",
+      "memory_update_summary": {
+        "memory_update_type": "post_tool_interaction_update",
+        "memory_update_agent": "MemoryUpdateAgent",
+        "updated_at": "2026-07-25T14:50:48.519032+00:00",
+        "learner_id": "article_T096",
+        "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+        "topic": "matrix_multiplication",
+        "task_type": "conceptual_explanation",
+        "status": "validated",
+        "confidence_score": 0.9,
+        "failure_reason": null,
+        "selected_tools": [
+          "RAGTool"
+        ],
+        "diagnosed_gap": "kernel movement",
+        "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+        "new_weak_topic": null,
+        "content_format": "structured_tool_sections",
+        "retrieval_mode": "topic_consistency_fallback",
+        "trace_memory_used": {},
+        "profile_update_policy": "conservative_metadata_update"
+      },
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+      "analyzed_task_type": "calculation_or_verification",
+      "operation_type": "conceptual_explanation",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Topic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]]."
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "Topic-consistency fallback after SKG topic filtering",
+            "retrieval_mode": "topic_consistency_fallback",
+            "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output. Use an incomplete tool output to demonstrate the multiplication process course-grounded tutoring explanation general topic Use an incomplete tool output to demonstrate the multiplication process Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding row by column dot product matrix product A times B",
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 1,
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "matrix_multiplication"
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "trace_summary": {
+    "trace_id": "TT-58268f3e",
+    "trace_path": "var/agentic_traces/TT-58268f3e.json",
+    "created_at": "2026-07-25T14:50:48.515069Z",
+    "task_type": "conceptual_explanation",
+    "status": "validated",
+    "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+    "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+    "selected_tools": [
+      "RAGTool"
+    ],
+    "attempts": 1,
+    "confidence_score": 0.9,
+    "failure_reason": null,
+    "recovery_used": false,
+    "content_preview": "## RAGTool\nTopic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]]."
+  },
+  "trace_events": {
+    "tool_request_received": {
+      "request_id": "REQ-66b5b6ba",
+      "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "user_query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+      "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+      "task_type": "conceptual_explanation",
+      "expected_output": "course-grounded tutoring explanation",
+      "workflow_source": "personalized_problem_tutoring",
+      "metadata": {
+        "source_component": "ToolRequestAgent",
+        "learner_id": "article_T096",
+        "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+        "plan_step_id": 2,
+        "step_reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result.",
+        "suggested_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "workflow_source": "personalized_problem_tutoring",
+        "investigation_result": {
+          "topic": "matrix_multiplication",
+          "task_type": "conceptual_explanation",
+          "student_intent": "understand matrix multiplication",
+          "difficulty_estimate": "intermediate",
+          "meta_questions": [
+            "What are the dimensions of the input matrices?",
+            "How does the incomplete tool output affect the multiplication process?"
+          ],
+          "required_context": [
+            "DPM",
+            "SKG",
+            "TraceToolkit"
+          ],
+          "initial_tutoring_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Explain the concept of matrix multiplication",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To provide a clear understanding of the concept, we will use a visual example with a small matrix/kernel."
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result."
+            }
+          ],
+          "tool_request_goal": "Provide a visual example of matrix multiplication using a small matrix/kernel and force the first attempt to use an incomplete tool output from RAGTool.",
+          "learner_id": "article_T096",
+          "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+          "llm_model": "llama-3.1-8b-instant",
+          "raw_response": "{\n  \"topic\": \"matrix_multiplication\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand matrix multiplication\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What are the dimensions of the input matrices?\",\n    \"How does the incomplete tool output affect the multiplication process?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Explain the concept of matrix multiplication\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\", \"VisualMatrixTool\"],\n      \"reason\": \"To provide a clear understanding of the concept, we will use a visual example with a small matrix/kernel.\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Use an incomplete tool output to demonstrate the multiplication process\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\", \"TraceSearchTool\"],\n      \"reason\": \"To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result.\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a visual example of matrix multiplication using a small matrix/kernel and force the first attempt to use an incomplete tool output from RAGTool.\"\n}"
+        },
+        "current_plan_step": {
+          "step_id": 2,
+          "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+          "needs_tool": true,
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "course-grounded tutoring explanation",
+          "reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result."
+        },
+        "full_investigation_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Explain the concept of matrix multiplication",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "To provide a clear understanding of the concept, we will use a visual example with a small matrix/kernel."
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "course-grounded tutoring explanation",
+            "reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result."
+          }
+        ],
+        "workflow_metadata": {
+          "source": "run_agentic_tutoring_demo",
+          "force_recovery_test": true
+        },
+        "force_recovery_test": false
+      }
+    },
+    "task_context_analyzed": {
+      "request_id": "REQ-66b5b6ba",
+      "workflow_source": "personalized_problem_tutoring",
+      "original_task_type": "conceptual_explanation",
+      "task_type": "calculation_or_verification",
+      "operation_type": "conceptual_explanation",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "topic": "general topic",
+      "goal": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+      "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "user_query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "expected_output": "course-grounded tutoring explanation",
+      "learner_level": "unknown",
+      "needs_visual_support": false,
+      "explicit_visual_requested": false,
+      "needs_calculation": false,
+      "needs_code_execution": false,
+      "needs_debugging": false,
+      "needs_grounding": true,
+      "code_generation_required": false,
+      "tool_request_goal": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "code_generation_instruction": "",
+      "reasoning_summary": "Fallback task analysis generated from request text.",
+      "analysis_strategy": "deterministic_fallback_after_llm_failure",
+      "analysis_error": "The configured Groq/OpenAI-compatible LLM provider is currently unavailable after 3 attempt(s). Please check your internet connection, API key, provider status, or try again later.",
+      "request_metadata": {
+        "source_component": "ToolRequestAgent",
+        "learner_id": "article_T096",
+        "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+        "plan_step_id": 2,
+        "step_reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result.",
+        "suggested_tools": [
+          "RAGTool",
+          "TraceSearchTool"
+        ],
+        "workflow_source": "personalized_problem_tutoring",
+        "investigation_result": {
+          "topic": "matrix_multiplication",
+          "task_type": "conceptual_explanation",
+          "student_intent": "understand matrix multiplication",
+          "difficulty_estimate": "intermediate",
+          "meta_questions": [
+            "What are the dimensions of the input matrices?",
+            "How does the incomplete tool output affect the multiplication process?"
+          ],
+          "required_context": [
+            "DPM",
+            "SKG",
+            "TraceToolkit"
+          ],
+          "initial_tutoring_plan": [
+            {
+              "step_id": 1,
+              "step_goal": "Explain the concept of matrix multiplication",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "VisualMatrixTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To provide a clear understanding of the concept, we will use a visual example with a small matrix/kernel."
+            },
+            {
+              "step_id": 2,
+              "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+              "needs_tool": true,
+              "suggested_tools": [
+                "RAGTool",
+                "TraceSearchTool"
+              ],
+              "reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result."
+            }
+          ],
+          "tool_request_goal": "Provide a visual example of matrix multiplication using a small matrix/kernel and force the first attempt to use an incomplete tool output from RAGTool.",
+          "learner_id": "article_T096",
+          "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+          "llm_model": "llama-3.1-8b-instant",
+          "raw_response": "{\n  \"topic\": \"matrix_multiplication\",\n  \"task_type\": \"conceptual_explanation\",\n  \"student_intent\": \"understand matrix multiplication\",\n  \"difficulty_estimate\": \"intermediate\",\n  \"meta_questions\": [\n    \"What are the dimensions of the input matrices?\",\n    \"How does the incomplete tool output affect the multiplication process?\"\n  ],\n  \"required_context\": [\n    \"DPM\",\n    \"SKG\",\n    \"TraceToolkit\"\n  ],\n  \"initial_tutoring_plan\": [\n    {\n      \"step_id\": 1,\n      \"step_goal\": \"Explain the concept of matrix multiplication\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\", \"VisualMatrixTool\"],\n      \"reason\": \"To provide a clear understanding of the concept, we will use a visual example with a small matrix/kernel.\"\n    },\n    {\n      \"step_id\": 2,\n      \"step_goal\": \"Use an incomplete tool output to demonstrate the multiplication process\",\n      \"needs_tool\": true,\n      \"suggested_tools\": [\"RAGTool\", \"TraceSearchTool\"],\n      \"reason\": \"To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result.\"\n    }\n  ],\n  \"tool_request_goal\": \"Provide a visual example of matrix multiplication using a small matrix/kernel and force the first attempt to use an incomplete tool output from RAGTool.\"\n}"
+        },
+        "current_plan_step": {
+          "step_id": 2,
+          "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+          "needs_tool": true,
+          "suggested_tools": [
+            "RAGTool",
+            "TraceSearchTool"
+          ],
+          "task_type": "conceptual_explanation",
+          "expected_output": "course-grounded tutoring explanation",
+          "reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result."
+        },
+        "full_investigation_plan": [
+          {
+            "step_id": 1,
+            "step_goal": "Explain the concept of matrix multiplication",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool",
+              "MatrixComputationTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "visual explanation with grounded evidence",
+            "reason": "To provide a clear understanding of the concept, we will use a visual example with a small matrix/kernel."
+          },
+          {
+            "step_id": 2,
+            "step_goal": "Use an incomplete tool output to demonstrate the multiplication process",
+            "needs_tool": true,
+            "suggested_tools": [
+              "RAGTool",
+              "TraceSearchTool"
+            ],
+            "task_type": "conceptual_explanation",
+            "expected_output": "course-grounded tutoring explanation",
+            "reason": "To force the first attempt to use an incomplete tool output, we will use RAGTool to provide a partial result."
+          }
+        ],
+        "workflow_metadata": {
+          "source": "run_agentic_tutoring_demo",
+          "force_recovery_test": true
+        },
+        "force_recovery_test": false
+      },
+      "learner_id": "article_T096",
+      "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+      "collected_context": {
+        "learner_id": "article_T096",
+        "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+        "task_type": "calculation_or_verification",
+        "topic": "general topic",
+        "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+        "dpm": {
+          "memory_source": "DynamicPersonalMemory",
+          "memory_storage": "file_based_local",
+          "memory_layers": [
+            "L1_interaction_traces",
+            "L2_tutoring_notes",
+            "L3_profile_preferences"
+          ],
+          "learner_id": "article_T096",
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "preferred_examples": [],
+          "avoid": [],
+          "known_topics": [],
+          "weak_topics": [],
+          "learning_goals": [],
+          "is_weak_topic": false,
+          "is_known_topic": false,
+          "recent_memory": "# Recent Memory\n\nLast updated: 2026-07-25T14:50:40.556485+00:00\n\nThe learner recently worked on: matrix_multiplication.\nObserved learning gap: kernel movement.\nRecommended next tutoring strategy: use simple step-by-step explanation grounded in course evidence.\nLast task type: conceptual_explanation.\nLast selected tools: RAGTool, MatrixComputationTool.\n",
+          "tutoring_memory": "# Tutoring Memory\n\n## MemoryUpdateAgent observation — 2026-07-25T14:50:40.556485+00:00\n\n- Topic: matrix_multiplication\n- Task type: conceptual_explanation\n- Status: validated\n- Confidence: 0.9\n- Diagnosed gap: kernel movement\n- Recommended future strategy: use simple step-by-step explanation grounded in course evidence\n- Selected tools: RAGTool, MatrixComputationTool\n\n",
+          "recent_traces": [
+            {
+              "trace_type": "tool_interaction_summary",
+              "stored_from": "MemoryUpdateAgent",
+              "timestamp": "2026-07-25T14:50:40.556485+00:00",
+              "learner_id": "article_T096",
+              "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+              "topic": "matrix_multiplication",
+              "task_type": "conceptual_explanation",
+              "step_goal": "Explain the concept of matrix multiplication",
+              "expected_output": "visual explanation with grounded evidence",
+              "request_id": "REQ-6e671ba8",
+              "trace_id": "TT-89931203",
+              "trace_path": "var/agentic_traces/TT-89931203.json",
+              "status": "validated",
+              "confidence_score": 0.9,
+              "failure_reason": null,
+              "selected_tools": [
+                "RAGTool",
+                "MatrixComputationTool"
+              ],
+              "content_format": "structured_tool_sections",
+              "memory_update_summary": {
+                "memory_update_type": "post_tool_interaction_update",
+                "memory_update_agent": "MemoryUpdateAgent",
+                "updated_at": "2026-07-25T14:50:40.556485+00:00",
+                "learner_id": "article_T096",
+                "student_question": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+                "topic": "matrix_multiplication",
+                "task_type": "conceptual_explanation",
+                "status": "validated",
+                "confidence_score": 0.9,
+                "failure_reason": null,
+                "selected_tools": [
+                  "RAGTool",
+                  "MatrixComputationTool"
+                ],
+                "diagnosed_gap": "kernel movement",
+                "recommended_future_strategy": "use simple step-by-step explanation grounded in course evidence",
+                "new_weak_topic": null,
+                "content_format": "structured_tool_sections",
+                "retrieval_mode": "topic_consistency_fallback",
+                "trace_memory_used": {},
+                "profile_update_policy": "conservative_metadata_update"
+              },
+              "memory_layer": "L1_interaction_trace_summary",
+              "stored_at": "2026-07-25T14:50:40.556695+00:00"
+            }
+          ],
+          "recent_trace_count": 1,
+          "profile_loaded": true,
+          "preferences_loaded": false,
+          "recent_memory_loaded": true,
+          "tutoring_memory_loaded": true,
+          "memory_paths": {
+            "base_dir": "var/agentic_memory/dpm/article_T096",
+            "L1_traces": "var/agentic_memory/dpm/article_T096/L1/traces.jsonl",
+            "L2_tutoring": "var/agentic_memory/dpm/article_T096/L2/tutoring.md",
+            "L3_profile": "var/agentic_memory/dpm/article_T096/L3/profile.json",
+            "L3_preferences": "var/agentic_memory/dpm/article_T096/L3/preferences.json",
+            "L3_recent": "var/agentic_memory/dpm/article_T096/L3/recent.md"
+          },
+          "topic": "general topic",
+          "task_type": "calculation_or_verification"
+        },
+        "skg": {
+          "kb_name": "default",
+          "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output.",
+          "topic": "general topic",
+          "snippets": [
+            {
+              "chunk_id": "SKG-CONV-002",
+              "topic": "convolution",
+              "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel movement",
+                "output value",
+                "matrix"
+              ],
+              "retrieval_score": 3
+            },
+            {
+              "chunk_id": "SKG-CONV-003",
+              "topic": "kernel movement",
+              "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+              "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+              "tags": [
+                "visual explanation",
+                "kernel",
+                "3x3 matrix",
+                "2x2 kernel"
+              ],
+              "retrieval_score": 3
+            },
+            {
+              "chunk_id": "SKG-CONV-001",
+              "topic": "convolution",
+              "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+              "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+              "tags": [
+                "convolution",
+                "kernel",
+                "image processing",
+                "matrix"
+              ],
+              "retrieval_score": 1
+            }
+          ],
+          "sources": [
+            "OpenTutorAI mock lesson: Image Processing / Convolution",
+            "OpenTutorAI mock visual explanation: Kernel Movement",
+            "OpenTutorAI mock lesson: Image Processing / Convolution"
+          ],
+          "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions."
+        },
+        "trace_memory": {
+          "similar_successful_traces": [],
+          "failed_traces": []
+        },
+        "summary": {
+          "learner_level": "unknown",
+          "preferred_explanation_style": "unknown",
+          "is_weak_topic": false,
+          "retrieved_knowledge_chunks": 3,
+          "similar_successful_trace_count": 0,
+          "failed_trace_count": 0
+        }
+      },
+      "is_weak_topic": false,
+      "knowledge_snippets": [
+        {
+          "chunk_id": "SKG-CONV-002",
+          "topic": "convolution",
+          "content": "At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.",
+          "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+          "tags": [
+            "convolution",
+            "kernel movement",
+            "output value",
+            "matrix"
+          ],
+          "retrieval_score": 3
+        },
+        {
+          "chunk_id": "SKG-CONV-003",
+          "topic": "kernel movement",
+          "content": "A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.",
+          "source": "OpenTutorAI mock visual explanation: Kernel Movement",
+          "tags": [
+            "visual explanation",
+            "kernel",
+            "3x3 matrix",
+            "2x2 kernel"
+          ],
+          "retrieval_score": 3
+        },
+        {
+          "chunk_id": "SKG-CONV-001",
+          "topic": "convolution",
+          "content": "Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+          "source": "OpenTutorAI mock lesson: Image Processing / Convolution",
+          "tags": [
+            "convolution",
+            "kernel",
+            "image processing",
+            "matrix"
+          ],
+          "retrieval_score": 1
+        }
+      ],
+      "grounding_text": "- At each position, the kernel values are multiplied with the corresponding input patch values, and the products are summed to produce one output value.\n- A simple visual explanation can use a 2x2 kernel sliding over a 3x3 matrix to show how local patches are transformed into output values.\n- Convolution applies a small matrix called a kernel over an input matrix by sliding it across local regions.",
+      "similar_successful_traces": [],
+      "failed_traces": []
+    },
+    "tools_selected": {},
+    "output_validated": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    }
+  },
+  "output_package": {
+    "package_id": "PKG-f96e0ef4",
+    "status": "validated",
+    "content": "## RAGTool\nTopic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]].",
+    "evidence": [
+      "Matrix multiplication computes each result cell as a row-by-column dot product.",
+      "For A = [[1, 2], [3, 4]] and B = [[5, 6], [7, 8]], the result is [[19, 22], [43, 50]]."
+    ],
+    "references": [
+      "RAGTool topic-consistency fallback: matrix multiplication"
+    ],
+    "validation_report": {
+      "status": "valid",
+      "confidence_score": 0.9,
+      "failure_reason": null,
+      "recommended_action": "accept"
+    },
+    "trace_id": "TT-58268f3e",
+    "metadata": {
+      "workflow_source": "personalized_problem_tutoring",
+      "task_type": "conceptual_explanation",
+      "current_step": "Use an incomplete tool output to demonstrate the multiplication process",
+      "analyzed_task_type": "calculation_or_verification",
+      "operation_type": "conceptual_explanation",
+      "operation_parameters": {
+        "matrices": [],
+        "shapes": [],
+        "stride": 1,
+        "padding": 0
+      },
+      "request_role": "pedagogical_support",
+      "satisfies_primary_request": false,
+      "tool_outputs": {
+        "RAGTool": [
+          "Topic-consistent matrix multiplication support:\n- Matrix multiplication combines rows of the first matrix with columns of the second matrix.\n- Each output value is a dot product between one row and one column.\n- Example:\n  A = [[1, 2], [3, 4]]\n  B = [[5, 6], [7, 8]]\n  C[1,1] = (1×5) + (2×7) = 19\n  C[1,2] = (1×6) + (2×8) = 22\n  C[2,1] = (3×5) + (4×7) = 43\n  C[2,2] = (3×6) + (4×8) = 50\n  Therefore C = [[19, 22], [43, 50]]."
+        ]
+      },
+      "tool_metadata": {
+        "RAGTool": [
+          {
+            "attempt": 1,
+            "source_component": "RAGTool",
+            "grounding_source": "Topic-consistency fallback after SKG topic filtering",
+            "retrieval_mode": "topic_consistency_fallback",
+            "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output. Use an incomplete tool output to demonstrate the multiplication process course-grounded tutoring explanation general topic Use an incomplete tool output to demonstrate the multiplication process Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding row by column dot product matrix product A times B",
+            "retrieved_knowledge_chunks": 0,
+            "original_retrieved_knowledge_chunks": 1,
+            "topic_filter_removed_chunks": 1,
+            "registry_tool": true,
+            "topic_consistent": true,
+            "topic_key": "matrix_multiplication"
+          }
+        ]
+      },
+      "tool_names": [
+        "RAGTool"
+      ],
+      "content_format": "structured_tool_sections"
+    }
+  },
+  "tool_metadata": {
+    "MatrixComputationTool": [],
+    "RAGTool": [
+      {
+        "attempt": 1,
+        "source_component": "RAGTool",
+        "grounding_source": "Topic-consistency fallback after SKG topic filtering",
+        "retrieval_mode": "topic_consistency_fallback",
+        "query": "Explain matrix multiplication, but force the first attempt to use an incomplete tool output. Use an incomplete tool output to demonstrate the multiplication process course-grounded tutoring explanation general topic Use an incomplete tool output to demonstrate the multiplication process Retrieve grounded educational knowledge Retrieve grounded educational knowledge grounding row by column dot product matrix product A times B",
+        "retrieved_knowledge_chunks": 0,
+        "original_retrieved_knowledge_chunks": 1,
+        "topic_filter_removed_chunks": 1,
+        "registry_tool": true,
+        "topic_consistent": true,
+        "topic_key": "matrix_multiplication"
+      }
+    ],
+    "TraceSearchTool": [],
+    "VisualMatrixTool": []
+  },
+  "provider": {
+    "status": "available",
+    "error": null
+  }
+}

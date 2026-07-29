@@ -1,0 +1,229 @@
+
+[CORE] AgenticCoreService received request
+       learner_id: article_T100
+       query: Give a personalized explanation of convolution after a failed first attempt.
+
+[CORE] CapabilityRouter received request
+       request_type: personalized_tutoring
+[CORE] Selected capability: PersonalizedTutoringWorkflow
+
+[1] Student question received
+    Give a personalized explanation of convolution after a failed first attempt.
+
+[2] LLM InvestigationAgent decomposed the question
+    topic: convolution
+    task_type: conceptual_explanation
+    required_context: ['DPM', 'SKG', 'TraceToolkit']
+    meta_questions: ["What was the student's previous understanding of convolution?", 'What specific aspect of convolution did the student struggle with?']
+    initial_tutoring_plan: [{'step_id': 1, 'step_goal': "Review the student's previous understanding of convolution", 'needs_tool': False, 'suggested_tools': [], 'reason': "to understand the student's knowledge gap"}, {'step_id': 2, 'step_goal': 'Provide a small matrix/kernel example to illustrate convolution', 'needs_tool': True, 'suggested_tools': ['VisualMatrixTool', 'TraceSearchTool'], 'reason': 'to provide a concrete example of convolution'}, {'step_id': 3, 'step_goal': 'Use RAGTool to provide course-grounded evidence for convolution', 'needs_tool': True, 'suggested_tools': ['RAGTool', 'TraceSearchTool'], 'reason': 'to provide relevant context for convolution'}]
+
+[3] Scratchpad solving plan created from LLM InvestigationAgent
+    step 1: Review the student's previous understanding of convolution | needs_tool=True | tools=['TraceSearchTool']
+    step 2: Provide a small matrix/kernel example to illustrate convolution | needs_tool=True | tools=['TraceSearchTool', 'MatrixComputationTool']
+    step 3: Use RAGTool to provide course-grounded evidence for convolution | needs_tool=True | tools=['RAGTool', 'TraceSearchTool']
+
+[4] Tool Request Agent creates a structured ToolRequest
+    request_id: REQ-13122582
+    task_type: conceptual_explanation
+
+[5] Central Tool Interaction Manager runs
+
+[4.0] LangGraph ToolInteractionGraph started
+
+[4.0] LangGraph ContextCollector enriched task context
+    learner_id: article_T100
+    learner_level: unknown
+    is_weak_topic: False
+    retrieved_knowledge_chunks: 3
+    similar_successful_traces: 0
+    failed_traces: 0
+
+[4.1] LangGraph plan-guided tool selection
+    strategy: controlled_failure_test
+    reason: force_recovery_test_attempt_1_omits_required_support
+    reference_trace_id: None
+    selected_tools: ['TraceSearchTool']
+
+[12] OutputValidator checked grounding and learner fit
+    attempt: 1
+    status: invalid
+    reason: insufficient_grounding
+    recommended_action: retry_with_grounding_tool
+
+[13] FailureRecovery triggered
+    previous_attempt: 1
+    next_attempt: 2
+    recovery_action: retry_grounding
+    required_tools: ['RAGTool', 'TraceSearchTool']
+
+[4.1] LangGraph plan-guided tool selection
+    strategy: failure_recovery_policy
+    reason: using_tools_required_by_failure_recovery
+    reference_trace_id: None
+    selected_tools: ['RAGTool', 'TraceSearchTool']
+
+[12] OutputValidator checked grounding and learner fit
+    attempt: 2
+    status: valid
+    reason: None
+    recommended_action: accept
+    node_history: ['analyze_task', 'collect_context', 'plan_tools', 'select_tools', 'execute_tools', 'validate_output', 'recover_failure', 'plan_tools', 'select_tools', 'execute_tools', 'validate_output', 'build_success_package']
+    final_status: validated
+
+[6] OutputPackage received from central manager
+    status: validated
+    confidence: 0.9
+    trace_id: TT-0ff68151
+
+[7] Scratchpad updated with validated package
+
+[17] DPM MemoryUpdateAgent updated learner memory
+    diagnosed_gap: kernel movement
+    recommended_future_strategy: use small matrix examples with step-by-step visual explanation
+    updated_layers: L1, L2, L3
+
+[4] Tool Request Agent creates a structured ToolRequest
+    request_id: REQ-8db93c94
+    task_type: conceptual_explanation
+
+[5] Central Tool Interaction Manager runs
+
+[4.0] LangGraph ToolInteractionGraph started
+
+[4.0] LangGraph ContextCollector enriched task context
+    learner_id: article_T100
+    learner_level: unknown
+    is_weak_topic: False
+    retrieved_knowledge_chunks: 3
+    similar_successful_traces: 0
+    failed_traces: 1
+
+[4.1] LangGraph plan-guided tool selection
+    strategy: minimal_plan_guided_selection
+    reason: minimum_tools_covering_current_plan_with_trace_informed_confirmation
+    reference_trace_id: None
+    selected_tools: ['RAGTool', 'TraceSearchTool', 'MatrixComputationTool']
+
+[12] OutputValidator checked grounding and learner fit
+    attempt: 1
+    status: valid
+    reason: None
+    recommended_action: accept
+    node_history: ['analyze_task', 'collect_context', 'plan_tools', 'select_tools', 'execute_tools', 'validate_output', 'build_success_package']
+    final_status: validated
+
+[6] OutputPackage received from central manager
+    status: validated
+    confidence: 0.9
+    trace_id: TT-54e5682b
+
+[7] Scratchpad updated with validated package
+
+[17] DPM MemoryUpdateAgent updated learner memory
+    diagnosed_gap: kernel movement
+    recommended_future_strategy: use small matrix examples with step-by-step visual explanation
+    updated_layers: L1, L2, L3
+
+[4] Tool Request Agent creates a structured ToolRequest
+    request_id: REQ-e8e7ec30
+    task_type: conceptual_explanation
+
+[5] Central Tool Interaction Manager runs
+
+[4.0] LangGraph ToolInteractionGraph started
+
+[4.0] LangGraph ContextCollector enriched task context
+    learner_id: article_T100
+    learner_level: unknown
+    is_weak_topic: False
+    retrieved_knowledge_chunks: 3
+    similar_successful_traces: 0
+    failed_traces: 2
+
+[4.1] LangGraph plan-guided tool selection
+    strategy: minimal_plan_guided_selection
+    reason: minimum_tools_covering_current_plan_with_trace_informed_confirmation
+    reference_trace_id: None
+    selected_tools: ['RAGTool', 'TraceSearchTool']
+
+[12] OutputValidator checked grounding and learner fit
+    attempt: 1
+    status: valid
+    reason: None
+    recommended_action: accept
+    node_history: ['analyze_task', 'collect_context', 'plan_tools', 'select_tools', 'execute_tools', 'validate_output', 'build_success_package']
+    final_status: validated
+
+[6] OutputPackage received from central manager
+    status: validated
+    confidence: 0.9
+    trace_id: TT-f70f9f3f
+
+[7] Scratchpad updated with validated package
+
+[17] DPM MemoryUpdateAgent updated learner memory
+    diagnosed_gap: kernel movement
+    recommended_future_strategy: use small matrix examples with step-by-step visual explanation
+    updated_layers: L1, L2, L3
+
+[8] Final tutor answer generated
+**Convolution explained simply**
+
+For a unknown learner, think of convolution as a small matrix called a **kernel** sliding over an input matrix. At each position, the kernel is applied to a local patch of the input to produce one output value.
+
+**Verified example from the tool output**
+
+```text
+## RAGTool
+Topic-consistent support for tool failure recovery:
+- The validator first detects that an output is incomplete, failed, or unsupported.
+- Failure Recovery keeps the failure reason and requests the missing or alternative capability.
+- The corrected tool output is executed and validated again.
+- Retry attempts are bounded, so an unverified result cannot loop indefinitely or enter a validated output package.
+
+## TraceSearchTool
+Trace guidance retrieved. Similar successful traces: 0. Failed traces considered: 2.
+```
+
+The important point is that the tutor must use the verified values shown above exactly as returned by the validated tools.
+
+**Evidence used**
+
+- Recovery is triggered only after output validation detects a failure.
+- Recovery preserves the failure reason, changes the relevant tool strategy, and requires revalidation.
+- Bounded attempts prevent uncontrolled retry loops.
+- TraceToolkit found 0 similar successful trace(s).
+- TraceToolkit considered 2 failed trace(s).
+
+**References**
+
+- RAGTool supported topic fallback: tool failure recovery
+- TraceToolkit memory traces
+
+_Grounded fallback used because the first LLM draft contained unsupported calculation details: unsupported_numeric_matrix_row._
+
+[9] Scratchpad state
+    rounds: 3
+    - round=1 | step=Review the student's previous understanding of convolution | status=validated | tools=['RAGTool', 'TraceSearchTool'] | confidence=0.9
+    - round=2 | step=Provide a small matrix/kernel example to illustrate convolution | status=validated | tools=['RAGTool', 'TraceSearchTool', 'MatrixComputationTool'] | confidence=0.9
+    - round=3 | step=Use RAGTool to provide course-grounded evidence for convolution | status=validated | tools=['RAGTool', 'TraceSearchTool'] | confidence=0.9
+
+[10] Tool interaction trace saved
+var/agentic_traces/TT-f70f9f3f.json
+
+================================================================================
+AGENTIC DEMO EVIDENCE SAVED
+================================================================================
+Report path: var/agentic_demo_runs/agentic_demo_20260725_145311_TT-f70f9f3f.json
+Provider status: available
+Workflow status: validated
+Trace ID: TT-f70f9f3f
+Trace path: var/agentic_traces/TT-f70f9f3f.json
+Selected tools: ['RAGTool', 'TraceSearchTool']
+Confidence: 0.9
+RAG mode: topic_consistency_fallback
+Similar traces: 0
+Failed traces: 2
+DPM learner level: unknown
+DPM weak topic: False
+================================================================================
